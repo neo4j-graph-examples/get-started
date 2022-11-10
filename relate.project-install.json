@@ -1,0 +1,12 @@
+{
+    "name": "get-started",
+    "icon": "documentation/img/icon.svg",
+    "title": "Start Here",
+    "description":"An introduction to graph databases and Neo4j for new users",
+    "dbms": [
+      {
+          "dumpFile": "data/empty-50.dump",
+          "targetNeo4jVersion": ">= 5.0.0 < 6.0.0"
+      }
+  ]
+}

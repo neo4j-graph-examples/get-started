@@ -1,0 +1,55 @@
+:name: get-started
+:long-name: Start Here
+:description: An introduction to graph databases and Neo4j for new users
+:icon: documentation/img/logo.svg
+:tags: example-data, dataset, retail-data, retail,recommendations,northwind
+:author: Ian Pollard
+:data: data/northwind-data-importer-model-data.zip
+:zip-file: true
+:use-plugin: false
+:target-db-version: 5.0
+:guide: documentation/northwind.adoc
+:rendered-guide: https://guides.neo4j.com/{name}/index.html
+:model: documentation/img/model.svg
+:example: documentation/img/example.svg
+
+image::{icon}[width=100]
+
+== {long-name} Graph Example
+
+Description: _{description}_
+
+.Model
+image::{model}[]
+
+.Example
+image::{example}[width=600]
+
+.Example Query:
+[source,cypher,role=query-example,param-name=category,param-value="Dairy Products",result-column=product,expected-result=Geitost]
+----
+MATCH (p:Product)-[:PART_OF]->(:Category)-[:PARENT*0..]->
+(:Category {categoryName:$category})
+ RETURN p.productName as product
+----
+
+=== Setup
+
+This is for Neo4j version: {target-db-version}
+
+ifeval::[{use-plugin} != false]
+Required plugins: {use-plugin}
+endif::[]
+
+==== Data Import 
+
+0. Create empty AuraDB instance
+1. Download the link:{data}[zip file^] to your computer.
+2. Open Import in Neo4j Workspace (or Data Importer)
+3. Use "Open Model with data" from the "..." menu to load the zip
+4. Explore the model, preview the import
+5. Run Import 
+
+=== Feedback
+
+Feel free to submit issues or pull requests for improvement on this repository.
