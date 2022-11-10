@@ -1,7 +1,7 @@
 :name: get-started
 :long-name: Start Here
 :description: An introduction to graph databases and Neo4j for new users
-:icon: documentation/img/logo.svg
+:icon: documentation/img/icon.svg
 :tags: example-data, dataset, retail-data, retail,recommendations,northwind
 :author: Ian Pollard
 :data: data/northwind-data-importer-model-data.zip
