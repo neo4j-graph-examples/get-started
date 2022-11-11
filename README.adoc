@@ -8,7 +8,7 @@
 :zip-file: true
 :use-plugin: false
 :target-db-version: 5.0
-:guide: documentation/northwind.adoc
+:guide: documentation/get-started.adoc
 :rendered-guide: https://guides.neo4j.com/{name}/index.html
 :model: documentation/img/model.svg
 :example: documentation/img/example.svg
