@@ -1,0 +1,427 @@
+<style type="text/css" media="screen">
+/*
+.nodes-image {
+	margin:-100;
+}
+*/	
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+
+.imageblock .content img, .image img {max-width: 100%;}
+.deck h3, .deck h4 {display: block !important;margin-bottom:8px;margin-top:5px;}
+.listingblock {margin:8px;}
+.pull-bottom {position:relative;bottom:1em;}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.admonitionblock.note.speaker { display:none; }
+</style>
+<style type="text/css" media="screen">
+/* #editor.maximize-editor .CodeMirror-code { font-size:24px; line-height:26px; } */
+</style>
+<article class="guide" ng-controller="AdLibDataController">
+  <carousel class="deck container-fluid">
+    <!--slide class="row-fluid">
+      <div class="col-sm-3">
+        <h3>Northwind Graph</h3>
+        <p class="lead">Information</p>
+			<!dl>
+				
+				
+				
+				
+				
+			</dl>
+		</div>
+      <div class="col-sm-9">
+        <figure>
+          <img style="width:300px" src=""/>
+        </figure>
+      </div>
+    </slide-->
+    
+
+
+   <h4>Northwind Graph</h4>
+   
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Get Started</h3>
+    <br/>
+    <div>
+      <div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title=""></i>
+</td>
+<td class="content">
+If you are new to graphs and opened this guide in Neo4j AuraDB to learn, please switch to "Neo4j Workspace" in your user-account.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then you get a fully integrated guide for import, exploration, query.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://guides.neo4j.com/auradb/get-started/img/auradb-workspace-setting.png" alt="auradb workspace setting">
+</div>
+<div class="title">Figure 1. AuraDB Setting to switch to Workspace</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://guides.neo4j.com/auradb/get-started/img/auradb-workspace-button.png" alt="auradb workspace button">
+</div>
+<div class="title">Figure 2. AuraDB Button to Open Workspace</div>
+</div>
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>From RDBMS to Graph, using a classic dataset</h3>
+    <br/>
+    <div>
+      <div class="paragraph">
+<p>The<em>Northwind Graph</em> demonstrates how to migrate from a relational database to Neo4j.</p>
+</div>
+<div class="paragraph">
+<p>The transformation is iterative and deliberate, emphasizing the conceptual shift from relational tables to the nodes and relationships of a graph.</p>
+</div>
+<div class="paragraph">
+<p>This guide will show you how to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Load: create data from external CSV files</p>
+</li>
+<li>
+<p>Index: index nodes based on label</p>
+</li>
+<li>
+<p>Relate: transform foreign key references into data relationships</p>
+</li>
+<li>
+<p>Promote: transform join records into relationships</p>
+</li>
+</ol>
+</div>
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Product Catalog</h3>
+    <br/>
+    <div>
+      <div class="paragraph">
+<p>Northwind sells food products in a few categories, provided by suppliers. Let&#8217;s start by loading the product catalog tables.</p>
+</div>
+<div class="paragraph">
+<p>The load statements to the right require public internet access.</p>
+</div>
+<div class="paragraph">
+<p><code>LOAD CSV</code> will retrieve a CSV file from a valid URL, applying a Cypher statement to each row using a named map (here we&#8217;re using the
+name <code>row</code>).</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="https://dev.assets.neo4j.com/wp-content/uploads/20160211151109/product-category-supplier.png" alt="image"></span></p>
+</div>
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Import Products, Categories, Suppliers</h3>
+    <br/>
+    <div>
+      <div class="listingblock">
+<div class="title">Create constraints</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->CREATE CONSTRAINT product_productid IF NOT EXISTS FOR (p:Product) REQUIRE (p.productID) IS UNIQUE;
+CREATE CONSTRAINT category_categoryid IF NOT EXISTS FOR (c:Category) REQUIRE (c.categoryID) IS UNIQUE;
+CREATE CONSTRAINT supplier_supplierid IF NOT EXISTS FOR (s:Supplier) REQUIRE (s.supplierID) IS UNIQUE;<!--/code--></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Load products, categories and suppliers</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->// load products
+LOAD CSV WITH HEADERS FROM "https://data.neo4j.com/northwind/products.csv" AS row
+MERGE (n:Product {productID : row.productID})
+ON CREATE SET n += row,
+  n.unitPrice = toFloat(row.unitPrice),
+  n.unitsInStock = toInteger(row.unitsInStock),
+  n.unitsOnOrder = toInteger(row.unitsOnOrder),
+  n.reorderLevel = toInteger(row.reorderLevel),
+  n.discontinued = (row.discontinued &lt;&gt; "0");
+
+// load categories
+LOAD CSV WITH HEADERS FROM "https://data.neo4j.com/northwind/categories.csv" AS row
+MERGE (n:Category {categoryID : row.categoryID})
+ON CREATE SET n += row;
+
+// load suppliers
+LOAD CSV WITH HEADERS FROM "https://data.neo4j.com/northwind/suppliers.csv" AS row
+MERGE (n:Supplier {supplierID : row.supplierID})
+ON CREATE SET n += row;<!--/code--></pre>
+</div>
+</div>
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Product Catalog Graph</h3>
+    <br/>
+    <div>
+      <div class="paragraph">
+<p>The products, categories and suppliers are related through foreign key references.
+Let&#8217;s promote those to data relationships to realize the graph.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="https://dev.assets.neo4j.com/wp-content/uploads/20160211151108/product-graph.png" alt="image"></span></p>
+</div>
+
+
+
+   <h4>Create data relationships</h4>
+   <div class="listingblock">
+<div class="title">Connect products to categories</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (p:Product),(c:Category)
+WHERE p.categoryID = c.categoryID
+MERGE (p)-[:PART_OF]-&gt;(c);<!--/code--></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title=""></i>
+</td>
+<td class="content">
+you only need to compare property values like this when first creating relationships.
+In principle you can delete the <code>categoryID</code> from product afterwards.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Calculate join, materialize relationship. (See <a href="https://neo4j.com/developer/guide-importing-data-and-etl" target="_blank">importing guide</a> for more details)</p>
+</div>
+<div class="listingblock">
+<div class="title">Connect products to suppliers</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (p:Product),(s:Supplier)
+WHERE p.supplierID = s.supplierID
+MERGE (s)-[:SUPPLIES]-&gt;(p);<!--/code--></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Show some part of the product catalog graph</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH path=(s:Supplier)-[:SUPPLIES]-&gt;(:Product)-[:PART_OF]-&gt;(c:Category)
+RETURN path LIMIT 50;<!--/code--></pre>
+</div>
+</div>
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Querying Product Catalog Graph</h3>
+    <br/>
+    <div>
+      <div class="paragraph">
+<p>Lets try some queries using patterns.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="https://dev.assets.neo4j.com/wp-content/uploads/20160211151108/product-graph.png" alt="image"></span></p>
+</div>
+
+
+
+   <h4>Query using patterns</h4>
+   <div class="listingblock">
+<div class="title">List the product categories provided by each supplier</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (s:Supplier)-[:SUPPLIES]-&gt;(:Product)-[:PART_OF]-&gt;(c:Category)
+RETURN s.companyName as Supplier, collect(distinct c.categoryName) as Categories<!--/code--></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">List suppliers for the "Produce" category</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (c:Category {categoryName:'Produce'})&lt;--(:Product)&lt;--(s:Supplier)
+RETURN DISTINCT s.companyName as ProduceSuppliers<!--/code--></pre>
+</div>
+</div>
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Customer Orders</h3>
+    <br/>
+    <div>
+      <div class="paragraph">
+<p>Northwind customers place orders which may detail multiple products.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://dev.assets.neo4j.com/wp-content/uploads/20160211151108/customer-orders.png" alt="customer orders">
+</div>
+</div>
+
+
+
+   <h4>Create Constraints</h4>
+   <div class="listingblock">
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->CREATE CONSTRAINT customer_customerid IF NOT EXISTS FOR (c:Customer) REQUIRE (c.customerID) IS UNIQUE;
+CREATE CONSTRAINT order_orderid IF NOT EXISTS FOR (o:Order) REQUIRE (o.orderID) IS UNIQUE;<!--/code--></pre>
+</div>
+</div>
+
+
+
+   <h4>Load and index records</h4>
+   <div class="listingblock">
+<div class="title">Load customers and orders</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->// load customers
+LOAD CSV WITH HEADERS FROM "https://data.neo4j.com/northwind/customers.csv" AS row
+MERGE (n:Customer {customerID: row.customerID})
+ON CREATE SET n += row;
+
+// load orders
+LOAD CSV WITH HEADERS FROM "https://data.neo4j.com/northwind/orders.csv" AS row
+MERGE (n:Order {orderID: row.orderID})
+ON CREATE SET n += row;
+
+// Connect customers to their orders
+MATCH (c:Customer),(o:Order)
+WHERE c.customerID = o.customerID
+MERGE (c)-[:PURCHASED]-&gt;(o);<!--/code--></pre>
+</div>
+</div>
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Customer Order Graph</h3>
+    <br/>
+    <div>
+      <div class="paragraph">
+<p>Notice that Order Details are always part of an Order and that they<em>relate</em> the Order to a Product — they&#8217;re a join table.
+Join tables are always a sign of a data relationship, indicating shared information between two other records.</p>
+</div>
+<div class="paragraph">
+<p>Here, we&#8217;ll directly promote each OrderDetail record into a relationship
+in the graph.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://dev.assets.neo4j.com/wp-content/uploads/20160211151107/order-graph.png" alt="order graph">
+</div>
+</div>
+
+
+
+   <h4>Load and Connect Order Details</h4>
+   <div class="listingblock">
+<div class="title">Load order details and use them to connect orders to products</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->LOAD CSV WITH HEADERS FROM "https://data.neo4j.com/northwind/order-details.csv" AS row
+MATCH (p:Product), (o:Order)
+WHERE p.productID = row.productID AND o.orderID = row.orderID
+MERGE (o)-[details:ORDERS]-&gt;(p)
+ON CREATE SET
+  details.unitPrice = toFloat(row.unitPrice),
+  details.discount = toFloat(row.discount),
+  details.quantity = toInteger(row.quantity)<!--/code--></pre>
+</div>
+</div>
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Query using patterns</h3>
+    <br/>
+    <div>
+      <div class="listingblock">
+<div class="title">Show some part of the customer order graph</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH path = (cust:Customer {contactName: "Blauer See Delikatessen"})-[:PURCHASED]-&gt;(:Order)
+      -[o:ORDERS]-&gt;(p:Product)-[:PART_OF]-&gt;(c:Category)
+RETURN path;<!--/code--></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Find total quantity per customer in the "Produce" category</div>
+<div class="content">
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (cust:Customer)-[:PURCHASED]-&gt;(:Order)-[o:ORDERS]-&gt;(p:Product),
+      (p)-[:PART_OF]-&gt;(c:Category {categoryName:"Produce"})
+RETURN DISTINCT cust.contactName as CustomerName, SUM(o.quantity) AS TotalProductsPurchased<!--/code--></pre>
+</div>
+</div>
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>More Resources</h3>
+    <br/>
+    <div>
+      <div class="ulist">
+<ul>
+<li>
+<p><a href="https://neo4j.com/developer/guide-importing-data-and-etl/">Full Northwind import example</a></p>
+</li>
+<li>
+<p><a href="https://neo4j.com/developer" target="_blank">Developer resources</a></p>
+</li>
+</ul>
+</div>
+	</div>
+  </div>
+</slide>
+  </carousel>
+</article>
