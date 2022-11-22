@@ -29,7 +29,7 @@ A graph database stores _nodes_ (`Supplier`, `Product`, etc) and their _relation
 
 Other types of databases may use tables and documents, but in a graph, data is stored in the same way as you may sketch ideas on a whiteboard. 
 
-image::model.svg[]
+image::model.png[]
 
 In relational databases, you are often required to add explicit joins to your queries. 
 In doing this, relationships are calculated at runtime, which can be an expensive and slow operation.
@@ -88,7 +88,7 @@ button::Load the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-gr
 You can now see the CSV files from Northwind's tables represented as a graph model. 
 The mappings for these files are already prepared for you.
 
-Notice the relationships connecting the nodes, e.g. a `Customer PURCHASED an Order` and the `Order CONTAINED Products`.
+Notice the relationships connecting the nodes, e.g. a `Customer PURCHASED an Order` and the `Order CONTAINS Products`.
 
 image::model.svg[]
 
@@ -114,7 +114,7 @@ If something goes wrong, keep in mind that the tool can import the same data mul
 
 === Explore your data
 
-After you have imported the Northwind dataset, click the _Explore the Import Results_ button in the report popup or switch to the _Explore_ tab. 
+After you have imported the Northwind dataset, click the _Start Exploring_ button in the report popup or switch to the _Explore_ tab. 
 
 Next you are going to see the power of graph visualization.
 
@@ -136,6 +136,8 @@ You can also run the _Show me a graph_ example Search Phrase yourself by typing 
 === Searching for data in Explore
 
 You can use simple search phrases based on your node labels and relationship types to visualize your graph.
+If you ran the example Search Phrase, you should clear the scene before you continue.
+Right-click anywhere on the canvas and select _Clear Scene_ or `Ctrl+Bksp`/`Cmd+Bksp`.
 
 If you enter `Category<tab>` and then press return; it fetches and displays all categories. 
 You can now explore and expand the graph visualization. 
@@ -144,7 +146,7 @@ This is a great way to discover interesting relationships and formulate question
 
 // TODO captions!!
 
-Another useful feature is to select two nodes (`Shift-Click`) and select _Paths -> Shortest Path_ from the right-click context menu on one of them.
+Another useful feature is to select two nodes (`Ctrl-Click`/`Cmd-Click``) and select _Paths -> Shortest Path_ from the right-click context menu on one of them.
 
 // TBD educate about paths in search box!
 
