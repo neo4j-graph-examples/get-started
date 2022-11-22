@@ -1,0 +1,69 @@
+= Data Importer
+
+This guide teaches you how import data from flat files and how to map the data to your graph data model.
+
+If you havent't already, please go through the _Getting started with Neo4j_ to learn the basics of Neo4j, including a brief introduction to the _graph property model_ and how this relates to the relational database model.
+That guide briefly touches on the topic of importing data, but this guide is more comprehensive and focuses specifically on importing data.
+
+The topics covered in this guide are:
+
+* Scope of Importer -- a brief introduction to the Importer.
+* Provision of files -- File formats, mapping, uploading, and structure of files.
+* Your model -- referring to your files, creating nodes, mapping relationships, ID selection and mapping, and complete the mapping.
+* Preview your import -- test without loading data, inspect the preview, limitations of the preview, and the difference between preview and run import.
+* Run your import -- resolving mapping errors, load progress, and understanding the Cypher load statements.
+* Exploring the resulting graph -- using the _Explore_ tab.
+* Saving and loading -- your model, mapping, and data.
+* Re-running the import -- idempotency and uniqueness constraints.
+* What's next? -- when you outgrow Data Importer and other ways to import data.
+* FAQ -- common errors, missing files, replacing files, and identically labeled nodes.
+
+== Scope of Importer
+
+This guide assumes that you have a basic understanding of Neo4j and the graph property model. 
+If you are new to Neo4j, please go through the _Getting started with Neo4j_ guide first.
+Once you're familiar with the basics, you are ready to have a closer look at the file format for importing data and how this relates to your graph model.
+
+=== Flat files
+
+Currently, Data Importer supports the import of data from flat files.
+Flat files are files that contain data in a tabular format, where each row represents a record and each column represents a field.
+The most common file formats are CSV (comma-separated values) and TSV (tab-separated values).
+Data Importer supports both of these formats, but this guide focuses on the former format, CSV.
+This guide does not teach you how to create CSV files, but you will get a closer look at their structure.
+
+=== Mapping
+
+The flat files contain both the data and the structure of the data.
+This means that the files contain both the nodes and the relationships that connect them and all you need to do is to map the data to the graph model you have in mind.
+Data Importer lets you draw your model and then map your data to it.
+You will have a closer look at this in a moment.
+
+== Provision of files
+
+The first thing you need to do is to locate the data you want to import.
+This can be individual CSV files or a directory containing multiple files.
+Once you have the files, you can drag and drop them into the _Files_ section of the _Import_ tab or you can click _browse_ to select from a file dialog.
+
+image::{images}/files.png[]
+
+=== File structure
+
+The CSV files may or may not contain a header row.
+The header row is the first row of the file and contains the names of the columns and if it is not present, you need to provide this information in a separate file.
+Best practice is to include a header row.
+You may already be familiar with the Northwind dataset from the _Getting started with Neo4j_ guide.
+The following is the first few lines of the `order-details.csv` file from that dataset and as you can see, it contains a header row:
+
+----
+OrderID,ProductID,UnitPrice,Quantity,Discount
+10248,11,14,12,0
+10248,42,9.8,10,0
+10248,72,34.8,5,0
+----
+
+This tells you that the file contains five columns and that the first column is called `OrderID`, the second `ProductID`, and so on.
+
+
+
+
