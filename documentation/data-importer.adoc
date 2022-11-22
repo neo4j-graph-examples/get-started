@@ -63,6 +63,17 @@ OrderID,ProductID,UnitPrice,Quantity,Discount
 ----
 
 This tells you that the file contains five columns and that the first column is called `OrderID`, the second `ProductID`, and so on.
+Apart from the header row, it is also important that the nodes in your CSV files have _unique IDs_.
+If not, you will have problems when you load the data and try to create relationships to connect the nodes.
+To learn more about the format of the CSV files and header rows, head over to the https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin/neo4j-admin-import/#import-tool-header-format[Operations Manual -> CSV header format].
+
+== Thinking about your model
+
+You should be familiar with the _graph data model_ by now, but in summary, the graph property model shows how your data is connected.
+When you create your model, you need to think about the data in your CSV files and how you want to connect it.
+
+
+
 
 
 
