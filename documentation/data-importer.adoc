@@ -30,20 +30,22 @@ Currently, Data Importer supports the import of data from flat files.
 Flat files are files that contain data in a tabular format, where each row represents a record and each column represents a field.
 The most common file formats are CSV (comma-separated values) and TSV (tab-separated values).
 Data Importer supports both of these formats, but this guide focuses on the former format, CSV.
-This guide does not teach you how to create CSV files, but you will get a closer look at their structure.
+This guide does not teach you how to create CSV files, but provides a closer look at their structure.
 
 === Mapping
 
 The flat files contain both the data and the structure of the data.
 This means that the files contain both the nodes and the relationships that connect them and all you need to do is to map the data to the graph model you have in mind.
 Data Importer lets you draw your model and then map your data to it.
-You will have a closer look at this in a moment.
+This is covered in a moment.
 
 == Provision of files
 
 The first thing you need to do is to locate the data you want to import.
 This can be individual CSV files or a directory containing multiple files.
 Once you have the files, you can drag and drop them into the _Files_ section of the _Import_ tab or you can click _browse_ to select from a file dialog.
+Keep in mind that _uploading_ the files is not the same as _importing_ them. 
+You just make them available to the Data Importer, not to your database.
 
 image::{images}/files.png[]
 
@@ -51,7 +53,7 @@ image::{images}/files.png[]
 
 The CSV files may or may not contain a header row.
 The header row is the first row of the file and contains the names of the columns and if it is not present, you need to provide this information in a separate file.
-Best practice is to include a header row.
+Best practice is to always include a header row.
 You may already be familiar with the Northwind dataset from the _Getting started with Neo4j_ guide.
 The following is the first few lines of the `order-details.csv` file from that dataset and as you can see, it contains a header row:
 
@@ -67,10 +69,20 @@ Apart from the header row, it is also important that the nodes in your CSV files
 If not, you will have problems when you load the data and try to create relationships to connect the nodes.
 To learn more about the format of the CSV files and header rows, head over to the https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin/neo4j-admin-import/#import-tool-header-format[Operations Manual -> CSV header format].
 
+//Action to import files
+
 == Thinking about your model
 
 You should be familiar with the _graph data model_ by now, but in summary, the graph property model shows how your data is connected.
-When you create your model, you need to think about the data in your CSV files and how you want to connect it.
+When you create your model, you need to think about the data in your CSV files and how the data is connected.
+As mentioned earlier, your CSV files already contain all the informatiom about how the data within the files is connected, you just need to map it to your graph model.
+
+=== Create nodes
+
+The first thing to do is create nodes in your model.
+The nodes represent the entities in your data and in case of the Northwind dataset, the nodes represent the customers, products, and orders and so on.
+
+
 
 
 
