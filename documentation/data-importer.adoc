@@ -2,11 +2,10 @@
 
 == Data Importer
 
-This guide teaches you how import data from flat files and how to map the data to your graph data model.
+This guide will teach you how to import data from flat files and how to map the data to your graph data model.
 
 If you havent't already, please go through the _Getting started with Neo4j_ to learn the basics of Neo4j, including a brief introduction to the _graph property model_ and how this relates to the relational database model.
-That guide briefly touches on the topic of importing data, but this guide is more comprehensive and focuses specifically on importing data.
-
+The _Getting started with Neeo4j_ guide shows you the basics on the topic of importing data, but this guide will go more in-depth and focus solely on Data Importer. 
 The topics covered in this guide are:
 
 * Scope of Importer -- a brief introduction to the Importer.
@@ -29,23 +28,25 @@ Once you're familiar with the basics, you are ready to have a closer look at the
 === Flat files
 
 Currently, Data Importer supports the import of data from flat files.
-Flat files are files that contain data in a tabular format, where each row represents a record and each column represents a field.
+Flat files are files that contain data in a tabular format.
+Each row represents a record and each column represents a field.
 The most common file formats are CSV (comma-separated values) and TSV (tab-separated values).
-Data Importer supports both of these formats, but this guide focuses on the former format, CSV.
-This guide does not teach you how to create CSV files, but provides a closer look at their structure.
+Data Importer supports both of these formats, but this guide will focus on CSV.
+This guide doesn't teach you how to create CSV files, but gives you a closer look at their structure.
 
 === Mapping
 
 The flat files contain both the data and the structure of the data.
-This means that the files contain both the nodes and the relationships that connect them and all you need to do is to map the data to the graph model you have in mind.
+This means that the files contain both the nodes and the relationships that connect them.
+All you need to do is to map the data to the graph model you have in mind.
 Data Importer lets you draw your model and then map your data to it.
-This will be covered in a moment.
+You'll get to this in a moment.
 
 == Provision of files
 
 The first thing you need to do is to locate the data you want to import.
 This can be individual CSV files or a directory containing multiple files.
-Once you have the files, you can drag and drop them into the _Files_ section of the _Import_ tab or you can click _browse_ to select from a file dialog.
+Once you have the files, drag and drop them into the _Files_ section of the _Import_ tab or click _browse_ to select from a file dialog.
 Keep in mind that _uploading_ the files is not the same as _importing_ them. 
 You just make them available to the Data Importer, not to your database.
 
@@ -58,7 +59,7 @@ Once downloaded, drag and drop the files into the _Files_ section, or use the br
 You should now see eleven CSV files in the _Files_ section.
 
 
-image::{images}/files.png[]
+image::files.png[]
 
 === File structure
 
