@@ -1,4 +1,6 @@
-= Data Importer
+= Learn how to import and map data with Neo4j Data Importer
+
+== Data Importer
 
 This guide teaches you how import data from flat files and how to map the data to your graph data model.
 
@@ -37,7 +39,7 @@ This guide does not teach you how to create CSV files, but provides a closer loo
 The flat files contain both the data and the structure of the data.
 This means that the files contain both the nodes and the relationships that connect them and all you need to do is to map the data to the graph model you have in mind.
 Data Importer lets you draw your model and then map your data to it.
-This is covered in a moment.
+This will be covered in a moment.
 
 == Provision of files
 
@@ -47,6 +49,15 @@ Once you have the files, you can drag and drop them into the _Files_ section of 
 Keep in mind that _uploading_ the files is not the same as _importing_ them. 
 You just make them available to the Data Importer, not to your database.
 
+Download the _Northwind_ example dataset by clicking the button below.
+
+//Need to modify the action to only dowload files and NOT a model
+button::Download the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-model-data.zip]
+
+Once downloaded, drag and drop the files into the _Files_ section, or use the browse option in the same section.
+You should now see eleven CSV files in the _Files_ section.
+
+
 image::{images}/files.png[]
 
 === File structure
@@ -54,8 +65,8 @@ image::{images}/files.png[]
 The CSV files may or may not contain a header row.
 The header row is the first row of the file and contains the names of the columns and if it is not present, you need to provide this information in a separate file.
 Best practice is to always include a header row.
-You may already be familiar with the Northwind dataset from the _Getting started with Neo4j_ guide.
-The following is the first few lines of the `order-details.csv` file from that dataset and as you can see, it contains a header row:
+If you have a closer look at the dataset you just downloaded, you can see that the files contain a header row.
+These are the first few lines of the `order-details.csv` file:
 
 ----
 OrderID,ProductID,UnitPrice,Quantity,Discount
@@ -80,7 +91,17 @@ As mentioned earlier, your CSV files already contain all the informatiom about h
 === Create nodes
 
 The first thing to do is create nodes in your model.
-The nodes represent the entities in your data and in case of the Northwind dataset, the nodes represent the customers, products, and orders and so on.
+The nodes represent the entities in your data and in case of the Northwind dataset, the nodes represent the customers, products, orders, and so on.
+To create a node, click the _Add node_ button.
+The nodes in your model need to have a _label_.
+Remember, a label is used to group nodes of the same type together.
+First, create a node with the label `Order`.
+You define the label for the node in the _Mapping Details_ pane, along with what file it should map to and also what properties it should have.
+Select `orders.csv` from the _File_ dropdown and then add the properties 
+
+
+
+
 
 
 
