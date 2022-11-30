@@ -6,7 +6,7 @@ This guide will teach you how to import data from flat files and how to map the 
 
 If you havent't already, please go through the _Getting started with Neo4j_ to learn the basics of Neo4j, including a brief introduction to the _graph property model_ and how this relates to the relational database model.
 
-The _Getting started with Neeo4j_ guide shows you the basics on the topic of importing data, but this guide will go more in-depth and focus solely on Data Importer. 
+The _Getting started with Neo4j_ guide shows you the basics on the topic of importing data, but this guide will go more in-depth and focus solely on Data Importer. 
 
 The topics covered in this guide are:
 
@@ -23,9 +23,9 @@ The topics covered in this guide are:
 
 == Scope of Importer
 
-This guide assumes that you have a basic understanding of Neo4j and the graph property model. 
-If you are new to Neo4j, please go through the _Getting started with Neo4j_ guide first.
-Once you're familiar with the basics, you are ready to have a closer look at the file format for importing data and how this relates to your graph model.
+You should have a basic understanding of Neo4j and the graph property model by now.
+If you are unsure, you can always go back to the _Getting started with Neo4j_ guide again.
+But assuming you're familiar with the basics, you are ready to have a closer look at the file format for importing data and how this relates to your graph model.
 
 === Flat files
 
@@ -33,7 +33,7 @@ Currently, Data Importer supports the import of data from flat files.
 Flat files are files that contain data in a tabular format.
 Each row represents a record and each column represents a field.
 The most common file formats are CSV (comma-separated values) and TSV (tab-separated values).
-Data Importer supports both of these formats, but this guide will focus on CSV.
+Data Importer supports both formats, but this guide will focus on CSV.
 This guide doesn't teach you how to create CSV files, but gives you a closer look at their structure.
 
 === Mapping
@@ -48,26 +48,25 @@ You'll get to this in a moment.
 
 The first thing you need to do is to locate the data you want to import.
 This can be individual CSV files or a directory containing multiple files.
-Once you have the files, drag and drop them into the _Files_ section of the _Import_ tab or click _browse_ to select from a file dialog.
-Keep in mind that _uploading_ the files is not the same as _importing_ them. 
-You just make them available to the Data Importer, not to your database.
+When you know where the files are, you can drag and drop them to the _Files_ pane or browse for them.
 
-Download the _Northwind_ example dataset by clicking the button below.
+Click the button to load the Northwind dataset, the files will automatically be uploaded and you won't need to drag and drop them.
 
-//Need to modify the action to only dowload files and NOT a model
-button::Download the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-model-data.zip]
+button::Download the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-data.zip]
 
-Once downloaded, drag and drop the files into the _Files_ section, or use the browse option in the same section.
+You have now _uploaded_ the files to Data Importer.
+This is *not* the same as _importing_ them. 
+By uploading, you just make them available to the Data Importer, not to your database.
+
 You should now see eleven CSV files in the _Files_ section.
 
-
-image::img/files.png[]
+image::files.png[]
 
 === File structure
 
-The CSV files may or may not contain a header row.
-The header row is the first row of the file and contains the names of the columns and if it is not present, you need to provide this information in a separate file.
-Best practice is to always include a header row.
+CSV files may or may not contain a header row.
+The header row is the first row of the file and contains the names of the columns.
+Data Importer requires a header row and even thoug other import methods may not require it, it is a good practice to include it.
 If you have a closer look at the dataset you just downloaded, you can see that the files contain a header row.
 These are the first few lines of the `order-details.csv` file:
 
@@ -83,24 +82,27 @@ Apart from the header row, it is also important that the nodes in your CSV files
 If not, you will have problems when you load the data and try to create relationships to connect the nodes.
 To learn more about the format of the CSV files and header rows, head over to the https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin/neo4j-admin-import/#import-tool-header-format[Operations Manual -> CSV header format].
 
-//Action to import files
 
 == Thinking about your model
 
-You should be familiar with the _graph data model_ by now, but in summary, the graph property model shows how your data is connected.
+You are likely familiar with the _graph data model_ by now, but in summary, the graph property model shows how your data is connected.
 When you create your model, you need to think about the data in your CSV files and how the data is connected.
-As mentioned earlier, your CSV files already contain all the informatiom about how the data within the files is connected, you just need to map it to your graph model.
+As mentioned earlier, your CSV files already contain all the information about how the data within the files is connected, you just need to sketch the model and map your data to it.
 
 === Create nodes
 
-The first thing to do is create nodes in your model.
-The nodes represent the entities in your data and in case of the Northwind dataset, the nodes represent the customers, products, orders, and so on.
+Start by creating nodes to represent the entities in your data
+In the imported Northwind dataset, the nodes represent the customers, products, orders, and so on.
 To create a node, click the _Add node_ button.
 The nodes in your model need to have a _label_.
 Remember, a label is used to group nodes of the same type together.
 First, create a node with the label `Order`.
 You define the label for the node in the _Mapping Details_ pane, along with what file it should map to and also what properties it should have.
-Select `orders.csv` from the _File_ dropdown and then add the properties 
+Select `orders.csv` from the _File_ dropdown and then add the properties you want to include.
+The properties are the columns in your CSV file.
+
+You have two options to add properties to your node.
+Either select from the file you just specified, `orders.csv`, or add a new property.
 
 
 
