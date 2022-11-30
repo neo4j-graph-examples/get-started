@@ -5,7 +5,9 @@
 This guide will teach you how to import data from flat files and how to map the data to your graph data model.
 
 If you havent't already, please go through the _Getting started with Neo4j_ to learn the basics of Neo4j, including a brief introduction to the _graph property model_ and how this relates to the relational database model.
+
 The _Getting started with Neeo4j_ guide shows you the basics on the topic of importing data, but this guide will go more in-depth and focus solely on Data Importer. 
+
 The topics covered in this guide are:
 
 * Scope of Importer -- a brief introduction to the Importer.
@@ -59,7 +61,7 @@ Once downloaded, drag and drop the files into the _Files_ section, or use the br
 You should now see eleven CSV files in the _Files_ section.
 
 
-image::files.png[]
+image::img/files.png[]
 
 === File structure
 
