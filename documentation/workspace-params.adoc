@@ -1,0 +1,62 @@
+= Neo4j WorkSpace Guide
+
+== Parameters
+=== About parameters
+
+Cypher supports querying with parameters. 
+A parameterized query is a query where placeholders are used for parameters and the parameter values are supplied at execution time. 
+This means developers don't have to resort to string building to create a query. 
+Also, parameters make caching of execution plans much easier for Cypher, thus leading to faster query execution times. 
+You can read more about parameters https://neo4j.com/docs/cypher-manual/current/syntax/parameters/[here].
+
+=== Setting and Managing Parameters
+
+Parameters are set and managed in Query using the `:param` command. 
+The following arguments are supported:
+
+* `:param list` or `:param` - Lists all parameters
+* `:param clear` - Clears all parameters
+* `:param {a: 1}` - Sets the parameter `a` to the value `1`
+* `:param {a: 1, b: 2}` - Sets the parameter `a` to the value `1`, `b` to the value `2`
+
+The arrow syntax `:param a => 1` is also supported to set parameters individually.
+
+=== Parameter evaluation
+
+When you declare a parameter, it is evaluated by an implicit Cypher `RETURN`, that’s to say, any value you set a parameter to, is first evaluated as a simple `RETURN <value>`. 
+For example, in:
+
+[source,cypher]
+----
+:param {
+  param1: 1,
+  param2: "Brown Fox",
+  param3: date("2020-01-01")
+}
+----
+
+each parameter value for `param1` through to `param3` is evaluated in a Cypher `RETURN` ensuring they obtain the correct neo4j data type.  
+This means that `RETURN date("2020-01-01")` evaluates the Neo4j Date https://neo4j.com/docs/cypher-manual/current/syntax/values/[type].
+
+=== Referencing a parameter
+
+Parameters are identified in Cypher statements by a `$` sign. 
+The parameter `param3` declared above could be used like this:
+
+[source,cypher]
+----
+MATCH (m:Movie {
+ releaseDate: $param3
+})
+RETURN m
+----
+
+to return all Movies with the release date `2020-01-01` set in `param3`.
+
+
+=== A note on the system database
+
+If you are using a multi-database DBMS, parameters can't be declared when using the `system` database. 
+Switch to a different database and declare, then switch back to the `system` database and use the parameters.
+
+
