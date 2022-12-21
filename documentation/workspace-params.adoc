@@ -14,12 +14,12 @@ You can read more about parameters https://neo4j.com/docs/cypher-manual/current/
 Parameters are set and managed in Query using the `:param` command. 
 The following arguments are supported:
 
-* `:param list` or `:param` - Lists all parameters
-* `:param clear` - Clears all parameters
-* `:param {a: 1}` - Sets the parameter `a` to the value `1`
-* `:param {a: 1, b: 2}` - Sets the parameter `a` to the value `1`, `b` to the value `2`
+* inlinecode:++:param list++[] or inlinecode:++:param++[] - Lists all parameters
+* inlinecode:++:param clear++[] - Clears all parameters
+* inlinecode:++:param {a: 1}++[] - Sets the parameter `a` to the value `1`
+* inlinecode:++:param {a: 1, b: 2}++[] - Sets the parameter `a` to the value `1`, `b` to the value `2`
 
-The arrow syntax `:param a => 1` is also supported to set parameters individually.
+The arrow syntax inlinecode:++:param a => 1++[] is also supported to set parameters individually.
 
 === Parameter evaluation
 
@@ -36,7 +36,7 @@ For example, in:
 ----
 
 each parameter value for `param1` through to `param3` is evaluated in a Cypher `RETURN` ensuring they obtain the correct neo4j data type.  
-This means that `RETURN date("2020-01-01")` evaluates the Neo4j Date https://neo4j.com/docs/cypher-manual/current/syntax/values/[type].
+This means that inlinecode:++RETURN date("2020-01-01")++[] evaluates the Neo4j Date https://neo4j.com/docs/cypher-manual/current/syntax/values/[type].
 
 === Referencing a parameter
 
