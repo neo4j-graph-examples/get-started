@@ -52,7 +52,7 @@ When you know where the files are, you can drag and drop them to the _Files_ pan
 
 Click the button to load the Northwind dataset, the files will automatically be uploaded and you won't need to drag and drop them.
 
-button::Download the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-data.zip]
+button::Download the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-model-data2.zip]
 
 You have now _uploaded_ the files to Data Importer.
 This is *not* the same as _importing_ them. 
@@ -88,21 +88,44 @@ To learn more about the format of the CSV files and header rows, head over to th
 You are likely familiar with the _graph data model_ by now, but in summary, the graph property model shows how your data is connected.
 When you create your model, you need to think about the data in your CSV files and how the data is connected.
 As mentioned earlier, your CSV files already contain all the information about how the data within the files is connected, you just need to sketch the model and map your data to it.
+To practice, we are going to create a simple model with only two nodes and one relationship.
 
 === Create nodes
 
-Start by creating nodes to represent the entities in your data
+Start by creating nodes to represent the entities in your data.
 In the imported Northwind dataset, the nodes represent the customers, products, orders, and so on.
 To create a node, click the _Add node_ button.
 The nodes in your model need to have a _label_.
 Remember, a label is used to group nodes of the same type together.
-First, create a node with the label `Order`.
-You define the label for the node in the _Mapping Details_ pane, along with what file it should map to and also what properties it should have.
-Select `orders.csv` from the _File_ dropdown and then add the properties you want to include.
-The properties are the columns in your CSV file.
+First, create a node with the label `Order` by clicking the _Add node_ button.
+The dashed lines mean that the node is not fully mapped yet.
+
+To fix this, first define the label for the node in the _Mapping Details_ pane, and then what file it should map to and also what properties it should have.
+The label is already populated, but you can change it if you want to.
+Select `orders.csv` from the _File_ dropdown and then you need to add the properties you want to include.
 
 You have two options to add properties to your node.
-Either select from the file you just specified, `orders.csv`, or add a new property.
+The most convenient way is to _Select from file_.
+With the `Order` node selected, go to the _Properties_ tab and click _Select from file_ and select which properties you would like to include.
+This option takes all the headers of the columns in the `orders.csv` and displays them as properties.
+You can rename the properties as you please.
+The datatype is predicted for you, but please make sure it is correct and change as needed.
+Since you're going to create a small model, you don't need all the available properties and can deselect `customerID` and `employeeID`.
+
+The other option is to create your own properties by clicking _Add new_ instead. 
+You need to name the property and select a data type for it.
+
+Go to the _Mapping_ tab next.
+This tab shows your selected properties and the predicted column in `orders.csv` each property maps to.
+If the predicted mapping is wrong, you can manually select which property should map to which column from this tab.
+If you created your own properties, you have to manually select which columns to map them to.
+
+The last thing you need to do is to select one of the properties to represent the node as its _node ID_.
+The node ID is used when connecting nodes with relationships as either a start node or end node.
+
+Go ahead and create a `Product` node accordingly.
+
+
 
 
 
