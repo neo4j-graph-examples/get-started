@@ -90,6 +90,8 @@ When you create your model, you need to think about the data in your CSV files a
 As mentioned earlier, your CSV files already contain all the information about how the data within the files is connected, you just need to sketch the model and map your data to it.
 To practice, we are going to create a simple model with only two nodes and one relationship.
 
+image::model.png[]
+
 == Create nodes
 
 The first step is to create nodes to represent the entities in your data.
@@ -129,14 +131,16 @@ Again, since you're creating a small model,  you won't need all the available pr
 Use the `productID` property as ID for the node.
 
 
-== Map relationships
+== Create relationships
 
 You have two nodes and now you need to create a relationship to connect them.
 Pick your start node, the `Order` node, by clicking on it.
 Hover by the edge of the circle and you'll see a `+` sign.
 Click and hold it and you'll see another circle.
-Drag the new circle on to the `Product node` and just like that, you have created a relationship. 
+Drag the new circle on to the `Product` node and just like that, you have created a relationship. 
+
 Just like newly created nodes, the relationship is dashed until you add mapping details.
+
 This is the most important part, where you tell Data Importer how to link the orders to the products in your data.
 
 First, you add the relationship type, which is a descriptive name for the relationship. 
@@ -158,8 +162,11 @@ You don't need to include the `orderID` or the `productID` here, as these are al
 Data Importer wants to make things easy for you and does things automatically so you don't have to.
 For example, once you have selected a file to map a node to, Data Importer automatically assigns a property as the ID.
 
-In a simiilar fashion, the data types for your properties are also automatically delected for you.
+In a simiilar fashion, the data types for your properties are also automatically selected for you.
 Data Importer scans a sample of property values from each column and based on that determines what data type the property is.
+
+If you selected your properties from file, the mapping is done for your as well.
+If you created your own properties, you have to map manually.
 
 But this doesn't mean that you can't change any of the things Data Importer have done for your convenience.
 You can always select different properties, change labels and types, as well as data types.
@@ -182,6 +189,9 @@ The following items **must be** mapped on a **relationship**:
 * File
 * ID file columns (for both _From_ and _To_ nodes)
 
+If you have done all your mapping and are satisfied with your model, you can _preview_ your graph before running the import.
+
+== Preview
 
 
 
