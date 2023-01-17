@@ -92,16 +92,16 @@ To practice, we are going to create a simple model with only two nodes and one r
 
 == Create nodes
 
-Start by creating nodes to represent the entities in your data.
+The first step is to create nodes to represent the entities in your data.
 In the imported Northwind dataset, the nodes represent the customers, products, orders, and so on.
-To create a node, click the _Add node_ button.
-The nodes in your model need to have a _label_.
+The nodes all need to have a _label_.
 Remember, a label is used to group nodes of the same type together.
-First, create a node with the label `Order` by clicking the _Add node_ button.
+
+First, create a node by clicking the _Add node_ button and add the label `Order` by typing directly in your new node.
+Alternatively, you can enter the label in the _Node name_ field in the _Mapping details_ pane on your right.
 The dashed lines mean that the node is not fully mapped yet.
 
-To fix this, first define the label for the node in the _Mapping Details_ pane, and then what file it should map to and also what properties it should have.
-The label is already populated, but you can change it if you want to.
+To fix this, you need to select what file it should map to and also what properties it should have.
 Select `orders.csv` from the _File_ dropdown and then you need to add the properties you want to include.
 
 You have two options to add properties to your node.
@@ -124,7 +124,8 @@ The last thing you need to do is to select one of the properties to represent th
 The node ID is used when connecting nodes with relationships as either a start node or end node.
 
 Go ahead and create a `Product` node accordingly.
-Again, since you're creating a small model, you can deselect `supplierID` and `categoryID`.
+Use the `products.csv` file.
+Again, since you're creating a small model,  you won't need all the available properties and can deselect `supplierID` and `categoryID`.
 Use the `productID` property as ID for the node.
 
 
@@ -139,7 +140,7 @@ Just like newly created nodes, the relationship is dashed until you add mapping 
 This is the most important part, where you tell Data Importer how to link the orders to the products in your data.
 
 First, you add the relationship type, which is a descriptive name for the relationship. 
-In the model you are creating, an order _contains_ a product, so go ahead and put `CONTAINS` in the _relationship type_ field.
+In the model you are creating, an order _contains_ a product, so go ahead and put `CONTAINS` in the _Relationship type_ field.
 
 Next, you need to map the relationship to a file. 
 Remember that you selected `orderID` and `productID` as IDs for the nodes you created.
@@ -151,6 +152,36 @@ In your model, the relationship goes _from_ the `Order` node, so select `orderID
 
 As you can see, the file also contains other properties pertaining to the order of a product. 
 You don't need to include the `orderID` or the `productID` here, as these are already encoded in the relationship.
+
+== Convenience features
+
+Data Importer wants to make things easy for you and does things automatically so you don't have to.
+For example, once you have selected a file to map a node to, Data Importer automatically assigns a property as the ID.
+
+In a simiilar fashion, the data types for your properties are also automatically delected for you.
+Data Importer scans a sample of property values from each column and based on that determines what data type the property is.
+
+But this doesn't mean that you can't change any of the things Data Importer have done for your convenience.
+You can always select different properties, change labels and types, as well as data types.
+
+== Ready to import?
+
+Any dashed lines in your model means that the mapping is not complete.
+It is possible to run the import anyway, but the dashed object (node and/or relationship) will not be imported.
+
+The following items **must be** mapped on a **node**:
+
+* Label
+* File
+* A minimum of one property
+* ID (the ID is populated automatically)
+
+The following items **must be** mapped on a **relationship**:
+
+* Type
+* File
+* ID file columns (for both _From_ and _To_ nodes)
+
 
 
 
