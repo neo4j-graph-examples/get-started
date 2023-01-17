@@ -52,7 +52,7 @@ When you know where the files are, you can drag and drop them to the _Files_ pan
 
 Click the button to load the Northwind dataset, the files will automatically be uploaded and you won't need to drag and drop them.
 
-button::Download the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-model-data2.zip]
+button::Download the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/just-the-data.zip]
 
 You have now _uploaded_ the files to Data Importer.
 This is *not* the same as _importing_ them. 
@@ -90,7 +90,7 @@ When you create your model, you need to think about the data in your CSV files a
 As mentioned earlier, your CSV files already contain all the information about how the data within the files is connected, you just need to sketch the model and map your data to it.
 To practice, we are going to create a simple model with only two nodes and one relationship.
 
-=== Create nodes
+== Create nodes
 
 Start by creating nodes to represent the entities in your data.
 In the imported Northwind dataset, the nodes represent the customers, products, orders, and so on.
@@ -124,6 +124,41 @@ The last thing you need to do is to select one of the properties to represent th
 The node ID is used when connecting nodes with relationships as either a start node or end node.
 
 Go ahead and create a `Product` node accordingly.
+Again, since you're creating a small model, you can deselect `supplierID` and `categoryID`.
+Use the `productID` property as ID for the node.
+
+
+== Map relationships
+
+You have two nodes and now you need to create a relationship to connect them.
+Pick your start node, the `Order` node, by clicking on it.
+Hover by the edge of the circle and you'll see a `+` sign.
+Click and hold it and you'll see another circle.
+Drag the new circle on to the `Product node` and just like that, you have created a relationship. 
+Just like newly created nodes, the relationship is dashed until you add mapping details.
+This is the most important part, where you tell Data Importer how to link the orders to the products in your data.
+
+First, you add the relationship type, which is a descriptive name for the relationship. 
+In the model you are creating, an order _contains_ a product, so go ahead and put `CONTAINS` in the _relationship type_ field.
+
+Next, you need to map the relationship to a file. 
+Remember that you selected `orderID` and `productID` as IDs for the nodes you created.
+The file you map your relationship to needs to contain these to be able to actually link the two nodes.
+Look in the left pane and you'll see that the `order-details.csv` file contains both. 
+
+You need to select from which column of the file that Data Importer should get the ID property.
+In your model, the relationship goes _from_ the `Order` node, so select `orderID` for the starting node, and _to_ the `Product` node, so select `productID` for the end node.
+
+As you can see, the file also contains other properties pertaining to the order of a product. 
+You don't need to include the `orderID` or the `productID` here, as these are already encoded in the relationship.
+
+
+
+
+
+
+
+
 
 
 
