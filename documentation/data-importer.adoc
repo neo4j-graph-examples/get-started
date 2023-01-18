@@ -157,6 +157,13 @@ In your model, the relationship goes _from_ the `Order` node, so select `orderID
 As you can see, the file also contains other properties pertaining to the order of a product. 
 You don't need to include the `orderID` or the `productID` here, as these are already encoded in the relationship.
 
+=== Graph databases vs. relational databases
+
+If you are new to graph databases but used to relational databases, some things may seem counter-intuitive.
+For example, it may be hard to grasp the concept mapping both a relationship and a node to the same file.
+The UI of Data Importer is designed to prevent you from making the most common mistakes expected from users with a background in SQL.
+
+
 == Convenience features
 
 Data Importer wants to make things easy for you and does things automatically so you don't have to.
@@ -191,7 +198,9 @@ The following items **must be** mapped on a **relationship**:
 
 If you have done all your mapping and are satisfied with your model, you can _preview_ your graph before running the import.
 
-== Preview
+== Preview your graph
+
+
 
 
 
