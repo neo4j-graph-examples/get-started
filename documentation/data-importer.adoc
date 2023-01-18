@@ -160,7 +160,7 @@ You don't need to include the `orderID` or the `productID` here, as these are al
 === Graph databases vs. relational databases
 
 If you are new to graph databases but used to relational databases, some things may seem counter-intuitive.
-For example, it may be hard to grasp the concept mapping both a relationship and a node to the same file.
+For example, it may be hard to grasp the possibility of mapping both a relationship and a node to the same file.
 The UI of Data Importer is designed to prevent you from making the most common mistakes expected from users with a background in SQL.
 
 
@@ -181,7 +181,7 @@ You can always select different properties, change labels and types, as well as 
 == Ready to import?
 
 Any dashed lines in your model means that the mapping is not complete.
-It is possible to run the import anyway, but the dashed object (node and/or relationship) will not be imported.
+If the mapping is not complete, you will not be able to run the import.
 
 The following items **must be** mapped on a **node**:
 
@@ -199,6 +199,47 @@ The following items **must be** mapped on a **relationship**:
 If you have done all your mapping and are satisfied with your model, you can _preview_ your graph before running the import.
 
 == Preview your graph
+
+When you're satisfied with your model and mapping, you can preview a sample of your data before running the actual import.
+
+Click the _Preview_ button to see a sample of your data visualized.
+
+image::preview.png[]
+
+Even though the preview only scans the first few rows of your files, it is often sufficient to make sure everything connects as expected.
+But you should keep in mind that it is only a preview and only a sample of your data.
+The actual graph may look different once the full import is complete.
+
+You want to have your mapping completely done before previewing, but if you have missed something, you are still able to do a preview, but the incomplete elements will not be rendered.
+In other words, any dashed element in your model will not show up in the preview.
+
+As mentioned before, if any element in your model is dashed, you will **not** be able to run the import.
+
+== Running an import
+
+You have drawn your data model, mapped every single element, and checked the preview to make sure things connect the way you intended.
+That means you are ready to run the actual import.
+
+Click _Run import_ to import the files specified in your model. 
+The simple model you have created in this example only maps to three of the eleven available files.
+The files not specified in your model are **not** imported, but they remain in the _Files_ section on your left.
+
+If any mapping is incomplete, Data Importer will tell you that your model has errors and add a red exclamations mark next to the incomplete element in the model.
+When you select an incomplete element, the mapping pane also highlights the missing details.
+
+Once you've addressed the errors, go ahead and run the import again.
+You should see a popup window showing the successful results.
+
+image::import_results.png[]
+
+The _Import results_ summarizes what was included in the import. 
+You can compare to your CSV files to verify that everything was imported
+
+
+
+
+
+
 
 
 
