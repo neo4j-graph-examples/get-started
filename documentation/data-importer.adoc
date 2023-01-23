@@ -90,7 +90,7 @@ When you create your model, you need to think about the data in your CSV files a
 As mentioned earlier, your CSV files already contain all the information about how the data within the files is connected, you just need to sketch the model and map your data to it.
 To practice, we are going to create a simple model with only two nodes and one relationship.
 
-image::model.png[]
+image::simple-model.png[]
 
 == Create nodes
 
@@ -235,11 +235,14 @@ image::import_results.png[]
 The _Import results_ summarizes what was included in the import. 
 You can compare to your CSV files to verify that everything was imported.
 
+== Cypher statements
+
 You can also see the Cypher commands used to create the elements in your model.
 Let's have a look at _Order_ nodes.
 Click _Show Cypher_ on _Order_.
 The key statement:
 
+.Key statement
 [source,cypher]
 ----
 CREATE CONSTRAINT `imp_uniq_Order_orderID` IF NOT EXISTS
@@ -254,6 +257,7 @@ Both key and load statements look similar to this for the _Product_ nodes.
 
 But let's have a look at the Cypher statement to create the relationships:
 
+.Load statement
 [source,cypher]
 ----
 UNWIND $relRecords AS relRecord
