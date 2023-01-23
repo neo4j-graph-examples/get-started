@@ -272,6 +272,22 @@ SET r.`discount` = toFloat(trim(relRecord.`discount`));
 From this you can see how a relationship is created _from_ a source node _to_ a target node and how each created relationship is of the type `CONTAINS`.
 You can also see the the properties added to each relationship.
 
+== Explore the graph
+
+With the data imported it's time to explore.
+Go ahead and navigate to the _Explore_ tab or click the button below:
+
+button::Explore[role=NX_TAB_NAV,tab=explore]
+
+The _Explore tab allows you to visualize and interact with your data with minimal use of Cypher.
+To start out, let's have a quick look at a sample of your data.
+
+Click the button to load an example graph:
+
+button::Example-graph[role=NX_EXPLORE_SEARCH,search='show me a graph']
+
+
+
 
 
 
