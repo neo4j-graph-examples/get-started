@@ -233,7 +233,39 @@ You should see a popup window showing the successful results.
 image::import_results.png[]
 
 The _Import results_ summarizes what was included in the import. 
-You can compare to your CSV files to verify that everything was imported
+You can compare to your CSV files to verify that everything was imported.
+
+You can also see the Cypher commands used to create the elements in your model.
+Let's have a look at _Order_ nodes.
+Click _Show Cypher_ on _Order_.
+The key statement:
+
+[source,cypher]
+----
+CREATE CONSTRAINT `imp_uniq_Order_orderID` IF NOT EXISTS
+FOR (n: `Order`)
+REQUIRE (n.`orderID`) IS UNIQUE;
+----
+
+This ensures that the `orderID` is unique which is important since this is what is used later to create the relationship between the _Order_ nodes and the _Product nodes.
+
+The load statement creates all the different nodes sets all your selected properties.
+Both key and load statements look similar to this for the _Product_ nodes.
+
+But let's have a look at the Cypher statement to create the relationships:
+
+[source,cypher]
+----
+UNWIND $relRecords AS relRecord
+MATCH (source: `Order` { `orderID`: toInteger(trim(relRecord.`orderID`)) })
+MATCH (target: `Product` { `productID`: toInteger(trim(relRecord.`productID`)) })
+MERGE (source)-[r: `CONTAINS`]->(target);
+SET r.`unitPrice` = toFloat(trim(relRecord.`unitPrice`))
+SET r.`quantity` = toInteger(trim(relRecord.`quantity`))
+SET r.`discount` = toFloat(trim(relRecord.`discount`));
+----
+
+From this you can see how a relationship is created _from_ a source node _to_ a target node and how each created relationship is of the type `CONTAINS`.
 
 
 
