@@ -266,6 +266,7 @@ SET r.`discount` = toFloat(trim(relRecord.`discount`));
 ----
 
 From this you can see how a relationship is created _from_ a source node _to_ a target node and how each created relationship is of the type `CONTAINS`.
+You can also see the the properties added to each relationship.
 
 
 
