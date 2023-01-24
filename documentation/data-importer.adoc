@@ -279,12 +279,23 @@ Go ahead and navigate to the _Explore_ tab or click the button below:
 
 button::Explore[role=NX_TAB_NAV,tab=explore]
 
-The _Explore tab allows you to visualize and interact with your data with minimal use of Cypher.
+The _Explore_ tab allows you to visualize and interact with your data with minimal use of Cypher.
 To start out, let's have a quick look at a sample of your data.
 
 Click the button to load an example graph:
 
 button::Example-graph[role=NX_EXPLORE_SEARCH,search='show me a graph']
+
+How much more do we want to cover here?
+
+== Saving and loading
+
+You have created a simple model and mapped it data.
+Often, the datamodel is a bit more complicated than this example model.
+Regardless of complexity, you may want to come back to your model at some point.
+Data Importer lets you _download_ your model, with or without the data you've mapped to it.
+
+image:save-load.png[]
 
 
 
