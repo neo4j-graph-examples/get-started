@@ -297,6 +297,16 @@ Data Importer lets you _download_ your model, with or without the data you've ma
 
 image:save-load.png[]
 
+When you choose to download your model, with or without data, you are essentially saving it.
+The model doesn't have to be mapped for you to download.
+
+If you have a downloaded model, you can open it from this same menu, again with or without data.
+
+The data is stored as CSV-files and the model as a json-file, which makes it easy to share.
+
+
+
+
 
 
 
