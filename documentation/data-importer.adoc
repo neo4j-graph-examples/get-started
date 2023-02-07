@@ -52,7 +52,7 @@ When you know where the files are, you can drag and drop them to the _Files_ pan
 
 For convenience, click the button to have the Northwind dataset loaded for you, so you don't have to drag and drop them.
 
-button::Download the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/just-the-data.zip]
+button::Download the partial Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/just-the-data.zip]
 
 You have now _uploaded_ the files to Data Importer.
 This is *not* the same as _importing_ them. 
@@ -326,6 +326,9 @@ Recall the Cypher statements from the Import summary.
 In case of re-running the import, this constrain ensures that if an element, with an ID, already exists, it will not be created again.
 
 To demonstrate this, try the button below to download the entire Northwind dataset and run the import.
+
+button::
+
 This action will not lead to any duplication of the `Order` and `Product` nodes nor of the relationships.
 To verify further, the new model calls the relationship type between `Order` and `Product` `ORDERS` instead of `CONTAINS`.
 Click the button to go to the _Explore_ tab.
@@ -341,6 +344,7 @@ You can also try to type _CONTAINS_ in the search bar to see that those relation
 Greg will contribute something here
 
 == Frequently Asked Questions
+
 
 
 
