@@ -1,0 +1,580 @@
+{
+  "version": "0.7.0",
+  "graph": {
+    "nodes": [],
+    "relationships": []
+  },
+  "dataModel": {
+    "fileModel": {
+      "fileSchemas": {
+        "territories.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "territoryID",
+              "type": "integer",
+              "sample": "01581",
+              "include": true
+            },
+            {
+              "name": "territoryDescription",
+              "type": "string",
+              "sample": "Westboro",
+              "include": true
+            },
+            {
+              "name": "regionID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            }
+          ]
+        },
+        "suppliers.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "supplierID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            },
+            {
+              "name": "companyName",
+              "type": "string",
+              "sample": "Exotic Liquids",
+              "include": true
+            },
+            {
+              "name": "contactName",
+              "type": "string",
+              "sample": "Charlotte Cooper",
+              "include": true
+            },
+            {
+              "name": "contactTitle",
+              "type": "string",
+              "sample": "Purchasing Manager",
+              "include": true
+            },
+            {
+              "name": "address",
+              "type": "string",
+              "sample": "49 Gilbert St.",
+              "include": true
+            },
+            {
+              "name": "city",
+              "type": "string",
+              "sample": "London",
+              "include": true
+            },
+            {
+              "name": "region",
+              "type": "string",
+              "sample": "NULL",
+              "include": true
+            },
+            {
+              "name": "postalCode",
+              "type": "string",
+              "sample": "EC1 4SD",
+              "include": true
+            },
+            {
+              "name": "country",
+              "type": "string",
+              "sample": "UK",
+              "include": true
+            },
+            {
+              "name": "phone",
+              "type": "string",
+              "sample": "(171) 555-2222",
+              "include": true
+            },
+            {
+              "name": "fax",
+              "type": "string",
+              "sample": "NULL",
+              "include": true
+            },
+            {
+              "name": "homePage",
+              "type": "string",
+              "sample": "NULL",
+              "include": true
+            }
+          ]
+        },
+        "shippers.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "shipperID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            },
+            {
+              "name": "companyName",
+              "type": "string",
+              "sample": "Speedy Express",
+              "include": true
+            },
+            {
+              "name": "phone",
+              "type": "string",
+              "sample": "(503) 555-9831",
+              "include": true
+            }
+          ]
+        },
+        "regions.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "regionID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            },
+            {
+              "name": "regionDescription",
+              "type": "string",
+              "sample": "Eastern",
+              "include": true
+            }
+          ]
+        },
+        "products.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "productID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            },
+            {
+              "name": "productName",
+              "type": "string",
+              "sample": "Chai",
+              "include": true
+            },
+            {
+              "name": "supplierID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            },
+            {
+              "name": "categoryID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            },
+            {
+              "name": "quantityPerUnit",
+              "type": "string",
+              "sample": "10 boxes x 20 bags",
+              "include": true
+            },
+            {
+              "name": "unitPrice",
+              "type": "float",
+              "sample": "18.00",
+              "include": true
+            },
+            {
+              "name": "unitsInStock",
+              "type": "integer",
+              "sample": "39",
+              "include": true
+            },
+            {
+              "name": "unitsOnOrder",
+              "type": "integer",
+              "sample": "0",
+              "include": true
+            },
+            {
+              "name": "reorderLevel",
+              "type": "integer",
+              "sample": "10",
+              "include": true
+            },
+            {
+              "name": "discontinued",
+              "type": "boolean",
+              "sample": "0",
+              "include": true
+            }
+          ]
+        },
+        "orders.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "orderID",
+              "type": "integer",
+              "sample": "10248",
+              "include": true
+            },
+            {
+              "name": "customerID",
+              "type": "string",
+              "sample": "VINET",
+              "include": true
+            },
+            {
+              "name": "employeeID",
+              "type": "integer",
+              "sample": "5",
+              "include": true
+            },
+            {
+              "name": "orderDate",
+              "type": "string",
+              "sample": "1996-07-04 00:00:00.000",
+              "include": true
+            },
+            {
+              "name": "requiredDate",
+              "type": "string",
+              "sample": "1996-08-01 00:00:00.000",
+              "include": true
+            },
+            {
+              "name": "shippedDate",
+              "type": "string",
+              "sample": "1996-07-16 00:00:00.000",
+              "include": true
+            },
+            {
+              "name": "shipVia",
+              "type": "integer",
+              "sample": "3",
+              "include": true
+            },
+            {
+              "name": "freight",
+              "type": "float",
+              "sample": "32.38",
+              "include": true
+            },
+            {
+              "name": "shipName",
+              "type": "string",
+              "sample": "Vins et alcools Chevalier",
+              "include": true
+            },
+            {
+              "name": "shipAddress",
+              "type": "string",
+              "sample": "59 rue de l'Abbaye",
+              "include": true
+            },
+            {
+              "name": "shipCity",
+              "type": "string",
+              "sample": "Reims",
+              "include": true
+            },
+            {
+              "name": "shipRegion",
+              "type": "string",
+              "sample": "NULL",
+              "include": true
+            },
+            {
+              "name": "shipPostalCode",
+              "type": "string",
+              "sample": "51100",
+              "include": true
+            },
+            {
+              "name": "shipCountry",
+              "type": "string",
+              "sample": "France",
+              "include": true
+            }
+          ]
+        },
+        "order-details.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "orderID",
+              "type": "integer",
+              "sample": "10248",
+              "include": true
+            },
+            {
+              "name": "productID",
+              "type": "integer",
+              "sample": "11",
+              "include": true
+            },
+            {
+              "name": "unitPrice",
+              "type": "float",
+              "sample": "14.00",
+              "include": true
+            },
+            {
+              "name": "quantity",
+              "type": "integer",
+              "sample": "12",
+              "include": true
+            },
+            {
+              "name": "discount",
+              "type": "float",
+              "sample": "0",
+              "include": true
+            }
+          ]
+        },
+        "employees.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "employeeID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            },
+            {
+              "name": "lastName",
+              "type": "string",
+              "sample": "Davolio",
+              "include": true
+            },
+            {
+              "name": "firstName",
+              "type": "string",
+              "sample": "Nancy",
+              "include": true
+            },
+            {
+              "name": "title",
+              "type": "string",
+              "sample": "Sales Representative",
+              "include": true
+            },
+            {
+              "name": "titleOfCourtesy",
+              "type": "string",
+              "sample": "Ms.",
+              "include": true
+            },
+            {
+              "name": "birthDate",
+              "type": "string",
+              "sample": "1948-12-08 00:00:00.000",
+              "include": true
+            },
+            {
+              "name": "hireDate",
+              "type": "string",
+              "sample": "1992-05-01 00:00:00.000",
+              "include": true
+            },
+            {
+              "name": "address",
+              "type": "string",
+              "sample": "507 - 20th Ave. E. Apt. 2A",
+              "include": true
+            },
+            {
+              "name": "city",
+              "type": "string",
+              "sample": "Seattle",
+              "include": true
+            },
+            {
+              "name": "region",
+              "type": "string",
+              "sample": "WA",
+              "include": true
+            },
+            {
+              "name": "postalCode",
+              "type": "string",
+              "sample": "98122",
+              "include": true
+            },
+            {
+              "name": "country",
+              "type": "string",
+              "sample": "USA",
+              "include": true
+            },
+            {
+              "name": "homePhone",
+              "type": "string",
+              "sample": "(206) 555-9857",
+              "include": true
+            },
+            {
+              "name": "extension",
+              "type": "integer",
+              "sample": "5467",
+              "include": true
+            },
+            {
+              "name": "photo",
+              "type": "string",
+              "sample": "0x151C2F00020000000D000E0014002100FFFFFFFF4269746D617020496D616765005061696E742E506963747572650001050000020000000700000050427275736800000000000000000020540000424D20540000000000007600000028000000C0000000DF0000000100040000000000A0530000CE0E0000D80E0000000000",
+              "include": true
+            },
+            {
+              "name": "notes",
+              "type": "string",
+              "sample": "Education includes a BA in psychology from Colorado State University in 1970.  She also completed \"The Art of the Cold Call.\"  Nancy is a member of Toastmasters International.",
+              "include": true
+            },
+            {
+              "name": "reportsTo",
+              "type": "string",
+              "sample": "2",
+              "include": true
+            },
+            {
+              "name": "photoPath",
+              "type": "string",
+              "sample": "http://accweb/emmployees/davolio.bmp",
+              "include": true
+            }
+          ]
+        },
+        "employee-territories.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "employeeID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            },
+            {
+              "name": "territoryID",
+              "type": "integer",
+              "sample": "06897",
+              "include": true
+            }
+          ]
+        },
+        "customers.csv": {
+          "expanded": false,
+          "fields": [
+            {
+              "name": "customerID",
+              "type": "string",
+              "sample": "ALFKI",
+              "include": true
+            },
+            {
+              "name": "companyName",
+              "type": "string",
+              "sample": "Alfreds Futterkiste",
+              "include": true
+            },
+            {
+              "name": "contactName",
+              "type": "string",
+              "sample": "Maria Anders",
+              "include": true
+            },
+            {
+              "name": "contactTitle",
+              "type": "string",
+              "sample": "Sales Representative",
+              "include": true
+            },
+            {
+              "name": "address",
+              "type": "string",
+              "sample": "Obere Str. 57",
+              "include": true
+            },
+            {
+              "name": "city",
+              "type": "string",
+              "sample": "Berlin",
+              "include": true
+            },
+            {
+              "name": "region",
+              "type": "string",
+              "sample": "NULL",
+              "include": true
+            },
+            {
+              "name": "postalCode",
+              "type": "string",
+              "sample": "12209",
+              "include": true
+            },
+            {
+              "name": "country",
+              "type": "string",
+              "sample": "Germany",
+              "include": true
+            },
+            {
+              "name": "phone",
+              "type": "string",
+              "sample": "030-0074321",
+              "include": true
+            },
+            {
+              "name": "fax",
+              "type": "string",
+              "sample": "030-0076545",
+              "include": true
+            }
+          ]
+        },
+        "categories.csv": {
+          "expanded": true,
+          "fields": [
+            {
+              "name": "categoryID",
+              "type": "integer",
+              "sample": "1",
+              "include": true
+            },
+            {
+              "name": "categoryName",
+              "type": "string",
+              "sample": "Beverages",
+              "include": true
+            },
+            {
+              "name": "description",
+              "type": "string",
+              "sample": "Soft drinks, coffees, teas, beers, and ales",
+              "include": true
+            },
+            {
+              "name": "picture",
+              "type": "string",
+              "sample": "0x151C2F00020000000D000E0014002100FFFFFFFF4269746D617020496D616765005061696E742E5069637475726500010500000200000007000000504272757368000000000000000000A0290000424D98290000000000005600000028000000AC00000078000000010004000000000000000000880B0000880B0000080000",
+              "include": true
+            }
+          ]
+        }
+      }
+    },
+    "graphModel": {
+      "nodeSchemas": {},
+      "relationshipSchemas": {}
+    },
+    "mappingModel": {
+      "nodeMappings": {},
+      "relationshipMappings": {}
+    }
+  }
+}
