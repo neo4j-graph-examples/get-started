@@ -1,0 +1,48 @@
+= Learn basic Cypher in the Query tab of Neo4j Workspace
+
+== Query Guide
+
+This guide is the next step after you've completed _Get started_, _Data Importer_, and _Explore_, but can be taken independently as well.
+It gives you an introduction to Cypher fundamentals and introduces some more complex queries.
+You will learn your way around the Query UI so you can make the most of it.
+
+Just like the previous guides, the Query guide uses the Northwind dataset.
+If you have completed the Data Importer guide, you already have the data needed and can just skip past the next step.
+If you are doing this guide independently, you need to import the dataset to run your queries on.
+Just follow the instructions in the next step and you will be set up in a minute.
+
+== Load the Northwind dataset
+
+Again, if you already have completed the Data Importer guide, you can skip this step.
+If not, then first navigate to the _Data Importer_ tab:
+
+button::Go to Data Importer[role=NX_TAB_NAV,tab=import]
+
+Use the button to load and map the data:
+
+button::Load the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://raw.githubusercontent.com/neo4j-graph-examples/northwind/main/import/northwind-data-importer-mode-data.zip]
+
+Once that's all done, click _Run import_ in the top right corner.
+
+If you want to learn more about importing data, try the Data Importer guide.
+
+With the data imported, navigate back to the _Query_ tab and get started with learning Cypher:
+
+button::Go back to Query[role=NX_TAB_NAV,tab=query]
+
+== Get to know the database
+
+A good place to start to take stock of what you have in your database is the _database information_ that you access from the sidebar.
+The database information is located on the very top of the sidebar.
+You'll see how many nodes you have and all their labels, the number of relationships and their types, and also a list of all the property keys present in the database.
+
+A node can have multiple labels and the list shows _all_ labels in the database.
+Relationships on the other hand, can have only one type, but multiple relationships can exist between the same nodes.
+The list of property keys include both node properties and relationship properties.
+
+You can click any of the labels, types, or property keys to run a query that returns a sample of nodes and/or relationships that has that label, type, or property.
+
+
+
+
+
