@@ -2,9 +2,11 @@
 
 == Query Guide
 
-This guide is the next step after you've completed _Get started_, _Data Importer_, and _Explore_, but can be taken independently as well.
-It gives you an introduction to Cypher fundamentals and introduces some more complex queries.
-You will learn your way around the Query UI so you can make the most of it.
+This guide is the next step after you've completed _Get started_, _Data Importer_, and _Explore_.
+You can follow this guide independently as well.
+
+It gives you an introduction to Cypher fundamentals and presents some more complex queries.
+You will learn your way around the Query UI so you can make the most of all it has to offer.
 
 Just like the previous guides, the Query guide uses the Northwind dataset.
 If you have completed the Data Importer guide, you already have the data needed and can just skip past the next step.
@@ -46,6 +48,48 @@ Relationships on the other hand, can have only one type, but multiple relationsh
 The list of property keys include both node properties and relationship properties.
 
 You can click any of the labels, types, or property keys to run a query that returns a sample of nodes and/or relationships that has that label, type, or property.
+
+For example, try click on the `Product` node label and you'll see this query populated and executed for you:
+
+[source,cypher]
+----
+MATCH (n:Product) RETURN n LIMIT 25;
+----
+
+== Anatomy of the Query result stream
+
+Central to the Query UI is the shell-like Cypher editor and result frame.
+These two components act as a rich and interactive _Read-Evaluate-Print-Loop_ for working with graph queries and results.
+
+The main Cypher editor is located at the top and this is where you write, edit, and execute your queries.
+
+When you execute, or _run_, a query from the editor, or when you run any auto-generated queries (such as clicking on node labels or example queries in this guide), this triggers the presentation of a result frame.
+
+The result frame contains both the executed query as well as the results of it.
+As you run more queries from the main editor, new result frames are generated, pushing the previous ones down.
+The latest one is always at the top.
+
+The result frames are reusable.
+This means that you can edit the query within the frame and run it again without spawning a new result frame.
+
+We'll have a closer look at the frame itself in the next step.
+
+== Anatomy of a result frame
+
+As mentioned before, the result fram consists of two parts, a Cypher editor and space to display the results of the Cypher query.
+The frame has three primary views: graph, table, or RAW.
+
+image::result-options.png[]
+
+The default is graph, but if the result of your query doesn't contain any nodes, it defaults to a table.
+The RAW option shows the submitted query, the Neo4j server version and address, the result, and a summary.
+
+
+
+
+
+
+
 
 
 
