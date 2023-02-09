@@ -81,7 +81,23 @@ The frame has three primary views: graph, table, or RAW.
 
 image::result-options.png[]
 
-The default is graph, but if the result of your query doesn't contain any nodes, it defaults to a table.
+The default view is graph.
+Run the following query:
+
+[source,cypher]
+----
+MATCH p=()-[:CONTAINS]->() RETURN p LIMIT 25;
+----
+
+The result is a neat graph of 25 relationships of the type `CONTAINS`, which links `Order` nodes to `Product` nodes.
+On your right you can see the properties panel with information about the entities in your graph.
+You can click on any of them to change their styling, i.e. color, size, and/or caption.
+If you select any _one_ element in your graph, the properties panel will show only the contents of that element and allow you to change the styling of only that element.
+
+If your query doesn't return any nodes, the result defaults to the table view and the graph view is not shown.
+You can try this by clicking on one of your properties from the list in database information, `orderID` for example.
+Using the tabular representation comes in handy when you want to compare items in the same return line and resembles SQL.
+
 The RAW option shows the submitted query, the Neo4j server version and address, the result, and a summary.
 
 
