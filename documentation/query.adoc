@@ -32,12 +32,17 @@ button::Go back to Query[role=NX_TAB_NAV,tab=query]
 
 == Get to know the database
 
-A good place to start to take stock of what you have in your database is the _database information_ that you access from the sidebar.
-The database information is located on the very top of the sidebar.
-You'll see how many nodes you have and all their labels, the number of relationships and their types, and also a list of all the property keys present in the database.
+A good place to start is to take stock of what you have in your database.
+You access _Database Information_ from the very top of the sidebar.
+
+image::database-icon.png[]
+
+There you'll see how many nodes you have and all their labels, the number of relationships and their types, and also a list of all the property keys present in the database.
 
 A node can have multiple labels and the list shows _all_ labels in the database.
+
 Relationships on the other hand, can have only one type, but multiple relationships can exist between the same nodes.
+
 The list of property keys include both node properties and relationship properties.
 
 You can click any of the labels, types, or property keys to run a query that returns a sample of nodes and/or relationships that has that label, type, or property.
