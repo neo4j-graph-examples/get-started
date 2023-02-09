@@ -1,6 +1,6 @@
 = Learn how to import and map data with Neo4j Data Importer
 
-== Data Importer
+== Introduction
 
 This guide will teach you how to import data from flat files and how to map the data to your graph data model.
 
@@ -23,9 +23,9 @@ The topics covered in this guide are:
 
 == Scope of Importer
 
-You should have a basic understanding of Neo4j and the graph property model by now.
-If you are unsure, you can always go back to the _Getting started with Neo4j_ guide again.
-But assuming you're familiar with the basics, you are ready to have a closer look at the file format for importing data and how this relates to your graph model.
+Data Importer is designed to get you started with Neo4j as quickly as possible and is recommend for new users and those with rapid prototyping needs. However, it's far from being the only way to load data into Neo4j, especially when you have more advanced needs. At the end of this guide the "What's next?" step gives links to resources on the many different ways of loading data into Neo4j.
+
+Configuring Data Importer for imnport is a simple three stage process (1) providing your Flat files, (2) defining a Graph Model and (3) Mapping that data to those flat files: 
 
 === Flat files
 
@@ -36,19 +36,21 @@ The most common file formats are CSV (comma-separated values) and TSV (tab-separ
 Data Importer supports both formats, but this guide will focus on CSV.
 This guide doesn't teach you how to create CSV files, but gives you a closer look at their structure.
 
+=== Graph Model
+
+Once you have your flat files, your next job is to think how you're going to represent the data as nodes and relationships in your graph. Data Importer allows you to visually sketch out that model which is then use in the mapping stage. You can model and mapping iteratively as you work out which graph model best suits your use case and data.
+
 === Mapping
 
-The flat files contain both the data and the structure of the data.
-This means that the files contain both the nodes and the relationships that connect them.
-All you need to do is to map the data to the graph model you have in mind.
-Data Importer lets you draw your model and then map your data to it.
-You'll get to this in a moment.
+While some flat files might refer to nodes an relationshps, more often than not the nodes and relationships will be implicitly represented. The mapping stage is all about helping Data Importer understand which parts of which files represent the nodes and relationships ion the graph model. This gives Data Importer all the infomration it needs to run an Import job.  
 
 == Provision of files
 
 The first thing you need to do is to locate the data you want to import.
 This can be individual CSV files or a directory containing multiple files.
 When you know where the files are, you can drag and drop them to the _Files_ pane or browse for them.
+
+image::files.png[]
 
 For convenience, click the button to have the Northwind dataset loaded for you, so you don't have to drag and drop them.
 
@@ -59,8 +61,6 @@ This is *not* the same as _importing_ them.
 By uploading, you just make them available to the Data Importer, not to your database.
 
 You should now see eleven CSV files in the _Files_ section.
-
-image::files.png[]
 
 === File structure
 
@@ -84,12 +84,14 @@ If not, you will have problems when you load the data and try to create relation
 
 == Thinking about your model
 
-You are likely familiar with the _graph data model_ by now, but in summary, the graph property model shows how your data is connected.
+You are likely familiar with the _graph data model_ by now, which determines how your data is connected.
 When you create your model, you need to think about the data in your CSV files and how the data is connected.
 As mentioned earlier, your CSV files already contain all the information about how the data within the files is connected, you just need to sketch the model and map your data to it.
 To practice, we are going to create a simple model with only two nodes and one relationship.
 
 image::simple-model.png[]
+
+We'll now go on to create this model and map data to it as we go.
 
 == Create nodes
 
@@ -122,12 +124,11 @@ Go to the _Mapping_ tab next.
 This tab shows your selected properties and the column in `orders.csv` each property maps to.
 If you created your own properties, you have to manually select which columns to map them to.
 
-The last thing you need to do is to select one of the properties to represent the node as its _node ID_.
+Returning to the _Definition_ tab, the last thing you need to do is to select one of the properties to represent the node as its _node ID_.
 The node ID is used when connecting nodes with relationships as either a start node or end node.
 If the node is referenced more than once in the file, the ID ensures that the node is not created more than once.
 
-To move on, go ahead and create a `Product` node accordingly.
-Use the `products.csv` file.
+To move on, go ahead and create a `Product` node accordingly, using the `products.csv` file in much the same way as you did for the `Order` node.
 Again, for the purpose of this example, you won't need all the available properties and can deselect `supplierID` and `categoryID`.
 Use the `productID` property as ID for the node.
 
@@ -135,8 +136,7 @@ Use the `productID` property as ID for the node.
 == Create relationships
 
 You have two nodes and now you need to create a relationship to connect them.
-Pick your start node, the `Order` node, by clicking on it.
-Hover by the edge of the circle and you'll see a `+` sign.
+Hover by the edge of the `Order` node circle and you'll see a `+` sign.
 Click and hold it and you'll see another circle.
 Drag the new circle on to the `Product` node and just like that, you have created a relationship. 
 
@@ -148,7 +148,7 @@ First, you add the relationship type, which is a descriptive name for the relati
 In the model you are creating, an order _contains_ a product, so go ahead and put `CONTAINS` in the _Relationship type_ field.
 
 Next, in order to create the relationship, you need to map a file that describes _how_ it should be created.
-Remember that you selected the `orderID` and `productID` properties as IDs for the your nodes.
+Remember that you selected the `orderID` and `productID` properties as IDs for the nodes.
 The file you map your relationship to needs to contain these to be able to actually link the two nodes.
 Look in the left pane and you'll see that the `order-details.csv` file contains both. 
 
@@ -157,7 +157,7 @@ In your model, the relationship goes _from_ the `Order` node, so select `orderID
 
 As you can see, the file also contains other properties pertaining to the order of a product. 
 You don't need to include the `orderID` or the `productID` here, as these are already encoded in the relationship.
-You could include `quantity`
+You could include `quantity`, `unitPrice` and `discount` as properties relevant to the relationship. For example `quantity` does not belong on either the `Product` or `Order` nodes since products the will be sold in different quantities on different orders.  
 
 === Graph databases vs. relational databases
 
@@ -191,7 +191,7 @@ The following items **must be** mapped on a **node**:
 * Label
 * File
 * A minimum of one property
-* ID (the ID is populated automatically)
+* ID
 
 The following items **must be** mapped on a **relationship**:
 
@@ -244,8 +244,7 @@ Note that if you run this guide after the _Getting Started_, the count may show 
 You can also see the Cypher commands used to create the elements in your model.
 This can be helpful if you want to gain appreciation for the underlying Cypher required to execute the load.
 Let's have a look at _Order_ nodes.
-Click _Show Cypher_ on _Order_.
-The key statement:
+Click _Show Cypher_ on _Order_ which reveals the key statement:
 
 .Key statement
 [source,cypher]
@@ -255,10 +254,10 @@ FOR (n: `Order`)
 REQUIRE (n.`orderID`) IS UNIQUE;
 ----
 
-This ensures that the `orderID` is unique which is important since this is what is used later to create the relationship between the _Order_ nodes and the _Product nodes.
+This ensures that the `orderID` is unique which is important since this is what is used later to create the relationship between the _Order_ nodes and the _Product_ nodes.
 As you will see later on, this constraint is also what allows you to run the import more than once.
 
-The load statement creates all the different nodes sets all your selected properties.
+The load statement creates all the _Order_ nodes sets all their properties.
 Both key and load statements look similar to this for the _Product_ nodes.
 
 But let's have a look at the Cypher statement to create the relationships:
@@ -275,7 +274,7 @@ SET r.`quantity` = toInteger(trim(relRecord.`quantity`))
 SET r.`discount` = toFloat(trim(relRecord.`discount`));
 ----
 
-From this you can see how the source node and the target node are `MATCH`ed (found in the data) and then a `MERGE` statement is used to create a `CONTAINS` relationship _from_ the source node _to_ the target node.
+From this you can see how the source node and the target node are `MATCH` ed (found in the data) and then a `MERGE` statement is used to create a `CONTAINS` relationship _from_ the source node _to_ the target node.
 You can also see the the properties added to each relationship.
 
 == Explore the graph
@@ -290,7 +289,7 @@ To start out, let's have a quick look at a sample of your data.
 
 You can see that the search bar in the top left corner is already populated with _Show me a graph_.
 Click the bar and press enter.
-Except for the sample graph, you can use the search bar to find and display any of the elements in your data.
+As well as showing the sample graph, you can use the search bar to find and display any of the elements in your data.
 You can use near-natural language for this and that means that Explore understands a vocabulary based on the categories, labels, relationship types, property keys and property values of your dataset.
 
 The legend panel on your right gives you an overview of the elements in your graph with one tab for nodes and one for relationships.
@@ -301,7 +300,7 @@ For a more comprehensive guidance on the Explore tab, see the https://www.neo4j.
 
 == Saving and loading
 
-You have created a simple model and mapped it data.
+Now switch back to the Import tab. You have created a simple model and mapped data to it.
 Often, the datamodel is a bit more complicated than this example model.
 Regardless of complexity, you may want to come back to your model at some point.
 Data Importer lets you _download_ your model, with or without the data you've mapped to it.
@@ -323,7 +322,7 @@ The changes you made will overwrite what you had before, but no existing element
 
 This is due to the uniqueness constraints in the import. 
 Recall the Cypher statements from the Import summary.
-In case of re-running the import, this constrain ensures that if an element, with an ID, already exists, it will not be created again.
+In case of re-running the import, this constraint ensures that if an element, with an ID, already exists, it will not be created again.
 
 To demonstrate this, try the button below to download the entire Northwind dataset and run the import.
 
@@ -336,16 +335,29 @@ Click the button to go to the _Explore_ tab.
 button::Explore[role=NX_TAB_NAV,tab=explore]
 
 In the search bar, type _Order_ and _Product_ and press enter.
-In the graph displayed in the Scene, click on any relationship and you can see it says `ORDERS` and not `CONTAINS`.
-You can also try to type _CONTAINS_ in the search bar to see that those relationships have now been replaced by identical relationships, except for the type now being `ORDERS`.
+In the graph displayed in the Scene, click on any relationship and you can see it offers the `ORDERS` option as well as `CONTAINS`.
+The `Order` and `Product` nodes have been retained and not recreated because their data importer configuration was identical, but since we added a new relationship type of `ORDERS`, this was added to the load. The `CONTAINS` relationship is still retained from the previous import run. The old relationships would need to be removed with Cypher, or the load run on a clean database to only keep the relationships in the latest iteration of the model and mapping. 
 
 == When you outgrow the Data Importer
 
-Greg will contribute something here
+Data Importer, as a UI tool, is not best placed to meet _all_ of your varied load needs, be they transformations or differing data formats. If you can't achieve a load in Data Importer, the chances are you can achieve the load using some of the other approaches to loading data into Neo4j. The following are useful resources for different needs:
+
+- https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV]] for writing your own bespoke Cypher load scripts from CSVs, leveraging the full capabilities of Cypher.
+- https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import]] for loading large amounts of CSV data rapidly into an offline database
+- https://neo4j.com/product/connectors/[Neo4j connectors] to connect data from a variety of soruces into Neo4j.
+- https://neo4j.com/docs/apoc/current/overview/apoc.load/[APOC Load procedures] for specialist Cypher procedures to make it easier to ingest data from formats including, json, xml and arrow.
 
 == Frequently Asked Questions
 
+- Q: Missing files - Why does data importer say I need to provide my files after I've aready provided them? Why does it happen so often? 
+A: When you provide Data Importer with your files, you are actually providing your Web Browser with a link to those files on your local filesystem, they aren't uploaded anywhere - Data importer stream the content of the files to you database only when you run the import. If you reload the page, Data Importer will lose access to the  connection to those files due to security restrictions in place to prevent web applications accessing files you haven't given express permission to use on page load. You simply need to re-provide the files when requested by data importer to be able to run an import.
 
+- Q: How can I replace a file?
+A: Data Importer doesn't currently allow you to swap out files in the UI. There is however a workaround that may prove useful. If you want to provide a different file with the same column structure to data importer, you can rename it to match and then simply add the file to the files panel. This will replace the referecne to the latest file and be available for use by your import.
+
+
+- Q: How do I change the database data improter load into?
+A: If you are using a Neo4j instanace that supports multiple databases, Data Importer will use the home database to import data into it.  You may have the facility to change the home database for the user that you connect to your DBMS with, read more on setting the home database for a user https://neo4j.com/docs/cypher-manual/current/access-control/manage-users/[here].
 
 
 
