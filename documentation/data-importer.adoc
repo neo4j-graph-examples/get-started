@@ -23,9 +23,11 @@ The topics covered in this guide are:
 
 == Scope of Importer
 
-Data Importer is designed to get you started with Neo4j as quickly as possible and is recommend for new users and those with rapid prototyping needs. However, it's far from being the only way to load data into Neo4j, especially when you have more advanced needs. At the end of this guide the "What's next?" step gives links to resources on the many different ways of loading data into Neo4j.
+Data Importer is designed to get you started with Neo4j as quickly as possible and is recommend for new users and those with rapid prototyping needs. 
+However, it's far from being the only way to load data into Neo4j, especially when you have more advanced needs. 
+At the end of this guide the _What's next?_ step gives links to resources on the many different ways of loading data into Neo4j.
 
-Configuring Data Importer for imnport is a simple three stage process (1) providing your Flat files, (2) defining a Graph Model and (3) Mapping that data to those flat files: 
+Configuring Data Importer for import is a simple three-stage-process: (1) providing your flat files, (2) defining a Graph Model and (3) mapping that data to those flat files: 
 
 === Flat files
 
@@ -42,7 +44,8 @@ Once you have your flat files, your next job is to think how you're going to rep
 
 === Mapping
 
-While some flat files might refer to nodes an relationshps, more often than not the nodes and relationships will be implicitly represented. The mapping stage is all about helping Data Importer understand which parts of which files represent the nodes and relationships ion the graph model. This gives Data Importer all the infomration it needs to run an Import job.  
+While some flat files might refer to nodes and relationshps, more often than not, the nodes and relationships will be implicitly represented. 
+The mapping stage is all about helping Data Importer understand which parts of which files represent the nodes and relationships in the graph model. This gives Data Importer all the infomration it needs to run an Import job.  
 
 == Provision of files
 
@@ -52,7 +55,7 @@ When you know where the files are, you can drag and drop them to the _Files_ pan
 
 image::files.png[]
 
-For convenience, click the button to have the Northwind dataset loaded for you, so you don't have to drag and drop them.
+For convenience, click the button to have a subset of the Northwind dataset loaded for you, so you don't have to drag and drop them.
 
 button::Download the partial Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/just-the-data.zip]
 
@@ -60,7 +63,7 @@ You have now _uploaded_ the files to Data Importer.
 This is *not* the same as _importing_ them. 
 By uploading, you just make them available to the Data Importer, not to your database.
 
-You should now see eleven CSV files in the _Files_ section.
+You should now see three CSV files in the _Files_ section.
 
 === File structure
 
@@ -84,7 +87,7 @@ If not, you will have problems when you load the data and try to create relation
 
 == Thinking about your model
 
-You are likely familiar with the _graph data model_ by now, which determines how your data is connected.
+You are likely familiar with the _graph data model_ by now, so you know it determines how your data is connected.
 When you create your model, you need to think about the data in your CSV files and how the data is connected.
 As mentioned earlier, your CSV files already contain all the information about how the data within the files is connected, you just need to sketch the model and map your data to it.
 To practice, we are going to create a simple model with only two nodes and one relationship.
@@ -157,7 +160,8 @@ In your model, the relationship goes _from_ the `Order` node, so select `orderID
 
 As you can see, the file also contains other properties pertaining to the order of a product. 
 You don't need to include the `orderID` or the `productID` here, as these are already encoded in the relationship.
-You could include `quantity`, `unitPrice` and `discount` as properties relevant to the relationship. For example `quantity` does not belong on either the `Product` or `Order` nodes since products the will be sold in different quantities on different orders.  
+You could include `quantity`, `unitPrice` and `discount` as properties relevant to the relationship. 
+For example `quantity` does not belong on either the `Product` or `Order` nodes since products the will be sold in different quantities on different orders.  
 
 === Graph databases vs. relational databases
 
@@ -300,7 +304,11 @@ For a more comprehensive guidance on the Explore tab, see the https://www.neo4j.
 
 == Saving and loading
 
-Now switch back to the Import tab. You have created a simple model and mapped data to it.
+Now switch back to the Import tab. 
+
+button::Import[role=NX_TAB_NAV,tab=inmport]
+
+You have created a simple model and mapped data to it.
 Often, the datamodel is a bit more complicated than this example model.
 Regardless of complexity, you may want to come back to your model at some point.
 Data Importer lets you _download_ your model, with or without the data you've mapped to it.
@@ -326,7 +334,7 @@ In case of re-running the import, this constraint ensures that if an element, wi
 
 To demonstrate this, try the button below to download the entire Northwind dataset and run the import.
 
-button::
+button::Load the full Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-model-data.zip]
 
 This action will not lead to any duplication of the `Order` and `Product` nodes nor of the relationships.
 To verify further, the new model calls the relationship type between `Order` and `Product` `ORDERS` instead of `CONTAINS`.
@@ -336,11 +344,14 @@ button::Explore[role=NX_TAB_NAV,tab=explore]
 
 In the search bar, type _Order_ and _Product_ and press enter.
 In the graph displayed in the Scene, click on any relationship and you can see it offers the `ORDERS` option as well as `CONTAINS`.
-The `Order` and `Product` nodes have been retained and not recreated because their data importer configuration was identical, but since we added a new relationship type of `ORDERS`, this was added to the load. The `CONTAINS` relationship is still retained from the previous import run. The old relationships would need to be removed with Cypher, or the load run on a clean database to only keep the relationships in the latest iteration of the model and mapping. 
+The `Order` and `Product` nodes have been retained and not recreated because their data importer configuration was identical, but since we added a new relationship type of `ORDERS`, this was added to the load. 
+The `CONTAINS` relationship is still retained from the previous import run. The old relationships would need to be removed with Cypher, or the load run on a clean database to only keep the relationships in the latest iteration of the model and mapping. 
 
 == When you outgrow the Data Importer
 
-Data Importer, as a UI tool, is not best placed to meet _all_ of your varied load needs, be they transformations or differing data formats. If you can't achieve a load in Data Importer, the chances are you can achieve the load using some of the other approaches to loading data into Neo4j. The following are useful resources for different needs:
+Data Importer, as a UI tool, is not best placed to meet _all_ of your varied load needs, whether they are transformations or differing data formats. 
+If you can't achieve a load in Data Importer, the chances are you can achieve the load using some of the other approaches to loading data into Neo4j. 
+The following are useful resources for different needs:
 
 - https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV]] for writing your own bespoke Cypher load scripts from CSVs, leveraging the full capabilities of Cypher.
 - https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import]] for loading large amounts of CSV data rapidly into an offline database
@@ -349,15 +360,23 @@ Data Importer, as a UI tool, is not best placed to meet _all_ of your varied loa
 
 == Frequently Asked Questions
 
-- Q: Missing files - Why does data importer say I need to provide my files after I've aready provided them? Why does it happen so often? 
-A: When you provide Data Importer with your files, you are actually providing your Web Browser with a link to those files on your local filesystem, they aren't uploaded anywhere - Data importer stream the content of the files to you database only when you run the import. If you reload the page, Data Importer will lose access to the  connection to those files due to security restrictions in place to prevent web applications accessing files you haven't given express permission to use on page load. You simply need to re-provide the files when requested by data importer to be able to run an import.
+- Q: Missing files - Why does data importer say I need to provide my files after I've aready provided them? 
+Why does it happen so often? 
+A: When you provide Data Importer with your files, you are actually providing your Web Browser with a link to those files on your local filesystem, they aren't uploaded anywhere - Data importer stream the content of the files to you database only when you run the import. 
+If you reload the page, Data Importer loses access to the connection to those files due to security restrictions.
+These are in place to prevent web applications accessing files you haven't given express permission to use on page load. 
+You simply need to re-provide the files when requested by data importer to be able to run an import.
 
 - Q: How can I replace a file?
-A: Data Importer doesn't currently allow you to swap out files in the UI. There is however a workaround that may prove useful. If you want to provide a different file with the same column structure to data importer, you can rename it to match and then simply add the file to the files panel. This will replace the referecne to the latest file and be available for use by your import.
+A: Data Importer doesn't currently allow you to swap out files in the UI. 
+However, there is a workaround that may prove useful. 
+If you want to provide a different file with the same column structure to data importer, you can rename it to match and then simply add the file to the files panel.
+This will replace the reference to the latest file and be available for use by your import.
 
 
-- Q: How do I change the database data improter load into?
-A: If you are using a Neo4j instanace that supports multiple databases, Data Importer will use the home database to import data into it.  You may have the facility to change the home database for the user that you connect to your DBMS with, read more on setting the home database for a user https://neo4j.com/docs/cypher-manual/current/access-control/manage-users/[here].
+- Q: How do I change the database data importer loads into?
+A: If you are using a Neo4j instance that supports multiple databases, Data Importer will use the home database to import data into. 
+You may have the facility to change the home database for the user that you connect to your DBMS with, read more on setting the home database for a user https://neo4j.com/docs/cypher-manual/current/access-control/manage-users/[here].
 
 
 
