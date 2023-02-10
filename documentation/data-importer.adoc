@@ -21,6 +21,9 @@ The topics covered in this guide are:
 * What's next? 
 * FAQ 
 
+You will be working with the Northwind dataset about a fictional company, it may be familiar if you have taken other Workspace guides.
+
+
 == Scope of Importer
 
 Data Importer is designed to get you started with Neo4j as quickly as possible and is recommend for new users and those with rapid prototyping needs. 
@@ -56,6 +59,7 @@ When you know where the files are, you can drag and drop them to the _Files_ pan
 image::files.png[]
 
 For convenience, click the button to have a subset of the Northwind dataset loaded for you, so you don't have to drag and drop them.
+(You will work with the full set later on, but for now this is sufficient.)
 
 button::Download the partial Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/just-the-data.zip]
 
@@ -88,8 +92,10 @@ If not, you will have problems when you load the data and try to create relation
 == Thinking about your model
 
 You are likely familiar with the _graph data model_ by now, so you know it determines how your data is connected.
+
 When you create your model, you need to think about the data in your CSV files and how the data is connected.
 As mentioned earlier, your CSV files already contain all the information about how the data within the files is connected, you just need to sketch the model and map your data to it.
+
 To practice, we are going to create a simple model with only two nodes and one relationship.
 
 image::simple-model.png[]
@@ -306,7 +312,7 @@ For a more comprehensive guidance on the Explore tab, see the https://www.neo4j.
 
 Now switch back to the Import tab. 
 
-button::Import[role=NX_TAB_NAV,tab=inmport]
+button::Import[role=NX_TAB_NAV,tab=import]
 
 You have created a simple model and mapped data to it.
 Often, the datamodel is a bit more complicated than this example model.
