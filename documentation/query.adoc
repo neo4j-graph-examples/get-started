@@ -100,6 +100,23 @@ Using the tabular representation comes in handy when you want to compare items i
 
 The RAW option shows the submitted query, the Neo4j server version and address, the result, and a summary.
 
+== Solve a problem using Cypher
+
+If you have already completed the Data Importer guide, you are familiar with the data model of the Northwind dataset, but if you haven't, you can see it in the _Import_ tab since you downloaded it in a previous step. 
+Another way is to use this procedure:
+
+[source, cypher]
+----
+CALL db.schema.visualization
+----
+
+Once you have an idea of the structure of the data, it's time to use Cypher to solve a problem.
+
+Let's assume that you want to see which product categories are typically co-ordered with other product categories.
+This might help you understand which products to promote alongside others, or finding gaps in opportunities to promote products often ordered together.
+
+
+
 
 
 
