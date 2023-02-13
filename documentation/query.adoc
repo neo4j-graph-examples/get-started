@@ -120,7 +120,7 @@ MATCH (s:Supplier)-->(:Product)-->(c:Category)
 RETURN s.companyName as Company, collect(distinct c.categoryName) as Categories
 ----
 
-This query finds _suppliers_ _supplying_ a _product_ which is part of a _category_ and returns the company names and the categories they supply products from, in a table.
+This query finds _suppliers_ that _supply_ a _product_ which is part of a _category_ and returns the company names and the categories they supply products from, in a table.
 In cases where the same supplier supplies products from more than one category, the categories are collected and listed together, as you can see in the _Categories_ column.
 Note that even though you specified the _Product_ node in the `MATCH` part of the query, no information about the actualy product is returned since this is not included in the `RETURN` part.
 
@@ -141,11 +141,18 @@ This is fairly basic, so let's move on to something a little more complex.
 
 == Write more advanced Cypher for problem-solving
 
-
-
-
-Let's assume that you want to see which product categories are typically co-ordered with other product categories.
+With the basics out of the way, let's have a look a more complex problem.
+Assume that you want to see which product categories are typically co-ordered with other product categories.
 This might help you understand which products to promote alongside others, or finding gaps in opportunities to promote products often ordered together.
+
+[source, cypher]
+----
+MATCH (o:Order)-[:ORDERS]->(:Product)-[:PART_OF]->(c:Category) 
+WITH o, collect(c.categoryName) as Categories WHERE size(Categories) > 1 
+RETURN DISTINCT Categories
+----
+
+
 
 
 
