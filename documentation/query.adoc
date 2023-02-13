@@ -100,7 +100,7 @@ Using the tabular representation comes in handy when you want to compare items i
 
 The RAW option shows the submitted query, the Neo4j server version and address, the result, and a summary.
 
-== Solve a problem using Cypher
+== Use basic Cypher to answer questions
 
 If you have already completed the Data Importer guide, you are familiar with the data model of the Northwind dataset, but if you haven't, you can see it in the _Import_ tab since you downloaded it in a previous step. 
 Another way is to use this procedure:
@@ -110,7 +110,39 @@ Another way is to use this procedure:
 CALL db.schema.visualization
 ----
 
-Once you have an idea of the structure of the data, it's time to use Cypher to solve a problem.
+Once you have an idea of the structure of the data, it's time to use Cypher to answer questions and solve problems.
+
+Let's take a look at the different companies supplying Northwind with products and see which supplier provides products from which categories:
+
+[source, cypher]
+----
+MATCH (s:Supplier)-->(:Product)-->(c:Category)
+RETURN s.companyName as Company, collect(distinct c.categoryName) as Categories
+----
+
+This query finds _suppliers_ _supplying_ a _product_ which is part of a _category_ and returns the company names and the categories they supply products from, in a table.
+In cases where the same supplier supplies products from more than one category, the categories are collected and listed together, as you can see in the _Categories_ column.
+Note that even though you specified the _Product_ node in the `MATCH` part of the query, no information about the actualy product is returned since this is not included in the `RETURN` part.
+
+Maybe you are interested only in suppliers of a certain category, say _Condiments_:
+
+[source, cypher]
+----
+MATCH (c:Category {categoryName:"Condiments"})<--(:Product)<--(s:Supplier)
+RETURN DISTINCT s.companyName as CondimentsSuppliers
+----
+
+This query finds a category with the name _Condiments_ (one of the properties on the _Category_ node, if you recall the data model) and links that to a _Product_ and the product to a _Supplier_ that supplies it.
+The query uses _variables_, `c` and `s`, for the category and the supplier, respectively, but _not_ for the product.
+That's because the product happens to be on the path between the two types of nodes you are interested in, just like in the previous example.
+Note that since you are only interested in that a relationship exist between these nodes and not in _what type_ of relationship, you don't have to specify any relationship type in the query.
+
+This is fairly basic, so let's move on to something a little more complex.
+
+== Write more advanced Cypher for problem-solving
+
+
+
 
 Let's assume that you want to see which product categories are typically co-ordered with other product categories.
 This might help you understand which products to promote alongside others, or finding gaps in opportunities to promote products often ordered together.
