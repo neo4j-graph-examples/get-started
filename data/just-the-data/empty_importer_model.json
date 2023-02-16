@@ -1,0 +1,23 @@
+{
+  "version": "0.8.0",
+  "graph": {
+    "nodes": [],
+    "relationships": []
+  },
+  "dataModel": {
+    "fileModel": {
+      "fileSchemas": {}
+    },
+    "graphModel": {
+      "nodeSchemas": {},
+      "relationshipSchemas": {}
+    },
+    "mappingModel": {
+      "nodeMappings": {},
+      "relationshipMappings": {}
+    },
+    "configurations": {
+      "idsToIgnore": []
+    }
+  }
+}
