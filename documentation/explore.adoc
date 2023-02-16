@@ -1,0 +1,18 @@
+= Explore and interact with the data visualization in Neo4j Workspace
+
+== Explore guide - an introduction
+
+The _Explore_ tab is a no-code interface that allows you to explore and interact with your graph data.
+You can customize Saved Cypher to enable common workflows for both developer and non-developer users.
+
+In order to use Explore, you need to have data in your database and therefore it's recommended that you take this guide _after_ the Data Importer guide.
+
+However, if you already feel comfortable with importing and modeling data, you can use the button below to quickly load and import both data and model for the Northwind dataset.
+To do this, first go to the _Import_ tab:
+
+button::Go to Data Importer[role=NX_TAB_NAV,tab=import]
+
+And then load and import:
+
+button::Load the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://raw.githubusercontent.com/neo4j-graph-examples/northwind/main/import/northwind-data-importer-mode-data.zip]
+
