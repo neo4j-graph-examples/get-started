@@ -5,14 +5,46 @@
 The _Explore_ tab is a no-code interface that allows you to explore and interact with your graph data.
 You can customize Saved Cypher to enable common workflows for both developer and non-developer users.
 
+
 In order to use Explore, you need to have data in your database and therefore it's recommended that you take this guide _after_ the Data Importer guide.
 
-However, if you already feel comfortable with importing and modeling data, you can use the button below to quickly load and import both data and model for the Northwind dataset.
-To do this, first go to the _Import_ tab:
+However, if you already feel comfortable with importing and modeling data, you can quickly load the Northwind example dataset in the next step without having to take the Import guide.
 
-button::Go to Data Importer[role=NX_TAB_NAV,tab=import]
+If you have imported the dataset, you can just skip the next step and get straight to exploring!
 
-And then load and import:
+== Load and import Northwind
+
+If you don't have the Northwind dataset already, just follow these steps to quickly load and import both data and model for the Northwind dataset.
+
+Use the button to load data and model:
 
 button::Load the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://raw.githubusercontent.com/neo4j-graph-examples/northwind/main/import/northwind-data-importer-mode-data.zip]
+
+Click `Run import` and once it's completed click `Start Exploring`.
+
+With that in place, let's actually start exploring!
+
+== The Explore UI
+
+When you first open the Explore tab (provided that you have data in your database), you're presented with a sample graph on the canvas, also called the _scene_, and a legend panel on the right and a sidebar on the left.
+
+The legend panel shows the available node labels and relationships, respectively, in your data.
+You can view them all or filter by whether they are present or not in the current scene.
+
+The sidebar contains the Perspective drawer, which you will have a closer look at later.
+
+On the bottom is the map and the layout options.
+
+On the top is the search bar where you define what you want to see in the scene.
+
+The next step is about the search bar.
+
+== Search
+
+Any graph exploration starts in the search bar.
+You can search using any of the node labels/relationship types in the legend panel. 
+
+When you click the empty search bar, you'll see a number of suggestions. 
+The first one is the sample graph, `Show me a graph`, that will visualize a some of your data.
+The other suggestions consist of the node labels in your database.
 
