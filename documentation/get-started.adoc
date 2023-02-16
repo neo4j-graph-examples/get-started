@@ -71,7 +71,7 @@ The classic Northwind dataset represents an online shop.
 
 The button below lets you load the dataset and the datamodel in one click, for your convenience.
 
-button::Load the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-model-data.zip]
+button::Get the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-model-data.zip]
 
 image::product-category-supplier.png[]
 
