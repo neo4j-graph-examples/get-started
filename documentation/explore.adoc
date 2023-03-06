@@ -46,5 +46,23 @@ You can search using any of the node labels/relationship types in the legend pan
 
 When you click the empty search bar, you'll see a number of suggestions. 
 The first one is the sample graph, `Show me a graph`, that will visualize a some of your data.
-The other suggestions consist of the node labels in your database.
+The other suggestions consist of the node labels and relationship types in your database.
+You can see these in the legend panel as well.
 
+Let's try an example in the Northwind dataset-
+Say you want to see which suppliers supply products in the different categories to get a better grasp of what is being supplied by whom. 
+This would have been a costly operation in SQL, but is a quick thing to do in a graph database.
+
+If you remember the datamodel for Northwind, a `Supplier` `-SUPPLIES->` `Product` `-PART_OF->` `Category` and this pattern is easy to enter in the search bar.
+
+Click the search bar and select first `Supplier` and then `Product` followed by `Category` and press enter to execute.
+Note that you _can_ specify the relationship type, but in this simple dataset, you don't have to.
+
+Specific values .... .... .... ....
+
+== Cleaning up
+
+When you clear the search bar, the returned elements stays in the scene and any new returned elements are added to existing scene.
+If you want a clean slate, bring up the _context menu_ by right-clicking on an empty part of the scene and select _Clear Scene_.
+
+Alternatively, you can use a keyboard shortcut: _Mac_: `⌘+⌫` or _Windows_: `Ctrl+⌫` to clear your scene.
