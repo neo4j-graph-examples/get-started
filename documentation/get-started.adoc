@@ -96,10 +96,11 @@ The model is interactive; you can click around and explore its nodes and relatio
 
 === Preview your data import
 
-You can see a preview of the data import by clicking the _Preview Graph_ button.
+You can see a preview of the data import by clicking the highlight:import/import-load-preview-button[Preview button].
+
 This allows you to check node labels, the property names and values, and the relationship types and directions.
 
-If you're satisfied, click the _Run Import_ button to load your data into your graph.
+If you're satisfied, click the highlight:import/import-run-import-button[Run import button] to load your data into your graph.
 
 If something goes wrong, keep in mind that the tool can import the same data multiple times and you can reset your database to blank in the AuraDB Console.
 
