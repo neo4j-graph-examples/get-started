@@ -49,20 +49,232 @@ The first one is the sample graph, `Show me a graph`, that will visualize a some
 The other suggestions consist of the node labels and relationship types in your database.
 You can see these in the legend panel as well.
 
-Let's try an example in the Northwind dataset-
+Let's try an example in the Northwind dataset.
 Say you want to see which suppliers supply products in the different categories to get a better grasp of what is being supplied by whom. 
 This would have been a costly operation in SQL, but is a quick thing to do in a graph database.
 
-If you remember the datamodel for Northwind, a `Supplier` `-SUPPLIES->` `Product` `-PART_OF->` `Category` and this pattern is easy to enter in the search bar.
+If you remember the datamodel for Northwind: 
+
+image::small-model.png[]
+
+This pattern is easy to enter in the search bar.
 
 Click the search bar and select first `Supplier` and then `Product` followed by `Category` and press enter to execute.
 Note that you _can_ specify the relationship type, but in this simple dataset, you don't have to.
 
-Specific values .... .... .... ....
+In the visualization it is visible that one category is disconnected from the others.
+Can you tell which one?
+
+You can also be more specific in your search, as you'll see shortly.
+But first, let's clean up.
 
 == Cleaning up
 
-When you clear the search bar, the returned elements stays in the scene and any new returned elements are added to existing scene.
-If you want a clean slate, bring up the _context menu_ by right-clicking on an empty part of the scene and select _Clear Scene_.
+Before demonstrating any further, you need to clean up your scene.
+
+When you clear the search bar, the returned elements from your previous search stay in the scene and any new returned elements are added to existing scene.
+
+When you want a clean slate, bring up the _context menu_ by right-clicking on an empty part of the scene and select _Clear Scene_.
 
 Alternatively, you can use a keyboard shortcut: _Mac_: `⌘+⌫` or _Windows_: `Ctrl+⌫` to clear your scene.
+
+With an empty scene, you're ready to get back to more refined searching.
+
+== Specific values
+
+You can also search for specific property values from the search bar.
+You can specify a property on one node label or on many.
+
+Say you want to refine your search a little and find which _categories_ do _customers in London_ order _discontinued products_ from.
+This extra information is stored as properties on the nodes and these can be specified directly in the search bar.
+
+(If you can't remember the properties in the example dataset, you can find them in the _Perspective drawer_ from the sidebar, just click on the node label you're interested in to expand a list of its properties.)
+
+Start by selecting the _Customer_ category, then type _city_ and select the suggestion (alternatively press `TAB` to autocomplete) then type _London_ and select the suggestion.
+
+image::london.png[]
+
+Now you have the the start nodes specified so let's get the next step in your pattern.
+
+A customer _purchases_ an order but since you don't need to specify the relationship, go straight to _Order_ and add that to the pattern.
+You are not specifying any properties on the _Order_ node, so proceed to _Product_.
+
+On the _Product_ node, you want only the _discontinued_ products so add that to the _Product_ node. 
+The _discontinued_ property is `boolean` and the only possible values are `true` or `false`, so type _true_ after the colon.
+
+image::discontinued.png[]
+
+Now there's only one node left to add to the pattern and that's the _Category_.
+Since you are not specifying any properties on the _Category_ nodes either, just add it as is.
+
+You should now have a search pattern that looks like this:
+
+image::pattern.png[]
+
+When you run the search pattern, you can see that one category has more discontinued products ordered by customers in London than the others.
+Can you tell which one?
+
+== Node Inspector
+
+From the visualization, only the title of each node is visible.
+The title is selected from the properties of that node (you'll learn how to change the title property in a later step), but you can use the Inspector to see all the information about a node or a relationship by double-clicking on it.
+
+For a node, the Inspector will show you: 
+
+* all the node's properties and what datatype they are (this is visible if you hover over them).
+* a list of all its neighbors, both on and off the Scene.
+* a list of the relationsips used to connect this node to its neighbors.
+
+For a relationship, the Inspector shows a list of the relationships on the relationship and a more detailed list of the nodes it connects.
+
+You can edit the properties from the Inspector and this includes both adding new and deleting existing properties.
+
+But the Inspector is only one way you can interact with your data.
+The next step will show you more.
+
+== Scene interactions
+
+There are many ways to interact with the data and the best way to demonstrate this is to start with just a few nodes.
+
+Try to bring out the different categories in the dataset!
+
+(Hint: Go to the search bar)
+
+[%collapsible]
+.Can't remember how to do this?
+====
+Use the button:
+
+button::Visualize categories[role=NX_EXPLORE_SEARCH,search=Categories]
+====
+
+You should now have the eight _Category_ nodes visible. 
+Pick one node and right-click on it to bring up the context menu (the same menu you brought up to clear your Scene previously).
+
+The context-menu allows you to do many different things, let's start with _Expand_.
+You can either expand to see *all* its neighbors, or restrict the expansion to a certain relationship type.
+The _Categories_ only have one relationship type so in this case, the choice is easy.
+
+Another interesting thing you can do from the context menu is to find the _shortest path_ between to nodes.
+Select (`⌘` and click on Mac, `Ctrl` and click on Windows) two nodes, say _Confections_ and _Condiments_ for example.
+Bring up the context menu for one of them, it doesn't matter which one, and select _Path_ -> _Shortest Path_.
+Can you see which node that connects them?
+
+If you guessed the _Order_ titled *White Clover Markets*, you are correct.
+Now if you expand this _Order_ node to see the _purchased_ relationship, you can determine which customer has purchased something from both categories in the same order.
+
+In the next step, you'll learn how you can change the look of what you see in your Scene.
+
+== Styling - default
+
+The legend panel (would be cool to highlight that here) on your right contains a list of the elements in your dataset and how they are represented in the visualization.
+But you can style this any way you want, change captions or change the size and colors of the elements, either by default or rule-based.
+
+Let's try to style the elements in the scene!
+
+Start by bringing some more nodes and relationships on to your Scene by selecting all the Category-nodes and select  _Expand_ from the context menu (right-click while hovering over one of the selected nodes).
+
+Expand all and you should see all the products in the various categories.
+Click on the circle next to the _Product_ in the legend panel to see all styling options.
+The styling options for relationships are equivalent (would be cool to highlight _Relationships_ in the legend pandel here).
+
+Try change the color of the Product nodes or play around with different sizes.
+You can also change the text on the node/relationship to any of the property keys for the selected node category or relationship type.
+If you don't like text, you can pick an icon to represent nodes of a category instead.
+
+All of these changes will be applied to _all_ the product nodes in the Scene by default.
+But if you want to highlight differences in property values, try the rule-based styling instead.
+
+Click **Next** to explore!
+
+== Styling - Rule-based
+
+Let's say you want to be able to see which products are discontinued directly in your Scene.
+Go back to the _Product_ in the legend panel, select **Rule-based** and the _Add rule-based styling_.
+
+From the list of available properties, you'll find `discontinued` which has a boolean value (`true` or `false`) which is easy to distinguish in the visualization by applying a contrasting color to all Product nodes with the `discontinued` property of `true`.
+But you could also change the size or text on affected nodes, the choice is yours.
+
+Of course, not all property values are boolean, numerical values offer even more options for rule-based styling.
+Try styling based on the `unitsInStock` property for example, you can experiment with single values, try gradient coloring or sizing based on a range, or pick unique values. 
+
+image::style.png[]
+
+In the next step you'll learn how to use filters to refine the results in your Scene.
+
+== Filtering
+//a highlight would be cool here
+Apart from using styling to differentiate by property values, you can use filters to filter out affected nodes and/or relationships.
+
+Let's assume that you want to place an order of 100 items from the seafood category and the only requirements are that it is seafood and that 100 items are available now.
+
+Start by clearing the Scene and then bring up products in the seafood category.
+
+[%collapsible]
+.Can't remember how to do this?
+====
+Start typing _Category_, hit <tab> to complete.
+Type _categoryName_, <tab> to complete and then _Seafood_.
+Select _Product_ from the dropdown in the search bar and complete the search by pressing <Enter>.
+
+or use the button
+
+button::Seafood products[role=NX_EXPLORE_SEARCH,search=Category categoryName Seafood Product]
+====
+
+With those in place click the filter icon and **Add filter**.
+First you need define which node label or relationship type to use the filter on, in this example you are looking for _Products_.
+
+Just like with the styling, you then need to select a property to filter on.
+You want to see how many items are in stock and the property key for that is `unitsInStock`.
+A histogram shows available values.
+Go ahead and specify that you want a minimum of 100 items.
+
+Once you apply the filter, all items that don't meet the requirements (in this case, products with less than 100 items in stock) are greyed out and can't be interacted with.
+If you want to remove them completely from the Scene, click **Dismiss filtered elements**.
+//a highlight here
+You can apply multiple filters too and if you want to remove a filter, use the toggle on the filter or delete it altogether.
+When you remove a filter, you'll see that greyed-out elements come back but dismissed elements don't.
+
+Hit **Next** to learn more about the last filtering feature, the **Slicer**.
+
+== Slicer
+
+If you want to showcase elements by a range of _numerical_ properties, the **Slicer** is the way to go.
+You find it below the **Filter** button.
+//Highlight here, if possible
+The Slicer lets you select a range of numerical values on a property key and highlight the range dynamically in the Scene via a timeline.
+You can scrub manually or use the playback function.
+
+Let's try it out!
+
+Say you want get a general idea of the product prices in the different categories without having to manually compary.
+
+As usual, start by clearing the scene.
+
+With a clean slate, bring out the products and the categories.
+
+[%collapsible]
+.Need help to do this?
+====
+button::Products in categories[role=NX_EXPLORE_SEARCH,search=Category Product]
+====
+
+Click the Slicer button and specify which property with _numerical_ values you want to use.
+For the purpose of this example, select _unitPrice_  and then set your range on the timeline and press play and watch products appear and disappear in the Scene as their unit prices appear within the range on the timeline.
+
+In this example, it would be interesting to see products added to categories successively without disappearing again.
+This can be done by changing the _playback mode_ to _Start of Range to end_ in the Settings.
+
+image::slicer-settings.png[]
+
+If you want to see the products removed instead of added, expand the range to cover the entire timeline and the select the _Within range_ playback mode and press play.
+
+This is just one example on a small amount of elements.
+You can use the Slicer on any numerical values, feel free to play around.
+If you're unsure about the datatypes of the properties, you can always have a look in the Perspective drawer on the sidebar.
+//highlight here
+
+
+
+
