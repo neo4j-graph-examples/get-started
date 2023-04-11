@@ -37,12 +37,14 @@ You will be working with the Northwind dataset about a fictional company, it may
 
 == What is Data Importer for?
 
-Data Importer is designed to get you modelling and importing withg Neo4j as quickly as possible. It's recommend if you're new to graph or have rapid prototyping needs. 
+Data Importer is designed to get you modeling and importing with Neo4j as quickly as possible.
+It's recommended if you're new to graphs or have rapid prototyping needs. 
 
 However, it's far from being the only way to load data into Neo4j, especially when you have more advanced needs.
 At the end of this guide the _What's next?_ step gives links to resources on the many different ways of loading data into Neo4j.
 
-But now let's focius on how to get the most of of Data Importer, the following sections will explain the three stage process of: 
+But now let's focus on how to get the most out of Data Importer.
+The following sections will explain the three-stage process of: 
 
 . Providing your **Flat Files**
 . Defining a **Graph Model**
@@ -50,9 +52,12 @@ But now let's focius on how to get the most of of Data Importer, the following s
 
 === Flat files
 
-The leftmost panel is the highlight:import/import-file-panel[Files panel].  As you add files, they will be listed here, along with the headers read from the file and an example value.
+The leftmost panel is the highlight:import/import-file-panel[Files panel].  
+As you add files, they will be listed here, along with the headers read from the file and an example value.
 
-You can add new files by clicking the highlight:import/import-file-panel-browse-button[Add files button] at the top right of the pane.  This will open a file dialog from which you can select files from your computer.  You may also drag and drop CSV or TSV files directly into the pane.
+You can add new files by clicking the highlight:import/import-file-panel-browse-button[Add files button] at the top right of the pane.  
+This will open a file dialog from which you can select files from your computer.  
+You can also drag and drop CSV or TSV files directly into the pane.
 
 As you map column headers to your Graph Model, a green indicator will appear to the left of the column name.
 
