@@ -8,6 +8,7 @@
 :people_locations_nodes_only_zip_file: http://localhost:8000/data/people_locations_nodes_only.zip
 :people_locations_full_zip_file: http://localhost:8000/data/people_locations_full.zip
 :northwind-subset-node-and-relationship-mapping-zip-file: http://localhost:8000/data/northwind-subset-node-and-relationship-mapping.zip
+:northwind-data-importer-model-data-zip-file: http://localhost:8000/data/northwind-data-importer-model-data.zip
 
 == Introduction
 
@@ -463,7 +464,7 @@ In case of re-running the import, this constraint ensures that if an element, wi
 
 To demonstrate this, try the button below to download the entire Northwind dataset and run the import.
 
-button::Load the full Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://neo4j-graph-examples.github.io/get-started/data/northwind-data-importer-model-data.zip]
+button::Load the full Northwind dataset[role=NX_IMPORT_LOAD,endpoint={northwind-data-importer-model-data-zip-file}]
 
 This action will not lead to any duplication of the `Order` and `Product` nodes nor of the relationships.
 To verify further, the new model calls the relationship type between `Order` and `Product` `ORDERS` instead of `CONTAINS`.
