@@ -24,7 +24,7 @@ Use the button to load and map the data:
 
 button::Load the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://raw.githubusercontent.com/neo4j-graph-examples/northwind/main/import/northwind-data-importer-mode-data.zip]
 
-Once that's all done, click _Run import_ in the top right corner.
+Once that's all done, click highlight:import/import-run-import-button[Run import].
 
 If you want to learn more about importing data, try the Data Importer guide.
 
@@ -38,6 +38,7 @@ A good place to start is to take stock of what you have in your database.
 You access _Database Information_ from the very top of the sidebar.
 
 image::database-icon.png[]
+//would be cool to replace this image with a highlight instead
 
 There you'll see how many nodes you have and all their labels, the number of relationships and their types, and also a list of all the property keys present in the database.
 
@@ -76,10 +77,14 @@ We'll have a closer look at the frame itself in the next step.
 
 == Anatomy of a result frame
 
-As mentioned before, the result fram consists of two parts, a Cypher editor and space to display the results of the Cypher query.
+As mentioned before, the result frame consists of two parts, a Cypher editor and space to display the results of the Cypher query.
 The frame has three primary views: graph, table, or RAW.
 
+//highlight:query/result-view-graph[Result view]
+//doesn't work
+
 image::result-options.png[]
+//would be cool to replace this with a highlight also
 
 The default view is graph.
 Run the following query:
@@ -102,7 +107,7 @@ The RAW option shows the submitted query, the Neo4j server version and address, 
 
 == Use basic Cypher to answer questions
 
-If you have already completed the Data Importer guide, you are familiar with the data model of the Northwind dataset, but if you haven't, you can see it in the _Import_ tab since you downloaded it in a previous step. 
+If you have already completed the Data Importer guide, you are familiar with the data model of the Northwind dataset, but if you haven't, you can see it in the _Import_ tab since you downloaded it in a previous step.
 Another way is to use this procedure:
 
 [source, cypher]
@@ -135,7 +140,7 @@ RETURN DISTINCT s.companyName as CondimentsSuppliers
 This query finds a category with the name _Condiments_ (one of the properties on the _Category_ node, if you recall the data model) and links that to a _Product_ and the product to a _Supplier_ that supplies it.
 The query uses _variables_, `c` and `s`, for the category and the supplier, respectively, but _not_ for the product.
 That's because the product happens to be on the path between the two types of nodes you are interested in, just like in the previous example.
-Note that since you are only interested in that a relationship exist between these nodes and not in _what type_ of relationship, you don't have to specify any relationship type in the query.
+Note that since you are only interested in that a relationship exists between these nodes and not in _what type_ of relationship, you don't have to specify any relationship type in the query.
 
 This is fairly basic, so let's move on to something a little more complex.
 
@@ -147,8 +152,8 @@ This might help you understand which products to promote alongside others, or fi
 
 [source, cypher]
 ----
-MATCH (o:Order)-[:ORDERS]->(:Product)-[:PART_OF]->(c:Category) 
-WITH o, collect(c.categoryName) as Categories WHERE size(Categories) > 1 
+MATCH (o:Order)-[:ORDERS]->(:Product)-[:PART_OF]->(c:Category)
+WITH o, collect(c.categoryName) as Categories WHERE size(Categories) > 1
 RETURN DISTINCT Categories
 ----
 
