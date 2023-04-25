@@ -3,39 +3,40 @@
 == Explore guide - an introduction
 
 The _Explore_ tab is a no-code interface that allows you to explore and interact with your graph data.
-You can customize Saved Cypher to enable common workflows for both developer and non-developer users.
-
 
 In order to use Explore, you need to have data in your database and therefore it's recommended that you take this guide _after_ the Data Importer guide.
 
-However, if you already feel comfortable with importing and modeling data, you can quickly load the Northwind example dataset in the next step without having to take the Import guide.
+However, if you already feel comfortable with importing and modeling data, you can quickly load the Northwind example dataset below without having to take the Import guide.
 
-If you have imported the dataset, you can just skip the next step and get straight to exploring!
-
-== Load and import Northwind
-
-If you don't have the Northwind dataset already, just follow these steps to quickly load and import both data and model for the Northwind dataset.
-
-Use the button to load data and model:
+[%collapsible]
+.Load and import Northwind
+====
+Use the button to load Northwind data and model:
 
 button::Load the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://raw.githubusercontent.com/neo4j-graph-examples/northwind/main/import/northwind-data-importer-mode-data.zip]
 
 Click `Run import` and once it's completed click `Start Exploring`.
 
 With that in place, let's actually start exploring!
+====
+
+If you already have imported the dataset, you can just hit _Next_ and get straight to exploring!
 
 == The Explore UI
 
+[role=NX_TAB_NAV,tab=explore]
+pagelaunch::[]
+
 When you first open the Explore tab (provided that you have data in your database), you're presented with a sample graph on the canvas, also called the _scene_, and a legend panel on the right and a sidebar on the left.
 
-The legend panel shows the available node labels and relationships, respectively, in your data.
+The highlight:explore/tabpanel-categories[legend panel] shows the available node labels and relationships, respectively, in your data.
 You can view them all or filter by whether they are present or not in the current scene.
 
 The sidebar contains the Perspective drawer, which you will have a closer look at later.
 
 On the bottom is the map and the layout options.
 
-On the top is the search bar where you define what you want to see in the scene.
+On the top is the highlight:explore/searchBox[search bar] where you define what you want to see in the scene.
 
 The next step is about the search bar.
 
@@ -48,6 +49,16 @@ When you click the empty search bar, you'll see a number of suggestions.
 The first one is the sample graph, `Show me a graph`, that will visualize a some of your data.
 The other suggestions consist of the node labels and relationship types in your database.
 You can see these in the legend panel as well.
+
+When you clear the search bar, the returned elements from your previous search stay in the scene and any new returned elements are added to existing scene.
+
+When you want a clean slate, bring up the _context menu_ by right-clicking on an empty part of the scene and select _Clear Scene_.
+
+Alternatively, you can use a keyboard shortcut: _Mac_: `⌘+⌫` or _Windows_: `Ctrl+⌫` to clear your scene.
+
+With an empty scene, you're ready to get back to more refined searching in the next step.
+
+== Search for something specific
 
 Let's try an example in the Northwind dataset.
 Say you want to see which suppliers supply products in the different categories to get a better grasp of what is being supplied by whom.
@@ -62,23 +73,16 @@ This pattern is easy to enter in the search bar.
 Click the search bar and select first `Supplier` and then `Product` followed by `Category` and press enter to execute.
 Note that you _can_ specify the relationship type, but in this simple dataset, you don't have to.
 
-In the visualization it is visible that one category is disconnected from the others.
-Can you tell which one?
+In the visualization it is visible that one group of products is disconnected from the others.
+Can you tell which product category they belong to?
 
-You can also be more specific in your search, as you'll see shortly.
-But first, let's clean up.
+[%collapsible]
+.Hint
+====
+The _Dairy Products_ form a subgraph of their own.
+====
 
-== Cleaning up
-
-Before demonstrating any further, you need to clean up your scene.
-
-When you clear the search bar, the returned elements from your previous search stay in the scene and any new returned elements are added to existing scene.
-
-When you want a clean slate, bring up the _context menu_ by right-clicking on an empty part of the scene and select _Clear Scene_.
-
-Alternatively, you can use a keyboard shortcut: _Mac_: `⌘+⌫` or _Windows_: `Ctrl+⌫` to clear your scene.
-
-With an empty scene, you're ready to get back to more refined searching.
+You can be even more specific in your search, as you'll see shortly.
 
 == Specific values
 
@@ -95,6 +99,8 @@ Start by selecting the _Customer_ category, then type _city_ and select the sugg
 image::london.png[]
 
 Now you have the the start nodes specified so let's get the next step in your pattern.
+
+== Specific values continued
 
 A customer _purchases_ an order but since you don't need to specify the relationship, go straight to _Order_ and add that to the pattern.
 You are not specifying any properties on the _Order_ node, so proceed to _Product_.
@@ -167,7 +173,7 @@ In the next step, you'll learn how you can change the look of what you see in yo
 
 == Styling - default
 
-The legend panel (would be cool to highlight that here) on your right contains a list of the elements in your dataset and how they are represented in the visualization.
+The highlight:explore/tabpanel-categories[legend panel] on your right contains a list of the elements in your dataset and how they are represented in the visualization.
 But you can style this any way you want, change captions or change the size and colors of the elements, either by default or rule-based.
 
 Let's try to style the elements in the scene!
@@ -176,7 +182,8 @@ Start by bringing some more nodes and relationships on to your Scene by selectin
 
 Expand all and you should see all the products in the various categories.
 Click on the circle next to the _Product_ in the legend panel to see all styling options.
-The styling options for relationships are equivalent (would be cool to highlight _Relationships_ in the legend pandel here).
+The styling options for relationships are equivalent and you access them from the _Relationships_ tab on the top of the legend panel.
+// (would be cool to highlight _Relationships_ in the legend pandel here).
 
 Try change the color of the Product nodes or play around with different sizes.
 You can also change the text on the node/relationship to any of the property keys for the selected node category or relationship type.
@@ -222,7 +229,8 @@ or use the button
 button::Seafood products[role=NX_EXPLORE_SEARCH,search=Category categoryName Seafood Product]
 ====
 
-With those in place click the filter icon and **Add filter**.
+With those in place click the filter icon (under the search bar) and **Add filter**.
+//implement this: highlight:explore/filter-collapse-button[filter icon]
 First you need define which node label or relationship type to use the filter on, in this example you are looking for _Products_.
 
 Just like with the styling, you then need to select a property to filter on.
