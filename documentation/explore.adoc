@@ -96,7 +96,7 @@ This extra information is stored as properties on the nodes and these can be spe
 
 Start by selecting the _Customer_ category, then type _city_ and select the suggestion (alternatively press `TAB` to autocomplete) then type _London_ and select the suggestion.
 
-image::london.png[]
+image::london1.png[]
 
 Now you have the the start nodes specified so let's get the next step in your pattern.
 
@@ -274,7 +274,7 @@ For the purpose of this example, select _unitPrice_  and then set your range on 
 In this example, it would be interesting to see products added to categories successively without disappearing again.
 This can be done by changing the _playback mode_ to _Start of Range to end_ in the Settings.
 
-image::slicer-settings.png[]
+image::slicer-settings1.png[]
 
 If you want to see the products removed instead of added, expand the range to cover the entire timeline and the select the _Within range_ playback mode and press play.
 
