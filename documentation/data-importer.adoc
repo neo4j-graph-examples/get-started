@@ -182,7 +182,8 @@ Returning to the _Definition_ tab, the last thing you need to do is to select on
 . If the node is referenced more than once in the file, the ID ensures that the node is not created more than once.
 . The node ID is used when connecting nodes with relationships. You'll learn more about this soon, as either a start node or end node.
 
-It should be fairly self evident here that we need to select the `id` property as the ID for the node. In this example, Data Importer has been helpful and selected it for you automatically (it guessed based on the property name containing the `id` string), but in other cases you may need to select the `id`` manually or correct an id Data Importer guesses for you.
+It should be fairly self-evident here that we need to select the `id` property as the ID for the node. 
+In this example, Data Importer has been helpful and selected it for you automatically (it guessed based on the property name containing the `id` string), but in other cases you may need to select the `id`` manually or correct an id Data Importer guesses for you.
 
 Now you just need to repeat the process, creating a `Product` node from the `products.csv` file. Here you need to map the `produtId` and `productName` columns, rename the `productId` property to be simply `id` in a similar way we did for the `Order` node and ensure `id` selected as the ID.
 
