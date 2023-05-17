@@ -117,12 +117,6 @@ You can also specify properites and their data types in isolation from mapping b
 Now you just need to repeat the process you followed for `Order`, creating a `Product` node from the `products.csv` file. 
 Here you need to map the `produtId` and `productName` columns, rename the `productId` property to be simply `id` and set it to be a `string`. Ensure `id` is selected as the ID.
 
-[TIP]
-====
-You can rapidly add nodes by hovering over an existing node; when a green plus icon appears, click-drag from the node and then release onto the canvas. 
-Selected nodes can be deleted by clicking the highlight:import/import-delete-node-or-rel[delete button] or with the backspace key.
-====
-
 [%collapsible]
 .Are you having trouble?
 ====
@@ -149,8 +143,10 @@ You have two nodes and now you need to create a relationship to connect them.
 
 [TIP]
 ====
-Just like newly created nodes, the relationship is dashed until you add mapping details.
+Just like newly created nodes, the relationship will only show a green tick once you have completed its mapping.
 You can also name relationships by double-clicking the arrow in the graph model and typing it directly.
+You can rapidly add nodes with a linking relationship by hovering over an existing node; when a green plus icon appears, click-drag from the node and then release onto the canvas. 
+Selected nodes can be deleted by clicking the highlight:import/import-delete-node-or-rel[delete button] or with the backspace key.
 ====
 
 === Map a file to a relationship
@@ -174,7 +170,7 @@ There should now be no dashed outlines in the highlight:import/import-model-pane
 
 For relationships, you can add properties that might be useful for your queries.
 
-In the `order-details.csv` file you'll notice the columns `unitPrice`, `quantity` and `discount` could be useful to add as properties to the `CONTAINS` relationship. These properties are well suited to being on the relationship since they couldn't easily be encapsulated on the nodes at either end of the relationship. For example `quantity` does not belong on either the `Product` or `Order` nodes since products the will be sold in different quantities on different orders. 
+In the `order-details.csv` file you'll notice the columns `unitPrice`, `quantity` and `discount` could be useful to add as properties to the `CONTAINS` relationship. These properties are well suited to being on the relationship since they couldn't easily be encapsulated on the nodes at either end of the relationship. For example `quantity` does not belong on either the `Product` or `Order` nodes since products will be sold in different quantities on different orders. 
 
 Just as we did for nodes, use the highlight:import/import-select-from-file-button[select from file] button to map those columns to new properties on the relationship.
 
@@ -207,7 +203,7 @@ Here you can see we are using the `orders.csv` file to define both the `Order` n
 
 === Relationship defined in the same file as both nodes
 
-In examples where the nodes at each end of the relationship are both mapped to the same file, the relationship can ususally be inferred by the same file. If you first setup the nodes with their IDs and mapping, when you draw the relationship we will will assist you by mapping the `From`` and `To`` parts of the relationship automatically.
+In examples where the nodes at each end of the relationship are both mapped to the same file, the relationship can ususally be inferred by the same file. If you first setup the nodes with their IDs and mapping, when you draw the relationship we will assist you by mapping the `From`` and `To`` parts of the relationship automatically.
 
 You can try this out by loading the simple example below and connecting the two nodes that are mapped to the same file:
 
@@ -274,7 +270,7 @@ Click highlight:import/import-run-import-button[Run import] to import the files 
 The simple model you have created in this example only maps to 3 of the 11 available files.
 The files not specified in your model are **not** imported, but they remain in the highlight:import/import-file-panel[Files panel].
 
-If any mapping is incomplete, we will tell you that your model has errors and add a red exclamations mark is shown next to the incomplete element in the model.
+If any mapping is incomplete, we will tell you that your model has errors and add a red exclamations mark next to the incomplete element in the model.
 When you select an incomplete element, the mapping pane also highlights the missing details.
 
 Once you've addressed any errors, go ahead and run the import again.
@@ -290,7 +286,7 @@ We have a few very useful importer tips to complete this guide.
 
 [TIP]
 ====
-Note that if you run this guide after the _Getting Started_, the count may show _updated_ rather than _created_ since Data Importer will ensure duplicate IDs are not created for elements already loaded.
+Note that if you run this guide after the _Getting Started_ guide, the count may show _updated_ rather than _created_ since Data Importer will ensure duplicate IDs are not created for elements already loaded.
 ====
 
 == Final tips
