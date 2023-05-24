@@ -204,13 +204,17 @@ button::Load Northwind node mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subs
 == Create relationships
 
 You have two nodes and now you need to create a relationship to connect them.
-Hover by the edge of the `Order` node circle and you'll see a `+` sign.
-Click and hold it and you'll see another circle.
-Drag the new circle on to the `Product` node and relase to create the relationship.
+As you saw earlier, this is done by dragging the circle from one node to another.
 
-Give your relationship a type, which is a descriptive name for the relationship. As with nodes, you can do this directly in the graph model or in the highlight:import/import-relationship-type[Type] section of the highlight:import/import-mapping-panel[Mapping details panel].
+[%collapsible]
+.How to add nodes and relationships
+====
+image::import-create-relationships.gif[]
+====
 
-In the model you are creating, an order _contains_ a product, so go ahead and give it a type of `CONTAINS`.
+Create a relationship _from_ the `Order` node _to_ the `Product` node.
+An order _contains_ a product and so give it a `CONTAINS` relationship type, which is a descriptive name for the connection.
+You can do this directly in the graph model or in the highlight:import/import-relationship-type[Type] section of the highlight:import/import-mapping-panel[Mapping details panel].
 
 Just like newly created nodes, the relationship needs mapping details before it's considered complete.
 
@@ -219,14 +223,17 @@ Just like newly created nodes, the relationship needs mapping details before it'
 The next stage is critical in helping Data importer understand how a file defines a relationship.
 This is what will give you a connected graph.
 
-If you look in the highlight:import/import-file-panel[Files panel], you'll see `order-details.csv` has columns that correspond with the `id` of our `Order` and `Product` nodes. Ensuring you have the relationship selected, select the `order-details.csv` file from the highlight:import/import-relationship-file-dropdown[File dropdown].
+If you look in the highlight:import/import-file-panel[Files panel], you'll see `order-details.csv` has columns that correspond with the `id` of your `Order` and `Product` nodes.
+With the relationship selected, select the `order-details.csv` file from the highlight:import/import-relationship-file-dropdown[File dropdown].
 // TODO: Add id selector for relationship dropdown to enable UI higlighting
 
 In the highlight:import/import-relationship-mapping-table[relationship mapping table] you will see the Nodes and ID properties at each end of the `CONTAINS` relationship.
 
-The *From* end of the node is the `Order` node with the `id` property (remember that this property was mapped to the `orderId` column in the `orders.csv` file). Our `order-details.csv` file also contains an `orderId` column, so select this in the highlight:import/import-rel-from-dropdown[From dropdown]. This gives Data Importer the information it requires to link up the From end of the relationship.
+The *From* end of the node is the `Order` node with the `id` property (remember that this property was mapped to the `orderId` column in the `orders.csv` file).
+Your `order-details.csv` file also contains an `orderId` column, so select this in the highlight:import/import-rel-from-dropdown[From dropdown].
+This gives Data Importer the information it requires to link up the `From` end of the relationship.
 
-Similarly, we need to select the correct file column for the `To` end of the relationship which is `productId` in the highlight:import/import-rel-to-dropdown[To dropdown].
+Similarly, you need to select the correct file column for the `To` end of the relationship which is `productId` in the highlight:import/import-rel-to-dropdown[To dropdown].
 
 //There should now be no dashed outlines in the highlight:import/import-model-panel[graph model pane] as we have successfully mapped the file.
 
@@ -235,10 +242,10 @@ Similarly, we need to select the correct file column for the `To` end of the rel
 For relationships, you can also optionally add properties if they are useful.
 
 In the `order-details.csv` file you'll notice the columns `unitPrice`, `quantity`, and `discount` could be useful to add as properties to the `CONTAINS` relationship.
-These properties are well suited to being on the relationship since they couldn't easily be encapsulated on the nodes at either end of the relationship. For example `quantity` does not belong on either the `Product` or `Order` nodes since products the will be sold in different quantities on different orders.
-Just as we did for nodes, use the highlight:import/import-select-from-file-button[Select from file] button to map those columns to new properties on the relationship.
+These properties are well-suited to being on the relationship since they couldn't easily be encapsulated on the nodes at either end of the relationship. For example `quantity` doesn't belong on either the `Product` or `Order` nodes since products are sold in different quantities on different orders.
+Just as you did for nodes, use the highlight:import/import-select-from-file-button[Select from file] button to map those columns to new properties on the relationship.
 
-You don't need to include the `orderID` or the `productID` here, as their only purpose is to create the `CONTAINS` relationship in our model and we've already used them to do that.
+You don't need to include the `orderID` or the `productID` here, as their only purpose is to create the `CONTAINS` relationship in your model and you've already used them to do that.
 
 [%collapsible]
 .Are you having trouble?
@@ -253,25 +260,26 @@ button::Load model and mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subset-no
 
 === Relationship defined in the same file as one node
 
-In this example, a separate link table `order-details.csv` defines the relationship linking `Orders` and `Products`.
+In this example, a separate flat file, `order-details.csv` defines the relationship linking `Orders` and `Products`.
 
-However it can be quite common to have files where the relationship is defined by the same file as that used for the node at one (or sometimes both) ends of the relationship.  In our example, you can see how the `orders.csv` file also contains a `shipVia` column which could be used to define the relationship to a `Shipper` node created from the `shippers.csv` file.
+However, it is quite common to have files where the relationship is defined by the same file as that used for the node at one (or sometimes both) ends of the relationship.
+In your example, you can see how the `orders.csv` file also contains a `shipVia` column which could be used to define the relationship to a `Shipper` node created from the `shippers.csv` file.
 
-To see how this mapping looks, load an the example configuration and inspect it.
+To see how this mapping looks, load the example configuration and inspect it.
 
 button::Load Northwind shipper mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subset-shipper-mapping-zip-file}]
 
-Here you can see we are using the `orders.csv` file to define both the `Order` node and the `SHIPS` relationship, as well as mapping the `Shipper` node to `shippers.csv`.
+Here you can see how to use the `orders.csv` file to define both the `Order` node and the `SHIPS` relationship, as well as mapping the `Shipper` node to `shippers.csv`.
 
 === Relationship defined in the same file as both nodes
 
-In examples where the nodes at each end of the relationship are both mapped to the same file, the relationship can usually be inferred by the same file. If you first setup the nodes with their IDs and mapping, when you then draw the relationship, Data Importer will assist you by mapping the From and To parts of the relationship automatically.
+In examples where the nodes at each end of the relationship are both mapped to the same file, the relationship can usually be inferred by the same file. If you first set up the nodes with their IDs and mapping, when you then draw the relationship, Data Importer will assist you by mapping the From and To parts of the relationship automatically.
 
 You can try this out by loading the simple example below and connecting the two nodes that are mapped to the same file:
 
 button::Load people and locations[role=NX_IMPORT_LOAD,endpoint={people_locations_nodes_only_zip_file}]
 
-The model we are aiming for is as below.
+The model you should aim for is this:
 
 image::import-people and locations.png[]
 
@@ -289,7 +297,7 @@ button::Load configuration[role=NX_IMPORT_LOAD,endpoint={people_locations_full_z
 
 == Ready to import?
 
-Let's get back to the Nortwind Model so we can pick up where we left off, start by reloading the small Northwind model we created.
+Let's get back to the Nortwind Model, start by reloading the small Northwind model you created.
 
 button::Load model and mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subset-node-and-relationship-mapping-zip-file}]
 
@@ -330,7 +338,7 @@ The actual graph may look different once the full import is complete.
 You want to have your mapping completely done before previewing, but if you have missed something, you are still able to do a preview, but the incomplete elements will not be rendered.
 In other words, any dashed element in your model will not show up in the preview.
 
-As mentioned before, if any element in your model is dashed, you will **not** be able to run the import.
+As mentioned before, if any element in your model is missing the green checkmark, you will **not** be able to run the import.
 
 == Running an import
 
@@ -403,7 +411,7 @@ button::Explore[role=NX_TAB_NAV,tab=explore]
 The _Explore_ tab allows you to visualize and interact with your data with minimal use of Cypher.
 To start out, let's have a quick look at a sample of your data.
 
-You can see that the search bar in the top left corner is already populated with _Show me a graph_.
+If you click the highlight:explore/searchBox[search bar] in the top left corner, it gets populated with _Show me a graph_.
 Click the bar and press enter.
 As well as showing the sample graph, you can use the search bar to find and display any of the elements in your data.
 You can use near-natural language for this and that means that Explore understands a vocabulary based on the categories, labels, relationship types, property keys and property values of your dataset.
@@ -463,7 +471,7 @@ The `CONTAINS` relationship is still retained from the previous import run. The 
 
 == When you outgrow the Data Importer
 
-Data Importer, as a UI tool, is not best placed to meet _all_ of your varied load needs, whether they are transformations or differing data formats.
+Data Importer, as a UI tool, may not meet _all_ of your varied load needs, whether they are transformations or differing data formats.
 If you can't achieve a load in Data Importer, the chances are you can achieve the load using some of the other approaches to loading data into Neo4j.
 The following are useful resources for different needs:
 
