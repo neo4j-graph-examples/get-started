@@ -411,7 +411,7 @@ button::Explore[role=NX_TAB_NAV,tab=explore]
 The _Explore_ tab allows you to visualize and interact with your data with minimal use of Cypher.
 To start out, let's have a quick look at a sample of your data.
 
-If you click the highlight:explore/searchBox[search bar] in the top left corner, it gets populated with _Show me a graph_.
+If you click the search bar in the top left corner, it gets populated with _Show me a graph_.
 Click the bar and press enter.
 As well as showing the sample graph, you can use the search bar to find and display any of the elements in your data.
 You can use near-natural language for this and that means that Explore understands a vocabulary based on the categories, labels, relationship types, property keys and property values of your dataset.
