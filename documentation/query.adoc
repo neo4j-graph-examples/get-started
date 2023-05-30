@@ -35,7 +35,7 @@ button::Go back to Query[role=NX_TAB_NAV,tab=query]
 == Get to know the database
 
 A good place to start is to take stock of what you have in your database.
-You access _Database Information_ from the very top of the sidebar.
+You access _Database Information_ from the very top left of the sidebar.
 
 image::database-icon.png[]
 //would be cool to replace this image with a highlight instead
@@ -57,111 +57,173 @@ For example, try click on the `Product` node label and you'll see this query pop
 MATCH (n:Product) RETURN n LIMIT 25;
 ----
 
-== Anatomy of the Query result stream
+== Excecuting queries with graph results
 
-Central to the Query UI is the shell-like Cypher editor and result frame.
-These two components act as a rich and interactive _Read-Evaluate-Print-Loop_ for working with graph queries and results.
+Central to the Query UI is the Cypher editor on top where you write and run your queries and the list of result frames.
 
-The main Cypher editor is located at the top and this is where you write, edit, and execute your queries.
+When you _run_ any query a result frame shows which shows the query with its results, pushing previous ones down.
 
-When you execute, or _run_, a query from the editor, or when you run any auto-generated queries (such as clicking on node labels or example queries in this guide), this triggers the presentation of a result frame.
+Try it out by typing in and executing the following Cypher query.
 
-The result frame contains both the executed query as well as the results of it.
-As you run more queries from the main editor, new result frames are generated, pushing the previous ones down.
-The latest one is always at the top.
+[source,cypher]
+----
+MATCH path=(:Product)-[:PART_OF]->(c:Category) 
+WHERE c.categoryName = 'Produce'
+RETURN path;
+----
 
-The result frames are reusable.
-This means that you can edit the query within the frame and run it again without spawning a new result frame.
+You can edit the query within the frame and run it again without creating a new result frame.
 
-We'll have a closer look at the frame itself in the next step.
-
-== Anatomy of a result frame
-
-As mentioned before, the result frame consists of two parts, a Cypher editor and space to display the results of the Cypher query.
-The frame has three primary views: graph, table, or RAW.
+The frame has two important views: "Graph" and "Table". ("Plan" is for showing query plans and "RAW" for the raw results).
 
 //highlight:query/result-view-graph[Result view]
 //doesn't work
 
-image::result-options.png[]
+// image::result-options.png[]
 //would be cool to replace this with a highlight also
 
-The default view is graph.
-Run the following query:
+The default view is graph if your query returns graph elements like nodes, relationships or paths.
+
+NOTE: Relationships are only shown if you return a path, or name and return the relationships as well as the nodes.
+
+Here we see `Product` nodes with `PART_OF` relationships to the `Category` with name _Produce_.
+
+On the right side of the graph view you can see the properties panel with information about the entities in your graph.
+You can click on any of them to change their styling, i.e. color, size, and caption, clicking on one element shows its attributes.
+
+== Showing tabular results
+
+If your query only returns scalar values (like strings or numbers), the result defaults to the table view and the graph view is not available.
+
+Change your query to:
 
 [source,cypher]
 ----
-MATCH p=()-[:CONTAINS]->() RETURN p LIMIT 25;
+MATCH (p:Product)-[:PART_OF]->(c:Category) 
+WHERE c.categoryName = 'Produce'
+RETURN p.productName,c.categoryName;
 ----
 
-The result is a neat graph of 25 relationships of the type `CONTAINS`, which links `Order` nodes to `Product` nodes.
-On your right you can see the properties panel with information about the entities in your graph.
-You can click on any of them to change their styling, i.e. color, size, and/or caption.
-If you select any _one_ element in your graph, the properties panel will show only the contents of that element and allow you to change the styling of only that element.
+The query uses _variables_, `c` and `p`, for the category and the product as we want to refer to them later.
 
-If your query doesn't return any nodes, the result defaults to the table view and the graph view is not shown.
-You can try this by clicking on one of your properties from the list in database information, `orderID` for example.
-Using the tabular representation comes in handy when you want to compare items in the same return line and resembles SQL.
-
+[NOTE]
+====
+If you prefix your query with `EXPLAIN` or `PROFILE` you can see a plan option for a visual query plan, which helps later with optimizations.
 The RAW option shows the submitted query, the Neo4j server version and address, the result, and a summary.
+====
 
 == Use basic Cypher to answer questions
 
-If you have already completed the Data Importer guide, you are familiar with the data model of the Northwind dataset, but if you haven't, you can see it in the _Import_ tab since you downloaded it in a previous step.
-Another way is to use this procedure:
+// You should be familiar with the data model of the Northwind dataset if you have completed the _Data Import_ guide, otherwise you can still see it in the _Import_ tab since you downloaded it in a previous step.
+For writing correct queries it is always good to know what your data looks like.
+Besides the sidebar with the overview, a quick way to show the current graph schema is to `CALL` this procedure.
 
 [source, cypher]
 ----
-CALL db.schema.visualization
+CALL db.schema.visualization()
 ----
-
-Once you have an idea of the structure of the data, it's time to use Cypher to answer questions and solve problems.
 
 Let's take a look at the different companies supplying Northwind with products and see which supplier provides products from which categories:
 
 [source, cypher]
 ----
 MATCH (s:Supplier)-->(:Product)-->(c:Category)
-RETURN s.companyName as Company, collect(distinct c.categoryName) as Categories
+RETURN s.companyName as company, collect(distinct c.categoryName) as categories
 ----
 
-This query finds _suppliers_ that _supply_ a _product_ which is part of a _category_ and returns the company names and the categories they supply products from, in a table.
-In cases where the same supplier supplies products from more than one category, the categories are collected and listed together, as you can see in the _Categories_ column.
-Note that even though you specified the _Product_ node in the `MATCH` part of the query, no information about the actualy product is returned since this is not included in the `RETURN` part.
+This query finds _suppliers_ that _supply_ a _product_ which is _part of_ a _category_ and returns the company names and the categories they supply products from, in a table.
+In cases where the same supplier supplies products from more than one category, the distinct category names are collected into a list, as you can see in the _categories_ column.
+
+Even though you specified the _Product_ node in the `MATCH` part of the query, no information about the actual product is returned since this is not included in the `RETURN` part.
 
 Maybe you are interested only in suppliers of a certain category, say _Condiments_:
 
 [source, cypher]
 ----
-MATCH (c:Category {categoryName:"Condiments"})<--(:Product)<--(s:Supplier)
-RETURN DISTINCT s.companyName as CondimentsSuppliers
+MATCH (s:Supplier)-->(:Product)-->(c:Category)
+WHERE c.categoryName = 'Condiments'
+RETURN DISTINCT s.companyName as condimentsSuppliers
 ----
 
-This query finds a category with the name _Condiments_ (one of the properties on the _Category_ node, if you recall the data model) and links that to a _Product_ and the product to a _Supplier_ that supplies it.
-The query uses _variables_, `c` and `s`, for the category and the supplier, respectively, but _not_ for the product.
-That's because the product happens to be on the path between the two types of nodes you are interested in, just like in the previous example.
-Note that since you are only interested in that a relationship exists between these nodes and not in _what type_ of relationship, you don't have to specify any relationship type in the query.
+Here we're not interested in the `Product` nodes, nor the exact types of the relationships between the nodes, so we don't have to specify them.
 
 This is fairly basic, so let's move on to something a little more complex.
 
 == Write more advanced Cypher for problem-solving
 
-With the basics out of the way, let's have a look a more complex problem.
-Assume that you want to see which product categories are typically co-ordered with other product categories.
-This might help you understand which products to promote alongside others, or finding gaps in opportunities to promote products often ordered together.
+Assume that you want to see which product categories are typically co-ordered with other product categories and how frequently.
+
+This might help you understand which products to promote alongside others.
 
 [source, cypher]
 ----
+// which categories are the products of an order in
 MATCH (o:Order)-[:ORDERS]->(:Product)-[:PART_OF]->(c:Category)
-WITH o, collect(c.categoryName) as Categories WHERE size(Categories) > 1
-RETURN DISTINCT Categories
+// retain same ordering of categories
+WITH o, c ORDER BY c.categoryName
+// aggregate categories by order into a list of names
+WITH o, collect(DISTINCT c.categoryName) as categories 
+// only orders with more than one category
+WHERE size(categories) > 1
+// count how frequently the pairings occurr
+RETURN categories, count(*) as freq
+// order by frequency
+ORDER BY freq DESC
+LIMIT 50
 ----
 
+Another question would be, which customers are similar, i.e. ordering similar products most frequently.
 
+The base question is the same, just that we expand across the product to other customers.
 
+We find the "peer-groups" of our customers, which then can be used for product recommdations (people that bought X also bought) or segmentation into clusters of our customer base.
 
+[source, cypher]
+----
+// pattern from customer purchasing products to another customer purchasing the same products
+MATCH (c:Customer)-[:PURCHASED]->(:Order)-[:ORDERS]->(p:Product)<-[:ORDERS]-(:Order)<-[:PURCHASED]-(c2:Customer)
+// don't want the same customer pair twice
+WHERE c < c2
+// sort by the top-occuring products
+WITH c, c2, p, count(*) as productOccurrence 
+ORDER BY productOccurrence DESC
+// return customer pairs ranked by similarity and the top 5 products
+RETURN c.companyName, c2.companyName, sum(productOccurrence) as similarity, collect(distinct p.productName)[0..5] as topProducts
+ORDER BY similarity DESC LIMIT 10
+----
 
+Now we could create relationships for all customers that score more than 50 in our similarity score and see how they cluster.
 
+[source,cypher]
+----
+MATCH (c:Customer)-[:PURCHASED]->(:Order)-[:ORDERS]->(p:Product)<-[:ORDERS]-(:Order)<-[:PURCHASED]-(c2:Customer)
+WHERE c < c2
+// find similar customers
+WITH c, c2, count(*) as similarity
+// with at least 50 shared product purchases
+WHERE similarity > 50
+// create a relationship between the two without specifying direction
+MERGE (c)-[sim:SIMILAR_TO]-(c2)
+// set relationship weight from similairity
+ON CREATE SET sim.weight = similarity
+----
+
+Now the new relationship shows up in our side-bar (after refresh at the bottom) and graph model and we can use it to show clusters of our customers.
+
+If you style the relationship `SIMILAR_TO` with the `weight` as caption you can see the strength of the similarity.
+
+[source,cypher]
+----
+MATCH path=()-[:SIMILAR_TO]->() RETURN path
+----
+
+This should give you a good starting point to see the power of graph queries.
+
+You can learn more about Cypher here:
+
+* https://graphacademy.neo4j.com/categories/cypher/[Cypher Online Courses^] 
+* https://neo4j.com/docs/cypher-manual/current/introduction/[Cypher Manual^] 
+* https://neo4j.com/docs/cypher-cheat-sheet/5/auradb-enterprise/[Cypher Cheat-Sheet^].
 
 
 
