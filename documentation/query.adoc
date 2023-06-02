@@ -86,7 +86,7 @@ The default view is graph if your query returns graph elements like nodes, relat
 
 NOTE: Relationships are only shown if you return a path, or name and return the relationships as well as the nodes.
 
-Here we see `Product` nodes with `PART_OF` relationships to the `Category` with name _Produce_.
+Here you can see `Product` nodes with `PART_OF` relationships to the `Category` with name _Produce_.
 
 On the right side of the graph view you can see the properties panel with information about the entities in your graph.
 You can click on any of them to change their styling, i.e. color, size, and caption, clicking on one element shows its attributes.
