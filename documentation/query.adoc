@@ -63,7 +63,7 @@ Central to the Query UI is the Cypher editor on top where you write and run your
 
 When you _run_ any query, a result frame shows the query and its results, pushing previous ones down.
 
-Try it out by typing in and executing the following Cypher query.
+Try it out by typing in and executing the following Cypher query:
 
 [source,cypher]
 ----
