@@ -145,7 +145,7 @@ WHERE c.categoryName = 'Condiments'
 RETURN DISTINCT s.companyName as condimentsSuppliers
 ----
 
-Here we're not interested in the `Product` nodes, nor the exact types of the relationships between the nodes, so we don't have to specify them.
+Since you are not interested in the `Product` nodes, nor the exact types of the relationships between the nodes here, you don't have to specify them.
 
 This is fairly basic, so let's move on to something a little more complex.
 
