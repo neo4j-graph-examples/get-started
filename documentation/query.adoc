@@ -192,7 +192,7 @@ RETURN c.companyName, c2.companyName, sum(productOccurrence) as similarity, coll
 ORDER BY similarity DESC LIMIT 10
 ----
 
-Now we could create relationships for all customers that score more than 50 in our similarity score and see how they cluster.
+Now you could create relationships for all customers that score more than 50 in your similarity score and see how they cluster.
 
 [source,cypher]
 ----
