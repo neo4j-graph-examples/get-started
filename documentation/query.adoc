@@ -104,7 +104,7 @@ WHERE c.categoryName = 'Produce'
 RETURN p.productName,c.categoryName;
 ----
 
-The query uses _variables_, `c` and `p`, for the category and the product as we want to refer to them later.
+The query uses _variables_, `c` and `p`, for the category and the product as you will want to refer to them later.
 
 [NOTE]
 ====
