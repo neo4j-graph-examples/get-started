@@ -174,7 +174,7 @@ LIMIT 50
 
 Another question would be, which customers are similar, i.e. ordering similar products most frequently.
 
-The base question is the same, just that we expand across the product to other customers.
+The base question is the same, you just expand across the product to other customers.
 
 We find the "peer-groups" of our customers, which then can be used for product recommdations (people that bought X also bought) or segmentation into clusters of our customer base.
 
