@@ -74,7 +74,7 @@ RETURN path;
 
 You can edit the query within the frame and run it again without creating a new result frame.
 
-The frame has two important views: "Graph" and "Table". ("Plan" is for showing query plans and "RAW" for the raw results).
+The frame has two important views: _Graph_ and _Table_. (_Plan_ is for showing query plans and _RAW_ for the raw results).
 
 //highlight:query/result-view-graph[Result view]
 //doesn't work
