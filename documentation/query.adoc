@@ -208,7 +208,7 @@ MERGE (c)-[sim:SIMILAR_TO]-(c2)
 ON CREATE SET sim.weight = similarity
 ----
 
-Now the new relationship shows up in our side-bar (after refresh at the bottom) and graph model and we can use it to show clusters of our customers.
+The new relationship shows up in your sidebar (after refresh at the bottom) and graph model and you can use it to show clusters of our customers.
 
 If you style the relationship `SIMILAR_TO` with the `weight` as caption you can see the strength of the similarity.
 
