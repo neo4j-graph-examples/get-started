@@ -61,7 +61,7 @@ MATCH (n:Product) RETURN n LIMIT 25;
 
 Central to the Query UI is the Cypher editor on top where you write and run your queries and the list of result frames.
 
-When you _run_ any query a result frame shows which shows the query with its results, pushing previous ones down.
+When you _run_ any query, a result frame shows the query and its results, pushing previous ones down.
 
 Try it out by typing in and executing the following Cypher query.
 
