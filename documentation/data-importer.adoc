@@ -60,7 +60,7 @@ OrderID,ProductID,UnitPrice,Quantity,Discount
 10248,72,34.8,5,0
 ----
 
-This file tells us which orders contain specific products and their price.
+This file tells you which orders contain specific products and their price.
 If you inspect the content of the file, you'll notice that `OrderID` is repeated.
 You'll learn later about how this can be used to create a `CONTAINS` relationship linking `Orders` and `Products`.
 
