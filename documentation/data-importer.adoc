@@ -113,6 +113,7 @@ If you go back to the _Definition_ tab, you can see that the `id` property is se
 The import tool did this for you automatically based on the property name containing the `id` string.
 In other cases, you may need to correct it or set it manually.
 
+// TO-DO: Add property highlight has been lost, requested the Importer team re-add it.  This TO-DO can be deleted once confirmed working.
 [TIP]
 ====
 You can also specify properites and their data types in isolation from mapping by using the highlight:import/import-property-add-button[add property] button.
