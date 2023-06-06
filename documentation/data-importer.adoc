@@ -1,13 +1,12 @@
 = Learn how to import and map data with Neo4j Data Importer
 // NOTE: Browser may cache files when loading from zip
 
-// TODO: Update the URL of files to be Github after completing local development testing
-:northwind-subset-data-only-zip-file:  http://localhost:8000/data/northwind-subset-data-only.zip
-:northwind-subset-node-only-mapping-zip-file: http://localhost:8000/data/northwind-subset-node-only-mapping.zip
-:northwind-subset-shipper-mapping-zip-file: http://localhost:8000/data/northwind-subset-shipper-mapping.zip
-:people_locations_nodes_only_zip_file: http://localhost:8000/data/people_locations_nodes_only.zip
-:people_locations_full_zip_file: http://localhost:8000/data/people_locations_full.zip
-:northwind-subset-node-and-relationship-mapping-zip-file: http://localhost:8000/data/northwind-subset-node-and-relationship-mapping.zip
+:northwind-subset-data-only-zip-file:  https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-data-only.zip
+:northwind-subset-node-only-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-node-only-mapping.zip
+:northwind-subset-shipper-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-shipper-mapping.zip
+:people_locations_nodes_only_zip_file: https://neo4j-graph-examples.github.io/get-started/data/people_locations_nodes_only.zip
+:people_locations_full_zip_file: https://neo4j-graph-examples.github.io/get-started/data/people_locations_full.zip
+:northwind-subset-node-and-relationship-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-node-and-relationship-mapping.zip
 
 == Introduction
 
