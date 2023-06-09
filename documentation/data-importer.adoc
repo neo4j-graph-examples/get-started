@@ -88,9 +88,8 @@ Let's now add some properties to the `Order` node from our `orders.csv` file.
 
 * Click the highlight:import/import-select-from-file-button[select from file] button.
 * Select the `orderId`, `orderDate` and `requiredDate` columns and click *Confirm*.
-* Edit the `orderId` property in the mapping details panel by clicking the pencil icon.
-* Change its data type from `integer` to `string`, and then rename it to `id` (it obviously relates to an order).
-* Click the check mark to save your edit.
+* Edit the name `orderId` property in the mapping details panel by clicking the pencil icon and then rename it to `id` (it obviously relates to an order).
+* Change its data type from `integer` to `string` using the drop-down .
 
 [NOTE]
 ====
