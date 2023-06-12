@@ -172,7 +172,7 @@ ORDER BY freq DESC
 LIMIT 50
 ----
 
-Another question would be, which customers are similar, i.e. ordering similar products most frequently.
+You can extend this and find customers who display similar purchasing patterns, i.e. which customers order similar products most frequently.
 
 The base question is the same, you just expand across the product to other customers.
 
