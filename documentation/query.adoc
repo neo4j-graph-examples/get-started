@@ -35,7 +35,7 @@ button::Go back to Query[role=NX_TAB_NAV,tab=query]
 == Get to know the database
 
 A good place to start is to take stock of what you have in your database.
-You access _Database Information_ from the very top left of the sidebar.
+You access _Database Information_ from the top of the sidebar.
 
 image::database-icon.png[]
 //would be cool to replace this image with a highlight instead
