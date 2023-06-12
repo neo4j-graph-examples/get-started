@@ -1,13 +1,12 @@
 = Learn how to import and map data with Neo4j Data Importer
 // NOTE: Browser may cache files when loading from zip
 
-// TODO: Update the URL of files to be Github after completing local development testing
-:northwind-subset-data-only-zip-file:  http://localhost:8000/data/northwind-subset-data-only.zip
-:northwind-subset-node-only-mapping-zip-file: http://localhost:8000/data/northwind-subset-node-only-mapping.zip
-:northwind-subset-shipper-mapping-zip-file: http://localhost:8000/data/northwind-subset-shipper-mapping.zip
-:people_locations_nodes_only_zip_file: http://localhost:8000/data/people_locations_nodes_only.zip
-:people_locations_full_zip_file: http://localhost:8000/data/people_locations_full.zip
-:northwind-subset-node-and-relationship-mapping-zip-file: http://localhost:8000/data/northwind-subset-node-and-relationship-mapping.zip
+:northwind-subset-data-only-zip-file:  https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-data-only.zip
+:northwind-subset-node-only-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-node-only-mapping.zip
+:northwind-subset-shipper-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-shipper-mapping.zip
+:people_locations_nodes_only_zip_file: https://neo4j-graph-examples.github.io/get-started/data/people_locations_nodes_only.zip
+:people_locations_full_zip_file: https://neo4j-graph-examples.github.io/get-started/data/people_locations_full.zip
+:northwind-subset-node-and-relationship-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-node-and-relationship-mapping.zip
 
 == Introduction
 
@@ -86,7 +85,7 @@ Select `orders.csv` from the highlight:import/import-node-file-dropdown[file dro
 
 Let's now add some properties to the `Order` node from our `orders.csv` file.
 
-* Click the highlight:import/import-select-from-file-button[select from file] button.
+* Click the highlight:import/import-select-from-file-button[Map from file] button.
 * Select the `orderId`, `orderDate` and `requiredDate` columns and click *Confirm*.
 * Edit the name `orderId` property in the mapping details panel by clicking the pencil icon and then rename it to `id` (it obviously relates to an order).
 * Change its data type from `integer` to `string` using the drop-down .
@@ -112,6 +111,7 @@ If you go back to the _Definition_ tab, you can see that the `id` property is se
 The import tool did this for you automatically based on the property name containing the `id` string.
 In other cases, you may need to correct it or set it manually.
 
+// TO-DO: Add property highlight has been lost, requested the Importer team re-add it.  This TO-DO can be deleted once confirmed working.
 [TIP]
 ====
 You can also specify properites and their data types in isolation from mapping by using the highlight:import/import-property-add-button[add property] button.
@@ -186,7 +186,7 @@ In the `order-details.csv` file, you'll notice the columns `unitPrice`, `quantit
 These properties are well suited to being on the relationship since they couldn't easily be encapsulated on the nodes at either end of the relationship.
 For example `quantity` does not belong on either the `Product` or `Order` nodes since products will be sold in different quantities on different orders.
 
-Just as you did for nodes, use the highlight:import/import-select-from-file-button[select from file] button to map those columns to new properties on the relationship.
+Just as you did for nodes, use the highlight:import/import-select-from-file-button[Map from file] button to map those columns to new properties on the relationship.
 
 [TIP]
 ====
