@@ -88,7 +88,8 @@ Let's now add some properties to the `Order` node from our `orders.csv` file.
 * Click the highlight:import/import-select-from-file-button[Map from file] button.
 * Select the `orderId`, `orderDate` and `requiredDate` columns and click *Confirm*.
 * Edit the name `orderId` property in the mapping details panel by clicking the pencil icon and then rename it to `id` (it obviously relates to an order).
-* Change its data type from `integer` to `string` using the drop-down .
+* Change its data type from `integer` to `string` using the drop-down.
+
 
 [NOTE]
 ====
@@ -107,7 +108,7 @@ For example, Northwind's date/time columns are identified as strings, but you ca
 Nodes need an ID to define relationships with other nodes.
 An ID also ensures an import doesn't create a node more than once if it's referenced multiple times in a data file.
 
-If you go back to the _Definition_ tab, you can see that the `id` property is set as the ID for the node highlight:import/import-node-id[ID].
+In the _Definition_ tab, you can see that the `id` property is set as the ID for the node highlight:import/import-node-id[ID].
 The import tool did this for you automatically based on the property name containing the `id` string.
 In other cases, you may need to correct it or set it manually.
 
@@ -124,6 +125,9 @@ You can then map a column from your data file to the property in the file mappin
 Now you just need to repeat the process you followed for `Order` and create a `Product` node from the `products.csv` file.
 Here you need to map the `produtId` and `productName` columns, rename the `productId` property to be simply `id` and set it to be a `string`.
 Ensure `id` is selected as the ID.
+
+Once you have created both nodes and mapped files accordingly, you should see a green check mark on both nodes.
+This indicates that the mapping is complete.
 
 [%collapsible]
 .Are you having trouble?
@@ -156,6 +160,7 @@ Just like newly created nodes, the relationship will only show a green check mar
 You can also name relationships by double-clicking the arrow in the graph model and typing it directly.
 You can rapidly add nodes with a linking relationship by releasing the circle on an empty space the canvas instead of an existing node.
 Selected nodes can be deleted by clicking the highlight:import/import-delete-node-or-rel[delete button] or with the backspace key.
+You can quickly change the direction of a relationship with _Switch direction_ next to the relationship type.
 ====
 
 == Map a file to a relationship
@@ -272,6 +277,7 @@ Click the highlight:import/import-load-preview-button[Preview button] to see a s
 image::preview.png[]
 
 Even though the preview only scans the first few rows of your files, it is often sufficient to make sure everything connects as expected.
+You can click individual elements in the preview to verify that their properties appear as expected.
 But you should keep in mind that it is only a preview and only a sample of your data.
 The actual graph may look different once the full import is complete.
 
@@ -330,7 +336,7 @@ The data is stored as CSV-files and the model as a JSON file, which makes it eas
 
 You can run the import multiple times without duplicating your data.
 For example, if you want to make some changes to your model after you've run the import, just fix your model and when you are happy run the import again.
-The changes you made will overwrite what you had before, but no existing elements will be recreated.
+The changes you made will overwrite what you had before, but no existing elements will be recreated, unless you change their IDs.
 
 === When you outgrow the Data Importer
 
@@ -338,10 +344,10 @@ Workspace's importer may not meet _all_ of your varied load needs, whether they 
 If you need more control, the chances are you can achieve the load using some of the other approaches to loading data into Neo4j.
 The following are useful resources for different needs:
 
-- https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV]] for writing your own bespoke Cypher load scripts from CSVs, leveraging the full capabilities of Cypher.
-- https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import]] for loading large amounts of CSV data rapidly into an offline database
-- https://neo4j.com/product/connectors/[Neo4j connectors] to connect data from a variety of soruces into Neo4j.
-- https://neo4j.com/docs/apoc/current/overview/apoc.load/[APOC Load procedures] for specialist Cypher procedures to make it easier to ingest data from formats including, json, xml and arrow.
+- https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV] for writing your own bespoke Cypher load scripts from CSVs, leveraging the full capabilities of Cypher.
+- https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import] for loading large amounts of CSV data rapidly into an offline database
+- https://neo4j.com/product/connectors/[Neo4j connectors] to connect data from a variety of sources into Neo4j.
+- https://neo4j.com/docs/apoc/current/overview/apoc.load/[APOC Load procedures] for special Cypher procedures to make it easier to ingest data from formats including json, xml and arrow.
 
 == Frequently Asked Questions
 
