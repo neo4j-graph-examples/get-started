@@ -22,7 +22,7 @@ This guide will teach you how to:
 
 [TIP]
 ====
-If you haven't already, it's recommended to go through the _Getting started with Neo4j_ guide to learn the basics of Neo4j.
+If you haven't already, it's recommended to go through the _Learn the basics_ guide to learn the basics of Neo4j.
 This guide is continuing with the same dataset, Northwind.
 ====
 
@@ -181,7 +181,7 @@ This gives Data Importer the information it requires to link up the From end of 
 * You need to select the correct file column for the `To` end of the relationship (the Product node).
 As you might guess, this is the `productId` in the highlight:import/import-rel-to-dropdown[to dropdown]
 
-Everything in the highlight:import/import-model-panel[Graph Model pane] should now have green check marks as you have successfully mapped the file.
+Everything in the highlight:import/import-model-panel[Data model pane] should now have green check marks as you have successfully mapped the file.
 
 === More properties for richer queries
 
