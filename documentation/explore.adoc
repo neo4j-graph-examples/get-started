@@ -54,7 +54,7 @@ When you clear the search bar, the returned elements from your previous search s
 
 When you want a clean slate, bring up the _context menu_ by right-clicking on an empty part of the scene and select _Clear Scene_.
 
-Alternatively, you can use a keyboard shortcut: _Mac_: `⌘+⌫` or _Windows_: `Ctrl+⌫` to clear your scene.
+Alternatively, you can use a keyboard shortcut: ⌘+⌫ for Mac or Ctrl+⌫ for Windows, to clear your scene.
 
 With an empty scene, you're ready to get back to more refined searching in the next step.
 
