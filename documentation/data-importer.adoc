@@ -1,6 +1,7 @@
 = Learn how to import and map data with Neo4j Data Importer
 // NOTE: Browser may cache files when loading from zip
 
+:northwind-subset-data-only-no-model-zip-file:  https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-data-only-no-model.zip
 :northwind-subset-data-only-zip-file:  https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-data-only.zip
 :northwind-subset-node-only-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-node-only-mapping.zip
 :northwind-subset-shipper-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-shipper-mapping.zip
@@ -31,7 +32,7 @@ This guide is continuing with the same dataset, Northwind.
 
 === Add the Northwind files
 
-To get started, {northwind-subset-data-only-zip-file}[download and unzip this file of CSVs^] and then drop the files onto the highlight:import/import-file-panel[files panel].
+To get started, {northwind-subset-data-only-no-model-zip-file}[download and unzip this file of CSVs^] and then drop the files onto the highlight:import/import-file-panel[files panel].
 
 [%collapsible]
 .Are you having trouble?
