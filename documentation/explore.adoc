@@ -94,19 +94,19 @@ This extra information is stored as properties on the nodes and these can be spe
 
 (If you can't remember the properties in the example dataset, you can find them in the _Perspective drawer_ from the sidebar, just click on the node label you're interested in to expand a list of its properties.)
 
-Start by selecting the _Customer_ category, then type _city_ and select the suggestion (alternatively press `TAB` to autocomplete) then type _London_ and select the suggestion.
+Start by selecting the _Customer_ category, then scroll down and find `Customer city:value`, select it and then type _London_.
 
-image::london1.png[]
+image::london2.png[]
 
 Now you have the the start nodes specified so let's get the next step in your pattern.
 
 == Specific values continued
 
-A customer _purchases_ an order but since you don't need to specify the relationship, go straight to _Order_ and add that to the pattern.
-You are not specifying any properties on the _Order_ node, so proceed to _Product_.
+A customer _purchases_ an order but since you don't need to specify the relationship, select the `-(any)-` relationship and then _Order_ and add that to the pattern.
+You are not specifying any properties on the _Order_ node, so proceed to _Product_ by using <TAB> to add another `-(any)-` relationship to the pattern.
 
-On the _Product_ node, you want only the _discontinued_ products so add that to the _Product_ node.
-The _discontinued_ property is `boolean` and the only possible values are `true` or `false`, so type _true_ after the colon.
+On the _Product_ node, you want only the _discontinued_ products so add that to the _Product_ node in the same way as you did with the `Customer`-node.
+The _discontinued_ property is `boolean` and the only possible values are `true` or `false`, so type _true_ after the colon and confirm with <TAB>.
 
 image::discontinued.png[]
 
@@ -115,7 +115,7 @@ Since you are not specifying any properties on the _Category_ nodes either, just
 
 You should now have a search pattern that looks like this:
 
-image::pattern.png[]
+image::pattern2.png[]
 
 When you run the search pattern, you can see that one category has more discontinued products ordered by customers in London than the others.
 Can you tell which one?
