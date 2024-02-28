@@ -15,7 +15,7 @@ Use the button to load Northwind data and model:
 
 button::Load the Northwind dataset[role=NX_IMPORT_LOAD,endpoint=https://raw.githubusercontent.com/neo4j-graph-examples/northwind/main/import/northwind-data-importer-mode-data.zip]
 
-Click `Run import` and once it's completed click `Start Exploring`.
+Click `Run import` and once it's completed click `Explore results`.
 
 With that in place, let's actually start exploring!
 ====
@@ -99,6 +99,11 @@ Start by selecting the _Customer_ category, then scroll down and find `Customer 
 image::london2.png[]
 
 Now you have the the start nodes specified so let's get the next step in your pattern.
+
+[NOTE]
+====
+The Neo4j database is _case sensitive_ and property values are matched in a case-sensitive fashion.
+====
 
 == Specific values continued
 
