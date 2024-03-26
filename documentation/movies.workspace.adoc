@@ -4,14 +4,12 @@
 == Movies graph
 
 This guide uses pop-cultural connections to teach you how to use Cypher to create and query data.
-You will explore connections between, actors, directors, and movies and solve the famous Bacon-path.
+You will explore connections between actors, directors, and movies, and also solve the famous Bacon-path.
 
 Note that this guide assumes that you use an empty database as you will modify it along the way.
 You will learn how to delete the data you create towards the end of the guide as well.
 
-
-
-== What you will learn
+=== What you will learn
 
 This guide takes around 10 minutes and by the end of it you will be able to:
 
@@ -33,7 +31,7 @@ If you are not familiar with Cypher syntax, you can try the _Query fundamentals_
 
 You are going to create a dataset with `Person` and `Movie` nodes and different types of relationships to connect them.
 
-image::movies-model.png[]
+image::movie-model.png[]
 
 Use the command below but be careful to only run it **once** as it will add data every time it is run.
 
@@ -577,7 +575,7 @@ RETURN movie
 
 Similarly, you can find all the people (nodes with the `Person` label) in the graph, but limit the returned number to ten:
 
-[ssource,cypher]
+[source,cypher]
 ----
 MATCH (people:Person)
 RETURN people.name LIMIT 10
@@ -621,6 +619,7 @@ Hint: The relationship between a person who is a director and the movie they dir
 MATCH (cloudAtlas {title: "Cloud Atlas"})<-[:DIRECTED]-(directors)
 RETURN directors.name
 ----
+====
 
 If you extend the length of the pattern, you can find co-actors:
 
@@ -629,6 +628,104 @@ If you extend the length of the pattern, you can find co-actors:
 MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors)
 RETURN coActors.name
 ----
+
+You can return _all_ properties if you are not sure exactly what you are looking for:
+
+[source,cypher]
+----
+MATCH (people:Person)-[relatedTo]-(:Movie {title: "Cloud Atlas"})
+RETURN people.name, Type(relatedTo), relatedTo
+----
+
+This query returns a list of Person-nodes that are connected to the Movie-node _Cloud Atlas_, the relationship type, and _all_ the properties on the relationship.
+
+In the next step, you are going to prove whether the Hollywood version of six degrees of separation is true in your dataset.
+
+== Six degrees of Kevin Bacon
+
+You may have heard about the concept that any two people on Earth are six or fewer connections apart.
+In Hollywood, this is said to be true for Kevin Bacon and any other actor.
+
+The following query lets you see all movies and actors up to six hops away from Kevin Bacon:
+
+[source,cypher]
+----
+MATCH (bacon:Person {name:"Kevin Bacon"})-[*1..6]-(hollywood)
+RETURN DISTINCT hollywood
+----
+
+But is it true that every actor is really connected to Kevin Bacon?
+
+Cypher has a built-in algorithm for this, `ShortestPath` and it looks like this:
+
+[source,cypher]
+----
+MATCH p=shortestPath(
+(bacon:Person {name:"Kevin Bacon"})-[*]-(meg:Person {name:"Meg Ryan"})
+)
+RETURN p
+----
+
+You can try to change _Meg Ryan_ out for any other actor in the dataset and see if you can find one farther away than six hops.
+
+In the next step, you are going to recommend new colleagues for Tom Hanks.
+
+== Recommendations
+
+A basic recommendation approach is to find connections past an immediate neighborhood of nodes which are themselves well-connected.
+For Tom Hanks, this means to find actors who he has yet to work with, but who has worked with his previous co-actors.
+Then you need to find someone who can introduce Tom Hanks to his potential new co-actor.
+
+To find a list of potential co-actors, run the following query:
+
+[source,cypher]
+----
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors),
+  (coActors)-[:ACTED_IN]->(m2)<-[:ACTED_IN]-(cocoActors)
+WHERE NOT (tom)-[:ACTED_IN]->()<-[:ACTED_IN]-(cocoActors) AND tom <> cocoActors
+RETURN cocoActors.name AS Recommended, count(*) AS Strength ORDER BY Strength DESC
+----
+
+The `WHERE NOT` part of the query ensures that you don't get actors who already worked with Tom Hanks nor Tom Hanks himself.
+The results are ordered by the number of co-co-actors they have in common.
+
+Now, if you think it would be a good idea for Tom Hanks and Keanu Reeves to do a movie together, who would be able to introduce them?
+
+[source,cypher]
+----
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors),
+  (coActors)-[:ACTED_IN]->(m2)<-[:ACTED_IN]-(keanu:Person {name:"Keanu Reeves"})
+RETURN tom, m, coActors, m2, keanu
+----
+
+In the last step, you are going to clean up your database by deleting the data you have created.
+
+== Clean up
+
+This dataset is fun to experiment with, but once you are done, you can delete everything with the following:
+
+[source,cypher]
+----
+MATCH (n)
+DETACH DELETE n
+----
+
+Note that this does in fact permanently delete the nodes and relationships in this database, so use with caution.
+You can verify that there is nothing left by a simple query:
+
+[source,cypher]
+----
+MATCH (n)
+RETURN n
+----
+
+Well done!
+
+If you want to learn more about Cypher, see the following:
+
+* https://graphacademy.neo4j.com/categories/cypher/[Cypher Online Courses^]
+* https://neo4j.com/docs/cypher-manual/current/introduction/[Cypher Manual^]
+* https://neo4j.com/docs/cypher-cheat-sheet/5/auradb-enterprise/[Cypher Cheat-Sheet^].
 
 
 
