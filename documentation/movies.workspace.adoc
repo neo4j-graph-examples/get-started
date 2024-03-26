@@ -553,7 +553,7 @@ RETURN person.name LIMIT 10
 Try to remove the property key `.name` from the RETURN clause and see the difference.
 
 [source,cypher]
------
+----
 MATCH (person:Person)
 RETURN person LIMIT 10
 ----
