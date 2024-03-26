@@ -9,7 +9,7 @@ You will explore connections between, actors, directors, and movies and solve th
 Note that this guide assumes that you use an empty database as you will modify it along the way.
 You will learn how to delete the data you create towards the end of the guide as well.
 
-image::movies-model.png[]
+
 
 == What you will learn
 
@@ -22,17 +22,20 @@ This guide takes around 10 minutes and by the end of it you will be able to:
 - Write a basic recommendation query.
 - Delete all data.
 
-== Get started!
+Let's get started!
 
 In the next step you are going to create the data you'll be working with.
 
-== Create
+== Create the data
 
 The Cypher `CREATE` clause is used to create data in your graph.
 If you are not familiar with Cypher syntax, you can try the _Query fundamentals_ guide or see the link:https://neo4j.com/docs/cypher-manual/current[Cypher Manual].
 
+You are going to create a dataset with `Person` and `Movie` nodes and different types of relationships to connect them.
 
+image::movies-model.png[]
 
+Use the command below but be careful to only run it **once** as it will add data every time it is run.
 
 [source,cypher]
 ----
@@ -545,3 +548,87 @@ CREATE
 WITH TomH as a
 MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d) RETURN a,m,d LIMIT 10;
 ----
+
+In the next step, you will look for nodes and their properties.
+
+== Find nodes
+
+To start, can you find the actor Tom Hanks?
+
+Run the following query:
+
+[source,cypher]
+----
+MATCH (tom {name: "Tom Hanks"})
+RETURN tom
+----
+
+Next, can you find a movie called _Cloud Atlas_?
+
+[%collapsible]
+.Reveal the solution
+====
+[source,cypher]
+----
+MATCH (movie {title:"Cloud Atlas"})
+RETURN movie
+----
+====
+
+Similarly, you can find all the people (nodes with the `Person` label) in the graph, but limit the returned number to ten:
+
+[ssource,cypher]
+----
+MATCH (people:Person)
+RETURN people.name LIMIT 10
+----
+
+[TIP]
+====
+Try to remove the property key `.name` from the RETURN clause and see the difference.
+(`RETURN people LIMIT 10`)
+====
+
+If you want to find movies released in a specific timespan, you can add conditions by using `WHERE`:
+
+[source,cypher]
+----
+MATCH (nineties:Movie) WHERE nineties.released >= 1990 AND nineties.released < 2000
+RETURN nineties.title
+----
+
+In the next step you will look for patterns in the graph.
+
+== Find patterns
+
+A pattern in the graph is a specific arrangement of nodes and relationships that can be matched in the graph.
+To find which movies Tom Hanks have acted in, specify the pattern as follows:
+
+[source,cypher]
+----
+MATCH (tom:Person {name: "Tom Hanks"})-[:ACTED_IN]->(tomHanksMovies)
+RETURN tom,tomHanksMovies
+----
+
+Can you specify a pattern to find who directed _Cloud Atlas_?
+Hint: The relationship between a person who is a director and the movie they directed is `:DIRECTED`.
+
+[%collapsible]
+.Reveal the solution
+====
+[source,cypher]
+----
+MATCH (cloudAtlas {title: "Cloud Atlas"})<-[:DIRECTED]-(directors)
+RETURN directors.name
+----
+
+If you extend the length of the pattern, you can find co-actors:
+
+[source,cypher]
+----
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors)
+RETURN coActors.name
+----
+
+
+
