@@ -632,8 +632,8 @@ The following query lets you see all movies _and_ people up to six hops away fro
 
 [source,cypher]
 ----
-MATCH (:Person {name:"Kevin Bacon"})-[*1..6]-(p:Person)
-RETURN DISTINCT p
+MATCH (:Person {name:"Kevin Bacon"})-[*1..6]-(n)
+RETURN DISTINCT n
 ----
 
 But is it true that every actor is really connected to Kevin Bacon?
@@ -663,11 +663,9 @@ To find a list of potential co-actors, run the following query:
 [source,cypher]
 ----
 MATCH (p:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors),
-      (coActors)-[:ACTED_IN]->(m2)<-[:ACTED_IN]-(cocoActors)
-WHERE NOT exists { (actor)-[:ACTED_IN]->()<-[:ACTED_IN]-(cocoActors) }
-  AND actor <> cocoActors
-RETURN cocoActors.name AS recommended, count(*) AS occurence
-ORDER BY occurence DESC
+  (coActors)-[:ACTED_IN]->(m2)<-[:ACTED_IN]-(cocoActors)
+WHERE NOT (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(cocoActors) AND p <> cocoActors
+RETURN cocoActors.name AS recommended, count(*) AS score ORDER BY score DESC
 ----
 
 The `WHERE` part of the query ensures that you don't get actors who already worked with Tom Hanks and nor Tom Hanks himself.
