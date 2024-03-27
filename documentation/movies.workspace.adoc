@@ -510,7 +510,7 @@ To see a subset of the imported data run the following statement
 [source,cypher]
 ----
 MATCH (person:Person {name: 'Tom Hanks'})
-MATCH path = (person)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d) 
+MATCH path = (person)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
 RETURN path;
 ----
 
@@ -524,8 +524,8 @@ Run the following query:
 
 [source,cypher]
 ----
-MATCH (person:Person {name: 'Tom Hanks'})
-RETURN person
+MATCH (p:Person {name: "Tom Hanks"})
+RETURN p
 ----
 
 Next, can you find a `Movie` called _Cloud Atlas_?
@@ -535,8 +535,8 @@ Next, can you find a `Movie` called _Cloud Atlas_?
 ====
 [source,cypher]
 ----
-MATCH (movie:Movie {title:'Cloud Atlas'})
-RETURN movie
+MATCH (m:Movie {title:"Cloud Atlas"})
+RETURN m
 ----
 ====
 
@@ -544,8 +544,8 @@ Similarly, you can find all the people (nodes with the `Person` label) in the gr
 
 [source,cypher]
 ----
-MATCH (person:Person)
-RETURN person.name LIMIT 10
+MATCH (p:Person)
+RETURN p.name LIMIT 10
 ----
 
 [TIP]
@@ -554,8 +554,8 @@ Try to remove the property key `.name` from the RETURN clause and see the differ
 
 [source,cypher]
 ----
-MATCH (person:Person)
-RETURN person LIMIT 10
+MATCH (p:Person)
+RETURN p LIMIT 10
 ----
 ====
 
@@ -563,8 +563,8 @@ If you want to find movies released in a specific timespan, you can add conditio
 
 [source,cypher]
 ----
-MATCH (movie:Movie) WHERE movie.released >= 1990 AND movie.released < 2000
-RETURN movie.title, movie.released
+MATCH (m:Movie) WHERE m.released >= 1990 AND m.released < 2000
+RETURN m.title, m.released
 ----
 
 In the next step you will look for patterns in the graph.
@@ -578,8 +578,8 @@ NOTE: You might need to switch back to the "Graph" view.
 
 [source,cypher]
 ----
-MATCH (person:Person {name: "Tom Hanks"})-[:ACTED_IN]->(movie:Movie)
-RETURN person,movie
+MATCH (p:Person {name: "Tom Hanks"})-[:ACTED_IN]->(movie)
+RETURN p,movie
 ----
 
 Can you specify a pattern to find who directed _Cloud Atlas_?
@@ -590,7 +590,7 @@ Hint: The relationship between a person who is a director and the movie they dir
 ====
 [source,cypher]
 ----
-MATCH (movie:Movie {title: "Cloud Atlas"})<-[:DIRECTED]-(director:Person)
+MATCH (m:Movie {title: "Cloud Atlas"})<-[:DIRECTED]-(director:Person)
 RETURN director.name
 ----
 ====
@@ -615,8 +615,8 @@ You can return _all_ properties if you are not sure exactly what you are looking
 
 [source,cypher]
 ----
-MATCH (person:Person)-[relationship]-(:Movie {title: "Cloud Atlas"})
-RETURN person.name, type(relationship), relationship
+MATCH (p:Person)-[relationship]-(:Movie {title: "Cloud Atlas"})
+RETURN p.name, type(relationship), relationship
 ----
 
 This query returns a list of Person-nodes that are connected to the Movie-node _Cloud Atlas_, the relationship type, and _all_ the properties on the relationship.
@@ -632,8 +632,8 @@ The following query lets you see all movies _and_ people up to six hops away fro
 
 [source,cypher]
 ----
-MATCH (:Person {name:"Kevin Bacon"})-[*1..6]-(hollywood)
-RETURN DISTINCT hollywood
+MATCH (:Person {name:"Kevin Bacon"})-[*1..6]-(p:Person)
+RETURN DISTINCT p
 ----
 
 But is it true that every actor is really connected to Kevin Bacon?
@@ -662,11 +662,11 @@ To find a list of potential co-actors, run the following query:
 
 [source,cypher]
 ----
-MATCH (actor:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors),
+MATCH (p:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors),
       (coActors)-[:ACTED_IN]->(m2)<-[:ACTED_IN]-(cocoActors)
-WHERE NOT exists { (actor)-[:ACTED_IN]->()<-[:ACTED_IN]-(cocoActors) } 
+WHERE NOT exists { (actor)-[:ACTED_IN]->()<-[:ACTED_IN]-(cocoActors) }
   AND actor <> cocoActors
-RETURN cocoActors.name AS recommended, count(*) AS occurence 
+RETURN cocoActors.name AS recommended, count(*) AS occurence
 ORDER BY occurence DESC
 ----
 
@@ -677,16 +677,16 @@ Now, if you think it would be a good idea for Tom Hanks and Keanu Reeves to do a
 
 [source,cypher]
 ----
-MATCH (actor:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors),
-  (coActors)-[:ACTED_IN]->(m2)<-[:ACTED_IN]-(actor2:Person {name:"Keanu Reeves"})
-RETURN m, coActors, m2
+MATCH (p1:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors),
+  (coActors)-[:ACTED_IN]->(m2)<-[:ACTED_IN]-(p2:Person {name:"Keanu Reeves"})
+RETURN DISTINCT coActors.name AS matchmaker
 ----
 
 In the last step, you are going to clean up your database by deleting the data you have created.
 
 == Clean up
 
-This dataset is fun to experiment with, but once you are done, you can delete everything with the following:
+This dataset is fun to experiment with, but once you are done, you can **delete everything** with the following:
 
 [source,cypher]
 ----
@@ -694,13 +694,17 @@ MATCH (n:Person|Movie)
 DETACH DELETE n
 ----
 
-Note that this does in fact permanently delete the nodes and relationships in this database, so use with caution.
+[WARNING]
+====
+This does in fact permanently delete the nodes and relationships in this database, so use with caution.
+====
+
 You can verify that there is nothing left by a simple query:
 
 [source,cypher]
 ----
-MATCH (:Person|Movie)
-RETURN count(*)
+MATCH ()
+RETURN count (*)
 ----
 
 Well done!
