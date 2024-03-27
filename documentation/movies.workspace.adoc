@@ -664,7 +664,7 @@ To find a list of potential co-actors, run the following query:
 ----
 MATCH (p:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors),
   (coActors)-[:ACTED_IN]->(m2)<-[:ACTED_IN]-(cocoActors)
-WHERE NOT exists { (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(cocoActors) }
+WHERE NOT exists { (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(cocoActors) } AND p <> cocoActors
 RETURN cocoActors.name AS recommended, count(*) AS score ORDER BY score DESC
 ----
 
