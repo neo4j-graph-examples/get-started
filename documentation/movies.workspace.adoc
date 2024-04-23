@@ -38,471 +38,512 @@ image::movie-model.png[]
 CREATE CONSTRAINT movie_title IF NOT EXISTS FOR (m:Movie) REQUIRE m.title IS UNIQUE;
 CREATE CONSTRAINT person_name IF NOT EXISTS FOR (p:Person) REQUIRE p.name IS UNIQUE;
 
-MERGE (TheMatrix:Movie {title:'The Matrix'}) ON CREATE SET TheMatrix.released=1999, TheMatrix.tagline='Welcome to the Real World'
-MERGE (Keanu:Person {name:'Keanu Reeves'}) ON CREATE SET Keanu.born=1964
-MERGE (Carrie:Person {name:'Carrie-Anne Moss'}) ON CREATE SET Carrie.born=1967
-MERGE (Laurence:Person {name:'Laurence Fishburne'}) ON CREATE SET Laurence.born=1961
-MERGE (Hugo:Person {name:'Hugo Weaving'}) ON CREATE SET Hugo.born=1960
-MERGE (LillyW:Person {name:'Lilly Wachowski'}) ON CREATE SET LillyW.born=1967
-MERGE (LanaW:Person {name:'Lana Wachowski'}) ON CREATE SET LanaW.born=1965
-MERGE (JoelS:Person {name:'Joel Silver'}) ON CREATE SET JoelS.born=1952
-MERGE (Keanu)-[:ACTED_IN {roles:['Neo']}]->(TheMatrix)
-MERGE (Carrie)-[:ACTED_IN {roles:['Trinity']}]->(TheMatrix)
-MERGE (Laurence)-[:ACTED_IN {roles:['Morpheus']}]->(TheMatrix)
-MERGE (Hugo)-[:ACTED_IN {roles:['Agent Smith']}]->(TheMatrix)
-MERGE (LillyW)-[:DIRECTED]->(TheMatrix)
-MERGE (LanaW)-[:DIRECTED]->(TheMatrix)
-MERGE (JoelS)-[:PRODUCED]->(TheMatrix)
+CREATE (TheMatrix:Movie {title:'The Matrix'}) ON CREATE SET TheMatrix.released=1999, TheMatrix.tagline='Welcome to the Real World'
+CREATE (Keanu:Person {name:'Keanu Reeves'}) ON CREATE SET Keanu.born=1964
+CREATE (Carrie:Person {name:'Carrie-Anne Moss'}) ON CREATE SET Carrie.born=1967
+CREATE (Laurence:Person {name:'Laurence Fishburne'}) ON CREATE SET Laurence.born=1961
+CREATE (Hugo:Person {name:'Hugo Weaving'}) ON CREATE SET Hugo.born=1960
+CREATE (LillyW:Person {name:'Lilly Wachowski'}) ON CREATE SET LillyW.born=1967
+CREATE (LanaW:Person {name:'Lana Wachowski'}) ON CREATE SET LanaW.born=1965
+CREATE (JoelS:Person {name:'Joel Silver'}) ON CREATE SET JoelS.born=1952
+CREATE (Keanu)-[:ACTED_IN {roles:['Neo']}]->(TheMatrix)
+CREATE (Carrie)-[:ACTED_IN {roles:['Trinity']}]->(TheMatrix)
+CREATE (Laurence)-[:ACTED_IN {roles:['Morpheus']}]->(TheMatrix)
+CREATE (Hugo)-[:ACTED_IN {roles:['Agent Smith']}]->(TheMatrix)
+CREATE (LillyW)-[:DIRECTED]->(TheMatrix)
+CREATE (LanaW)-[:DIRECTED]->(TheMatrix)
+CREATE (JoelS)-[:PRODUCED]->(TheMatrix)
 
-MERGE (Emil:Person {name:'Emil Eifrem'}) ON CREATE SET Emil.born=1978
-MERGE (Emil)-[:ACTED_IN {roles:["Emil"]}]->(TheMatrix)
 
-MERGE (TheMatrixReloaded:Movie {title:'The Matrix Reloaded'}) ON CREATE SET TheMatrixReloaded.released=2003, TheMatrixReloaded.tagline='Free your mind'
-MERGE (Keanu)-[:ACTED_IN {roles:['Neo']}]->(TheMatrixReloaded)
-MERGE (Carrie)-[:ACTED_IN {roles:['Trinity']}]->(TheMatrixReloaded)
-MERGE (Laurence)-[:ACTED_IN {roles:['Morpheus']}]->(TheMatrixReloaded)
-MERGE (Hugo)-[:ACTED_IN {roles:['Agent Smith']}]->(TheMatrixReloaded)
-MERGE (LillyW)-[:DIRECTED]->(TheMatrixReloaded)
-MERGE (LanaW)-[:DIRECTED]->(TheMatrixReloaded)
-MERGE (JoelS)-[:PRODUCED]->(TheMatrixReloaded)
+CREATE (Emil:Person {name:'Emil Eifrem'}) ON CREATE SET Emil.born=1978
+CREATE (Emil)-[:ACTED_IN {roles:["Emil"]}]->(TheMatrix)
 
-MERGE (TheMatrixRevolutions:Movie {title:'The Matrix Revolutions'}) ON CREATE SET TheMatrixRevolutions.released=2003, TheMatrixRevolutions.tagline='Everything that has a beginning has an end'
-MERGE (Keanu)-[:ACTED_IN {roles:['Neo']}]->(TheMatrixRevolutions)
-MERGE (Carrie)-[:ACTED_IN {roles:['Trinity']}]->(TheMatrixRevolutions)
-MERGE (Laurence)-[:ACTED_IN {roles:['Morpheus']}]->(TheMatrixRevolutions)
-MERGE (Hugo)-[:ACTED_IN {roles:['Agent Smith']}]->(TheMatrixRevolutions)
-MERGE (LillyW)-[:DIRECTED]->(TheMatrixRevolutions)
-MERGE (LanaW)-[:DIRECTED]->(TheMatrixRevolutions)
-MERGE (JoelS)-[:PRODUCED]->(TheMatrixRevolutions)
 
-MERGE (TheDevilsAdvocate:Movie {title:"The Devil's Advocate", released:1997, tagline:'Evil has its winning ways'})
-MERGE (Charlize:Person {name:'Charlize Theron'}) ON CREATE SET Charlize.born=1975
-MERGE (Al:Person {name:'Al Pacino'}) ON CREATE SET Al.born=1940
-MERGE (Taylor:Person {name:'Taylor Hackford'}) ON CREATE SET Taylor.born=1944
-MERGE (Keanu)-[:ACTED_IN {roles:['Kevin Lomax']}]->(TheDevilsAdvocate)
-MERGE (Charlize)-[:ACTED_IN {roles:['Mary Ann Lomax']}]->(TheDevilsAdvocate)
-MERGE (Al)-[:ACTED_IN {roles:['John Milton']}]->(TheDevilsAdvocate)
-MERGE (Taylor)-[:DIRECTED]->(TheDevilsAdvocate)
+CREATE (TheMatrixReloaded:Movie {title:'The Matrix Reloaded'}) ON CREATE SET TheMatrixReloaded.released=2003, TheMatrixReloaded.tagline='Free your mind'
+CREATE (Keanu)-[:ACTED_IN {roles:['Neo']}]->(TheMatrixReloaded)
+CREATE (Carrie)-[:ACTED_IN {roles:['Trinity']}]->(TheMatrixReloaded)
+CREATE (Laurence)-[:ACTED_IN {roles:['Morpheus']}]->(TheMatrixReloaded)
+CREATE (Hugo)-[:ACTED_IN {roles:['Agent Smith']}]->(TheMatrixReloaded)
+CREATE (LillyW)-[:DIRECTED]->(TheMatrixReloaded)
+CREATE (LanaW)-[:DIRECTED]->(TheMatrixReloaded)
+CREATE (JoelS)-[:PRODUCED]->(TheMatrixReloaded)
 
-MERGE (AFewGoodMen:Movie {title:'A Few Good Men'}) ON CREATE SET AFewGoodMen.released=1992, AFewGoodMen.tagline='In the heart of the nation\'s capital, in a courthouse of the U.S. government, one man will stop at nothing to keep his honor, and one will stop at nothing to find the truth.'
-MERGE (TomC:Person {name:'Tom Cruise'}) ON CREATE SET TomC.born=1962
-MERGE (JackN:Person {name:'Jack Nicholson'}) ON CREATE SET JackN.born=1937
-MERGE (DemiM:Person {name:'Demi Moore'}) ON CREATE SET DemiM.born=1962
-MERGE (KevinB:Person {name:'Kevin Bacon'}) ON CREATE SET KevinB.born=1958
-MERGE (KieferS:Person {name:'Kiefer Sutherland'}) ON CREATE SET KieferS.born=1966
-MERGE (NoahW:Person {name:'Noah Wyle'}) ON CREATE SET NoahW.born=1971
-MERGE (CubaG:Person {name:'Cuba Gooding Jr.'}) ON CREATE SET CubaG.born=1968
-MERGE (KevinP:Person {name:'Kevin Pollak'}) ON CREATE SET KevinP.born=1957
-MERGE (JTW:Person {name:'J.T. Walsh'}) ON CREATE SET JTW.born=1943
-MERGE (JamesM:Person {name:'James Marshall'}) ON CREATE SET JamesM.born=1967
-MERGE (ChristopherG:Person {name:'Christopher Guest'}) ON CREATE SET ChristopherG.born=1948
-MERGE (RobR:Person {name:'Rob Reiner'}) ON CREATE SET RobR.born=1947
-MERGE (AaronS:Person {name:'Aaron Sorkin'}) ON CREATE SET AaronS.born=1961
-MERGE (TomC)-[:ACTED_IN {roles:['Lt. Daniel Kaffee']}]->(AFewGoodMen)
-MERGE (JackN)-[:ACTED_IN {roles:['Col. Nathan R. Jessup']}]->(AFewGoodMen)
-MERGE (DemiM)-[:ACTED_IN {roles:['Lt. Cdr. JoAnne Galloway']}]->(AFewGoodMen)
-MERGE (KevinB)-[:ACTED_IN {roles:['Capt. Jack Ross']}]->(AFewGoodMen)
-MERGE (KieferS)-[:ACTED_IN {roles:['Lt. Jonathan Kendrick']}]->(AFewGoodMen)
-MERGE (NoahW)-[:ACTED_IN {roles:['Cpl. Jeffrey Barnes']}]->(AFewGoodMen)
-MERGE (CubaG)-[:ACTED_IN {roles:['Cpl. Carl Hammaker']}]->(AFewGoodMen)
-MERGE (KevinP)-[:ACTED_IN {roles:['Lt. Sam Weinberg']}]->(AFewGoodMen)
-MERGE (JTW)-[:ACTED_IN {roles:['Lt. Col. Matthew Andrew Markinson']}]->(AFewGoodMen)
-MERGE (JamesM)-[:ACTED_IN {roles:['Pfc. Louden Downey']}]->(AFewGoodMen)
-MERGE (ChristopherG)-[:ACTED_IN {roles:['Dr. Stone']}]->(AFewGoodMen)
-MERGE (AaronS)-[:ACTED_IN {roles:['Man in Bar']}]->(AFewGoodMen)
-MERGE (RobR)-[:DIRECTED]->(AFewGoodMen)
-MERGE (AaronS)-[:WROTE]->(AFewGoodMen)
 
-MERGE (TopGun:Movie {title:'Top Gun'}) ON CREATE SET TopGun.released=1986, TopGun.tagline='I feel the need, the need for speed.'
-MERGE (KellyM:Person {name:'Kelly McGillis'}) ON CREATE SET KellyM.born=1957
-MERGE (ValK:Person {name:'Val Kilmer'}) ON CREATE SET ValK.born=1959
-MERGE (AnthonyE:Person {name:'Anthony Edwards'}) ON CREATE SET AnthonyE.born=1962
-MERGE (TomS:Person {name:'Tom Skerritt'}) ON CREATE SET TomS.born=1933
-MERGE (MegR:Person {name:'Meg Ryan'}) ON CREATE SET MegR.born=1961
-MERGE (TonyS:Person {name:'Tony Scott'}) ON CREATE SET TonyS.born=1944
-MERGE (JimC:Person {name:'Jim Cash'}) ON CREATE SET JimC.born=1941
-MERGE (TomC)-[:ACTED_IN {roles:['Maverick']}]->(TopGun)
-MERGE (KellyM)-[:ACTED_IN {roles:['Charlie']}]->(TopGun)
-MERGE (ValK)-[:ACTED_IN {roles:['Iceman']}]->(TopGun)
-MERGE (AnthonyE)-[:ACTED_IN {roles:['Goose']}]->(TopGun)
-MERGE (TomS)-[:ACTED_IN {roles:['Viper']}]->(TopGun)
-MERGE (MegR)-[:ACTED_IN {roles:['Carole']}]->(TopGun)
-MERGE (TonyS)-[:DIRECTED]->(TopGun)
-MERGE (JimC)-[:WROTE]->(TopGun)
+CREATE (TheMatrixRevolutions:Movie {title:'The Matrix Revolutions'}) ON CREATE SET TheMatrixRevolutions.released=2003, TheMatrixRevolutions.tagline='Everything that has a beginning has an end'
+CREATE (Keanu)-[:ACTED_IN {roles:['Neo']}]->(TheMatrixRevolutions)
+CREATE (Carrie)-[:ACTED_IN {roles:['Trinity']}]->(TheMatrixRevolutions)
+CREATE (Laurence)-[:ACTED_IN {roles:['Morpheus']}]->(TheMatrixRevolutions)
+CREATE (Hugo)-[:ACTED_IN {roles:['Agent Smith']}]->(TheMatrixRevolutions)
+CREATE (LillyW)-[:DIRECTED]->(TheMatrixRevolutions)
+CREATE (LanaW)-[:DIRECTED]->(TheMatrixRevolutions)
+CREATE (JoelS)-[:PRODUCED]->(TheMatrixRevolutions)
 
-MERGE (JerryMaguire:Movie {title:'Jerry Maguire'}) ON CREATE SET JerryMaguire.released=2000, JerryMaguire.tagline='The rest of his life begins now.'
-MERGE (ReneeZ:Person {name:'Renee Zellweger'}) ON CREATE SET ReneeZ.born=1969
-MERGE (KellyP:Person {name:'Kelly Preston'}) ON CREATE SET KellyP.born=1962
-MERGE (JerryO:Person {name:'Jerry O\'Connell'}) ON CREATE SET JerryO.born=1974
-MERGE (JayM:Person {name:'Jay Mohr'}) ON CREATE SET JayM.born=1970
-MERGE (BonnieH:Person {name:'Bonnie Hunt'}) ON CREATE SET BonnieH.born=1961
-MERGE (ReginaK:Person {name:'Regina King'}) ON CREATE SET ReginaK.born=1971
-MERGE (JonathanL:Person {name:'Jonathan Lipnicki'}) ON CREATE SET JonathanL.born=1996
-MERGE (CameronC:Person {name:'Cameron Crowe'}) ON CREATE SET CameronC.born=1957
-MERGE (TomC)-[:ACTED_IN {roles:['Jerry Maguire']}]->(JerryMaguire)
-MERGE (CubaG)-[:ACTED_IN {roles:['Rod Tidwell']}]->(JerryMaguire)
-MERGE (ReneeZ)-[:ACTED_IN {roles:['Dorothy Boyd']}]->(JerryMaguire)
-MERGE (KellyP)-[:ACTED_IN {roles:['Avery Bishop']}]->(JerryMaguire)
-MERGE (JerryO)-[:ACTED_IN {roles:['Frank Cushman']}]->(JerryMaguire)
-MERGE (JayM)-[:ACTED_IN {roles:['Bob Sugar']}]->(JerryMaguire)
-MERGE (BonnieH)-[:ACTED_IN {roles:['Laurel Boyd']}]->(JerryMaguire)
-MERGE (ReginaK)-[:ACTED_IN {roles:['Marcee Tidwell']}]->(JerryMaguire)
-MERGE (JonathanL)-[:ACTED_IN {roles:['Ray Boyd']}]->(JerryMaguire)
-MERGE (CameronC)-[:DIRECTED]->(JerryMaguire)
-MERGE (CameronC)-[:PRODUCED]->(JerryMaguire)
-MERGE (CameronC)-[:WROTE]->(JerryMaguire)
 
-MERGE (StandByMe:Movie {title:'Stand By Me'}) ON CREATE SET StandByMe.released=1986, StandByMe.tagline='For some, it\'s the last real taste of innocence, and the first real taste of life. But for everyone, it\'s the time that memories are made of.'
-MERGE (RiverP:Person {name:'River Phoenix'}) ON CREATE SET RiverP.born=1970
-MERGE (CoreyF:Person {name:'Corey Feldman'}) ON CREATE SET CoreyF.born=1971
-MERGE (WilW:Person {name:'Wil Wheaton'}) ON CREATE SET WilW.born=1972
-MERGE (JohnC:Person {name:'John Cusack'}) ON CREATE SET JohnC.born=1966
-MERGE (MarshallB:Person {name:'Marshall Bell'}) ON CREATE SET MarshallB.born=1942
-MERGE (WilW)-[:ACTED_IN {roles:['Gordie Lachance']}]->(StandByMe)
-MERGE (RiverP)-[:ACTED_IN {roles:['Chris Chambers']}]->(StandByMe)
-MERGE (JerryO)-[:ACTED_IN {roles:['Vern Tessio']}]->(StandByMe)
-MERGE (CoreyF)-[:ACTED_IN {roles:['Teddy Duchamp']}]->(StandByMe)
-MERGE (JohnC)-[:ACTED_IN {roles:['Denny Lachance']}]->(StandByMe)
-MERGE (KieferS)-[:ACTED_IN {roles:['Ace Merrill']}]->(StandByMe)
-MERGE (MarshallB)-[:ACTED_IN {roles:['Mr. Lachance']}]->(StandByMe)
-MERGE (RobR)-[:DIRECTED]->(StandByMe)
+CREATE (TheDevilsAdvocate:Movie {title:"The Devil's Advocate", released:1997, tagline:'Evil has its winning ways'})
+CREATE (Charlize:Person {name:'Charlize Theron'}) ON CREATE SET Charlize.born=1975
+CREATE (Al:Person {name:'Al Pacino'}) ON CREATE SET Al.born=1940
+CREATE (Taylor:Person {name:'Taylor Hackford'}) ON CREATE SET Taylor.born=1944
+CREATE (Keanu)-[:ACTED_IN {roles:['Kevin Lomax']}]->(TheDevilsAdvocate)
+CREATE (Charlize)-[:ACTED_IN {roles:['Mary Ann Lomax']}]->(TheDevilsAdvocate)
+CREATE (Al)-[:ACTED_IN {roles:['John Milton']}]->(TheDevilsAdvocate)
+CREATE (Taylor)-[:DIRECTED]->(TheDevilsAdvocate)
 
-MERGE (AsGoodAsItGets:Movie {title:'As Good as It Gets'}) ON CREATE SET AsGoodAsItGets.released=1997, AsGoodAsItGets.tagline='A comedy from the heart that goes for the throat.'
-MERGE (HelenH:Person {name:'Helen Hunt'}) ON CREATE SET HelenH.born=1963
-MERGE (GregK:Person {name:'Greg Kinnear'}) ON CREATE SET GregK.born=1963
-MERGE (JamesB:Person {name:'James L. Brooks'}) ON CREATE SET JamesB.born=1940
-MERGE (JackN)-[:ACTED_IN {roles:['Melvin Udall']}]->(AsGoodAsItGets)
-MERGE (HelenH)-[:ACTED_IN {roles:['Carol Connelly']}]->(AsGoodAsItGets)
-MERGE (GregK)-[:ACTED_IN {roles:['Simon Bishop']}]->(AsGoodAsItGets)
-MERGE (CubaG)-[:ACTED_IN {roles:['Frank Sachs']}]->(AsGoodAsItGets)
-MERGE (JamesB)-[:DIRECTED]->(AsGoodAsItGets)
 
-MERGE (WhatDreamsMayCome:Movie {title:'What Dreams May Come'}) ON CREATE SET WhatDreamsMayCome.released=1998, WhatDreamsMayCome.tagline='After life there is more. The end is just the beginning.'
-MERGE (AnnabellaS:Person {name:'Annabella Sciorra'}) ON CREATE SET AnnabellaS.born=1960
-MERGE (MaxS:Person {name:'Max von Sydow'}) ON CREATE SET MaxS.born=1929
-MERGE (WernerH:Person {name:'Werner Herzog'}) ON CREATE SET WernerH.born=1942
-MERGE (Robin:Person {name:'Robin Williams'}) ON CREATE SET Robin.born=1951
-MERGE (VincentW:Person {name:'Vincent Ward'}) ON CREATE SET VincentW.born=1956
-MERGE (Robin)-[:ACTED_IN {roles:['Chris Nielsen']}]->(WhatDreamsMayCome)
-MERGE (CubaG)-[:ACTED_IN {roles:['Albert Lewis']}]->(WhatDreamsMayCome)
-MERGE (AnnabellaS)-[:ACTED_IN {roles:['Annie Collins-Nielsen']}]->(WhatDreamsMayCome)
-MERGE (MaxS)-[:ACTED_IN {roles:['The Tracker']}]->(WhatDreamsMayCome)
-MERGE (WernerH)-[:ACTED_IN {roles:['The Face']}]->(WhatDreamsMayCome)
-MERGE (VincentW)-[:DIRECTED]->(WhatDreamsMayCome)
+CREATE (AFewGoodMen:Movie {title:'A Few Good Men'}) ON CREATE SET AFewGoodMen.released=1992, AFewGoodMen.tagline='In the heart of the nation\'s capital, in a courthouse of the U.S. government, one man will stop at nothing to keep his honor, and one will stop at nothing to find the truth.'
+CREATE (TomC:Person {name:'Tom Cruise'}) ON CREATE SET TomC.born=1962
+CREATE (JackN:Person {name:'Jack Nicholson'}) ON CREATE SET JackN.born=1937
+CREATE (DemiM:Person {name:'Demi Moore'}) ON CREATE SET DemiM.born=1962
+CREATE (KevinB:Person {name:'Kevin Bacon'}) ON CREATE SET KevinB.born=1958
+CREATE (KieferS:Person {name:'Kiefer Sutherland'}) ON CREATE SET KieferS.born=1966
+CREATE (NoahW:Person {name:'Noah Wyle'}) ON CREATE SET NoahW.born=1971
+CREATE (CubaG:Person {name:'Cuba Gooding Jr.'}) ON CREATE SET CubaG.born=1968
+CREATE (KevinP:Person {name:'Kevin Pollak'}) ON CREATE SET KevinP.born=1957
+CREATE (JTW:Person {name:'J.T. Walsh'}) ON CREATE SET JTW.born=1943
+CREATE (JamesM:Person {name:'James Marshall'}) ON CREATE SET JamesM.born=1967
+CREATE (ChristopherG:Person {name:'Christopher Guest'}) ON CREATE SET ChristopherG.born=1948
+CREATE (RobR:Person {name:'Rob Reiner'}) ON CREATE SET RobR.born=1947
+CREATE (AaronS:Person {name:'Aaron Sorkin'}) ON CREATE SET AaronS.born=1961
+CREATE (TomC)-[:ACTED_IN {roles:['Lt. Daniel Kaffee']}]->(AFewGoodMen)
+CREATE (JackN)-[:ACTED_IN {roles:['Col. Nathan R. Jessup']}]->(AFewGoodMen)
+CREATE (DemiM)-[:ACTED_IN {roles:['Lt. Cdr. JoAnne Galloway']}]->(AFewGoodMen)
+CREATE (KevinB)-[:ACTED_IN {roles:['Capt. Jack Ross']}]->(AFewGoodMen)
+CREATE (KieferS)-[:ACTED_IN {roles:['Lt. Jonathan Kendrick']}]->(AFewGoodMen)
+CREATE (NoahW)-[:ACTED_IN {roles:['Cpl. Jeffrey Barnes']}]->(AFewGoodMen)
+CREATE (CubaG)-[:ACTED_IN {roles:['Cpl. Carl Hammaker']}]->(AFewGoodMen)
+CREATE (KevinP)-[:ACTED_IN {roles:['Lt. Sam Weinberg']}]->(AFewGoodMen)
+CREATE (JTW)-[:ACTED_IN {roles:['Lt. Col. Matthew Andrew Markinson']}]->(AFewGoodMen)
+CREATE (JamesM)-[:ACTED_IN {roles:['Pfc. Louden Downey']}]->(AFewGoodMen)
+CREATE (ChristopherG)-[:ACTED_IN {roles:['Dr. Stone']}]->(AFewGoodMen)
+CREATE (AaronS)-[:ACTED_IN {roles:['Man in Bar']}]->(AFewGoodMen)
+CREATE (RobR)-[:DIRECTED]->(AFewGoodMen)
+CREATE (AaronS)-[:WROTE]->(AFewGoodMen)
 
-MERGE (SnowFallingonCedars:Movie {title:'Snow Falling on Cedars'}) ON CREATE SET SnowFallingonCedars.released=1999, SnowFallingonCedars.tagline='First loves last. Forever.'
-MERGE (EthanH:Person {name:'Ethan Hawke'}) ON CREATE SET EthanH.born=1970
-MERGE (RickY:Person {name:'Rick Yune'}) ON CREATE SET RickY.born=1971
-MERGE (JamesC:Person {name:'James Cromwell'}) ON CREATE SET JamesC.born=1940
-MERGE (ScottH:Person {name:'Scott Hicks'}) ON CREATE SET ScottH.born=1953
-MERGE (EthanH)-[:ACTED_IN {roles:['Ishmael Chambers']}]->(SnowFallingonCedars)
-MERGE (RickY)-[:ACTED_IN {roles:['Kazuo Miyamoto']}]->(SnowFallingonCedars)
-MERGE (MaxS)-[:ACTED_IN {roles:['Nels Gudmundsson']}]->(SnowFallingonCedars)
-MERGE (JamesC)-[:ACTED_IN {roles:['Judge Fielding']}]->(SnowFallingonCedars)
-MERGE (ScottH)-[:DIRECTED]->(SnowFallingonCedars)
 
-MERGE (YouveGotMail:Movie {title:'You\'ve Got Mail'}) ON CREATE SET YouveGotMail.released=1998, YouveGotMail.tagline='At odds in life... in love on-line.'
-MERGE (ParkerP:Person {name:'Parker Posey'}) ON CREATE SET ParkerP.born=1968
-MERGE (DaveC:Person {name:'Dave Chappelle'}) ON CREATE SET DaveC.born=1973
-MERGE (SteveZ:Person {name:'Steve Zahn'}) ON CREATE SET SteveZ.born=1967
-MERGE (TomH:Person {name:'Tom Hanks'}) ON CREATE SET TomH.born=1956
-MERGE (NoraE:Person {name:'Nora Ephron'}) ON CREATE SET NoraE.born=1941
-MERGE (TomH)-[:ACTED_IN {roles:['Joe Fox']}]->(YouveGotMail)
-MERGE (MegR)-[:ACTED_IN {roles:['Kathleen Kelly']}]->(YouveGotMail)
-MERGE (GregK)-[:ACTED_IN {roles:['Frank Navasky']}]->(YouveGotMail)
-MERGE (ParkerP)-[:ACTED_IN {roles:['Patricia Eden']}]->(YouveGotMail)
-MERGE (DaveC)-[:ACTED_IN {roles:['Kevin Jackson']}]->(YouveGotMail)
-MERGE (SteveZ)-[:ACTED_IN {roles:['George Pappas']}]->(YouveGotMail)
-MERGE (NoraE)-[:DIRECTED]->(YouveGotMail)
+CREATE (TopGun:Movie {title:'Top Gun'}) ON CREATE SET TopGun.released=1986, TopGun.tagline='I feel the need, the need for speed.'
+CREATE (KellyM:Person {name:'Kelly McGillis'}) ON CREATE SET KellyM.born=1957
+CREATE (ValK:Person {name:'Val Kilmer'}) ON CREATE SET ValK.born=1959
+CREATE (AnthonyE:Person {name:'Anthony Edwards'}) ON CREATE SET AnthonyE.born=1962
+CREATE (TomS:Person {name:'Tom Skerritt'}) ON CREATE SET TomS.born=1933
+CREATE (MegR:Person {name:'Meg Ryan'}) ON CREATE SET MegR.born=1961
+CREATE (TonyS:Person {name:'Tony Scott'}) ON CREATE SET TonyS.born=1944
+CREATE (JimC:Person {name:'Jim Cash'}) ON CREATE SET JimC.born=1941
+CREATE (TomC)-[:ACTED_IN {roles:['Maverick']}]->(TopGun)
+CREATE (KellyM)-[:ACTED_IN {roles:['Charlie']}]->(TopGun)
+CREATE (ValK)-[:ACTED_IN {roles:['Iceman']}]->(TopGun)
+CREATE (AnthonyE)-[:ACTED_IN {roles:['Goose']}]->(TopGun)
+CREATE (TomS)-[:ACTED_IN {roles:['Viper']}]->(TopGun)
+CREATE (MegR)-[:ACTED_IN {roles:['Carole']}]->(TopGun)
+CREATE (TonyS)-[:DIRECTED]->(TopGun)
+CREATE (JimC)-[:WROTE]->(TopGun)
 
-MERGE (SleeplessInSeattle:Movie {title:'Sleepless in Seattle'}) ON CREATE SET SleeplessInSeattle.released=1993, SleeplessInSeattle.tagline='What if someone you never met, someone you never saw, someone you never knew was the only someone for you?'
-MERGE (RitaW:Person {name:'Rita Wilson'}) ON CREATE SET RitaW.born=1956
-MERGE (BillPull:Person {name:'Bill Pullman'}) ON CREATE SET BillPull.born=1953
-MERGE (VictorG:Person {name:'Victor Garber'}) ON CREATE SET VictorG.born=1949
-MERGE (RosieO:Person {name:'Rosie O\'Donnell'}) ON CREATE SET RosieO.born=1962
-MERGE (TomH)-[:ACTED_IN {roles:['Sam Baldwin']}]->(SleeplessInSeattle)
-MERGE (MegR)-[:ACTED_IN {roles:['Annie Reed']}]->(SleeplessInSeattle)
-MERGE (RitaW)-[:ACTED_IN {roles:['Suzy']}]->(SleeplessInSeattle)
-MERGE (BillPull)-[:ACTED_IN {roles:['Walter']}]->(SleeplessInSeattle)
-MERGE (VictorG)-[:ACTED_IN {roles:['Greg']}]->(SleeplessInSeattle)
-MERGE (RosieO)-[:ACTED_IN {roles:['Becky']}]->(SleeplessInSeattle)
-MERGE (NoraE)-[:DIRECTED]->(SleeplessInSeattle)
 
-MERGE (JoeVersustheVolcano:Movie {title:'Joe Versus the Volcano'}) ON CREATE SET JoeVersustheVolcano.released=1990, JoeVersustheVolcano.tagline='A story of love, lava and burning desire.'
-MERGE (JohnS:Person {name:'John Patrick Stanley'}) ON CREATE SET JohnS.born=1950
-MERGE (Nathan:Person {name:'Nathan Lane'}) ON CREATE SET Nathan.born=1956
-MERGE (TomH)-[:ACTED_IN {roles:['Joe Banks']}]->(JoeVersustheVolcano)
-MERGE (MegR)-[:ACTED_IN {roles:['DeDe', 'Angelica Graynamore', 'Patricia Graynamore']}]->(JoeVersustheVolcano)
-MERGE (Nathan)-[:ACTED_IN {roles:['Baw']}]->(JoeVersustheVolcano)
-MERGE (JohnS)-[:DIRECTED]->(JoeVersustheVolcano)
+CREATE (JerryMaguire:Movie {title:'Jerry Maguire'}) ON CREATE SET JerryMaguire.released=2000, JerryMaguire.tagline='The rest of his life begins now.'
+CREATE (ReneeZ:Person {name:'Renee Zellweger'}) ON CREATE SET ReneeZ.born=1969
+CREATE (KellyP:Person {name:'Kelly Preston'}) ON CREATE SET KellyP.born=1962
+CREATE (JerryO:Person {name:'Jerry O\'Connell'}) ON CREATE SET JerryO.born=1974
+CREATE (JayM:Person {name:'Jay Mohr'}) ON CREATE SET JayM.born=1970
+CREATE (BonnieH:Person {name:'Bonnie Hunt'}) ON CREATE SET BonnieH.born=1961
+CREATE (ReginaK:Person {name:'Regina King'}) ON CREATE SET ReginaK.born=1971
+CREATE (JonathanL:Person {name:'Jonathan Lipnicki'}) ON CREATE SET JonathanL.born=1996
+CREATE (CameronC:Person {name:'Cameron Crowe'}) ON CREATE SET CameronC.born=1957
+CREATE (TomC)-[:ACTED_IN {roles:['Jerry Maguire']}]->(JerryMaguire)
+CREATE (CubaG)-[:ACTED_IN {roles:['Rod Tidwell']}]->(JerryMaguire)
+CREATE (ReneeZ)-[:ACTED_IN {roles:['Dorothy Boyd']}]->(JerryMaguire)
+CREATE (KellyP)-[:ACTED_IN {roles:['Avery Bishop']}]->(JerryMaguire)
+CREATE (JerryO)-[:ACTED_IN {roles:['Frank Cushman']}]->(JerryMaguire)
+CREATE (JayM)-[:ACTED_IN {roles:['Bob Sugar']}]->(JerryMaguire)
+CREATE (BonnieH)-[:ACTED_IN {roles:['Laurel Boyd']}]->(JerryMaguire)
+CREATE (ReginaK)-[:ACTED_IN {roles:['Marcee Tidwell']}]->(JerryMaguire)
+CREATE (JonathanL)-[:ACTED_IN {roles:['Ray Boyd']}]->(JerryMaguire)
+CREATE (CameronC)-[:DIRECTED]->(JerryMaguire)
+CREATE (CameronC)-[:PRODUCED]->(JerryMaguire)
+CREATE (CameronC)-[:WROTE]->(JerryMaguire)
 
-MERGE (WhenHarryMetSally:Movie {title:'When Harry Met Sally'}) ON CREATE SET WhenHarryMetSally.released=1998, WhenHarryMetSally.tagline='Can two friends sleep together and still love each other in the morning?'
-MERGE (BillyC:Person {name:'Billy Crystal'}) ON CREATE SET BillyC.born=1948
-MERGE (CarrieF:Person {name:'Carrie Fisher'}) ON CREATE SET CarrieF.born=1956
-MERGE (BrunoK:Person {name:'Bruno Kirby'}) ON CREATE SET BrunoK.born=1949
-MERGE (BillyC)-[:ACTED_IN {roles:['Harry Burns']}]->(WhenHarryMetSally)
-MERGE (MegR)-[:ACTED_IN {roles:['Sally Albright']}]->(WhenHarryMetSally)
-MERGE (CarrieF)-[:ACTED_IN {roles:['Marie']}]->(WhenHarryMetSally)
-MERGE (BrunoK)-[:ACTED_IN {roles:['Jess']}]->(WhenHarryMetSally)
-MERGE (RobR)-[:DIRECTED]->(WhenHarryMetSally)
-MERGE (RobR)-[:PRODUCED]->(WhenHarryMetSally)
-MERGE (NoraE)-[:PRODUCED]->(WhenHarryMetSally)
-MERGE (NoraE)-[:WROTE]->(WhenHarryMetSally)
 
-MERGE (ThatThingYouDo:Movie {title:'That Thing You Do'}) ON CREATE SET ThatThingYouDo.released=1996, ThatThingYouDo.tagline='In every life there comes a time when that thing you dream becomes that thing you do'
-MERGE (LivT:Person {name:'Liv Tyler'}) ON CREATE SET LivT.born=1977
-MERGE (TomH)-[:ACTED_IN {roles:['Mr. White']}]->(ThatThingYouDo)
-MERGE (LivT)-[:ACTED_IN {roles:['Faye Dolan']}]->(ThatThingYouDo)
-MERGE (Charlize)-[:ACTED_IN {roles:['Tina']}]->(ThatThingYouDo)
-MERGE (TomH)-[:DIRECTED]->(ThatThingYouDo)
+CREATE (StandByMe:Movie {title:'Stand By Me'}) ON CREATE SET StandByMe.released=1986, StandByMe.tagline='For some, it\'s the last real taste of innocence, and the first real taste of life. But for everyone, it\'s the time that memories are made of.'
+CREATE (RiverP:Person {name:'River Phoenix'}) ON CREATE SET RiverP.born=1970
+CREATE (CoreyF:Person {name:'Corey Feldman'}) ON CREATE SET CoreyF.born=1971
+CREATE (WilW:Person {name:'Wil Wheaton'}) ON CREATE SET WilW.born=1972
+CREATE (JohnC:Person {name:'John Cusack'}) ON CREATE SET JohnC.born=1966
+CREATE (MarshallB:Person {name:'Marshall Bell'}) ON CREATE SET MarshallB.born=1942
+CREATE (WilW)-[:ACTED_IN {roles:['Gordie Lachance']}]->(StandByMe)
+CREATE (RiverP)-[:ACTED_IN {roles:['Chris Chambers']}]->(StandByMe)
+CREATE (JerryO)-[:ACTED_IN {roles:['Vern Tessio']}]->(StandByMe)
+CREATE (CoreyF)-[:ACTED_IN {roles:['Teddy Duchamp']}]->(StandByMe)
+CREATE (JohnC)-[:ACTED_IN {roles:['Denny Lachance']}]->(StandByMe)
+CREATE (KieferS)-[:ACTED_IN {roles:['Ace Merrill']}]->(StandByMe)
+CREATE (MarshallB)-[:ACTED_IN {roles:['Mr. Lachance']}]->(StandByMe)
+CREATE (RobR)-[:DIRECTED]->(StandByMe)
 
-MERGE (TheReplacements:Movie {title:'The Replacements'}) ON CREATE SET TheReplacements.released=2000, TheReplacements.tagline='Pain heals, Chicks dig scars... Glory lasts forever'
-MERGE (Brooke:Person {name:'Brooke Langton'}) ON CREATE SET Brooke.born=1970
-MERGE (Gene:Person {name:'Gene Hackman'}) ON CREATE SET Gene.born=1930
-MERGE (Orlando:Person {name:'Orlando Jones'}) ON CREATE SET Orlando.born=1968
-MERGE (Howard:Person {name:'Howard Deutch'}) ON CREATE SET Howard.born=1950
-MERGE (Keanu)-[:ACTED_IN {roles:['Shane Falco']}]->(TheReplacements)
-MERGE (Brooke)-[:ACTED_IN {roles:['Annabelle Farrell']}]->(TheReplacements)
-MERGE (Gene)-[:ACTED_IN {roles:['Jimmy McGinty']}]->(TheReplacements)
-MERGE (Orlando)-[:ACTED_IN {roles:['Clifford Franklin']}]->(TheReplacements)
-MERGE (Howard)-[:DIRECTED]->(TheReplacements)
 
-MERGE (RescueDawn:Movie {title:'RescueDawn'}) ON CREATE SET RescueDawn.released=2006, RescueDawn.tagline='Based on the extraordinary true story of one man\'s fight for freedom'
-MERGE (ChristianB:Person {name:'Christian Bale'}) ON CREATE SET ChristianB.born=1974
-MERGE (ZachG:Person {name:'Zach Grenier'}) ON CREATE SET ZachG.born=1954
-MERGE (MarshallB)-[:ACTED_IN {roles:['Admiral']}]->(RescueDawn)
-MERGE (ChristianB)-[:ACTED_IN {roles:['Dieter Dengler']}]->(RescueDawn)
-MERGE (ZachG)-[:ACTED_IN {roles:['Squad Leader']}]->(RescueDawn)
-MERGE (SteveZ)-[:ACTED_IN {roles:['Duane']}]->(RescueDawn)
-MERGE (WernerH)-[:DIRECTED]->(RescueDawn)
+CREATE (AsGoodAsItGets:Movie {title:'As Good as It Gets'}) ON CREATE SET AsGoodAsItGets.released=1997, AsGoodAsItGets.tagline='A comedy from the heart that goes for the throat.'
+CREATE (HelenH:Person {name:'Helen Hunt'}) ON CREATE SET HelenH.born=1963
+CREATE (GregK:Person {name:'Greg Kinnear'}) ON CREATE SET GregK.born=1963
+CREATE (JamesB:Person {name:'James L. Brooks'}) ON CREATE SET JamesB.born=1940
+CREATE (JackN)-[:ACTED_IN {roles:['Melvin Udall']}]->(AsGoodAsItGets)
+CREATE (HelenH)-[:ACTED_IN {roles:['Carol Connelly']}]->(AsGoodAsItGets)
+CREATE (GregK)-[:ACTED_IN {roles:['Simon Bishop']}]->(AsGoodAsItGets)
+CREATE (CubaG)-[:ACTED_IN {roles:['Frank Sachs']}]->(AsGoodAsItGets)
+CREATE (JamesB)-[:DIRECTED]->(AsGoodAsItGets)
 
-MERGE (TheBirdcage:Movie {title:'The Birdcage'}) ON CREATE SET TheBirdcage.released=1996, TheBirdcage.tagline='Come as you are'
-MERGE (MikeN:Person {name:'Mike Nichols'}) ON CREATE SET MikeN.born=1931
-MERGE (Robin)-[:ACTED_IN {roles:['Armand Goldman']}]->(TheBirdcage)
-MERGE (Nathan)-[:ACTED_IN {roles:['Albert Goldman']}]->(TheBirdcage)
-MERGE (Gene)-[:ACTED_IN {roles:['Sen. Kevin Keeley']}]->(TheBirdcage)
-MERGE (MikeN)-[:DIRECTED]->(TheBirdcage)
 
-MERGE (Unforgiven:Movie {title:'Unforgiven'}) ON CREATE SET Unforgiven.released=1992, Unforgiven.tagline='It\'s a hell of a thing, killing a man'
-MERGE (RichardH:Person {name:'Richard Harris'}) ON CREATE SET RichardH.born=1930
-MERGE (ClintE:Person {name:'Clint Eastwood'}) ON CREATE SET ClintE.born=1930
-MERGE (RichardH)-[:ACTED_IN {roles:['English Bob']}]->(Unforgiven)
-MERGE (ClintE)-[:ACTED_IN {roles:['Bill Munny']}]->(Unforgiven)
-MERGE (Gene)-[:ACTED_IN {roles:['Little Bill Daggett']}]->(Unforgiven)
-MERGE (ClintE)-[:DIRECTED]->(Unforgiven)
+CREATE (WhatDreamsMayCome:Movie {title:'What Dreams May Come'}) ON CREATE SET WhatDreamsMayCome.released=1998, WhatDreamsMayCome.tagline='After life there is more. The end is just the beginning.'
+CREATE (AnnabellaS:Person {name:'Annabella Sciorra'}) ON CREATE SET AnnabellaS.born=1960
+CREATE (MaxS:Person {name:'Max von Sydow'}) ON CREATE SET MaxS.born=1929
+CREATE (WernerH:Person {name:'Werner Herzog'}) ON CREATE SET WernerH.born=1942
+CREATE (Robin:Person {name:'Robin Williams'}) ON CREATE SET Robin.born=1951
+CREATE (VincentW:Person {name:'Vincent Ward'}) ON CREATE SET VincentW.born=1956
+CREATE (Robin)-[:ACTED_IN {roles:['Chris Nielsen']}]->(WhatDreamsMayCome)
+CREATE (CubaG)-[:ACTED_IN {roles:['Albert Lewis']}]->(WhatDreamsMayCome)
+CREATE (AnnabellaS)-[:ACTED_IN {roles:['Annie Collins-Nielsen']}]->(WhatDreamsMayCome)
+CREATE (MaxS)-[:ACTED_IN {roles:['The Tracker']}]->(WhatDreamsMayCome)
+CREATE (WernerH)-[:ACTED_IN {roles:['The Face']}]->(WhatDreamsMayCome)
+CREATE (VincentW)-[:DIRECTED]->(WhatDreamsMayCome)
 
-MERGE (JohnnyMnemonic:Movie {title:'Johnny Mnemonic'}) ON CREATE SET JohnnyMnemonic.released=1995, JohnnyMnemonic.tagline='The hottest data on earth. In the coolest head in town'
-MERGE (Takeshi:Person {name:'Takeshi Kitano'}) ON CREATE SET Takeshi.born=1947
-MERGE (Dina:Person {name:'Dina Meyer'}) ON CREATE SET Dina.born=1968
-MERGE (IceT:Person {name:'Ice-T'}) ON CREATE SET IceT.born=1958
-MERGE (RobertL:Person {name:'Robert Longo'}) ON CREATE SET RobertL.born=1953
-MERGE (Keanu)-[:ACTED_IN {roles:['Johnny Mnemonic']}]->(JohnnyMnemonic)
-MERGE (Takeshi)-[:ACTED_IN {roles:['Takahashi']}]->(JohnnyMnemonic)
-MERGE (Dina)-[:ACTED_IN {roles:['Jane']}]->(JohnnyMnemonic)
-MERGE (IceT)-[:ACTED_IN {roles:['J-Bone']}]->(JohnnyMnemonic)
-MERGE (RobertL)-[:DIRECTED]->(JohnnyMnemonic)
 
-MERGE (CloudAtlas:Movie {title:'Cloud Atlas'}) ON CREATE SET CloudAtlas.released=2012, CloudAtlas.tagline='Everything is connected'
-MERGE (HalleB:Person {name:'Halle Berry'}) ON CREATE SET HalleB.born=1966
-MERGE (JimB:Person {name:'Jim Broadbent'}) ON CREATE SET JimB.born=1949
-MERGE (TomT:Person {name:'Tom Tykwer'}) ON CREATE SET TomT.born=1965
-MERGE (DavidMitchell:Person {name:'David Mitchell'}) ON CREATE SET DavidMitchell.born=1969
-MERGE (StefanArndt:Person {name:'Stefan Arndt'}) ON CREATE SET StefanArndt.born=1961
-MERGE (TomH)-[:ACTED_IN {roles:['Zachry', 'Dr. Henry Goose', 'Isaac Sachs', 'Dermot Hoggins']}]->(CloudAtlas)
-MERGE (Hugo)-[:ACTED_IN {roles:['Bill Smoke', 'Haskell Moore', 'Tadeusz Kesselring', 'Nurse Noakes', 'Boardman Mephi', 'Old Georgie']}]->(CloudAtlas)
-MERGE (HalleB)-[:ACTED_IN {roles:['Luisa Rey', 'Jocasta Ayrs', 'Ovid', 'Meronym']}]->(CloudAtlas)
-MERGE (JimB)-[:ACTED_IN {roles:['Vyvyan Ayrs', 'Captain Molyneux', 'Timothy Cavendish']}]->(CloudAtlas)
-MERGE (TomT)-[:DIRECTED]->(CloudAtlas)
-MERGE (LillyW)-[:DIRECTED]->(CloudAtlas)
-MERGE (LanaW)-[:DIRECTED]->(CloudAtlas)
-MERGE (DavidMitchell)-[:WROTE]->(CloudAtlas)
-MERGE (StefanArndt)-[:PRODUCED]->(CloudAtlas)
+CREATE (SnowFallingonCedars:Movie {title:'Snow Falling on Cedars'}) ON CREATE SET SnowFallingonCedars.released=1999, SnowFallingonCedars.tagline='First loves last. Forever.'
+CREATE (EthanH:Person {name:'Ethan Hawke'}) ON CREATE SET EthanH.born=1970
+CREATE (RickY:Person {name:'Rick Yune'}) ON CREATE SET RickY.born=1971
+CREATE (JamesC:Person {name:'James Cromwell'}) ON CREATE SET JamesC.born=1940
+CREATE (ScottH:Person {name:'Scott Hicks'}) ON CREATE SET ScottH.born=1953
+CREATE (EthanH)-[:ACTED_IN {roles:['Ishmael Chambers']}]->(SnowFallingonCedars)
+CREATE (RickY)-[:ACTED_IN {roles:['Kazuo Miyamoto']}]->(SnowFallingonCedars)
+CREATE (MaxS)-[:ACTED_IN {roles:['Nels Gudmundsson']}]->(SnowFallingonCedars)
+CREATE (JamesC)-[:ACTED_IN {roles:['Judge Fielding']}]->(SnowFallingonCedars)
+CREATE (ScottH)-[:DIRECTED]->(SnowFallingonCedars)
 
-MERGE (TheDaVinciCode:Movie {title:'The Da Vinci Code'}) ON CREATE SET TheDaVinciCode.released=2006, TheDaVinciCode.tagline='Break The Codes'
-MERGE (IanM:Person {name:'Ian McKellen'}) ON CREATE SET IanM.born=1939
-MERGE (AudreyT:Person {name:'Audrey Tautou'}) ON CREATE SET AudreyT.born=1976
-MERGE (PaulB:Person {name:'Paul Bettany'}) ON CREATE SET PaulB.born=1971
-MERGE (RonH:Person {name:'Ron Howard'}) ON CREATE SET RonH.born=1954
-MERGE (TomH)-[:ACTED_IN {roles:['Dr. Robert Langdon']}]->(TheDaVinciCode)
-MERGE (IanM)-[:ACTED_IN {roles:['Sir Leight Teabing']}]->(TheDaVinciCode)
-MERGE (AudreyT)-[:ACTED_IN {roles:['Sophie Neveu']}]->(TheDaVinciCode)
-MERGE (PaulB)-[:ACTED_IN {roles:['Silas']}]->(TheDaVinciCode)
-MERGE (RonH)-[:DIRECTED]->(TheDaVinciCode)
 
-MERGE (VforVendetta:Movie {title:'V for Vendetta'}) ON CREATE SET VforVendetta.released=2006, VforVendetta.tagline='Freedom! Forever!'
-MERGE (NatalieP:Person {name:'Natalie Portman'}) ON CREATE SET NatalieP.born=1981
-MERGE (StephenR:Person {name:'Stephen Rea'}) ON CREATE SET StephenR.born=1946
-MERGE (JohnH:Person {name:'John Hurt'}) ON CREATE SET JohnH.born=1940
-MERGE (BenM:Person {name:'Ben Miles'}) ON CREATE SET BenM.born=1967
-MERGE (Hugo)-[:ACTED_IN {roles:['V']}]->(VforVendetta)
-MERGE (NatalieP)-[:ACTED_IN {roles:['Evey Hammond']}]->(VforVendetta)
-MERGE (StephenR)-[:ACTED_IN {roles:['Eric Finch']}]->(VforVendetta)
-MERGE (JohnH)-[:ACTED_IN {roles:['High Chancellor Adam Sutler']}]->(VforVendetta)
-MERGE (BenM)-[:ACTED_IN {roles:['Dascomb']}]->(VforVendetta)
-MERGE (JamesM)-[:DIRECTED]->(VforVendetta)
-MERGE (LillyW)-[:PRODUCED]->(VforVendetta)
-MERGE (LanaW)-[:PRODUCED]->(VforVendetta)
-MERGE (JoelS)-[:PRODUCED]->(VforVendetta)
-MERGE (LillyW)-[:WROTE]->(VforVendetta)
-MERGE (LanaW)-[:WROTE]->(VforVendetta)
+CREATE (YouveGotMail:Movie {title:'You\'ve Got Mail'}) ON CREATE SET YouveGotMail.released=1998, YouveGotMail.tagline='At odds in life... in love on-line.'
+CREATE (ParkerP:Person {name:'Parker Posey'}) ON CREATE SET ParkerP.born=1968
+CREATE (DaveC:Person {name:'Dave Chappelle'}) ON CREATE SET DaveC.born=1973
+CREATE (SteveZ:Person {name:'Steve Zahn'}) ON CREATE SET SteveZ.born=1967
+CREATE (TomH:Person {name:'Tom Hanks'}) ON CREATE SET TomH.born=1956
+CREATE (NoraE:Person {name:'Nora Ephron'}) ON CREATE SET NoraE.born=1941
+CREATE (TomH)-[:ACTED_IN {roles:['Joe Fox']}]->(YouveGotMail)
+CREATE (MegR)-[:ACTED_IN {roles:['Kathleen Kelly']}]->(YouveGotMail)
+CREATE (GregK)-[:ACTED_IN {roles:['Frank Navasky']}]->(YouveGotMail)
+CREATE (ParkerP)-[:ACTED_IN {roles:['Patricia Eden']}]->(YouveGotMail)
+CREATE (DaveC)-[:ACTED_IN {roles:['Kevin Jackson']}]->(YouveGotMail)
+CREATE (SteveZ)-[:ACTED_IN {roles:['George Pappas']}]->(YouveGotMail)
+CREATE (NoraE)-[:DIRECTED]->(YouveGotMail)
 
-MERGE (SpeedRacer:Movie {title:'Speed Racer'}) ON CREATE SET SpeedRacer.released=2008, SpeedRacer.tagline='Speed has no limits'
-MERGE (EmileH:Person {name:'Emile Hirsch'}) ON CREATE SET EmileH.born=1985
-MERGE (JohnG:Person {name:'John Goodman'}) ON CREATE SET JohnG.born=1960
-MERGE (SusanS:Person {name:'Susan Sarandon'}) ON CREATE SET SusanS.born=1946
-MERGE (MatthewF:Person {name:'Matthew Fox'}) ON CREATE SET MatthewF.born=1966
-MERGE (ChristinaR:Person {name:'Christina Ricci'}) ON CREATE SET ChristinaR.born=1980
-MERGE (Rain:Person {name:'Rain'}) ON CREATE SET Rain.born=1982
-MERGE (EmileH)-[:ACTED_IN {roles:['Speed Racer']}]->(SpeedRacer)
-MERGE (JohnG)-[:ACTED_IN {roles:['Pops']}]->(SpeedRacer)
-MERGE (SusanS)-[:ACTED_IN {roles:['Mom']}]->(SpeedRacer)
-MERGE (MatthewF)-[:ACTED_IN {roles:['Racer X']}]->(SpeedRacer)
-MERGE (ChristinaR)-[:ACTED_IN {roles:['Trixie']}]->(SpeedRacer)
-MERGE (Rain)-[:ACTED_IN {roles:['Taejo Togokahn']}]->(SpeedRacer)
-MERGE (BenM)-[:ACTED_IN {roles:['Cass Jones']}]->(SpeedRacer)
-MERGE (LillyW)-[:DIRECTED]->(SpeedRacer)
-MERGE (LanaW)-[:DIRECTED]->(SpeedRacer)
-MERGE (LillyW)-[:WROTE]->(SpeedRacer)
-MERGE (LanaW)-[:WROTE]->(SpeedRacer)
-MERGE (JoelS)-[:PRODUCED]->(SpeedRacer)
 
-MERGE (NinjaAssassin:Movie {title:'Ninja Assassin'}) ON CREATE SET NinjaAssassin.released=2009, NinjaAssassin.tagline='Prepare to enter a secret world of assassins'
-MERGE (NaomieH:Person {name:'Naomie Harris'})
-MERGE (Rain)-[:ACTED_IN {roles:['Raizo']}]->(NinjaAssassin)
-MERGE (NaomieH)-[:ACTED_IN {roles:['Mika Coretti']}]->(NinjaAssassin)
-MERGE (RickY)-[:ACTED_IN {roles:['Takeshi']}]->(NinjaAssassin)
-MERGE (BenM)-[:ACTED_IN {roles:['Ryan Maslow']}]->(NinjaAssassin)
-MERGE (JamesM)-[:DIRECTED]->(NinjaAssassin)
-MERGE (LillyW)-[:PRODUCED]->(NinjaAssassin)
-MERGE (LanaW)-[:PRODUCED]->(NinjaAssassin)
-MERGE (JoelS)-[:PRODUCED]->(NinjaAssassin)
+CREATE (SleeplessInSeattle:Movie {title:'Sleepless in Seattle'}) ON CREATE SET SleeplessInSeattle.released=1993, SleeplessInSeattle.tagline='What if someone you never met, someone you never saw, someone you never knew was the only someone for you?'
+CREATE (RitaW:Person {name:'Rita Wilson'}) ON CREATE SET RitaW.born=1956
+CREATE (BillPull:Person {name:'Bill Pullman'}) ON CREATE SET BillPull.born=1953
+CREATE (VictorG:Person {name:'Victor Garber'}) ON CREATE SET VictorG.born=1949
+CREATE (RosieO:Person {name:'Rosie O\'Donnell'}) ON CREATE SET RosieO.born=1962
+CREATE (TomH)-[:ACTED_IN {roles:['Sam Baldwin']}]->(SleeplessInSeattle)
+CREATE (MegR)-[:ACTED_IN {roles:['Annie Reed']}]->(SleeplessInSeattle)
+CREATE (RitaW)-[:ACTED_IN {roles:['Suzy']}]->(SleeplessInSeattle)
+CREATE (BillPull)-[:ACTED_IN {roles:['Walter']}]->(SleeplessInSeattle)
+CREATE (VictorG)-[:ACTED_IN {roles:['Greg']}]->(SleeplessInSeattle)
+CREATE (RosieO)-[:ACTED_IN {roles:['Becky']}]->(SleeplessInSeattle)
+CREATE (NoraE)-[:DIRECTED]->(SleeplessInSeattle)
 
-MERGE (TheGreenMile:Movie {title:'The Green Mile'}) ON CREATE SET TheGreenMile.released=1999, TheGreenMile.tagline='Walk a mile you\'ll never forget.'
-MERGE (MichaelD:Person {name:'Michael Clarke Duncan'}) ON CREATE SET MichaelD.born=1957
-MERGE (DavidM:Person {name:'David Morse'}) ON CREATE SET DavidM.born=1953
-MERGE (SamR:Person {name:'Sam Rockwell'}) ON CREATE SET SamR.born=1968
-MERGE (GaryS:Person {name:'Gary Sinise'}) ON CREATE SET GaryS.born=1955
-MERGE (PatriciaC:Person {name:'Patricia Clarkson'}) ON CREATE SET PatriciaC.born=1959
-MERGE (FrankD:Person {name:'Frank Darabont'}) ON CREATE SET FrankD.born=1959
-MERGE (TomH)-[:ACTED_IN {roles:['Paul Edgecomb']}]->(TheGreenMile)
-MERGE (MichaelD)-[:ACTED_IN {roles:['John Coffey']}]->(TheGreenMile)
-MERGE (DavidM)-[:ACTED_IN {roles:['Brutus "Brutal" Howell']}]->(TheGreenMile)
-MERGE (BonnieH)-[:ACTED_IN {roles:['Jan Edgecomb']}]->(TheGreenMile)
-MERGE (JamesC)-[:ACTED_IN {roles:['Warden Hal Moores']}]->(TheGreenMile)
-MERGE (SamR)-[:ACTED_IN {roles:['"Wild Bill" Wharton']}]->(TheGreenMile)
-MERGE (GaryS)-[:ACTED_IN {roles:['Burt Hammersmith']}]->(TheGreenMile)
-MERGE (PatriciaC)-[:ACTED_IN {roles:['Melinda Moores']}]->(TheGreenMile)
-MERGE (FrankD)-[:DIRECTED]->(TheGreenMile)
 
-MERGE (FrostNixon:Movie {title:'Frost/Nixon'}) ON CREATE SET FrostNixon.released=2008, FrostNixon.tagline='400 million people were waiting for the truth.'
-MERGE (FrankL:Person {name:'Frank Langella'}) ON CREATE SET FrankL.born=1938
-MERGE (MichaelS:Person {name:'Michael Sheen'}) ON CREATE SET MichaelS.born=1969
-MERGE (OliverP:Person {name:'Oliver Platt'}) ON CREATE SET OliverP.born=1960
-MERGE (FrankL)-[:ACTED_IN {roles:['Richard Nixon']}]->(FrostNixon)
-MERGE (MichaelS)-[:ACTED_IN {roles:['David Frost']}]->(FrostNixon)
-MERGE (KevinB)-[:ACTED_IN {roles:['Jack Brennan']}]->(FrostNixon)
-MERGE (OliverP)-[:ACTED_IN {roles:['Bob Zelnick']}]->(FrostNixon)
-MERGE (SamR)-[:ACTED_IN {roles:['James Reston, Jr.']}]->(FrostNixon)
-MERGE (RonH)-[:DIRECTED]->(FrostNixon)
+CREATE (JoeVersustheVolcano:Movie {title:'Joe Versus the Volcano'}) ON CREATE SET JoeVersustheVolcano.released=1990, JoeVersustheVolcano.tagline='A story of love, lava and burning desire.'
+CREATE (JohnS:Person {name:'John Patrick Stanley'}) ON CREATE SET JohnS.born=1950
+CREATE (Nathan:Person {name:'Nathan Lane'}) ON CREATE SET Nathan.born=1956
+CREATE (TomH)-[:ACTED_IN {roles:['Joe Banks']}]->(JoeVersustheVolcano)
+CREATE (MegR)-[:ACTED_IN {roles:['DeDe', 'Angelica Graynamore', 'Patricia Graynamore']}]->(JoeVersustheVolcano)
+CREATE (Nathan)-[:ACTED_IN {roles:['Baw']}]->(JoeVersustheVolcano)
+CREATE (JohnS)-[:DIRECTED]->(JoeVersustheVolcano)
 
-MERGE (Hoffa:Movie {title:'Hoffa'}) ON CREATE SET Hoffa.released=1992, Hoffa.tagline='He didn\'t want law. He wanted justice.'
-MERGE (DannyD:Person {name:'Danny DeVito'}) ON CREATE SET DannyD.born=1944
-MERGE (JohnR:Person {name:'John C. Reilly'}) ON CREATE SET JohnR.born=1965
-MERGE (JackN)-[:ACTED_IN {roles:['Hoffa']}]->(Hoffa)
-MERGE (DannyD)-[:ACTED_IN {roles:['Robert "Bobby" Ciaro']}]->(Hoffa)
-MERGE (JTW)-[:ACTED_IN {roles:['Frank Fitzsimmons']}]->(Hoffa)
-MERGE (JohnR)-[:ACTED_IN {roles:['Peter "Pete" Connelly']}]->(Hoffa)
-MERGE (DannyD)-[:DIRECTED]->(Hoffa)
 
-MERGE (Apollo13:Movie {title:'Apollo 13'}) ON CREATE SET Apollo13.released=1995, Apollo13.tagline='Houston, we have a problem.'
-MERGE (EdH:Person {name:'Ed Harris'}) ON CREATE SET EdH.born=1950
-MERGE (BillPax:Person {name:'Bill Paxton'}) ON CREATE SET BillPax.born=1955
-MERGE (TomH)-[:ACTED_IN {roles:['Jim Lovell']}]->(Apollo13)
-MERGE (KevinB)-[:ACTED_IN {roles:['Jack Swigert']}]->(Apollo13)
-MERGE (EdH)-[:ACTED_IN {roles:['Gene Kranz']}]->(Apollo13)
-MERGE (BillPax)-[:ACTED_IN {roles:['Fred Haise']}]->(Apollo13)
-MERGE (GaryS)-[:ACTED_IN {roles:['Ken Mattingly']}]->(Apollo13)
-MERGE (RonH)-[:DIRECTED]->(Apollo13)
+CREATE (WhenHarryMetSally:Movie {title:'When Harry Met Sally'}) ON CREATE SET WhenHarryMetSally.released=1998, WhenHarryMetSally.tagline='Can two friends sleep together and still love each other in the morning?'
+CREATE (BillyC:Person {name:'Billy Crystal'}) ON CREATE SET BillyC.born=1948
+CREATE (CarrieF:Person {name:'Carrie Fisher'}) ON CREATE SET CarrieF.born=1956
+CREATE (BrunoK:Person {name:'Bruno Kirby'}) ON CREATE SET BrunoK.born=1949
+CREATE (BillyC)-[:ACTED_IN {roles:['Harry Burns']}]->(WhenHarryMetSally)
+CREATE (MegR)-[:ACTED_IN {roles:['Sally Albright']}]->(WhenHarryMetSally)
+CREATE (CarrieF)-[:ACTED_IN {roles:['Marie']}]->(WhenHarryMetSally)
+CREATE (BrunoK)-[:ACTED_IN {roles:['Jess']}]->(WhenHarryMetSally)
+CREATE (RobR)-[:DIRECTED]->(WhenHarryMetSally)
+CREATE (RobR)-[:PRODUCED]->(WhenHarryMetSally)
+CREATE (NoraE)-[:PRODUCED]->(WhenHarryMetSally)
+CREATE (NoraE)-[:WROTE]->(WhenHarryMetSally)
 
-MERGE (Twister:Movie {title:'Twister'}) ON CREATE SET Twister.released=1996, Twister.tagline='Don\'t Breathe. Don\'t Look Back.'
-MERGE (PhilipH:Person {name:'Philip Seymour Hoffman'}) ON CREATE SET PhilipH.born=1967
-MERGE (JanB:Person {name:'Jan de Bont'}) ON CREATE SET JanB.born=1943
-MERGE (BillPax)-[:ACTED_IN {roles:['Bill Harding']}]->(Twister)
-MERGE (HelenH)-[:ACTED_IN {roles:['Dr. Jo Harding']}]->(Twister)
-MERGE (ZachG)-[:ACTED_IN {roles:['Eddie']}]->(Twister)
-MERGE (PhilipH)-[:ACTED_IN {roles:['Dustin "Dusty" Davis']}]->(Twister)
-MERGE (JanB)-[:DIRECTED]->(Twister)
 
-MERGE (CastAway:Movie {title:'Cast Away'}) ON CREATE SET CastAway.released=2000, CastAway.tagline='At the edge of the world, his journey begins.'
-MERGE (RobertZ:Person {name:'Robert Zemeckis'}) ON CREATE SET RobertZ.born=1951
-MERGE (TomH)-[:ACTED_IN {roles:['Chuck Noland']}]->(CastAway)
-MERGE (HelenH)-[:ACTED_IN {roles:['Kelly Frears']}]->(CastAway)
-MERGE (RobertZ)-[:DIRECTED]->(CastAway)
+CREATE (ThatThingYouDo:Movie {title:'That Thing You Do'}) ON CREATE SET ThatThingYouDo.released=1996, ThatThingYouDo.tagline='In every life there comes a time when that thing you dream becomes that thing you do'
+CREATE (LivT:Person {name:'Liv Tyler'}) ON CREATE SET LivT.born=1977
+CREATE (TomH)-[:ACTED_IN {roles:['Mr. White']}]->(ThatThingYouDo)
+CREATE (LivT)-[:ACTED_IN {roles:['Faye Dolan']}]->(ThatThingYouDo)
+CREATE (Charlize)-[:ACTED_IN {roles:['Tina']}]->(ThatThingYouDo)
+CREATE (TomH)-[:DIRECTED]->(ThatThingYouDo)
 
-MERGE (OneFlewOvertheCuckoosNest:Movie {title:'One Flew Over the Cuckoo\'s Nest'}) ON CREATE SET OneFlewOvertheCuckoosNest.released=1975, OneFlewOvertheCuckoosNest.tagline='If he\'s crazy, what does that make you?'
-MERGE (MilosF:Person {name:'Milos Forman'}) ON CREATE SET MilosF.born=1932
-MERGE (JackN)-[:ACTED_IN {roles:['Randle McMurphy']}]->(OneFlewOvertheCuckoosNest)
-MERGE (DannyD)-[:ACTED_IN {roles:['Martini']}]->(OneFlewOvertheCuckoosNest)
-MERGE (MilosF)-[:DIRECTED]->(OneFlewOvertheCuckoosNest)
 
-MERGE (SomethingsGottaGive:Movie {title:'Something\'s Gotta Give'}) ON CREATE SET SomethingsGottaGive.released=2003
-MERGE (DianeK:Person {name:'Diane Keaton'}) ON CREATE SET DianeK.born=1946
-MERGE (NancyM:Person {name:'Nancy Meyers'}) ON CREATE SET NancyM.born=1949
-MERGE (JackN)-[:ACTED_IN {roles:['Harry Sanborn']}]->(SomethingsGottaGive)
-MERGE (DianeK)-[:ACTED_IN {roles:['Erica Barry']}]->(SomethingsGottaGive)
-MERGE (Keanu)-[:ACTED_IN {roles:['Julian Mercer']}]->(SomethingsGottaGive)
-MERGE (NancyM)-[:DIRECTED]->(SomethingsGottaGive)
-MERGE (NancyM)-[:PRODUCED]->(SomethingsGottaGive)
-MERGE (NancyM)-[:WROTE]->(SomethingsGottaGive)
+CREATE (TheReplacements:Movie {title:'The Replacements'}) ON CREATE SET TheReplacements.released=2000, TheReplacements.tagline='Pain heals, Chicks dig scars... Glory lasts forever'
+CREATE (Brooke:Person {name:'Brooke Langton'}) ON CREATE SET Brooke.born=1970
+CREATE (Gene:Person {name:'Gene Hackman'}) ON CREATE SET Gene.born=1930
+CREATE (Orlando:Person {name:'Orlando Jones'}) ON CREATE SET Orlando.born=1968
+CREATE (Howard:Person {name:'Howard Deutch'}) ON CREATE SET Howard.born=1950
+CREATE (Keanu)-[:ACTED_IN {roles:['Shane Falco']}]->(TheReplacements)
+CREATE (Brooke)-[:ACTED_IN {roles:['Annabelle Farrell']}]->(TheReplacements)
+CREATE (Gene)-[:ACTED_IN {roles:['Jimmy McGinty']}]->(TheReplacements)
+CREATE (Orlando)-[:ACTED_IN {roles:['Clifford Franklin']}]->(TheReplacements)
+CREATE (Howard)-[:DIRECTED]->(TheReplacements)
 
-MERGE (BicentennialMan:Movie {title:'Bicentennial Man'}) ON CREATE SET BicentennialMan.released=1999, BicentennialMan.tagline='One robot\'s 200 year journey to become an ordinary man.'
-MERGE (ChrisC:Person {name:'Chris Columbus'}) ON CREATE SET ChrisC.born=1958
-MERGE (Robin)-[:ACTED_IN {roles:['Andrew Marin']}]->(BicentennialMan)
-MERGE (OliverP)-[:ACTED_IN {roles:['Rupert Burns']}]->(BicentennialMan)
-MERGE (ChrisC)-[:DIRECTED]->(BicentennialMan)
 
-MERGE (CharlieWilsonsWar:Movie {title:'Charlie Wilson\'s War'}) ON CREATE SET CharlieWilsonsWar.released=2007, CharlieWilsonsWar.tagline='A stiff drink. A little mascara. A lot of nerve. Who said they couldn\'t bring down the Soviet empire.'
-MERGE (JuliaR:Person {name:'Julia Roberts'}) ON CREATE SET JuliaR.born=1967
-MERGE (TomH)-[:ACTED_IN {roles:['Rep. Charlie Wilson']}]->(CharlieWilsonsWar)
-MERGE (JuliaR)-[:ACTED_IN {roles:['Joanne Herring']}]->(CharlieWilsonsWar)
-MERGE (PhilipH)-[:ACTED_IN {roles:['Gust Avrakotos']}]->(CharlieWilsonsWar)
-MERGE (MikeN)-[:DIRECTED]->(CharlieWilsonsWar)
+CREATE (RescueDawn:Movie {title:'RescueDawn'}) ON CREATE SET RescueDawn.released=2006, RescueDawn.tagline='Based on the extraordinary true story of one man\'s fight for freedom'
+CREATE (ChristianB:Person {name:'Christian Bale'}) ON CREATE SET ChristianB.born=1974
+CREATE (ZachG:Person {name:'Zach Grenier'}) ON CREATE SET ZachG.born=1954
+CREATE (MarshallB)-[:ACTED_IN {roles:['Admiral']}]->(RescueDawn)
+CREATE (ChristianB)-[:ACTED_IN {roles:['Dieter Dengler']}]->(RescueDawn)
+CREATE (ZachG)-[:ACTED_IN {roles:['Squad Leader']}]->(RescueDawn)
+CREATE (SteveZ)-[:ACTED_IN {roles:['Duane']}]->(RescueDawn)
+CREATE (WernerH)-[:DIRECTED]->(RescueDawn)
 
-MERGE (ThePolarExpress:Movie {title:'The Polar Express'}) ON CREATE SET ThePolarExpress.released=2004, ThePolarExpress.tagline='This Holiday Season... Believe'
-MERGE (TomH)-[:ACTED_IN {roles:['Hero Boy', 'Father', 'Conductor', 'Hobo', 'Scrooge', 'Santa Claus']}]->(ThePolarExpress)
-MERGE (RobertZ)-[:DIRECTED]->(ThePolarExpress)
 
-MERGE (ALeagueofTheirOwn:Movie {title:'A League of Their Own'}) ON CREATE SET ALeagueofTheirOwn.released=1992, ALeagueofTheirOwn.tagline='Once in a lifetime you get a chance to do something different.'
-MERGE (Madonna:Person {name:'Madonna'}) ON CREATE SET Madonna.born=1954
-MERGE (GeenaD:Person {name:'Geena Davis'}) ON CREATE SET GeenaD.born=1956
-MERGE (LoriP:Person {name:'Lori Petty'}) ON CREATE SET LoriP.born=1963
-MERGE (PennyM:Person {name:'Penny Marshall'}) ON CREATE SET PennyM.born=1943
-MERGE (TomH)-[:ACTED_IN {roles:['Jimmy Dugan']}]->(ALeagueofTheirOwn)
-MERGE (GeenaD)-[:ACTED_IN {roles:['Dottie Hinson']}]->(ALeagueofTheirOwn)
-MERGE (LoriP)-[:ACTED_IN {roles:['Kit Keller']}]->(ALeagueofTheirOwn)
-MERGE (RosieO)-[:ACTED_IN {roles:['Doris Murphy']}]->(ALeagueofTheirOwn)
-MERGE (Madonna)-[:ACTED_IN {roles:['"All the Way" Mae Mordabito']}]->(ALeagueofTheirOwn)
-MERGE (BillPax)-[:ACTED_IN {roles:['Bob Hinson']}]->(ALeagueofTheirOwn)
-MERGE (PennyM)-[:DIRECTED]->(ALeagueofTheirOwn)
+CREATE (TheBirdcage:Movie {title:'The Birdcage'}) ON CREATE SET TheBirdcage.released=1996, TheBirdcage.tagline='Come as you are'
+CREATE (MikeN:Person {name:'Mike Nichols'}) ON CREATE SET MikeN.born=1931
+CREATE (Robin)-[:ACTED_IN {roles:['Armand Goldman']}]->(TheBirdcage)
+CREATE (Nathan)-[:ACTED_IN {roles:['Albert Goldman']}]->(TheBirdcage)
+CREATE (Gene)-[:ACTED_IN {roles:['Sen. Kevin Keeley']}]->(TheBirdcage)
+CREATE (MikeN)-[:DIRECTED]->(TheBirdcage)
 
-MERGE (PaulBlythe:Person {name:'Paul Blythe'})
-MERGE (AngelaScope:Person {name:'Angela Scope'})
-MERGE (JessicaThompson:Person {name:'Jessica Thompson'})
-MERGE (JamesThompson:Person {name:'James Thompson'})
 
-MERGE (JamesThompson)-[:FOLLOWS]->(JessicaThompson)
-MERGE (AngelaScope)-[:FOLLOWS]->(JessicaThompson)
-MERGE (PaulBlythe)-[:FOLLOWS]->(AngelaScope)
+CREATE (Unforgiven:Movie {title:'Unforgiven'}) ON CREATE SET Unforgiven.released=1992, Unforgiven.tagline='It\'s a hell of a thing, killing a man'
+CREATE (RichardH:Person {name:'Richard Harris'}) ON CREATE SET RichardH.born=1930
+CREATE (ClintE:Person {name:'Clint Eastwood'}) ON CREATE SET ClintE.born=1930
+CREATE (RichardH)-[:ACTED_IN {roles:['English Bob']}]->(Unforgiven)
+CREATE (ClintE)-[:ACTED_IN {roles:['Bill Munny']}]->(Unforgiven)
+CREATE (Gene)-[:ACTED_IN {roles:['Little Bill Daggett']}]->(Unforgiven)
+CREATE (ClintE)-[:DIRECTED]->(Unforgiven)
 
-MERGE (JessicaThompson)-[:REVIEWED {summary:'An amazing journey', rating:95}]->(CloudAtlas)
-MERGE (JessicaThompson)-[:REVIEWED {summary:'Silly, but fun', rating:65}]->(TheReplacements)
-MERGE (JamesThompson)-[:REVIEWED {summary:'The coolest football movie ever', rating:100}]->(TheReplacements)
-MERGE (AngelaScope)-[:REVIEWED {summary:'Pretty funny at times', rating:62}]->(TheReplacements)
-MERGE (JessicaThompson)-[:REVIEWED {summary:'Dark, but compelling', rating:85}]->(Unforgiven)
-MERGE (JessicaThompson)-[:REVIEWED {summary:"Slapstick redeemed only by the Robin Williams and Gene Hackman's stellar performances", rating:45}]->(TheBirdcage)
-MERGE (JessicaThompson)-[:REVIEWED {summary:'A solid romp', rating:68}]->(TheDaVinciCode)
-MERGE (JamesThompson)-[:REVIEWED {summary:'Fun, but a little far fetched', rating:65}]->(TheDaVinciCode)
-MERGE (JessicaThompson)-[:REVIEWED {summary:'You had me at Jerry', rating:92}]->(JerryMaguire);
+
+CREATE (JohnnyMnemonic:Movie {title:'Johnny Mnemonic'}) ON CREATE SET JohnnyMnemonic.released=1995, JohnnyMnemonic.tagline='The hottest data on earth. In the coolest head in town'
+CREATE (Takeshi:Person {name:'Takeshi Kitano'}) ON CREATE SET Takeshi.born=1947
+CREATE (Dina:Person {name:'Dina Meyer'}) ON CREATE SET Dina.born=1968
+CREATE (IceT:Person {name:'Ice-T'}) ON CREATE SET IceT.born=1958
+CREATE (RobertL:Person {name:'Robert Longo'}) ON CREATE SET RobertL.born=1953
+CREATE (Keanu)-[:ACTED_IN {roles:['Johnny Mnemonic']}]->(JohnnyMnemonic)
+CREATE (Takeshi)-[:ACTED_IN {roles:['Takahashi']}]->(JohnnyMnemonic)
+CREATE (Dina)-[:ACTED_IN {roles:['Jane']}]->(JohnnyMnemonic)
+CREATE (IceT)-[:ACTED_IN {roles:['J-Bone']}]->(JohnnyMnemonic)
+CREATE (RobertL)-[:DIRECTED]->(JohnnyMnemonic)
+
+
+CREATE (CloudAtlas:Movie {title:'Cloud Atlas'}) ON CREATE SET CloudAtlas.released=2012, CloudAtlas.tagline='Everything is connected'
+CREATE (HalleB:Person {name:'Halle Berry'}) ON CREATE SET HalleB.born=1966
+CREATE (JimB:Person {name:'Jim Broadbent'}) ON CREATE SET JimB.born=1949
+CREATE (TomT:Person {name:'Tom Tykwer'}) ON CREATE SET TomT.born=1965
+CREATE (DavidMitchell:Person {name:'David Mitchell'}) ON CREATE SET DavidMitchell.born=1969
+CREATE (StefanArndt:Person {name:'Stefan Arndt'}) ON CREATE SET StefanArndt.born=1961
+CREATE (TomH)-[:ACTED_IN {roles:['Zachry', 'Dr. Henry Goose', 'Isaac Sachs', 'Dermot Hoggins']}]->(CloudAtlas)
+CREATE (Hugo)-[:ACTED_IN {roles:['Bill Smoke', 'Haskell Moore', 'Tadeusz Kesselring', 'Nurse Noakes', 'Boardman Mephi', 'Old Georgie']}]->(CloudAtlas)
+CREATE (HalleB)-[:ACTED_IN {roles:['Luisa Rey', 'Jocasta Ayrs', 'Ovid', 'Meronym']}]->(CloudAtlas)
+CREATE (JimB)-[:ACTED_IN {roles:['Vyvyan Ayrs', 'Captain Molyneux', 'Timothy Cavendish']}]->(CloudAtlas)
+CREATE (TomT)-[:DIRECTED]->(CloudAtlas)
+CREATE (LillyW)-[:DIRECTED]->(CloudAtlas)
+CREATE (LanaW)-[:DIRECTED]->(CloudAtlas)
+CREATE (DavidMitchell)-[:WROTE]->(CloudAtlas)
+CREATE (StefanArndt)-[:PRODUCED]->(CloudAtlas)
+
+
+CREATE (TheDaVinciCode:Movie {title:'The Da Vinci Code'}) ON CREATE SET TheDaVinciCode.released=2006, TheDaVinciCode.tagline='Break The Codes'
+CREATE (IanM:Person {name:'Ian McKellen'}) ON CREATE SET IanM.born=1939
+CREATE (AudreyT:Person {name:'Audrey Tautou'}) ON CREATE SET AudreyT.born=1976
+CREATE (PaulB:Person {name:'Paul Bettany'}) ON CREATE SET PaulB.born=1971
+CREATE (RonH:Person {name:'Ron Howard'}) ON CREATE SET RonH.born=1954
+CREATE (TomH)-[:ACTED_IN {roles:['Dr. Robert Langdon']}]->(TheDaVinciCode)
+CREATE (IanM)-[:ACTED_IN {roles:['Sir Leight Teabing']}]->(TheDaVinciCode)
+CREATE (AudreyT)-[:ACTED_IN {roles:['Sophie Neveu']}]->(TheDaVinciCode)
+CREATE (PaulB)-[:ACTED_IN {roles:['Silas']}]->(TheDaVinciCode)
+CREATE (RonH)-[:DIRECTED]->(TheDaVinciCode)
+
+
+CREATE (VforVendetta:Movie {title:'V for Vendetta'}) ON CREATE SET VforVendetta.released=2006, VforVendetta.tagline='Freedom! Forever!'
+CREATE (NatalieP:Person {name:'Natalie Portman'}) ON CREATE SET NatalieP.born=1981
+CREATE (StephenR:Person {name:'Stephen Rea'}) ON CREATE SET StephenR.born=1946
+CREATE (JohnH:Person {name:'John Hurt'}) ON CREATE SET JohnH.born=1940
+CREATE (BenM:Person {name:'Ben Miles'}) ON CREATE SET BenM.born=1967
+CREATE (Hugo)-[:ACTED_IN {roles:['V']}]->(VforVendetta)
+CREATE (NatalieP)-[:ACTED_IN {roles:['Evey Hammond']}]->(VforVendetta)
+CREATE (StephenR)-[:ACTED_IN {roles:['Eric Finch']}]->(VforVendetta)
+CREATE (JohnH)-[:ACTED_IN {roles:['High Chancellor Adam Sutler']}]->(VforVendetta)
+CREATE (BenM)-[:ACTED_IN {roles:['Dascomb']}]->(VforVendetta)
+CREATE (JamesM)-[:DIRECTED]->(VforVendetta)
+CREATE (LillyW)-[:PRODUCED]->(VforVendetta)
+CREATE (LanaW)-[:PRODUCED]->(VforVendetta)
+CREATE (JoelS)-[:PRODUCED]->(VforVendetta)
+CREATE (LillyW)-[:WROTE]->(VforVendetta)
+CREATE (LanaW)-[:WROTE]->(VforVendetta)
+
+
+CREATE (SpeedRacer:Movie {title:'Speed Racer'}) ON CREATE SET SpeedRacer.released=2008, SpeedRacer.tagline='Speed has no limits'
+CREATE (EmileH:Person {name:'Emile Hirsch'}) ON CREATE SET EmileH.born=1985
+CREATE (JohnG:Person {name:'John Goodman'}) ON CREATE SET JohnG.born=1960
+CREATE (SusanS:Person {name:'Susan Sarandon'}) ON CREATE SET SusanS.born=1946
+CREATE (MatthewF:Person {name:'Matthew Fox'}) ON CREATE SET MatthewF.born=1966
+CREATE (ChristinaR:Person {name:'Christina Ricci'}) ON CREATE SET ChristinaR.born=1980
+CREATE (Rain:Person {name:'Rain'}) ON CREATE SET Rain.born=1982
+CREATE (EmileH)-[:ACTED_IN {roles:['Speed Racer']}]->(SpeedRacer)
+CREATE (JohnG)-[:ACTED_IN {roles:['Pops']}]->(SpeedRacer)
+CREATE (SusanS)-[:ACTED_IN {roles:['Mom']}]->(SpeedRacer)
+CREATE (MatthewF)-[:ACTED_IN {roles:['Racer X']}]->(SpeedRacer)
+CREATE (ChristinaR)-[:ACTED_IN {roles:['Trixie']}]->(SpeedRacer)
+CREATE (Rain)-[:ACTED_IN {roles:['Taejo Togokahn']}]->(SpeedRacer)
+CREATE (BenM)-[:ACTED_IN {roles:['Cass Jones']}]->(SpeedRacer)
+CREATE (LillyW)-[:DIRECTED]->(SpeedRacer)
+CREATE (LanaW)-[:DIRECTED]->(SpeedRacer)
+CREATE (LillyW)-[:WROTE]->(SpeedRacer)
+CREATE (LanaW)-[:WROTE]->(SpeedRacer)
+CREATE (JoelS)-[:PRODUCED]->(SpeedRacer)
+
+
+CREATE (NinjaAssassin:Movie {title:'Ninja Assassin'}) ON CREATE SET NinjaAssassin.released=2009, NinjaAssassin.tagline='Prepare to enter a secret world of assassins'
+CREATE (NaomieH:Person {name:'Naomie Harris'})
+CREATE (Rain)-[:ACTED_IN {roles:['Raizo']}]->(NinjaAssassin)
+CREATE (NaomieH)-[:ACTED_IN {roles:['Mika Coretti']}]->(NinjaAssassin)
+CREATE (RickY)-[:ACTED_IN {roles:['Takeshi']}]->(NinjaAssassin)
+CREATE (BenM)-[:ACTED_IN {roles:['Ryan Maslow']}]->(NinjaAssassin)
+CREATE (JamesM)-[:DIRECTED]->(NinjaAssassin)
+CREATE (LillyW)-[:PRODUCED]->(NinjaAssassin)
+CREATE (LanaW)-[:PRODUCED]->(NinjaAssassin)
+CREATE (JoelS)-[:PRODUCED]->(NinjaAssassin)
+
+
+CREATE (TheGreenMile:Movie {title:'The Green Mile'}) ON CREATE SET TheGreenMile.released=1999, TheGreenMile.tagline='Walk a mile you\'ll never forget.'
+CREATE (MichaelD:Person {name:'Michael Clarke Duncan'}) ON CREATE SET MichaelD.born=1957
+CREATE (DavidM:Person {name:'David Morse'}) ON CREATE SET DavidM.born=1953
+CREATE (SamR:Person {name:'Sam Rockwell'}) ON CREATE SET SamR.born=1968
+CREATE (GaryS:Person {name:'Gary Sinise'}) ON CREATE SET GaryS.born=1955
+CREATE (PatriciaC:Person {name:'Patricia Clarkson'}) ON CREATE SET PatriciaC.born=1959
+CREATE (FrankD:Person {name:'Frank Darabont'}) ON CREATE SET FrankD.born=1959
+CREATE (TomH)-[:ACTED_IN {roles:['Paul Edgecomb']}]->(TheGreenMile)
+CREATE (MichaelD)-[:ACTED_IN {roles:['John Coffey']}]->(TheGreenMile)
+CREATE (DavidM)-[:ACTED_IN {roles:['Brutus "Brutal" Howell']}]->(TheGreenMile)
+CREATE (BonnieH)-[:ACTED_IN {roles:['Jan Edgecomb']}]->(TheGreenMile)
+CREATE (JamesC)-[:ACTED_IN {roles:['Warden Hal Moores']}]->(TheGreenMile)
+CREATE (SamR)-[:ACTED_IN {roles:['"Wild Bill" Wharton']}]->(TheGreenMile)
+CREATE (GaryS)-[:ACTED_IN {roles:['Burt Hammersmith']}]->(TheGreenMile)
+CREATE (PatriciaC)-[:ACTED_IN {roles:['Melinda Moores']}]->(TheGreenMile)
+CREATE (FrankD)-[:DIRECTED]->(TheGreenMile)
+
+
+CREATE (FrostNixon:Movie {title:'Frost/Nixon'}) ON CREATE SET FrostNixon.released=2008, FrostNixon.tagline='400 million people were waiting for the truth.'
+CREATE (FrankL:Person {name:'Frank Langella'}) ON CREATE SET FrankL.born=1938
+CREATE (MichaelS:Person {name:'Michael Sheen'}) ON CREATE SET MichaelS.born=1969
+CREATE (OliverP:Person {name:'Oliver Platt'}) ON CREATE SET OliverP.born=1960
+CREATE (FrankL)-[:ACTED_IN {roles:['Richard Nixon']}]->(FrostNixon)
+CREATE (MichaelS)-[:ACTED_IN {roles:['David Frost']}]->(FrostNixon)
+CREATE (KevinB)-[:ACTED_IN {roles:['Jack Brennan']}]->(FrostNixon)
+CREATE (OliverP)-[:ACTED_IN {roles:['Bob Zelnick']}]->(FrostNixon)
+CREATE (SamR)-[:ACTED_IN {roles:['James Reston, Jr.']}]->(FrostNixon)
+CREATE (RonH)-[:DIRECTED]->(FrostNixon)
+
+
+CREATE (Hoffa:Movie {title:'Hoffa'}) ON CREATE SET Hoffa.released=1992, Hoffa.tagline='He didn\'t want law. He wanted justice.'
+CREATE (DannyD:Person {name:'Danny DeVito'}) ON CREATE SET DannyD.born=1944
+CREATE (JohnR:Person {name:'John C. Reilly'}) ON CREATE SET JohnR.born=1965
+CREATE (JackN)-[:ACTED_IN {roles:['Hoffa']}]->(Hoffa)
+CREATE (DannyD)-[:ACTED_IN {roles:['Robert "Bobby" Ciaro']}]->(Hoffa)
+CREATE (JTW)-[:ACTED_IN {roles:['Frank Fitzsimmons']}]->(Hoffa)
+CREATE (JohnR)-[:ACTED_IN {roles:['Peter "Pete" Connelly']}]->(Hoffa)
+CREATE (DannyD)-[:DIRECTED]->(Hoffa)
+
+
+CREATE (Apollo13:Movie {title:'Apollo 13'}) ON CREATE SET Apollo13.released=1995, Apollo13.tagline='Houston, we have a problem.'
+CREATE (EdH:Person {name:'Ed Harris'}) ON CREATE SET EdH.born=1950
+CREATE (BillPax:Person {name:'Bill Paxton'}) ON CREATE SET BillPax.born=1955
+CREATE (TomH)-[:ACTED_IN {roles:['Jim Lovell']}]->(Apollo13)
+CREATE (KevinB)-[:ACTED_IN {roles:['Jack Swigert']}]->(Apollo13)
+CREATE (EdH)-[:ACTED_IN {roles:['Gene Kranz']}]->(Apollo13)
+CREATE (BillPax)-[:ACTED_IN {roles:['Fred Haise']}]->(Apollo13)
+CREATE (GaryS)-[:ACTED_IN {roles:['Ken Mattingly']}]->(Apollo13)
+CREATE (RonH)-[:DIRECTED]->(Apollo13)
+
+
+CREATE (Twister:Movie {title:'Twister'}) ON CREATE SET Twister.released=1996, Twister.tagline='Don\'t Breathe. Don\'t Look Back.'
+CREATE (PhilipH:Person {name:'Philip Seymour Hoffman'}) ON CREATE SET PhilipH.born=1967
+CREATE (JanB:Person {name:'Jan de Bont'}) ON CREATE SET JanB.born=1943
+CREATE (BillPax)-[:ACTED_IN {roles:['Bill Harding']}]->(Twister)
+CREATE (HelenH)-[:ACTED_IN {roles:['Dr. Jo Harding']}]->(Twister)
+CREATE (ZachG)-[:ACTED_IN {roles:['Eddie']}]->(Twister)
+CREATE (PhilipH)-[:ACTED_IN {roles:['Dustin "Dusty" Davis']}]->(Twister)
+CREATE (JanB)-[:DIRECTED]->(Twister)
+
+
+CREATE (CastAway:Movie {title:'Cast Away'}) ON CREATE SET CastAway.released=2000, CastAway.tagline='At the edge of the world, his journey begins.'
+CREATE (RobertZ:Person {name:'Robert Zemeckis'}) ON CREATE SET RobertZ.born=1951
+CREATE (TomH)-[:ACTED_IN {roles:['Chuck Noland']}]->(CastAway)
+CREATE (HelenH)-[:ACTED_IN {roles:['Kelly Frears']}]->(CastAway)
+CREATE (RobertZ)-[:DIRECTED]->(CastAway)
+
+
+CREATE (OneFlewOvertheCuckoosNest:Movie {title:'One Flew Over the Cuckoo\'s Nest'}) ON CREATE SET OneFlewOvertheCuckoosNest.released=1975, OneFlewOvertheCuckoosNest.tagline='If he\'s crazy, what does that make you?'
+CREATE (MilosF:Person {name:'Milos Forman'}) ON CREATE SET MilosF.born=1932
+CREATE (JackN)-[:ACTED_IN {roles:['Randle McMurphy']}]->(OneFlewOvertheCuckoosNest)
+CREATE (DannyD)-[:ACTED_IN {roles:['Martini']}]->(OneFlewOvertheCuckoosNest)
+CREATE (MilosF)-[:DIRECTED]->(OneFlewOvertheCuckoosNest)
+
+
+CREATE (SomethingsGottaGive:Movie {title:'Something\'s Gotta Give'}) ON CREATE SET SomethingsGottaGive.released=2003
+CREATE (DianeK:Person {name:'Diane Keaton'}) ON CREATE SET DianeK.born=1946
+CREATE (NancyM:Person {name:'Nancy Meyers'}) ON CREATE SET NancyM.born=1949
+CREATE (JackN)-[:ACTED_IN {roles:['Harry Sanborn']}]->(SomethingsGottaGive)
+CREATE (DianeK)-[:ACTED_IN {roles:['Erica Barry']}]->(SomethingsGottaGive)
+CREATE (Keanu)-[:ACTED_IN {roles:['Julian Mercer']}]->(SomethingsGottaGive)
+CREATE (NancyM)-[:DIRECTED]->(SomethingsGottaGive)
+CREATE (NancyM)-[:PRODUCED]->(SomethingsGottaGive)
+CREATE (NancyM)-[:WROTE]->(SomethingsGottaGive)
+
+
+CREATE (BicentennialMan:Movie {title:'Bicentennial Man'}) ON CREATE SET BicentennialMan.released=1999, BicentennialMan.tagline='One robot\'s 200 year journey to become an ordinary man.'
+CREATE (ChrisC:Person {name:'Chris Columbus'}) ON CREATE SET ChrisC.born=1958
+CREATE (Robin)-[:ACTED_IN {roles:['Andrew Marin']}]->(BicentennialMan)
+CREATE (OliverP)-[:ACTED_IN {roles:['Rupert Burns']}]->(BicentennialMan)
+CREATE (ChrisC)-[:DIRECTED]->(BicentennialMan)
+
+
+CREATE (CharlieWilsonsWar:Movie {title:'Charlie Wilson\'s War'}) ON CREATE SET CharlieWilsonsWar.released=2007, CharlieWilsonsWar.tagline='A stiff drink. A little mascara. A lot of nerve. Who said they couldn\'t bring down the Soviet empire.'
+CREATE (JuliaR:Person {name:'Julia Roberts'}) ON CREATE SET JuliaR.born=1967
+CREATE (TomH)-[:ACTED_IN {roles:['Rep. Charlie Wilson']}]->(CharlieWilsonsWar)
+CREATE (JuliaR)-[:ACTED_IN {roles:['Joanne Herring']}]->(CharlieWilsonsWar)
+CREATE (PhilipH)-[:ACTED_IN {roles:['Gust Avrakotos']}]->(CharlieWilsonsWar)
+CREATE (MikeN)-[:DIRECTED]->(CharlieWilsonsWar)
+
+
+CREATE (ThePolarExpress:Movie {title:'The Polar Express'}) ON CREATE SET ThePolarExpress.released=2004, ThePolarExpress.tagline='This Holiday Season... Believe'
+CREATE (TomH)-[:ACTED_IN {roles:['Hero Boy', 'Father', 'Conductor', 'Hobo', 'Scrooge', 'Santa Claus']}]->(ThePolarExpress)
+CREATE (RobertZ)-[:DIRECTED]->(ThePolarExpress)
+
+
+CREATE (ALeagueofTheirOwn:Movie {title:'A League of Their Own'}) ON CREATE SET ALeagueofTheirOwn.released=1992, ALeagueofTheirOwn.tagline='Once in a lifetime you get a chance to do something different.'
+CREATE (Madonna:Person {name:'Madonna'}) ON CREATE SET Madonna.born=1954
+CREATE (GeenaD:Person {name:'Geena Davis'}) ON CREATE SET GeenaD.born=1956
+CREATE (LoriP:Person {name:'Lori Petty'}) ON CREATE SET LoriP.born=1963
+CREATE (PennyM:Person {name:'Penny Marshall'}) ON CREATE SET PennyM.born=1943
+CREATE (TomH)-[:ACTED_IN {roles:['Jimmy Dugan']}]->(ALeagueofTheirOwn)
+CREATE (GeenaD)-[:ACTED_IN {roles:['Dottie Hinson']}]->(ALeagueofTheirOwn)
+CREATE (LoriP)-[:ACTED_IN {roles:['Kit Keller']}]->(ALeagueofTheirOwn)
+CREATE (RosieO)-[:ACTED_IN {roles:['Doris Murphy']}]->(ALeagueofTheirOwn)
+CREATE (Madonna)-[:ACTED_IN {roles:['"All the Way" Mae Mordabito']}]->(ALeagueofTheirOwn)
+CREATE (BillPax)-[:ACTED_IN {roles:['Bob Hinson']}]->(ALeagueofTheirOwn)
+CREATE (PennyM)-[:DIRECTED]->(ALeagueofTheirOwn)
+
+
+CREATE (PaulBlythe:Person {name:'Paul Blythe'})
+CREATE (AngelaScope:Person {name:'Angela Scope'})
+CREATE (JessicaThompson:Person {name:'Jessica Thompson'})
+CREATE (JamesThompson:Person {name:'James Thompson'})
+
+
+CREATE (JamesThompson)-[:FOLLOWS]->(JessicaThompson)
+CREATE (AngelaScope)-[:FOLLOWS]->(JessicaThompson)
+CREATE (PaulBlythe)-[:FOLLOWS]->(AngelaScope)
+
+
+CREATE (JessicaThompson)-[:REVIEWED {summary:'An amazing journey', rating:95}]->(CloudAtlas)
+CREATE (JessicaThompson)-[:REVIEWED {summary:'Silly, but fun', rating:65}]->(TheReplacements)
+CREATE (JamesThompson)-[:REVIEWED {summary:'The coolest football movie ever', rating:100}]->(TheReplacements)
+CREATE (AngelaScope)-[:REVIEWED {summary:'Pretty funny at times', rating:62}]->(TheReplacements)
+CREATE (JessicaThompson)-[:REVIEWED {summary:'Dark, but compelling', rating:85}]->(Unforgiven)
+CREATE (JessicaThompson)-[:REVIEWED {summary:"Slapstick redeemed only by the Robin Williams and Gene Hackman's stellar performances", rating:45}]->(TheBirdcage)
+CREATE (JessicaThompson)-[:REVIEWED {summary:'A solid romp', rating:68}]->(TheDaVinciCode)
+CREATE (JamesThompson)-[:REVIEWED {summary:'Fun, but a little far fetched', rating:65}]->(TheDaVinciCode)
+CREATE (JessicaThompson)-[:REVIEWED {summary:'You had me at Jerry', rating:92}]->(JerryMaguire);
 ----
 
 To see a subset of the imported data run the following statement
@@ -664,7 +705,7 @@ To find a list of potential co-actors, run the following query:
 ----
 MATCH (p:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors),
   (coActors)-[:ACTED_IN]->(m2)<-[:ACTED_IN]-(cocoActors)
-WHERE NOT exists { (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(cocoActors) } AND p <> cocoActors
+WHERE NOT exists { (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(cocoActors) }
 RETURN cocoActors.name AS recommended, count(*) AS score ORDER BY score DESC
 ----
 
