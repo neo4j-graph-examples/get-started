@@ -713,7 +713,7 @@ CREATE INDEX movie_title FOR (m:Movie) ON (m.title)
 
 Note that you can also add constraints to your data to ensure uniqueness for example.
 Adding constraints automatically adds a correpsonding index.
-See link:https://neo4j.com/docs/cypher-manual/current/constraints/[Cypher Manual -> Constraints] for more information.
+See link:https://neo4j.com/docs/cypher-manual/current/constraints/[Cypher Manual -> Constraints^] for more information.
 
 In the next step, you will look for nodes and their properties.
 
