@@ -139,7 +139,7 @@ button::Load Northwind node mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subs
 == Constraints and indexes
 
 To ensure accuracy of your data and support read performance, Data Importer automatically creates a uniqueness constraint and a corresponding index on the property you select as the node ID.
-You can add additional indexes in addition to the mandatory constraint and index.
+You can add further indexes in addition to the mandatory constraint and index.
 
 Constraints and indexes have their own tab in the highlight:import/import-mapping-panel[mapping details panel].
 Use the `+`-sign to add an index and then select which property to add the index on.
@@ -149,7 +149,7 @@ If you make a mistake, select the erroneous index and click the trash-can to del
 
 If you know that you are going to use a property regularly, it is good practice to add an index to it.
 For example, if you doing administrative work with Northwind, you may be interested in the order dates.
-See if you can add an index to the `orderDate` property that will help you that!
+See if you can add an index to the `orderDate` property that will help you with that!
 
 [%collapsible]
 .Hint
