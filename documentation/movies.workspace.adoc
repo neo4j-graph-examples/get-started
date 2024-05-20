@@ -693,7 +693,7 @@ MERGE (JamesThompson)-[:REVIEWED {summary:'Fun, but a little far fetched', ratin
 MERGE (JessicaThompson)-[:REVIEWED {summary:'You had me at Jerry', rating:92}]->(JerryMaguire);
 ----
 
-To see a subset of the imported data run the following statement
+To see a subset of the data you just created, run the following statement
 
 [source,cypher]
 ----
@@ -701,6 +701,42 @@ MATCH (person:Person {name: 'Tom Hanks'})
 MATCH path = (person)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
 RETURN path;
 ----
+
+In the next step you will learn about indexes and constraints.
+
+== Indexes and constraints
+
+To aid query performance, you can add indexes to your data.
+The dataset you create in this guide is very small, but it is good practice to use indexes as they can greatly improve query performance when the datasets are larger.
+
+Run the follwing to see the existing indexes in the database:
+
+[source, cypher]
+----
+SHOW INDEXES
+----
+
+As you can see, there are already some indexes present and this is a result of the two first lines in the `MERGE` clause in the previous step:
+
+[source,cypher]
+----
+CREATE CONSTRAINT movie_title IF NOT EXISTS FOR (m:Movie) REQUIRE m.title IS UNIQUE;
+CREATE CONSTRAINT person_name IF NOT EXISTS FOR (p:Person) REQUIRE p.name IS UNIQUE;
+----
+
+See link:https://neo4j.com/docs/cypher-manual/current/constraints/[Cypher Manual -> Constraints^] for more information on constraints.
+
+You can add indexes on any of your properties and if you know beforehand which ones you will use the most, it makes sense to add an index on these.
+In the Movies dataset, you may be interested in both the year people were born and the year movies were released.
+Run the following to add indexes on these properties:
+
+[source,cypher]
+----
+CREATE INDEX person_born IF NOT EXISTS FOR (p:Person) ON (p.born);
+CREATE INDEX movie_released IF NOT EXISTS FOR (m:Movie) ON (m.released)
+----
+
+See link:https://neo4j.com/docs/cypher-manual/current/indexes/[Cypher Manual -> Indexes^] to learn more about indexes.
 
 In the next step, you will look for nodes and their properties.
 
