@@ -9,43 +9,12 @@ link:https://www.nuget.org/packages/Neo4j.Driver/.
 
 [source, csharp, role=nocollapse]
 ----
-public class HelloWorldExample : IDisposable
-{
-    private readonly IDriver _driver;
+using Neo4j.Driver;
 
-    public HelloWorldExample(string uri, string user, string password)
-    {
-        _driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
-    }
+const string uri = "{neo4j-database-uri}";
+const string user = "<Username>";
+const string password = "<Password>";
 
-    public void PrintGreeting(string message)
-    {
-        using var session = _driver.Session();
-        var greeting = session.ExecuteWrite(
-            tx =>
-            {
-                var result = tx.Run(
-                    "CREATE (a:Greeting) " +
-                    "SET a.message = $message " +
-                    "RETURN a.message + ', from node ' + id(a)",
-                    new { message });
-
-                return result.Single()[0].As<string>();
-            });
-
-        Console.WriteLine(greeting);
-    }
-
-    public void Dispose()
-    {
-        _driver?.Dispose();
-    }
-
-    public static void Main()
-    {
-        using var greeter = new HelloWorldExample("{neo4j-database-uri}", "<Username>", "<Password>");
-
-        greeter.PrintGreeting("hello, world");
-    }
-}
+await using var driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
+await driver.VerifyConnectivityAsync();
 ----
