@@ -1,0 +1,20 @@
+== Installation
+
+The .NET driver is distributed via the NuGet Gallery. 
+To find the latest version of the driver, visit 
+link:https://www.nuget.org/packages/Neo4j.Driver/.
+
+== Connect to the database
+
+
+[source, csharp, role=nocollapse]
+----
+using Neo4j.Driver;
+
+const string uri = "{neo4j-database-uri}";
+const string user = "<Username>";
+const string password = "<Password>";
+
+await using var driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
+await driver.VerifyConnectivityAsync();
+----
