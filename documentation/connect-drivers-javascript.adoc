@@ -2,7 +2,7 @@
 
 Install the Neo4j JavaScript driver with `npm`:
 
-[source,bash]
+[source, bash, copy=true]
 ----
 npm i neo4j-driver
 ----
@@ -15,7 +15,7 @@ link:https://neo4j.com/docs/javascript-manual/current/install/#install-driver[Mo
 Connect to a database by creating a `Driver` object and providing a URL and an authentication token.
 Once you have a `Driver` instance, use the `.getServerInfo()` method to ensure that a working connection can be established by retrieving the server information.
 
-[source, javascript]
+[source, javascript, copy=true]
 ----
 var neo4j = require('neo4j-driver');
 (async () => {

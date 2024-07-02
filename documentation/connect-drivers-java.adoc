@@ -2,7 +2,7 @@
 
 Add the Neo4j Java driver to the list of dependencies in the `pom.xml` of your Maven project:
 
-[source, xml, subs="attributes+"]
+[source, xml, subs="attributes+", copy=true]
 ----
 <dependency>
     <groupId>org.neo4j.driver</groupId>
@@ -18,7 +18,7 @@ link:https://neo4j.com/docs/java-manual/current/install/#install-driver[More inf
 Connect to a database by creating a `Driver` object and providing a URL and an authentication token.
 Once you have a `Driver` instance, use the `.verifyConnectivity()` method to ensure that a working connection can be established.
 
-[source, java, role=nocollapse]
+[source, java, role=nocollapse, copy=true]
 ----
 package demo;
 

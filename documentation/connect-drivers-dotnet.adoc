@@ -7,7 +7,7 @@ link:https://www.nuget.org/packages/Neo4j.Driver/.
 == Connect to the database
 
 
-[source, csharp, role=nocollapse]
+[source, csharp, role=nocollapse, copy=true]
 ----
 using Neo4j.Driver;
 

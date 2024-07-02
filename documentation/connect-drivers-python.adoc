@@ -1,6 +1,6 @@
 == Install Driver
 
-[source, bash]
+[source, bash, copy=true]
 ----
 pip install neo4j
 ----
@@ -12,7 +12,7 @@ link:https://neo4j.com/docs/python-manual/current/install/#install-driver[More i
 Connect to a database by creating a `Driver` object and providing a URL and an authentication token.
 Once you have a `Driver` instance, use the `.verify_connectivity()` method to ensure that a working connection can be established.
 
-[source, python]
+[source, python, copy=true]
 ----
 from neo4j import GraphDatabase
 
