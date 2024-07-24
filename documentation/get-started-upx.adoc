@@ -108,7 +108,7 @@ If something goes wrong, keep in mind that the tool can import the same data mul
 
 === Explore your data
 
-After you have imported the Northwind dataset, click the _Start Exploring_ button in the report popup or switch to the _Explore_ tab.
+After you have imported the Northwind dataset, click the _Start Exploring_ button in the report popup or use the _Explore_ tool.
 
 Next you are going to see the power of graph visualization.
 
@@ -117,20 +117,20 @@ Next you are going to see the power of graph visualization.
 
 == Explore your graph
 
-With the data in a graph, it is time to get familiar with the _Explore_ tab.
+With the data in a graph, it is time to get familiar with the _Explore_ tool.
 
-The `Show me a graph` Search Phrase runs automatically to show an example subset of the data.
+The `Show me a graph` Search phrase runs automatically to show an example subset of the data.
 The visualized graph represents the relationships in the data in an intuitive way.
 
 [NOTE]
 ====
-You can also run the _Show me a graph_ example Search Phrase yourself by typing the _Show me a graph_ in the top-left search bar.
+You can also run the _Show me a graph_ example Search phrase yourself by typing the _Show me a graph_ in the top-left search bar.
 ====
 
 === Searching for data in Explore
 
 You can use simple search phrases based on your node labels and relationship types to visualize your graph.
-If you ran the example Search Phrase, you should clear the scene before you continue.
+If you ran the example Search phrase, you should clear the scene before you continue.
 Right-click anywhere on the canvas and select _Clear Scene_ or `Ctrl+Bksp`/`Cmd+Bksp`.
 
 If you enter `Category<tab>` and then press return; it fetches and displays all categories.
@@ -150,7 +150,7 @@ The context menu also offers many more options like editing, partial expansion, 
 
 == Advanced exploration
 
-In the bottom-right of _Explore_ you can switch between the default force-based layout, a hierarchical layout, and a coordinate layout.
+In the bottom-right of the _Explore_ canvas you can switch between the default force-based layout, a hierarchical layout, and a coordinate layout.
 
 You can style your data in the right legend using colors, icons, sizes, and captions, and even apply rules for these.
 
@@ -169,9 +169,9 @@ Learn more in the link:https://neo4j.com/docs/bloom-user-guide/current/bloom-vis
 
 == Basic Querying
 
-Switch to the _Query_ tab, if you haven't already done so.
+Switch to the _Query_ tool, if you haven't already done so.
 
-On the left sidebar in the first entry (database) you can see the counts of types of nodes and relationships.
+On the left sidebar you can see the counts of types of nodes and relationships.
 Click on `(Product)` - the database fetches a few elements with the `Product`-label using a minimal query.
 
 .Load query for product nodes
@@ -198,10 +198,10 @@ That view is shown by default if you return only scalar values.
 
 Like any other database, Neo4j can be queried with a query language.
 
-Neo4j's graph query language is called _Cypher_ and is very well-suited for finding patterns.
+Neo4j's graph query language is called _Cypher_ and is well-suited for finding patterns.
 Unlike SQL, there is no reliance on writing complex joins.
 
-In Cypher, you represent the graph patterns that you've seen in _Import_ and _Explore_ with ascii-art.
+In Cypher, you represent the graph patterns with ascii-art.
 
 Parentheses `(p:Product {name:'Camembert Pierrot'})` form "circles" around nodes and arrows `+-[:SUPPLIES]->+` depicts relationships.
 
@@ -256,7 +256,7 @@ RETURN cust.contactName as CustomerName,
 
 Congratulations on completing this tutorial.
 
-You can do more with the Northwind dataset or you can reset your instance in AuraDB Console and import your own data.
+You can do more with the Northwind dataset or you can reset your instance in Neo4j Aura Console and import your own data.
 
 For your next steps, a suggestion is to look at furthering your Cypher knowledge or building an application using Neo4j's popular language drivers.
 
