@@ -260,6 +260,8 @@ You can do more with the Northwind dataset or you can reset your instance in Neo
 
 For your next steps, a suggestion is to look at furthering your Cypher knowledge or building an application using Neo4j's popular language drivers.
 
+Hello!
+
 === Next steps with Cypher
 
 To learn more about Cypher, check out the interactive https://graphacademy.neo4j.com/categories/beginners/[GraphAcademy course^] and have a look at the https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet^].
