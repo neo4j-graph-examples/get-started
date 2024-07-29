@@ -4,7 +4,7 @@
 == Movies graph
 
 This guide uses pop-cultural connections to teach you how to use Cypher to create and query data.
-You will explore connections between actors, directors, and movies, and also solve the famous Bacon-path.
+You will use the Query tool to explore connections between actors, directors, and movies, and also solve the famous Bacon-path.
 
 Note that this guide assumes that you use an empty database as you will modify it along the way.
 You will learn how to delete the data you create towards the end of the guide as well.
@@ -706,7 +706,7 @@ In the next step, you will look for nodes and their properties.
 
 == Find nodes
 
-To start, can you find the actor _Tom Hanks_ which is a `Person` in our graph?
+To start, can you find the actor _Tom Hanks_ which is a `Person` in the graph?
 
 Run the following query:
 
@@ -762,8 +762,6 @@ In the next step you will look for patterns in the graph.
 A pattern in the graph is a specific arrangement of nodes and relationships that can be matched in the graph.
 To find which movies Tom Hanks have acted in, specify the pattern as follows:
 
-NOTE: You might need to switch back to the "Graph" view.
-
 [source,cypher]
 ----
 MATCH (p:Person {name: "Tom Hanks"})-[:ACTED_IN]->(movie)
@@ -799,7 +797,7 @@ MATCH path= (:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors
 RETURN path
 ----
 
-You can return _all_ properties if you are not sure exactly what you are looking for:
+You can return _all_ relationship properties if you are not sure exactly what you are looking for:
 
 [source,cypher]
 ----
@@ -833,7 +831,7 @@ Cypher has a built-in algorithm for this, "Shortest Path" and it looks like this
 MATCH path=shortestPath(
   (:Person {name:"Kevin Bacon"})-[*]-(:Person {name:"Meg Ryan"})
 )
-RETURN path, length(path) / 2 as distance
+RETURN path
 ----
 
 You can try to change _Meg Ryan_ out for any other actor in the dataset and see if you can find one farther away than six hops.
