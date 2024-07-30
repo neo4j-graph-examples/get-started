@@ -4,7 +4,7 @@
 == Movies graph
 
 This guide uses pop-cultural connections to teach you how to use Cypher to create and query data.
-You will explore connections between actors, directors, and movies, and also solve the famous Bacon-path.
+You will use the Query tool to explore connections between actors, directors, and movies, and also solve the famous Bacon-path.
 
 Note that this guide assumes that you use an empty database as you will modify it along the way.
 You will learn how to delete the data you create towards the end of the guide as well.
@@ -693,7 +693,7 @@ MERGE (JamesThompson)-[:REVIEWED {summary:'Fun, but a little far fetched', ratin
 MERGE (JessicaThompson)-[:REVIEWED {summary:'You had me at Jerry', rating:92}]->(JerryMaguire);
 ----
 
-To see a subset of the data you just created, run the following statement
+To see a subset of the imported data run the following statement
 
 [source,cypher]
 ----
@@ -702,47 +702,11 @@ MATCH path = (person)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
 RETURN path;
 ----
 
-In the next step you will learn about indexes and constraints.
-
-== Indexes and constraints
-
-To aid query performance, you can add indexes to your data.
-The dataset you create in this guide is very small, but it is good practice to use indexes as they can greatly improve query performance when the datasets are larger.
-
-Run the follwing to see the existing indexes in the database:
-
-[source, cypher]
-----
-SHOW INDEXES
-----
-
-As you can see, there are already some indexes present and this is a result of the two first lines in the `MERGE` clause in the previous step:
-
-[source,cypher]
-----
-CREATE CONSTRAINT movie_title IF NOT EXISTS FOR (m:Movie) REQUIRE m.title IS UNIQUE;
-CREATE CONSTRAINT person_name IF NOT EXISTS FOR (p:Person) REQUIRE p.name IS UNIQUE;
-----
-
-See link:https://neo4j.com/docs/cypher-manual/current/constraints/[Cypher Manual -> Constraints^] for more information on constraints.
-
-You can add indexes on any of your properties and if you know beforehand which ones you will use the most, it makes sense to add an index on these.
-In the Movies dataset, you may be interested in both the year people were born and the year movies were released.
-Run the following to add indexes on these properties:
-
-[source,cypher]
-----
-CREATE INDEX person_born IF NOT EXISTS FOR (p:Person) ON (p.born);
-CREATE INDEX movie_released IF NOT EXISTS FOR (m:Movie) ON (m.released)
-----
-
-See link:https://neo4j.com/docs/cypher-manual/current/indexes/[Cypher Manual -> Indexes^] to learn more about indexes.
-
 In the next step, you will look for nodes and their properties.
 
 == Find nodes
 
-To start, can you find the actor _Tom Hanks_ which is a `Person` in our graph?
+To start, can you find the actor _Tom Hanks_ which is a `Person` in the graph?
 
 Run the following query:
 
@@ -798,8 +762,6 @@ In the next step you will look for patterns in the graph.
 A pattern in the graph is a specific arrangement of nodes and relationships that can be matched in the graph.
 To find which movies Tom Hanks have acted in, specify the pattern as follows:
 
-NOTE: You might need to switch back to the "Graph" view.
-
 [source,cypher]
 ----
 MATCH (p:Person {name: "Tom Hanks"})-[:ACTED_IN]->(movie)
@@ -835,7 +797,7 @@ MATCH path= (:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors
 RETURN path
 ----
 
-You can return _all_ properties if you are not sure exactly what you are looking for:
+You can return _all_ relationship properties if you are not sure exactly what you are looking for:
 
 [source,cypher]
 ----
@@ -869,7 +831,7 @@ Cypher has a built-in algorithm for this, "Shortest Path" and it looks like this
 MATCH path=shortestPath(
   (:Person {name:"Kevin Bacon"})-[*]-(:Person {name:"Meg Ryan"})
 )
-RETURN path, length(path) / 2 as distance
+RETURN path
 ----
 
 You can try to change _Meg Ryan_ out for any other actor in the dataset and see if you can find one farther away than six hops.
