@@ -1,0 +1,439 @@
+= Learn how to import and map data with Neo4j Data Importer
+// NOTE: Browser may cache files when loading from zip
+
+:northwind-subset-data-only-no-model-zip-file:  https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-data-only-no-model.zip
+:northwind-subset-data-only-zip-file:  https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-data-only.zip
+:northwind-subset-node-only-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-node-only-mapping.zip
+:northwind-subset-shipper-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-shipper-mapping.zip
+:people_locations_nodes_only_zip_file: https://neo4j-graph-examples.github.io/get-started/data/people_locations_nodes_only.zip
+:people_locations_full_zip_file: https://neo4j-graph-examples.github.io/get-started/data/people_locations_full.zip
+:northwind-subset-node-and-relationship-mapping-zip-file: https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-node-and-relationship-mapping.zip
+
+== Introduction
+
+Workspace's data importer offers a powerful and simple way to model and load data into Neo4j.
+It's great if you're new to graphs or have rapid prototyping needs.
+If you have more advanced needs, checkout the _What's next?_ section at the end of this guide.
+
+This guide will teach you how to:
+
+* Create a graph model
+* Configure its properties and relationships
+* Upload and map data files (we have prepared some for you)
+
+[TIP]
+====
+If you haven't already, it's recommended to go through the _Learn the basics_ guide to learn the basics of Neo4j.
+This guide is continuing with the same dataset, Northwind.
+====
+
+
+== Working with data files
+
+=== Add the Northwind files
+
+To get started, {northwind-subset-data-only-no-model-zip-file}[download and unzip this file of CSVs^] and then drop the files onto the highlight:import/import-file-panel[files panel].
+
+[%collapsible]
+.Are you having trouble?
+====
+You can also click the following button to add the CSV files automatically.
+
+button::Add Northwind files[role=NX_IMPORT_LOAD,endpoint={northwind-subset-data-only-zip-file}]
+====
+
+=== File structure
+
+Now that you've added the files, you should be able to see each file's header and the first row of data in the highlight:import/import-file-panel[Files panel].
+
+[TIP]
+====
+Importer always requires files to have a *header row* as well as at least one *data row* in order to map and import data.
+====
+
+The `order-details.csv` file looks like this:
+
+----
+OrderID,ProductID,UnitPrice,Quantity,Discount
+10248,11,14.00,12,0
+10248,42,9.8,10,0
+10248,72,34.8,5,0
+----
+
+This file tells you which orders contain specific products and their price.
+If you inspect the content of the file, you'll notice that `OrderID` is repeated.
+You'll learn later about how this can be used to create a `CONTAINS` relationship linking `Orders` and `Products`.
+
+The `products.csv` and `orders.csv` files refer to the other parts of the Northwind data model.
+
+
+== Nodes and properties
+
+=== Create the Order node
+
+You are going to create a simple model with two nodes and one relationship.
+Add a node using the highlight:import/import-add-node[add node button], and give it the label `Order`.
+
+image::simple-model.png[]
+
+=== Map a file
+
+The `Order` node you have just created isn't fully mapped yet; it needs to show a green check mark.
+Select `orders.csv` from the highlight:import/import-node-file-dropdown[file dropdown] in the highlight:import/import-mapping-panel[mapping details panel].
+
+
+=== Defining and mapping properties
+
+Let's now add some properties to the `Order` node from our `orders.csv` file.
+
+* Click the highlight:import/import-select-from-file-button[Map from file] button.
+* Select the `orderId`, `orderDate` and `requiredDate` columns and click *Confirm*.
+* Edit the name `orderId` property in the mapping details panel by clicking the pencil icon and then rename it to `id` (it obviously relates to an order).
+* Change its data type from `integer` to `string` using the drop-down.
+
+
+[NOTE]
+====
+When selected from file, properties are given the name of the column selected when created.
+Workspace guesses each datatype based on a sample of the values it found.
+Always double-check this when working with unfamiliar data.
+For example, Northwind's date/time columns are identified as strings, but you can edit that if you want to.
+====
+// TODO: properties with same name... this needs rewording for clarity
+
+== Relationships and IDs
+
+=== Setting a node ID
+
+Nodes need an ID to define relationships with other nodes.
+An ID also ensures an import doesn't create a node more than once if it's referenced multiple times in a data file.
+
+In the _Definition_ tab, you can see that the `id` property is set as the ID for the node highlight:import/import-node-id[ID].
+The import tool did this for you automatically based on the property name containing the `id` string.
+In other cases, you may need to correct it or set it manually.
+
+// TO-DO: Add property highlight has been lost, requested the Importer team re-add it.  This TO-DO can be deleted once confirmed working.
+[TIP]
+====
+You can also specify properites and their data types in isolation from mapping by using the highlight:import/import-property-add-button[add property] button.
+You can then map a column from your data file to the property in the file mapping tab.
+====
+
+=== Create the Product node
+
+Now you just need to repeat the process you followed for `Order` and create a `Product` node from the `products.csv` file.
+Here you need to map the `produtId` and `productName` columns, rename the `productId` property to be simply `id` and set it to be a `string`.
+Ensure `id` is selected as the ID.
+
+Once you have created both nodes and mapped files accordingly, you should see a green check mark on both nodes.
+This indicates that the mapping is complete.
+
+[%collapsible]
+.Are you having trouble?
+====
+If you're unsure if you've followed the steps correctly so far, you can go ahead and load the correct mapping so everything is in order before continuing.
+
+button::Load Northwind node mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subset-node-only-mapping-zip-file}]
+====
+
+== Constraints and indexes
+
+To ensure accuracy of your data and support read performance, Data Importer automatically creates a uniqueness constraint and a corresponding index on the property you select as the node ID.
+You can add further indexes in addition to the mandatory constraint and index.
+
+Constraints and indexes have their own tab in the highlight:import/import-mapping-panel[mapping details panel].
+Use the `+`-sign to add an index and then select which property to add the index on.
+
+Data Importer generates a name for the index and the index type created is Neo4j's default index.
+If you make a mistake, select the erroneous index and click the trash-can to delete it.
+
+If you know that you are going to use a property regularly, it is good practice to add an index to it.
+For example, if you doing administrative work with Northwind, you may be interested in the order dates.
+See if you can add an index to the `orderDate` property that will help you with that!
+
+[%collapsible]
+.Hint
+====
+From the highlight:import/import-mapping-panel[mapping details panel], tap the `+` and select the `orderDate` property.
+====
+
+[NOTE]
+====
+Only the properties you mapped from the _Definition_ tab are available to create indexes on.
+To modify the selection, you need to go back to the _Definition_ tab.
+====
+
+To learn more about indexes and constraints, see link:https://neo4j.com/docs/cypher-manual/current/indexes/[Cypher Manual -> Indexes] and link:https://neo4j.com/docs/cypher-manual/current/constraints/[Cypher Manual -> Constraints] repsectively.
+
+== Create relationships
+
+[TIP]
+====
+As you've seen already, your data concerns `Orders` that `CONTAIN` specific `Products`.
+Conventionally, https://en.wikipedia.org/wiki/Camel_case[CamelCase^] is used for node labels and capitalized https://en.wikipedia.org/wiki/Snake_case[SNAKE_CASE^] for relationship types.
+====
+
+You have two nodes and now you need to create a relationship to connect them.
+
+* Hover by the edge of the `Order` node circle and you'll see a `+` sign.
+* Click and hold it and you'll see another circle.
+* Drag the new circle on to the `Product` node and relase to create the relationship.
+* With the relationship arrow selected, you can now specify how `Order` relates to `Product`.
+* In the highlight:import/import-relationship-type[type] section of the highlight:import/import-mapping-panel[mapping details panel], enter the text `CONTAINS`.
+
+[TIP]
+====
+Just like newly created nodes, the relationship will only show a green check mark once you have completed its mapping.
+You can also name relationships by double-clicking the arrow in the graph model and typing it directly.
+You can rapidly add nodes with a linking relationship by releasing the circle on an empty space the canvas instead of an existing node.
+Selected nodes can be deleted by clicking the highlight:import/import-delete-node-or-rel[delete button] or with the backspace key.
+You can quickly change the direction of a relationship with _Switch direction_ next to the relationship type.
+====
+
+== Map a file to a relationship
+
+The next stage is critical in helping the importer understand how a file defines a relationship.
+This is what will give you a connected graph.
+
+* If you look in the highlight:import/import-file-panel[Files panel], you'll see `order-details.csv` has columns that correspond with the `id` of our `Order` and `Product` nodes.
+* Ensuring you have the relationship selected, select the `order-details.csv` file from the highlight:import/import-relationship-file-dropdown[File dropdown].
+// TODO: Add id selector for relationship dropdown to enable UI higlighting
+* In the highlight:import/import-relationship-mapping-table[relationship mapping table] you will see the nodes and ID properties at each end of the `CONTAINS` relationship.
+
+Setup the *From* and *To* for the `CONTAINS` relationship:
+
+* The `From` end of the node is the `Order` node with the `id` property (remember that this property was mapped to the `orderId` column in the `orders.csv` file).
+* Your `order-details.csv` file also contains an `orderId` column, so select this in the highlight:import/import-rel-from-dropdown[from dropdown].
+This gives Data Importer the information it requires to link up the From end of the relationship.
+* You need to select the correct file column for the `To` end of the relationship (the Product node).
+As you might guess, this is the `productId` in the highlight:import/import-rel-to-dropdown[to dropdown]
+
+Everything in the highlight:import/import-model-panel[Data model pane] should now have green check marks as you have successfully mapped the file.
+
+=== More properties for richer queries
+
+For relationships, you can add properties that may be useful for your queries.
+
+In the `order-details.csv` file, you'll notice the columns `unitPrice`, `quantity` and `discount` could be useful to add as properties to the `CONTAINS` relationship.
+These properties are well suited to being on the relationship since they couldn't easily be encapsulated on the nodes at either end of the relationship.
+For example `quantity` does not belong on either the `Product` or `Order` nodes since products will be sold in different quantities on different orders.
+
+Just as you did for nodes, use the highlight:import/import-select-from-file-button[Map from file] button to map those columns to new properties on the relationship.
+
+[TIP]
+====
+You don't need to include the `orderID` or the `productID` here, as their only purpose is to create the `CONTAINS` relationship in our model and we've already used them to do that.
+====
+
+[%collapsible]
+.Are you having trouble?
+====
+If you're unsure if you've followed the steps correctly so far, you can go ahead and load the correct mapping so everything is in order before continuing.
+
+button::Load model and mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subset-node-and-relationship-mapping-zip-file}]
+====
+
+== Dealing with different file structures
+
+=== Relationship defined in the same file as one node
+
+In this example, a separate flat file, `order-details.csv`,  defines the relationship linking `Orders` and `Products`.
+
+However, it is quite common to have files where the relationship is defined by the same file as that used for the node at one (or sometimes both) ends of the relationship.
+In this example, you can see how the `orders.csv` file also contains a `shipVia` column which could be used to define the relationship to a `Shipper` node created from the `shippers.csv` file.
+
+To see how this mapping looks, here's an example for you to inspect the configuration.
+
+button::Load Northwind shipper mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subset-shipper-mapping-zip-file}]
+
+Here you can see that the `orders.csv` file is used to define both the `Order` node and the `SHIPS` relationship, as well as mapping the `Shipper` node to `shippers.csv`.
+
+=== Relationship defined in the same file as both nodes
+
+In examples where the nodes at each end of the relationship are both mapped to the same file, the relationship can ususally be inferred by the same file.
+If you first set up the nodes with their IDs and mapping, when then you draw the relationship, the `From` and `To` parts of the relationship will be mapped automatically.
+
+You can try this out by loading the simple example below and connecting the two nodes that are mapped to the same file:
+
+button::Load people and locations[role=NX_IMPORT_LOAD,endpoint={people_locations_nodes_only_zip_file}]
+
+The model you are aiming for is as below.
+
+image::import-people and locations.png[]
+
+If you add the relationships and label their types as above, you'll observe that the `From` and `To` relationships are automatically mapped for you.
+
+// TO-DO: Is not so neat in this example switching to a completely different context - would be better to add a Northwind related example of ths - look at doing this as it's a good example to show.
+
+[%collapsible]
+.Are you having trouble?
+====
+You can also click the button to load the people and locations with their relationship mapping.
+
+button::Load configuration[role=NX_IMPORT_LOAD,endpoint={people_locations_full_zip_file}]
+====
+
+== Ready to import?
+
+Let's get back to the Nortwind model, start by reloading the small Northwind model you created.
+
+button::Load model and mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subset-node-and-relationship-mapping-zip-file}]
+
+Any object in your model without a green check mark means that the mapping is not complete.
+If the mapping is not complete, you will not be able to run the import.
+
+The following items **must be** mapped on a **node**:
+
+* Label
+* File
+* A minimum of one property
+* ID
+
+The following items **must be** mapped on a **relationship**:
+
+* Type
+* File
+* ID file columns (for both _From_ and _To_ nodes)
+
+== Preview your graph
+
+When you're satisfied with your model and mapping, you can preview a sample of your data before running the actual import.
+
+Click the highlight:import/import-load-preview-button[Preview button] to see a sample of your data visualized.
+
+image::preview.png[]
+
+Even though the preview only scans the first few rows of your files, it is often sufficient to make sure everything connects as expected.
+You can click individual elements in the preview to verify that their properties appear as expected.
+But you should keep in mind that it is only a preview and only a sample of your data.
+The actual graph may look different once the full import is complete.
+
+You want to have your mapping completely done before previewing, but if you have missed something, you are still able to do a preview, but the incomplete elements will not be rendered.
+In other words, any element without a check mark in your model will not show up in the preview.
+
+As mentioned before, if any element in your model not mapped, you will **not** be able to run the import.
+
+== Running an import
+
+Click highlight:import/import-run-import-button[Run import] to import the files specified in your model.
+
+If any uploaded files are not specified in your model, these are **not** imported, but they remain in the highlight:import/import-file-panel[Files panel].
+
+If any mapping is incomplete, you will be informed that your model has errors and a red exclamation mark is shown next to the incomplete element in the model.
+When you select an incomplete element, the mapping pane also highlights the missing details.
+
+Once you've addressed any errors, go ahead and run the import again.
+You should see a popup window showing the successful results.
+
+image::import_results.png[]
+
+The summary shows what was included in the import.
+You can compare to your CSV files to verify that everything was imported.
+
+Congratulations on modelling, mapping, and loading your data!
+You can now explore and query it to learn more about the power of graphs and Neo4j.
+We have a few very useful importer tips to complete this guide.
+
+[TIP]
+====
+Note that if you run this guide after the _Getting Started_ guide, the count may show _updated_ rather than _created_ since Data Importer will ensure duplicate IDs are not created for elements already loaded.
+====
+
+== Final tips
+
+=== Saving and loading models
+
+As you work with data models, may want to come back to it or share it at some point.
+The importer lets you _download_ your model, with or without the data you've mapped to it.
+
+Ensure you are in the import tab.
+
+button::Import[role=NX_TAB_NAV,tab=import]
+
+image::save_load.png[]
+
+When you choose to download your model, with or without data, you are essentially saving it.
+The model doesn't have to be mapped for you to download.
+
+If you have a downloaded model, you can open it from this same menu, again with or without data.
+
+The data is stored as CSV-files and the model as a JSON file, which makes it easy to share.
+
+=== Re-running imports and updating your model
+
+You can run the import multiple times without duplicating your data.
+For example, if you want to make some changes to your model after you've run the import, just fix your model and when you are happy run the import again.
+The changes you made will overwrite what you had before, but no existing elements will be recreated, unless you change their IDs.
+
+=== When you outgrow the Data Importer
+
+Workspace's importer may not meet _all_ of your varied load needs, whether they are transformations or differing data formats.
+If you need more control, the chances are you can achieve the load using some of the other approaches to loading data into Neo4j.
+The following are useful resources for different needs:
+
+- https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV] for writing your own bespoke Cypher load scripts from CSVs, leveraging the full capabilities of Cypher.
+- https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import] for loading large amounts of CSV data rapidly into an offline database
+- https://neo4j.com/product/connectors/[Neo4j connectors] to connect data from a variety of sources into Neo4j.
+- https://neo4j.com/docs/apoc/current/overview/apoc.load/[APOC Load procedures] for special Cypher procedures to make it easier to ingest data from formats including json, xml and arrow.
+
+== Frequently Asked Questions
+
+*Missing files - why does Data Importer say I need to provide my files after I've aready provided them?*
+
+When you provide the importer with your files, you are actually providing your web browser with a link to those files on your local file system, they aren't uploaded anywhere.
+The importer streams the content of the files to you database only when you run the import.
+If you reload the page, the importer loses access to the connection to those files due to security restrictions.
+These are in place to prevent web applications accessing files you haven't given express permission to use on page load.
+You simply need to re-provide the files when requested by data importer to be able to run an import.
+
+*How can I replace a file?*
+
+The importer doesn't currently allow you to swap out files in the UI.
+However, there is a workaround that may prove useful.
+If you want to provide a different file with the same column structure to data importer, you can rename it to match and then simply add the file to the files panel.
+This will replace the reference to the latest file and be available for use by your import.
+
+
+*How do I change the database Data Importer loads into?*
+
+If you are using a Neo4j instance that supports multiple databases, the importer will use the home database to import data into.
+You may have the facility to change the home database for the user that you connect to your DBMS with, read more on setting the home database for a user https://neo4j.com/docs/cypher-manual/current/access-control/manage-users/[here].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

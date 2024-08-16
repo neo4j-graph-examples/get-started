@@ -1,8 +1,8 @@
-= Explore and interact with the data visualization in Neo4j Workspace
+= Explore and interact with the data visualization
 
 == Explore guide - an introduction
 
-The _Explore_ tab is a no-code interface that allows you to explore and interact with your graph data.
+The _Explore_ tool is a no-code interface that allows you to explore and interact with your graph data.
 
 In order to use Explore, you need to have data in your database and therefore it's recommended that you take this guide _after_ the Data Importer guide.
 
@@ -27,7 +27,7 @@ If you already have imported the dataset, you can just hit _Next_ and get straig
 [role=NX_TAB_NAV,tab=explore]
 pagelaunch::[]
 
-When you first open the Explore tab (provided that you have data in your database), you're presented with a sample graph on the canvas, also called the _scene_, and a legend panel on the right and a sidebar on the left.
+When you first open the Explore tool (provided that you have data in your database), you're presented with a sample graph on the canvas, also called the _scene_, and a legend panel on the right and a sidebar on the left.
 
 The highlight:explore/tabpanel-categories[legend panel] shows the available node labels and relationships, respectively, in your data.
 You can view them all or filter by whether they are present or not in the current scene.
