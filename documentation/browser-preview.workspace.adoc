@@ -1,0 +1,94 @@
+= New Browser Preview
+//:images: img/browser-preview
+// http://localhost:4000/browser-preview.workspace.json
+
+== Introduction
+
+Welcome to the New Browser Preview! We’ve been busy modernizing our applications as part of our integrated cloud offering Neo4j Aura and are now bringing those benefits to the Browser that we bundle with the Neo4j distribution.
+
+If you use Neo4j Aura you’ll see the same capabilities as this New Browser Preview offered under the “Query” part of the integrated experience. This offers the same capabilities as you find here, along with new features you might expect from a cloud offering, like user content being backed by cloud storage so it’s available wherever you login. For our standalone Browser, content will continue to be backed by LocalStorage and therefore tied to the browser you use to access the application.
+
+With that context, read on to learn more about the big new updates in this preview:
+
+- New Cypher editor
+- Richer table visualization
+- More scalable graph visualization
+- New history and quick search
+- Improved saved Cypher experience
+- Revised parameters 
+
+== New Cypher editor
+
+One of the biggest improvements is the new editor, now built from the same source as the underlying Cypher Language. With  Cypher evolving more rapidly than ever before, it’s never been more important to keep pace with the latest language features. Here are a few ways the new editor helps you do that:  
+ 
+Syntax highlighting:: Richer syntax highlighting all but eliminates false positives from things like property values being misinterpreted as Cypher keywords and differentiates more tokens for ease of reading.
+
+image::cypher-editor-syntax-highlighting.png[]
+
+
+Auto completions:: The underpinnings of the Cypher editor now have a much improved understanding of valid constructs, meaning it will, for example, far more accurately complete the next valid keyword.
+
+image::cypher-editor-auto-completions.gif[]
+
+Inline help:: When using a procedure or making a function call, helpful descriptions and signatures are presented, allowing you to better understand what’s expected as an input or what might be returned.
+
+image::cypher-editor-inline-help.png[]
+
+Cypher linting:: One of the single most useful new features we’ve added to the editor is Cypher linting, so you’ll now see useful warnings and errors _before_ running a query. This really helps shorten the feedback loop, meaning you don’t have to run a query to spot syntactic or semantic errors. This is especially useful when editing larger queries or using new language constructs where you might not be so familiar with what to expect.
+
+image::cypher-editor-linting.png[]
+
+Cypher reference:: As a complement to the in-editor help, we now also provide a searchable Cypher reference in the sidebar. This is useful if you want to check the syntax of a Cypher construct or want a refresher, for example, of which temporal functions exist and how to use them. The reference also provides links to the cypher manual for more in depth explanations and examples.
+
+image::cypher-reference.gif[]
+
+== Richer table visualization
+
+The table visualization now employs reactive result fetching by default, meaning we’ll automatically limit the number of rows returned by a query regardless of any `LIMIT` statements you apply. This is useful for new and experienced users alike, where an unintentional omission of a `LIMIT` statement could result in the results returned could previously overwhelm Browser. The table now also employs virtualized rendering meaning that even if you do return a larger number of rows, we only render those in view to keep the application more responsive.
+
+Functionally there are improvements too. A new render for paths, relationships and nodes allows you to more readily discern labels/types and key/value pairs. By default we provide a compact render, but optionally allow graph objects to be pretty-printed for situations where ease of reading is more important than compactness.
+
+Simple result filtering is now also available, allowing you to perform simple text matches on returned results. This can be useful when it's simpler and quicker than modifying a Cypher statement to contain a WHERE clause.
+
+image::table-visualization.gif[]
+
+ 
+== More scalable graph visualization
+
+The graph visualization has been completely rebuilt using a new engine while maintaining the familiar layout algorithm from the ouutgoing graph visualization. This makes the visualization much more responsive and allows for a far larger number of nodes and relationships to be visualized than was previously possible.
+
+One important functional change is the visualization now only displays items you explicitly return in Cypher statements - no longer automatically connecting returned nodes with relationships that exist between them. This can still be achieved on-demand via a context menu in the visualization to “show all relationships”
+
+image::scalable-graph-visualization.gif[]
+
+
+== New history and quick search
+
+The familiar and convenient up/down arrow history feature that remains, but has been supplemented with a dedicated sidebar to review and manage history, allowing history to be selectively deleted or exported.
+
+For convenience, the history available in the sidebar is also searchable via a fuzzy search from the main editor, allowing you to quickly find a query in your history. This can be invoked from the … more menu on the main editor or via Ctrl+R
+
+image::history-quick-search.gif[]
+
+
+== Improved saved Cypher experience
+
+The “Favorites” experience from Browser is now “Saved Cypher” and provides a refreshed way of creating and managing Cypher. Among other things, you can now more readily re-order items among nested folders and cypher saved from the editors recalls the last folders used for convenience. 
+
+image::saved-cypher.gif[]
+
+== Revised paramaters 
+
+The parameters implementation has rationalized the `:param` and `:params` variants that differed in Browser. While singular and plural versions of the command are respected they behave the same way and offer support for setting parameters singularly via the arrow syntax `:param a => 1` or multiply via cypher maps `:param {a:1, b: 2}`. 
+
+== And finally...
+
+We hope you enjpy using the new Browser preview. Please note that the following are not yet supported:
+
+- `:server [connect | disconnect]` commands and frames. For the time being the connection header at the top of the page is used to connect to instances
+- `:sysinfo` command to review details of your dbms cluster
+- `:play` commands to play builtin and custom guides
+- `:server user [add | list]` commands to support user management - this is possible via the cypher surface, see docs for more details.
+- GraSS and the `:style` command to set custom styles. Some basic styling support is provided via the UI to change colors, captions and size as well as ordering the priority of styles when multiple labels apply to a node.  
+
+This new Browser preview will ultimately replace the existing Browser as the default and later only experience. If these items or anything else is important to you, please head over to https://feedback.neo4j.com/query and drop your feedback there.
