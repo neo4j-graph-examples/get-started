@@ -39,7 +39,9 @@ Inline help:: When using a procedure or making a function call, helpful descript
 
 image::cypher-editor-inline-help.png[]
 
-Cypher linting:: One of the single most useful new features we’ve added to the editor is Cypher linting, so you’ll now see useful warnings and errors _before_ running a query. This really helps shorten the feedback loop, meaning you don’t have to run a query to spot syntactic or semantic errors. This is especially useful when editing larger queries or using new language constructs where you might not be so familiar with what to expect.
+Cypher linting:: One of the most useful new features is Cypher linting, which lets you see useful warnings and errors _before_ running a query. 
+This helps shorten the feedback loop, so you don’t have to run a query to spot syntactic or semantic errors. 
+This is especially useful when editing larger queries or using new language constructs where you might not know what to expect.
 
 image::cypher-editor-linting.png[]
 
