@@ -23,7 +23,7 @@ This guide will take you through a three-stage process:
 
 === Limitations
 
-We do not yet support:
+The following are not yet supported:
 
 - Advanced configuration options such as custom certificates for data sources
 - Imports from data sources in a Virtual Private Cloud (VPC) into a Neo4j managed VPC
