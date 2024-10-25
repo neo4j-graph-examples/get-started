@@ -112,4 +112,5 @@ Please note that the following are not yet supported:
 - `:server user [add | list]` commands to support user management - this is possible via the cypher surface, see docs for more details.
 - GraSS and the `:style` command to set custom styles. Some basic styling support is provided via the UI to change colors, captions and size as well as ordering the priority of styles when multiple labels apply to a node.  
 
-This new Browser preview will ultimately replace the existing Browser as the default and later only experience. If these items or anything else is important to you, please head over to https://feedback.neo4j.com/query and drop your feedback there.
+This new Browser preview will ultimately replace the existing Browser as the default and later, only experience. 
+If these items or anything else is important to you, please head over to link:https://feedback.neo4j.com/query[] and drop your feedback there.
