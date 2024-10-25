@@ -53,7 +53,10 @@ image::cypher-reference.gif[]
 
 == Richer table visualization
 
-The table visualization now employs reactive result fetching by default, meaning we’ll automatically limit the number of rows returned by a query regardless of any `LIMIT` statements you apply. This is useful for new and experienced users alike, where an unintentional omission of a `LIMIT` statement could result in the results returned could previously overwhelm Browser. The table now also employs virtualized rendering meaning that even if you do return a larger number of rows, we only render those in view to keep the application more responsive.
+The table visualization now employs reactive result fetching by default.
+This means that the number of rows returned by a query is automatically limited, regardless of any `LIMIT` statements you apply. 
+This is useful for both new and experienced users since an unintentional omission of a `LIMIT` statement can lead to an unexpectedly large amount of results returned, which could previously have overwhelmed Browser.
+The table now also employs virtualized rendering meaning that even if you do return a larger number of rows, only those in view are rendered to keep the application more responsive.
 
 Functionally there are improvements too. A new render for paths, relationships and nodes allows you to more readily discern labels/types and key/value pairs. By default we provide a compact render, but optionally allow graph objects to be pretty-printed for situations where ease of reading is more important than compactness.
 
