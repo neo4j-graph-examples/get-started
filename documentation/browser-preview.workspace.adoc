@@ -83,7 +83,8 @@ image::scalable-graph-visualization.gif[]
 
 The familiar and convenient up/down arrow history feature remains but has been supplemented with a dedicated sidebar to review and manage history, allowing history to be selectively deleted or exported.
 
-For convenience, the history available in the sidebar is also searchable via a fuzzy search from the main editor, allowing you to quickly find a query in your history. This can be invoked from the … more menu on the main editor or via Ctrl+R
+For convenience, the history available in the sidebar is also searchable via a fuzzy search from the main editor, allowing you to quickly find a query in your history. 
+This can be invoked from the […] more menu on the main editor or via Ctrl+R.
 
 image::history-quick-search.gif[]
 
