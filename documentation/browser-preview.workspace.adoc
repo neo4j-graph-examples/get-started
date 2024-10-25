@@ -26,7 +26,7 @@ One of the biggest improvements is the new editor which is now built from the sa
 The Cypher language is ever-evolving and the new editor helps you stay up-to-date with the latest language features.
 Here are a few ways the new editor helps you do that:  
  
-Syntax highlighting:: Richer syntax highlighting all but eliminates false positives from things like property values being misinterpreted as Cypher keywords and differentiates more tokens for ease of reading.
+Syntax highlighting:: Richer syntax highlighting identifies potential errors from things like property values being misinterpreted as Cypher keywords and differentiates more tokens for ease of reading.
 
 image::cypher-editor-syntax-highlighting.png[]
 
