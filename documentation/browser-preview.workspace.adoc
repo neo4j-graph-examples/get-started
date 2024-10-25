@@ -91,7 +91,8 @@ image::history-quick-search.gif[]
 
 == Improved saved Cypher experience
 
-The “Favorites” experience from Browser is now “Saved Cypher” and provides a refreshed way of creating and managing Cypher. Among other things, you can now more readily re-order items among nested folders and cypher saved from the editors recalls the last folders used for convenience. 
+The “Favorites” experience from Browser is now “Saved Cypher” and provides a refreshed way of creating and managing Cypher. 
+You can now more readily re-order items among nested folders, and Cypher statements saved from the editors recall the last folders used for convenience. 
 
 image::saved-cypher.gif[]
 
