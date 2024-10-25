@@ -29,7 +29,7 @@ The following are not yet supported:
 - Imports from data sources in a Virtual Private Cloud (VPC) into a Neo4j managed VPC
 
 
-Let's get started setting up a connection to a relational database and completing our first import.
+Start by setting up a connection to a relational database and complete your first import.
 
 
 == Configuring a data source
