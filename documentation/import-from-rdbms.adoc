@@ -45,36 +45,52 @@ Two categories of data sources are available:
 - Proivision of CSV files -- you provide CSV files from your filesystem as the data source. 
 A separate guide, _Import from CSV_, is available to take you through this process.
 
-This guide will focus on connecting directly to a data source. Start by clicking the "New data source" button on the Data Sources tab, which will present you with a number of data source options. In this guide we'll connect to PostgreSQL.
+This guide focuses on connecting directly to a data source. 
+The "New data source" button on the Data Sources tab, presents you with a number of data source options. 
+In this guide, you will connect to PostgreSQL.
 
 
-Complete the form with the required information for your data source. If there are any problems connecting to your data source, you'll stay on the connection form and have the opportunity to tweak the details before continuing.
+Complete the form with the required information for your data source. 
+If there are any problems connecting to your data source, you stay on the connection form and have the opportunity to tweak the details before continuing.
 
 image::import-source-config-form.png[]
 
 [TIP]
 ====
-Currently error reporting is limited, so you might find it helpful to validate all your details are correct by successfully connecting from your development machine. It's worth re-iterating that at present your database needs to be publicly accessible for us to conenct to it.
+Currently, error reporting is limited, so you should validate that all your details are correct by successfully connecting from your development machine. 
+Also, note that your database needs to be publicly accessible to connect to it from Neo4j Aura.
 ====
 
-Once the connection is successful, you'll be prompted to review and confirm the table schema for the database you've chosen to connect to. Here you can see a summary of the tables and columns in your database to help validate you're connected to the right data source. If everything looks good, hit `Confirm`. This will add your data source and and save it for future re-use.
+Once the connection is successful, you are prompted to review and confirm the table schema for the database you've selected to connect to. 
+Here you can see a summary of the tables and columns in your database to help validate that you're connected to the right data source. 
+If everything looks good, hit `Confirm`. 
+This adds your data source and saves it for future re-use.
 
 image::import-source-table-schema.png[]
 
 [TIP]
 ====
-While retain your connection details, we don't currently retain your password. You'll need to re-provide the password for your data source when you use it again or trigger the import job.
+While your connection details are retained, your password is not. 
+You need to re-provide the password for your data source when you use it again or trigger the import job.
 ====
 
-Once you've added a data source, you can either start generating a candidate graph from it, or hit `Later` to come back and do this at a later point in time. If you come back later, you'll be able to use the `...` button on a row and the `New graph model from data source` option to start the graph generation flow. In this guide, let's move immediately onto the next stage of generating a graph model.
+Once you've added a data source, you can either start generating a candidate graph from it, or hit `Later` to come back and do this later. 
+If you come back later, use the [...] button on a row and the `New graph model from data source` option to start the graph generation flow. 
+In this guide, let's move immediately onto the next stage of generating a graph model.
 
 
 == Generating a graph model
 
 
-After adding a data source, hit the `Generate graph model` button. Doing this inspects any constraints that exist in your database, looking for primary key constraints to create nodes with IDs and foreign keys to generate relationships between them. If suitable contraints are found we'll generate a corresponding candidate graph for and map the tables and columns to it. If your dataset doesn't have any such constraints (or only part of the schema does), you'll have to map your tables to nodes and relationships manually. If you're not familiar with your data source, it might take some time to understand the different entities and connections present in your tables.
+Use the `Generate graph model` button once you have added a data source. 
+Doing this inspects any constraints that exist in your database, looking for primary key constraints to create nodes with IDs and foreign keys to generate relationships between them. 
+If suitable constraints are found, a corresponding candidate graph is generated, and the tables and columns are mapped to it. 
+If your dataset doesn't have any such constraints (or only part of the schema does), you have to map your tables to nodes and relationships manually. 
+If you're not familiar with your data source, it may take some time to understand the different entities and connections present in your tables.
 
-If we don't find any constraints *at all* in your source database, we'll map everyhthing to a node for your convenience. While this saves you doing some mapping manually, please note that a graph with just nodes doesn't make for a connected graph! From here, delete nodes that should be relationships and recreate relationships between the remaining nodes as is most appropriate for your data.
+If no constraints are found *at all* in your source database, everything is mapped to a node for your convenience. 
+This saves you from doing some manual mapping, but note that a graph with just nodes doesn't make for a connected graph! 
+From here, delete nodes that should be relationships and recreate relationships between the remaining nodes as appropriate for your data.
 
 
 [TIP]
@@ -84,22 +100,32 @@ The generation and mapping doesn't currently support composite primary or foregi
 
 === Refining a model
 
-Even in this example where a well-conencted graph model has been generated, the model can benefit from some tidy up. For example, tables mapped to nodes simply use the correspoinding table name as the Label, but we can tidy that up to make it more suitable for our Graph. The same applies for relatonships which by default use a concatenation of related table names. Relationship direction may also benefit from being reversed for the chosen semantics. See the example below where the concepts of Person, Order and Employee and their corresponding relationships are tidied up.
+Even in this example where a well-connected graph model has been generated, the model can benefit from some tidy-up. 
+For example, tables mapped to nodes use the corresponding table name as the label, but this can be made more suitable for your graph. 
+The same applies to relationships that by default use a concatenation of related table names. 
+Relationship direction may also benefit from being reversed for the chosen semantics. 
+See the example below where the concepts of Person, Order, and Employee and their corresponding relationships are tidied up.
 
 image::import-iterate-graph-model.gif[]
 
-In the Data source panel on the left hand side, blue icons denote that the column form a particular table has been mapped to the graph model. It's worth reviewing the list of tables to any that have not been mapped.
+In the Data source panel on the left-hand side, blue icons denote that the column from a particular table has been mapped to the graph model. 
+Reviewing the list of tables to any that have not been mapped can be useful.
 
 image::import-tables-mapped.png[]
 
 
-If the data is in the right shape, these can be mapped manually to the graph model. You can learn more about how nodes and relationships are mapped in the "Import from CSV" guide that covers the same concepts required here. It explains node IDs and relationship mappings in more details with CSV files instead of tables.
+If the data is in the right shape, it can be mapped manually to the graph model. 
+You can learn more about how nodes and relationships are mapped in the _Import from CSV_ guide that covers the same concepts required here.
+ It explains node IDs and relationship mappings in more detail with CSV files instead of tables.
 
-When all parts of the graph model (nodes and relationships) are successfully mapped to tables, they will be annotated with a green check mark. If an import is attempted and anything is missing, it will be higlighted in red to be fixed before proceeding with the import. 
+When all parts of the graph model (nodes and relationships) are successfully mapped to tables, they are annotated with a green check mark. 
+If an import is attempted and anything is missing, it is highlighted in red to be fixed before proceeding with the import. 
 
 == Running an import job
 
-Once you're happy with your graph model and how your tables are mapped to it, you can submit the import job. If you're already connected to an instance, this instance will be used, otherwise you'll be prompted to select an instance.
+Once you're happy with your graph model and how your tables are mapped to it, you can runthe import job.
+If you're already connected to an instance, this instance is used. 
+Otherwise, you are prompted to select an instance.
 
 When submitting the job, you are prompted for two sets of credentials:
 
