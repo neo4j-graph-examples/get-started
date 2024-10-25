@@ -7,7 +7,9 @@
 Welcome to the New Browser Preview! 
 Browser's querying functionality has been modernized and integrated into Neo4j Aura, and these benefits are now available in the new Browser, bundled with the Neo4j on-prem distribution.
 
-If you use Neo4j Aura you’ll see the same capabilities as this New Browser Preview offered under the “Query” part of the integrated experience. This offers the same capabilities as you find here, along with new features you might expect from a cloud offering, like user content being backed by cloud storage so it’s available wherever you login. For our standalone Browser, content will continue to be backed by LocalStorage and therefore tied to the browser you use to access the application.
+If you use Neo4j Aura you’ll see the same capabilities as this New Browser Preview offered under the **Query** part of the integrated experience. 
+Query and Browser are similar, but Query provides features you might expect from a cloud offering like user content being backed by cloud storage so it’s available wherever you log in. 
+For the standalone Browser, content continues to be backed by LocalStorage and therefore tied to the browser you use to access the application.
 
 With that context, read on to learn more about the big new updates in this preview:
 
