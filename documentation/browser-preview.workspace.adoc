@@ -98,7 +98,8 @@ image::saved-cypher.gif[]
 
 == Revised paramaters 
 
-The parameters implementation has rationalized the `:param` and `:params` variants that differed in Browser. While singular and plural versions of the command are respected they behave the same way and offer support for setting parameters singularly via the arrow syntax `:param a => 1` or multiply via cypher maps `:param {a:1, b: 2}`. 
+The parameters implementation has rationalized the `:param` and `:params` variants that differed in Browser. 
+While singular and plural versions of the command are respected, they behave the same way and offer support for setting parameters singularly via the arrow syntax `:param a => 1` or multiply via Cypher maps `:param {a:1, b: 2}`. 
 
 == And finally...
 
