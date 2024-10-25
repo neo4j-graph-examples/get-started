@@ -115,6 +115,7 @@ image::import-query-db-info-refresh.gif[]
 
 ====
 
-If you want to return to a model, you can find it stored in the Graph models tab. From here you can open a model and rerun an import or adapt the model as required before rerunning.
+If you want to return to a model, you can find it stored in the Graph models tab. 
+From here you can open a model and rerun an import or adapt the model as required before rerunning.
 
 image::import-graph-models.png[]
