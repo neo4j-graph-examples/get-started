@@ -42,7 +42,8 @@ Once in the Import service, the first step is to configure a new data source.
 Two categories of data sources are available:
 
 - Direct connection -- you provide the import service with access to your data source, including connection URL, database name, and credentials. 
-- Proivision of CSV files - here you will be providing CSV files from your filesystem as the data source. A separate guide "Import from CSV" is available to take you though this process.
+- Proivision of CSV files -- you provide CSV files from your filesystem as the data source. 
+A separate guide, _Import from CSV_, is available to take you through this process.
 
 This guide will focus on connecting directly to a data source. Start by clicking the "New data source" button on the Data Sources tab, which will present you with a number of data source options. In this guide we'll connect to PostgreSQL.
 
