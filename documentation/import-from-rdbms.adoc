@@ -8,7 +8,7 @@
 The import service now offers a way to import directly from data sources such as relational databases. 
 If your data is already in reasonable shape for use in a graph database, it is possible to connect directly to your source and configure an import job.
 
-This guide will take you through a simple three stage process:
+This guide will take you through a three-stage process:
 
 . Configuring a data source
 . Reviewing a generated graph model and mapping to the data source
