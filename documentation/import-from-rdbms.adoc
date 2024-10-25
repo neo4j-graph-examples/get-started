@@ -103,7 +103,7 @@ When submitting the job, you are prompted for two sets of credentials:
 - The data source password (as used when setting up the data source)
 - The destination neo4j instance password. These were provided when you created the instance and optionally made available to download in a `.txt` file of the format `Neo4j-<instance_id>-Created-<date>.txt`
 
-Once the job has been successfully submitted, you'll be redirected to the import jobs page which tracks the current status of the import job.
+Once the job has been successfully submitted, you are redirected to the import jobs page, which tracks the current status of the import job.
 
 image::import-import-jobs.png[]
 
