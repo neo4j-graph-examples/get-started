@@ -62,7 +62,8 @@ There are functional improvements too.
 A new render for paths, relationships, and nodes allows you to more readily discern labels/types and key/value pairs. 
 By default, the render is compact, but optionally it allows graph objects to be pretty-printed for situations where readability is more important than compactness.
 
-Simple result filtering is now also available, allowing you to perform simple text matches on returned results. This can be useful when it's simpler and quicker than modifying a Cypher statement to contain a WHERE clause.
+Simple result filtering is now also available, allowing you to perform simple text matches on returned results. 
+It's often simpler and quicker than modifying a Cypher statement to contain a WHERE clause.
 
 image::table-visualization.gif[]
 
