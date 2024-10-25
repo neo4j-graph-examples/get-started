@@ -98,7 +98,7 @@ When all parts of the graph model (nodes and relationships) are successfully map
 
 Once you're happy with your graph model and how your tables are mapped to it, you can submit the import job. If you're already connected to an instance, this instance will be used, otherwise you'll be prompted to select an instance.
 
-When submitting the job, you'll be prompted for two sets of credentials:
+When submitting the job, you are prompted for two sets of credentials:
 
 - The data source password (as used when setting up the data source)
 - The destination neo4j instance password. These will have been provided when creating the instance and optionally made available to download in a `.txt` file of the format `Neo4j-<instance_id>-Created-<date>.txt`
