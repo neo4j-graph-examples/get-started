@@ -31,7 +31,7 @@ Syntax highlighting:: Richer syntax highlighting identifies potential errors fro
 image::cypher-editor-syntax-highlighting.png[]
 
 
-Auto completions:: The underpinnings of the Cypher editor now have a much improved understanding of valid constructs, meaning it will, for example, far more accurately complete the next valid keyword.
+Auto completions:: The underpinnings of the Cypher editor now have an improved understanding of valid constructs, meaning it will, for example, more accurately complete the next valid keyword.
 
 image::cypher-editor-auto-completions.gif[]
 
