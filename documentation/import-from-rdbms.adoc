@@ -109,7 +109,8 @@ image::import-import-jobs.png[]
 
 [TIP]
 ====
-The high level status of the import job is refreshed periodically, but does not currently show progress. If you want to see live updates of the nodes and relationships being imported into the graph, you can switch to the Query app and monitor the Database Information sidebar and refresh it to see counts increment.
+The high-level status of the import job is refreshed periodically but does not currently show progress. 
+If you want to see live updates of the nodes and relationships being imported into the graph, you can switch to the Query app, monitor the Database Information sidebar, and refresh it to see counts increment.
 
 image::import-query-db-info-refresh.gif[]
 
