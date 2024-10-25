@@ -22,7 +22,9 @@ With that context, read on to learn more about the big new updates in this previ
 
 == New Cypher editor
 
-One of the biggest improvements is the new editor, now built from the same source as the underlying Cypher Language. With  Cypher evolving more rapidly than ever before, it’s never been more important to keep pace with the latest language features. Here are a few ways the new editor helps you do that:  
+One of the biggest improvements is the new editor which is now built from the same source as the Cypher language.
+The Cypher language is ever-evolving and the new editor helps you stay up-to-date with the latest language features.
+Here are a few ways the new editor helps you do that:  
  
 Syntax highlighting:: Richer syntax highlighting all but eliminates false positives from things like property values being misinterpreted as Cypher keywords and differentiates more tokens for ease of reading.
 
