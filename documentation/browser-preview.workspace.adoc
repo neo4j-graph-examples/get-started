@@ -58,7 +58,9 @@ This means that the number of rows returned by a query is automatically limited,
 This is useful for both new and experienced users since an unintentional omission of a `LIMIT` statement can lead to an unexpectedly large amount of results returned, which could previously have overwhelmed Browser.
 The table now also employs virtualized rendering meaning that even if you do return a larger number of rows, only those in view are rendered to keep the application more responsive.
 
-Functionally there are improvements too. A new render for paths, relationships and nodes allows you to more readily discern labels/types and key/value pairs. By default we provide a compact render, but optionally allow graph objects to be pretty-printed for situations where ease of reading is more important than compactness.
+There are functional improvements too. 
+A new render for paths, relationships, and nodes allows you to more readily discern labels/types and key/value pairs. 
+By default, the render is compact, but optionally it allows graph objects to be pretty-printed for situations where readability is more important than compactness.
 
 Simple result filtering is now also available, allowing you to perform simple text matches on returned results. This can be useful when it's simpler and quicker than modifying a Cypher statement to contain a WHERE clause.
 
