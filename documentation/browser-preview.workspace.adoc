@@ -103,7 +103,8 @@ While singular and plural versions of the command are respected, they behave the
 
 == And finally...
 
-We hope you enjpy using the new Browser preview. Please note that the following are not yet supported:
+Hope you enjoy using the new Browser preview. 
+Please note that the following are not yet supported:
 
 - `:server [connect | disconnect]` commands and frames. For the time being the connection header at the top of the page is used to connect to instances
 - `:sysinfo` command to review details of your dbms cluster
