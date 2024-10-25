@@ -45,7 +45,9 @@ This is especially useful when editing larger queries or using new language cons
 
 image::cypher-editor-linting.png[]
 
-Cypher reference:: As a complement to the in-editor help, we now also provide a searchable Cypher reference in the sidebar. This is useful if you want to check the syntax of a Cypher construct or want a refresher, for example, of which temporal functions exist and how to use them. The reference also provides links to the cypher manual for more in depth explanations and examples.
+Cypher reference:: As a complement to the in-editor help, a searchable Cypher reference is now available in the sidebar. 
+This is useful to check the syntax of a Cypher construct or want a quick reference of which temporal functions exist and how to use them, for example. 
+The reference also provides links to the Cypher manual for more in-depth explanations and examples.
 
 image::cypher-reference.gif[]
 
