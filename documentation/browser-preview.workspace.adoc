@@ -73,7 +73,8 @@ image::table-visualization.gif[]
 The graph visualization has been rebuilt using a new engine while maintaining the familiar layout algorithm from the outgoing graph visualization. 
 This makes the visualization more responsive and allows for a larger number of nodes and relationships to be visualized.
 
-One important functional change is the visualization now only displays items you explicitly return in Cypher statements - no longer automatically connecting returned nodes with relationships that exist between them. This can still be achieved on-demand via a context menu in the visualization to “show all relationships”
+Another important functional change is that the visualization now only displays items you explicitly return in Cypher statements - it no longer automatically connects returned nodes with relationships that exist between them. 
+This can still be achieved on-demand via a context menu in the visualization to “show all relationships”.
 
 image::scalable-graph-visualization.gif[]
 
