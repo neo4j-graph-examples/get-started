@@ -1,4 +1,4 @@
-= Learn how to import and map data with Neo4j Data Importer
+= Import data from CSV
 // NOTE: Browser may cache files when loading from zip
 
 :northwind-subset-data-only-no-model-zip-file:  https://neo4j-graph-examples.github.io/get-started/data/northwind-subset-data-only-no-model.zip
@@ -11,9 +11,12 @@
 
 == Introduction
 
-Workspace's data importer offers a powerful and simple way to model and load data into Neo4j.
+Data importer offers a powerful and simple way to model and load data into Neo4j.
 It's great if you're new to graphs or have rapid prototyping needs.
 If you have more advanced needs, checkout the _What's next?_ section at the end of this guide.
+
+
+This guide focuses on loading data from CSV, if loading data from a relationsal database, refer to the guide _Import from Relational Database_.
 
 This guide will teach you how to:
 
@@ -32,7 +35,7 @@ This guide is continuing with the same dataset, Northwind.
 
 === Add the Northwind files
 
-To get started, {northwind-subset-data-only-no-model-zip-file}[download and unzip this file of CSVs^] and then drop the files onto the highlight:import/import-file-panel[files panel].
+To get started, navigate to the _Import_ tab under _Data Services_ section and choose the CSV option when adding a data source. Then {northwind-subset-data-only-no-model-zip-file}[download and unzip this file of CSVs^] and drop the files onto the highlight:import/import-file-panel[data source panel].
 
 [%collapsible]
 .Are you having trouble?
@@ -44,7 +47,7 @@ button::Add Northwind files[role=NX_IMPORT_LOAD,endpoint={northwind-subset-data-
 
 === File structure
 
-Now that you've added the files, you should be able to see each file's header and the first row of data in the highlight:import/import-file-panel[Files panel].
+Now that you've added the files, you should be able to see each file's header and the first row of data in the highlight:import/import-file-panel[data source panel].
 
 [TIP]
 ====
@@ -86,7 +89,7 @@ Select `orders.csv` from the highlight:import/import-node-file-dropdown[file dro
 
 Let's now add some properties to the `Order` node from our `orders.csv` file.
 
-* Click the highlight:import/import-select-from-file-button[Map from file] button.
+* Click the highlight:import/import-select-from-file-button[Map from table] button.
 * Select the `orderId`, `orderDate` and `requiredDate` columns and click *Confirm*.
 * Edit the name `orderId` property in the mapping details panel by clicking the pencil icon and then rename it to `id` (it obviously relates to an order).
 * Change its data type from `integer` to `string` using the drop-down.
@@ -95,7 +98,7 @@ Let's now add some properties to the `Order` node from our `orders.csv` file.
 [NOTE]
 ====
 When selected from file, properties are given the name of the column selected when created.
-Workspace guesses each datatype based on a sample of the values it found.
+Importer guesses each datatype based on a sample of the values it found.
 Always double-check this when working with unfamiliar data.
 For example, Northwind's date/time columns are identified as strings, but you can edit that if you want to.
 ====
@@ -195,7 +198,7 @@ You can quickly change the direction of a relationship with _Switch direction_ n
 The next stage is critical in helping the importer understand how a file defines a relationship.
 This is what will give you a connected graph.
 
-* If you look in the highlight:import/import-file-panel[Files panel], you'll see `order-details.csv` has columns that correspond with the `id` of our `Order` and `Product` nodes.
+* If you look in the highlight:import/import-file-panel[data source panel], you'll see `order-details.csv` has columns that correspond with the `id` of our `Order` and `Product` nodes.
 * Ensuring you have the relationship selected, select the `order-details.csv` file from the highlight:import/import-relationship-file-dropdown[File dropdown].
 // TODO: Add id selector for relationship dropdown to enable UI higlighting
 * In the highlight:import/import-relationship-mapping-table[relationship mapping table] you will see the nodes and ID properties at each end of the `CONTAINS` relationship.
@@ -218,7 +221,7 @@ In the `order-details.csv` file, you'll notice the columns `unitPrice`, `quantit
 These properties are well suited to being on the relationship since they couldn't easily be encapsulated on the nodes at either end of the relationship.
 For example `quantity` does not belong on either the `Product` or `Order` nodes since products will be sold in different quantities on different orders.
 
-Just as you did for nodes, use the highlight:import/import-select-from-file-button[Map from file] button to map those columns to new properties on the relationship.
+Just as you did for nodes, use the highlight:import/import-select-from-file-button[Map from table] button to map those columns to new properties on the relationship.
 
 [TIP]
 ====
@@ -311,13 +314,13 @@ The actual graph may look different once the full import is complete.
 You want to have your mapping completely done before previewing, but if you have missed something, you are still able to do a preview, but the incomplete elements will not be rendered.
 In other words, any element without a check mark in your model will not show up in the preview.
 
-As mentioned before, if any element in your model not mapped, you will **not** be able to run the import.
+As mentioned before, if any element in your model is not mapped, you will **not** be able to run the import.
 
 == Running an import
 
 Click highlight:import/import-run-import-button[Run import] to import the files specified in your model.
 
-If any uploaded files are not specified in your model, these are **not** imported, but they remain in the highlight:import/import-file-panel[Files panel].
+If any uploaded files are not specified in your model, these are **not** imported, but they remain in the highlight:import/import-file-panel[data source panel].
 
 If any mapping is incomplete, you will be informed that your model has errors and a red exclamation mark is shown next to the incomplete element in the model.
 When you select an incomplete element, the mapping pane also highlights the missing details.
@@ -367,7 +370,7 @@ The changes you made will overwrite what you had before, but no existing element
 
 === When you outgrow the Data Importer
 
-Workspace's importer may not meet _all_ of your varied load needs, whether they are transformations or differing data formats.
+Importer may not meet _all_ of your varied load needs, whether they are transformations or differing data formats.
 If you need more control, the chances are you can achieve the load using some of the other approaches to loading data into Neo4j.
 The following are useful resources for different needs:
 
@@ -392,14 +395,6 @@ The importer doesn't currently allow you to swap out files in the UI.
 However, there is a workaround that may prove useful.
 If you want to provide a different file with the same column structure to data importer, you can rename it to match and then simply add the file to the files panel.
 This will replace the reference to the latest file and be available for use by your import.
-
-
-*How do I change the database Data Importer loads into?*
-
-If you are using a Neo4j instance that supports multiple databases, the importer will use the home database to import data into.
-You may have the facility to change the home database for the user that you connect to your DBMS with, read more on setting the home database for a user https://neo4j.com/docs/cypher-manual/current/access-control/manage-users/[here].
-
-
 
 
 

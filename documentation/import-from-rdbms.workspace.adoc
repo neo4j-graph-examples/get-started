@@ -1,6 +1,4 @@
 = Import from Relational Database
-:imagesdir: https://neo4j-graph-examples.github.io/get-started/documentation/img/
-
 [role=NX_TAB_NAV,tab=import]
 
 == Introduction
@@ -123,7 +121,7 @@ If an import is attempted and anything is missing, it is highlighted in red to b
 
 == Running an import job
 
-Once you're happy with your graph model and how your tables are mapped to it, you can runthe import job.
+Once you're happy with your graph model and how your tables are mapped to it, you can run the import job.
 If you're already connected to an instance, this instance is used. 
 Otherwise, you are prompted to select an instance.
 

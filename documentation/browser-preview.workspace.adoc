@@ -1,5 +1,4 @@
 = New Browser Preview
-//:images: img/browser-preview
 // http://localhost:4000/browser-preview.workspace.json
 
 == Introduction
