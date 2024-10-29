@@ -802,8 +802,8 @@ NOTE: You might need to switch back to the "Graph" view.
 
 [source,cypher]
 ----
-MATCH (p:Person {name: "Tom Hanks"})-[:ACTED_IN]->(movie)
-RETURN p.movie
+MATCH (p:Person {name: "Tom Hanks"})-[:ACTED_IN]->(m:Movie)
+RETURN m.title
 ----
 
 Can you specify a pattern to find who directed _Cloud Atlas_?
