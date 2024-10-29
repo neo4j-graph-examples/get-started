@@ -764,8 +764,8 @@ To find which movies Tom Hanks have acted in, specify the pattern as follows:
 
 [source,cypher]
 ----
-MATCH (p:Person {name: "Tom Hanks"})-[:ACTED_IN]->(movie)
-RETURN p.movie
+MATCH (p:Person {name: "Tom Hanks"})-[:ACTED_IN]->(m:Movie)
+RETURN m.title
 ----
 
 Can you specify a pattern to find who directed _Cloud Atlas_?
