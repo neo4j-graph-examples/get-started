@@ -165,7 +165,7 @@ WITH o, c ORDER BY c.categoryName
 WITH o, collect(DISTINCT c.categoryName) as categories
 // only orders with more than one category
 WHERE size(categories) > 1
-// count how frequently the pairings occurr
+// count how frequently the pairings occur
 RETURN categories, count(*) as freq
 // order by frequency
 ORDER BY freq DESC
