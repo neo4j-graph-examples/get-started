@@ -67,7 +67,7 @@ Try it out by typing in and executing the following Cypher query:
 
 [source,cypher]
 ----
-MATCH path=(:Product)-[:PART_OF]->(c:Category) 
+MATCH path=(:Product)-[:PART_OF]->(c:Category)
 WHERE c.categoryName = 'Produce'
 RETURN path;
 ----
@@ -99,7 +99,7 @@ Change your query to:
 
 [source,cypher]
 ----
-MATCH (p:Product)-[:PART_OF]->(c:Category) 
+MATCH (p:Product)-[:PART_OF]->(c:Category)
 WHERE c.categoryName = 'Produce'
 RETURN p.productName,c.categoryName;
 ----
@@ -162,10 +162,10 @@ MATCH (o:Order)-[:ORDERS]->(:Product)-[:PART_OF]->(c:Category)
 // retain same ordering of categories
 WITH o, c ORDER BY c.categoryName
 // aggregate categories by order into a list of names
-WITH o, collect(DISTINCT c.categoryName) as categories 
+WITH o, collect(DISTINCT c.categoryName) as categories
 // only orders with more than one category
 WHERE size(categories) > 1
-// count how frequently the pairings occurr
+// count how frequently the pairings occur
 RETURN categories, count(*) as freq
 // order by frequency
 ORDER BY freq DESC
@@ -185,7 +185,7 @@ MATCH (c:Customer)-[:PURCHASED]->(:Order)-[:ORDERS]->(p:Product)<-[:ORDERS]-(:Or
 // don't want the same customer pair twice
 WHERE c < c2
 // sort by the top-occuring products
-WITH c, c2, p, count(*) as productOccurrence 
+WITH c, c2, p, count(*) as productOccurrence
 ORDER BY productOccurrence DESC
 // return customer pairs ranked by similarity and the top 5 products
 RETURN c.companyName, c2.companyName, sum(productOccurrence) as similarity, collect(distinct p.productName)[0..5] as topProducts
@@ -221,8 +221,8 @@ This should give you a good starting point to see the power of graph queries.
 
 You can learn more about Cypher here:
 
-* https://graphacademy.neo4j.com/categories/cypher/[Cypher Online Courses^] 
-* https://neo4j.com/docs/cypher-manual/current/introduction/[Cypher Manual^] 
+* https://graphacademy.neo4j.com/categories/cypher/[Cypher Online Courses^]
+* https://neo4j.com/docs/cypher-manual/current/introduction/[Cypher Manual^]
 * https://neo4j.com/docs/cypher-cheat-sheet/5/auradb-enterprise/[Cypher Cheat-Sheet^].
 
 
