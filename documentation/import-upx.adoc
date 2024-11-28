@@ -122,7 +122,7 @@ You can then map a column from your data file to the property in the file mappin
 === Create the Product node
 
 Now you just need to repeat the process you followed for `Order` and create a `Product` node from the `products.csv` file.
-Here you need to map the `produtId` and `productName` columns, rename the `productId` property to be simply `id` and set it to be a `string`.
+Here you need to map the `productId` and `productName` columns, rename the `productId` property to be simply `id` and set it to be a `string`.
 Ensure `id` is selected as the ID.
 
 Once you have created both nodes and mapped files accordingly, you should see a green check mark on both nodes.
