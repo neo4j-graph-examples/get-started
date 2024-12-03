@@ -15,16 +15,16 @@ This guide will take you through a three-stage process:
 
 === Connectivity requirements
 
-- Your database should be one of the supported types, including Postgres, MySQL, SQL Server and Oracle
-- It should be accessible via a public IP address
-- You should have username / password authentication setup. We recommend using a read-only user.
+- Your database should be one of the supported types, including Postgres, MySQL, SQL Server, and Oracle.
+- It should be accessible via a public IP address.
+- You should have username/password authentication setup. Using a read-only user is recommended.
 
 === Limitations
 
 The following are not yet supported:
 
-- Advanced configuration options such as custom certificates for data sources
-- Imports from data sources in a Virtual Private Cloud (VPC) into a Neo4j managed VPC
+- Advanced configuration options such as custom certificates for data sources.
+- Imports from data sources in a Virtual Private Cloud (VPC) into a Neo4j managed VPC.
 
 
 Start by setting up a connection to a relational database and complete your first import.
@@ -74,7 +74,7 @@ You need to re-provide the password for your data source when you use it again o
 
 Once you've added a data source, you can either start generating a candidate graph from it, or hit `Later` to come back and do this later. 
 If you come back later, use the [...] button on a row and the `New graph model from data source` option to start the graph generation flow. 
-In this guide, let's move immediately onto the next stage of generating a graph model.
+The next step in this guide is generating a graph model.
 
 
 == Generating a graph model
@@ -114,7 +114,7 @@ image::import-tables-mapped.png[]
 
 If the data is in the right shape, it can be mapped manually to the graph model. 
 You can learn more about how nodes and relationships are mapped in the _Import from CSV_ guide that covers the same concepts required here.
- It explains node IDs and relationship mappings in more detail with CSV files instead of tables.
+It explains node IDs and relationship mappings in more detail with CSV files instead of tables.
 
 When all parts of the graph model (nodes and relationships) are successfully mapped to tables, they are annotated with a green check mark. 
 If an import is attempted and anything is missing, it is highlighted in red to be fixed before proceeding with the import. 

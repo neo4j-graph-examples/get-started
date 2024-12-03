@@ -16,7 +16,7 @@ It's great if you're new to graphs or have rapid prototyping needs.
 If you have more advanced needs, checkout the _What's next?_ section at the end of this guide.
 
 
-This guide focuses on loading data from CSV, if loading data from a relationsal database, refer to the guide _Import from Relational Database_.
+This guide focuses on loading data from CSV, if loading data from a relational database, refer to the guide _Import from Relational Database_.
 
 This guide will teach you how to:
 
