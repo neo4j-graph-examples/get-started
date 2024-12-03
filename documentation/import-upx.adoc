@@ -35,7 +35,7 @@ This guide is continuing with the same dataset, Northwind.
 
 === Add the Northwind files
 
-To get started, navigate to the _Import_ tab under _Data Services_ section and choose the CSV option when adding a data source. Then {northwind-subset-data-only-no-model-zip-file}[download and unzip this file of CSVs^] and drop the files onto the highlight:import/import-file-panel[data source panel].
+To get started, navigate to the `Data Serices > Import` menu item and choose the CSV option when adding a data source. Then {northwind-subset-data-only-no-model-zip-file}[download and unzip this file of CSVs^] and drop the files onto the highlight:import/import-file-panel[data source panel].
 
 [%collapsible]
 .Are you having trouble?
