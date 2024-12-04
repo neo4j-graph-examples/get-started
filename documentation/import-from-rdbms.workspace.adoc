@@ -1,0 +1,149 @@
+= Import from Relational Database
+[role=NX_TAB_NAV,tab=import]
+
+== Introduction
+
+The import service now offers a way to import directly from data sources such as relational databases. 
+If your data is already in reasonable shape for use in a graph database, it is possible to connect directly to your source and configure an import job.
+
+This guide will take you through a three-stage process:
+
+. Configuring a data source
+. Reviewing a generated graph model and mapping to the data source
+. Running the import job
+
+
+=== Connectivity requirements
+
+- Your database should be one of the supported types, including Postgres, MySQL, SQL Server, and Oracle.
+- It should be accessible via a public IP address.
+- You should have username/password authentication setup. Using a read-only user is recommended.
+
+=== Limitations
+
+The following are not yet supported:
+
+- Advanced configuration options such as custom certificates for data sources.
+- Imports from data sources in a Virtual Private Cloud (VPC) into a Neo4j managed VPC.
+
+
+Start by setting up a connection to a relational database and complete your first import.
+
+
+== Configuring a data source
+
+[role=NX_TAB_NAV,tab=import]
+
+If you haven't already, navigate to the `Data Serices > Import` menu item to access the import service.
+
+Once in the Import service, the first step is to configure a new data source. 
+Two categories of data sources are available:
+
+- Direct connection -- you provide the import service with access to your data source, including connection URL, database name, and credentials. 
+- Proivision of CSV files -- you provide CSV files from your filesystem as the data source. 
+A separate guide, _Import from CSV_, is available to take you through this process.
+
+This guide focuses on connecting directly to a data source. 
+The "New data source" button on the Data Sources tab, presents you with a number of data source options. 
+In this guide, you will connect to PostgreSQL.
+
+
+Complete the form with the required information for your data source. 
+If there are any problems connecting to your data source, you stay on the connection form and have the opportunity to tweak the details before continuing.
+
+image::import-source-config-form.png[]
+
+[TIP]
+====
+Currently, error reporting is limited, so you should validate that all your details are correct by successfully connecting from your development machine. 
+Also, note that your database needs to be publicly accessible to connect to it from Neo4j Aura.
+====
+
+Once the connection is successful, you are prompted to review and confirm the table schema for the database you've selected to connect to. 
+Here you can see a summary of the tables and columns in your database to help validate that you're connected to the right data source. 
+If everything looks good, hit `Confirm`. 
+This adds your data source and saves it for future re-use.
+
+image::import-source-table-schema.png[]
+
+[TIP]
+====
+While your connection details are retained, your password is not. 
+You need to re-provide the password for your data source when you use it again or trigger the import job.
+====
+
+Once you've added a data source, you can either start generating a candidate graph from it, or hit `Later` to come back and do this later. 
+If you come back later, use the [...] button on a row and the `New graph model from data source` option to start the graph generation flow. 
+The next step in this guide is generating a graph model.
+
+
+== Generating a graph model
+
+
+Use the `Generate graph model` button once you have added a data source. 
+Doing this inspects any constraints that exist in your database, looking for primary key constraints to create nodes with IDs and foreign keys to generate relationships between them. 
+If suitable constraints are found, a corresponding candidate graph is generated, and the tables and columns are mapped to it. 
+If your dataset doesn't have any such constraints (or only part of the schema does), you have to map your tables to nodes and relationships manually. 
+If you're not familiar with your data source, it may take some time to understand the different entities and connections present in your tables.
+
+If no constraints are found *at all* in your source database, everything is mapped to a node for your convenience. 
+This saves you from doing some manual mapping, but note that a graph with just nodes doesn't make for a connected graph! 
+From here, delete nodes that should be relationships and recreate relationships between the remaining nodes as appropriate for your data.
+
+
+[TIP]
+=====
+The generation and mapping doesn't currently support composite primary or foregin keys, so you won't see mappings related to these, nor be able to import them easily via the import UI just yet.
+=====
+
+=== Refining a model
+
+Even in this example where a well-connected graph model has been generated, the model can benefit from some tidy-up. 
+For example, tables mapped to nodes use the corresponding table name as the label, but this can be made more suitable for your graph. 
+The same applies to relationships that by default use a concatenation of related table names. 
+Relationship direction may also benefit from being reversed for the chosen semantics. 
+See the example below where the concepts of Person, Order, and Employee and their corresponding relationships are tidied up.
+
+image::import-iterate-graph-model.gif[]
+
+In the Data source panel on the left-hand side, blue icons denote that the column from a particular table has been mapped to the graph model. 
+Reviewing the list of tables to any that have not been mapped can be useful.
+
+image::import-tables-mapped.png[]
+
+
+If the data is in the right shape, it can be mapped manually to the graph model. 
+You can learn more about how nodes and relationships are mapped in the _Import from CSV_ guide that covers the same concepts required here.
+It explains node IDs and relationship mappings in more detail with CSV files instead of tables.
+
+When all parts of the graph model (nodes and relationships) are successfully mapped to tables, they are annotated with a green check mark. 
+If an import is attempted and anything is missing, it is highlighted in red to be fixed before proceeding with the import. 
+
+== Running an import job
+
+Once you're happy with your graph model and how your tables are mapped to it, you can run the import job.
+If you're already connected to an instance, this instance is used. 
+Otherwise, you are prompted to select an instance.
+
+When submitting the job, you are prompted for two sets of credentials:
+
+- The data source password (as used when setting up the data source)
+- The destination neo4j instance password. These were provided when you created the instance and optionally made available to download in a `.txt` file of the format `Neo4j-<instance_id>-Created-<date>.txt`
+
+Once the job has been successfully submitted, you are redirected to the import jobs page, which tracks the current status of the import job.
+
+image::import-import-jobs.png[]
+
+[TIP]
+====
+The high-level status of the import job is refreshed periodically but does not currently show progress. 
+If you want to see live updates of the nodes and relationships being imported into the graph, you can switch to the Query app, monitor the Database Information sidebar, and refresh it to see counts increment.
+
+image::import-query-db-info-refresh.gif[]
+
+====
+
+If you want to return to a model, you can find it stored in the Graph models tab. 
+From here you can open a model and rerun an import or adapt the model as required before rerunning.
+
+image::import-graph-models.png[]
