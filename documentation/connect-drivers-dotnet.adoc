@@ -2,7 +2,7 @@
 
 The .NET driver is distributed via the NuGet Gallery. 
 
-link:https://www.nuget.org/packages/Neo4j.Driver/[Get latest version of the driver ^]
+link:https://www.nuget.org/packages/Neo4j.Driver/[More info on installing the driver ^]
 
 == Connect to the database
 
