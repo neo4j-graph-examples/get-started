@@ -148,7 +148,7 @@ Data Importer generates a name for the index and the index type created is Neo4j
 If you make a mistake, select the erroneous index and click the trash-can to delete it.
 
 If you know that you are going to use a property regularly, it is good practice to add an index to it.
-For example, if you doing administrative work with Northwind, you may be interested in the order dates.
+For example, if you are doing administrative work with Northwind, you may be interested in the order dates.
 See if you can add an index to the `orderDate` property that will help you with that!
 
 [%collapsible]
