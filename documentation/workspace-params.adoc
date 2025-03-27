@@ -15,7 +15,7 @@ Parameters can be created and managed either via the parameters sidebar or by in
 
 The Parameters sidebar provides dedicated UI inputs for most of the neo4j https://neo4j.com/docs/cypher-manual/current/values-and-types/property-structural-constructed/#property-types[property types].
 There are a few exceptions such as the https://neo4j.com/docs/cypher-manual/current/values-and-types/spatial/#spatial-values-point-type[Point] type and the setting of https://neo4j.com/docs/cypher-manual/current/values-and-types/property-structural-constructed/#constructed-types[constructed types].
-To support the setting of these types via the UI, we also provide a special option of `evaluated` in the type dropdown.
+To support the setting of these types via the UI, there is also a special option of `evaluated` in the type dropdown.
 This allows you to express any parameter type as you would using the right-hand part of the command syntax inlinecode:++:param pointParam => Point({x:1, y:1})++[], in this example `Point({x:1, y:1})` as the value to be evaluated.
 
 For types that are not supported by the UI, or indeed if you prefer working with commands, the `:param` command provides the ability to set and manage parameters.
