@@ -12,7 +12,6 @@ You can read more about parameters https://neo4j.com/docs/cypher-manual/current/
 === Setting and Managing Parameters
 
 Parameters can be created and managed either via the parameters sidebar or by invoking the `:param` command in a Cypher editor.
-Both share the same common state and which you use.
 
 The Parameters sidebar provides dedicated UI inputs for most of the neo4j https://neo4j.com/docs/cypher-manual/current/values-and-types/property-structural-constructed/#property-types[property types].
 There are a few exceptions such as the https://neo4j.com/docs/cypher-manual/current/values-and-types/spatial/#spatial-values-point-type[Point] type and the setting of https://neo4j.com/docs/cypher-manual/current/values-and-types/property-structural-constructed/#constructed-types[constructed types].
