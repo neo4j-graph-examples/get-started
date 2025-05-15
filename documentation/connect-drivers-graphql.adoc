@@ -35,7 +35,7 @@ const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
 
 == Set GraphQL type definitions
 
-Extend your JavaScript with a constant that holds GraphQL type definitions.
+Add a constant to your JavaScript that holds GraphQL type definitions.
 Here is a simple example with two node types, one with label "Actor" and the other "Movie":
 
 [source, javascript, indent=0]
