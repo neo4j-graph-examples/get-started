@@ -56,7 +56,7 @@ const typeDefs = `#graphql
 
 == Create an instance of `ApolloServer`
 
-Extend your JavaScript to create an Apollo Server instance:
+Add the following to your JavaScript to create an Apollo Server instance:
 
 [source, javascript, indent=0]
 ----
@@ -77,8 +77,53 @@ console.log(`🚀 Server ready at ${url}`);
 
 == Start the server
 
+Make sure that your JavaScript file looks like this:
+
+[source, javascript]
+----
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
+import { Neo4jGraphQL } from "@neo4j/graphql";
+import neo4j from "neo4j-driver";
+
+const typeDefs = `#graphql
+    type Movie @node {
+        title: String
+        actors: [Actor!]! @relationship(type: "ACTED_IN", direction: IN)
+    }
+
+    type Actor @node {
+        name: String
+        movies: [Movie!]! @relationship(type: "ACTED_IN", direction: OUT)
+    }
+`;
+
+const driver = neo4j.driver(
+    "neo4j://localhost:7687",
+    neo4j.auth.basic("username", "password")
+);
+
+const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
+
+const server = new ApolloServer({
+    schema: await neoSchema.getSchema(),
+});
+
+const { url } = await startStandaloneServer(server, {
+    context: async ({ req }) => ({ req }),
+    listen: { port: 4000 },
+});
+
+console.log(`🚀 Server ready at ${url}`);
+----
+
 You are ready to start up your GraphQL server.
-Execute your JavaScript with `node`.
+Execute your JavaScript with `node`:
+
+[source, bash, indent=0]
+----
+node [yourJavaScriptFile].js
+----
 
 If successful, you should see the following output:
 
