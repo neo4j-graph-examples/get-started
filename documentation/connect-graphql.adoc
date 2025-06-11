@@ -29,7 +29,7 @@ const driver = neo4j.driver(
 
 Provide the GraphQL type definitions mapping to the nodes and relationships in your Neo4j database through `Neo4jGraphQL`.
 
-.Type definitions for node labels `Actor` and `Movie`
+.Type definitions for node labels `Actor` and `Movie` and relationship `ACTED_IN`
 [source, javascript]
 ----
 import { Neo4jGraphQL } from "@neo4j/graphql";
