@@ -4,7 +4,7 @@ Install the Neo4j GraphQL library and its peer dependencies with `npm`.
 
 [source, bash]
 ----
-npm install @neo4j/graphql@alpha graphql neo4j-driver @apollo/server
+npm install @neo4j/graphql graphql neo4j-driver @apollo/server
 ----
 
 link:https://neo4j.com/docs/graphql/current/getting-started/[More info on installing the Neo4j GraphQL Library]
