@@ -1,45 +1,39 @@
-== Install the Neo4j GraphQL Library and dependencies
+== Install
 
-[source, bash, copy=true]
+Install the Neo4j GraphQL library and its peer dependencies with `npm`.
+
+[source, bash]
 ----
 npm install @neo4j/graphql@alpha graphql neo4j-driver @apollo/server
 ----
-
-. `@neo4j/graphql` is the official Neo4j GraphQL Library package.
-  It takes your GraphQL type definitions and generates a schema backed by a Neo4j database.
-. `graphql` generates a schema and execute queries and mutations.
-. `neo4j-driver` is the official Neo4j Driver package for JavaScript, of which an instance must be passed into the Neo4j GraphQL Library.
-. The https://www.apollographql.com/docs/apollo-server/[`@apollo/server`] is the default GraphQL server package for Apollo Server.
 
 link:https://neo4j.com/docs/graphql/current/getting-started/[More info on installing the Neo4j GraphQL Library]
 
 
 == Connect to the database
 
-The following JavaScript snippet connects to a Neo4j database.
-Set your values for `<neo4j-database-uri>`, `<username>` and `<password>`:
+Connect to the Neo4j server via `neo4j.driver()` and your server credentials.
 
-[source, javascript, indent=0]
+[source, javascript]
 ----
 import neo4j from "neo4j-driver";
-import { Neo4jGraphQL } from "@neo4j/graphql";
 
 const driver = neo4j.driver(
     "<neo4j-database-uri>",
     neo4j.auth.basic("<username>", "<password>")
 );
-
-const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
 ----
 
 
 == Set GraphQL type definitions
 
-Add a constant to your JavaScript that holds GraphQL type definitions.
-Here is a simple example with two node types, one with label "Actor" and the other "Movie":
+Provide the GraphQL type definitions mapping to the nodes and relationships in your Neo4j database through `Neo4jGraphQL`.
 
-[source, javascript, indent=0]
+.Type definitions for node labels `Actor` and `Movie`
+[source, javascript]
 ----
+import { Neo4jGraphQL } from "@neo4j/graphql";
+
 const typeDefs = `#graphql
     type Movie @node {
         title: String
@@ -51,88 +45,28 @@ const typeDefs = `#graphql
         movies: [Movie!]! @relationship(type: "ACTED_IN", direction: OUT)
     }
 `;
+
+const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
 ----
 
 
-== Create an instance of `ApolloServer`
+== Create an instance of Apollo Server
 
-Add the following to your JavaScript to create an Apollo Server instance:
-
-[source, javascript, indent=0]
-----
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
-
-const server = new ApolloServer({
-    schema: await neoSchema.getSchema(),
-});
-
-const { url } = await startStandaloneServer(server, {
-    listen: { port: 4000 },
-});
-
-console.log(`🚀 Server ready at ${url}`);
-----
-
-
-== Start the server
-
-Make sure that your JavaScript file looks like this:
+Start an `ApolloServer` instance drawing its schema from the Neo4j type definitions.
+Execute mutations and link:https://neo4j.com/docs/graphql/current/getting-started/#_create_nodes_in_the_database[create nodes in the database] through the Apollo server.
 
 [source, javascript]
 ----
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { Neo4jGraphQL } from "@neo4j/graphql";
-import neo4j from "neo4j-driver";
-
-const typeDefs = `#graphql
-    type Movie @node {
-        title: String
-        actors: [Actor!]! @relationship(type: "ACTED_IN", direction: IN)
-    }
-
-    type Actor @node {
-        name: String
-        movies: [Movie!]! @relationship(type: "ACTED_IN", direction: OUT)
-    }
-`;
-
-const driver = neo4j.driver(
-    "neo4j://localhost:7687",
-    neo4j.auth.basic("username", "password")
-);
-
-const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
 
 const server = new ApolloServer({
     schema: await neoSchema.getSchema(),
 });
 
 const { url } = await startStandaloneServer(server, {
-    context: async ({ req }) => ({ req }),
     listen: { port: 4000 },
 });
 
 console.log(`🚀 Server ready at ${url}`);
 ----
-
-You are ready to start up your GraphQL server.
-Execute your JavaScript with `node`:
-
-[source, bash, indent=0]
-----
-node [yourJavaScriptFile].js
-----
-
-If successful, you should see the following output:
-
-[source, bash, indent=0]
-----
-🚀 Server ready at http://localhost:4000/
-----
-
-That is where the Apollo server starts.
-
-Use the Apollo server to execute mutations and populate your database.
-See link:https://neo4j.com/docs/graphql/current/getting-started/#_create_nodes_in_the_database[Create nodes in the database].
