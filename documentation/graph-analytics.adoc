@@ -1,3 +1,72 @@
-== Setup Instructions
+== Graph Analytics
 
-See https://neo4j.com/docs/aura/graph-analytics/[documentation]
+Graph Analytics is a powerful feature of Neo4j Aura that allows users to run graph algorithms on their graph data. This includes tasks such as community detection, pathfinding, and centrality analysis.
+
+More information about Aura Graph Analytics can be found in the Neo4j link:https://neo4j.com/docs/aura/graph-analytics[documentation].
+
+You only need to have link:https://neo4j.com/docs/aura/api/authentication/[Aura API credentials] ready before you can start using sessions.
+
+=== Using the Graph Analytics Cypher API
+
+The Graph Analytics Cypher API provides a straightforward way to execute graph algorithms directly within your Neo4j database using Cypher queries.
+You can use the `gds.aura.api.credentials` function to provide your credentials in your Cypher queries.
+
+Assuming you have data in your Neo4j Aura database, the first step is to project a graph into Aura Graph Analytics.
+
+.Projecting a graph to a GDS Session:
+[source, cypher, copy=true]
+----
+CYPHER runtime=parallel
+WITH gds.aura.api.credentials($clientId, $clientSecret) AS credentials
+MATCH (n)
+OPTIONAL MATCH (n)-->(m)
+RETURN gds.graph.project('myGraph', n, m, {}, {memory: '4GB'})
+----
+
+Next you can run different algorithms on the projected graph, such as PageRank to find central nodes in the graph.
+
+.Run an algorithm on the projected graph:
+[source, cypher, copy=true]
+----
+WITH gds.aura.api.credentials($clientId, $clientSecret) AS credentials
+CALL gds.pageRank.stream('myGraph', { mutateProperty: 'pageRank' })
+YIELD nodeId, score
+RETURN gds.util.asNode(nodeId), score
+----
+
+After running the algorithm, you can inspect the PageRank score assigned to each node using `gds.graph.nodeProperty.stream` function to retrieve the node properties that were mutated by the algorithm.
+
+For more information about the Cypher API such as writing back results to the database, refer to the link:https://neo4j.com/docs/graph-data-science/current/aura-graph-analytics/cypher[Graph Data Science documentation].
+
+
+=== Using the Python Client
+
+To use the Graph Analytics features in Neo4j Aura with Python, you need to install the `graphdatascience` package.
+Compared to the Cypher API, the Python client offers the option to run algorithms against non-neo4j data sources, such as Pandas DataFrames.
+
+[source, bash, copy=true]
+----
+pip install graphdatascience
+----
+
+The entry point for managing Aura Graph Analytics sessions is the `GdsSessions` class.
+
+[source, python, copy=true]
+----
+import os
+
+from graphdatascience.session import AuraAPICredentials, GdsSessions
+
+# you can also use AuraAPICredentials.from_env() to load credentials from environment variables
+api_credentials = AuraAPICredentials(
+    client_id=os.environ["CLIENT_ID"],
+    client_secret=os.environ["CLIENT_SECRET"],
+    # If your account is a member of several project, you must also specify the project ID to use
+    project_id=os.environ.get("PROJECT_ID", None),
+)
+
+sessions = GdsSessions(api_credentials=api_credentials)
+----
+
+
+For more details, explore our client link:https://neo4j.com/docs/graph-data-science-client/current/graph-analytics-serverless/[docs] and the tutorials on link:https://neo4j.com/docs/graph-data-science-client/current/tutorials/graph-analytics-serverless/[attached], and link:https://neo4j.com/docs/graph-data-science-client/current/tutorials/graph-analytics-serverless-standalone/[standalone] sessions).
