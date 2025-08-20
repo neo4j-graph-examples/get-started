@@ -1,0 +1,3 @@
+== Setup Instructions
+
+See link:https://neo4j.com/docs/operations-manual/current/cypher-shell/[documentation]

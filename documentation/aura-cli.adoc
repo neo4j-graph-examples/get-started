@@ -1,3 +1,0 @@
-== Setup Instructions
-
-See https://neo4j.com/docs/aura/aura-cli/[documentation]
