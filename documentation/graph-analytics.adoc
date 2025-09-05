@@ -97,9 +97,9 @@ Here the username and password are the credentials of your AuraDB instance, _not
 from graphdatascience.session import DbmsConnectionInfo, SessionMemory
 
 db_connection = DbmsConnectionInfo(
-     "<AuraDB instance URI>",
-     "<AuraDB username>",
-     "<AuraDB password>"
+     uri="<AuraDB instance URI>",
+     username="<AuraDB username>",
+     password="<AuraDB password>"
 )
 
 gds = sessions.get_or_create(
@@ -115,7 +115,17 @@ With the session ready, add some data to the AuraDB instance with the `run_cyphe
 ----
 gds.run_cypher("""
     CREATE
-    ...
+      (a:User {name: 'Alice'}),
+      (b:User {name: 'Bob'}),
+      (c:User {name: 'Charlie'}),
+      (d:User {name: 'Dan'}),
+      (e:User {name: 'Eve'}),
+      (f:User {name: 'Frank'}),
+      (a)-[:LINK]->(b),
+      (a)-[:LINK]->(c),
+      (c)-[:LINK]->(e),
+      (e)-[:LINK]->(d),
+      (e)-[:LINK]->(f)
 """)
 ----
 
