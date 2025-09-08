@@ -6,7 +6,9 @@ link:https://neo4j.com/docs/aura/graph-analytics[Graph Analytics^] allows you to
 
 You must create link:https://neo4j.com/docs/aura/api/authentication/[Aura API credentials] to use Aura Graph Analytics.
 
-Optionally, you can create an example dataset in your Neo4j database using the following Cypher query.
+== Graph Analytics with Cypher
+
+Add data to your AuraDB instance using the following Cypher query.
 
 [source, cypher, copy=true]
 ----
@@ -24,9 +26,6 @@ CREATE
   (e)-[:LINK]->(f)
 ----
 
-== Graph Analytics with Cypher
-
-Add data to your AuraDB instance using the Cypher query from the _Requirements_ section.
 Then, create a remote in-memory graph within an Aura Graph Analytics session using a _remote projection_.
 
 [source, cypher, copy=true]
@@ -109,7 +108,7 @@ gds = sessions.get_or_create(
 )
 ----
 
-With the session ready, add some data to the AuraDB instance with the `run_cypher` method using the Cypher query from the _Requirements_ section.
+With the session ready, add some data to the AuraDB instance with the `run_cypher` method.
 
 [source, python, copy=true]
 ----
