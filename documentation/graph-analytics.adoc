@@ -37,7 +37,7 @@ OPTIONAL MATCH (n)-->(m)
 RETURN gds.graph.project('myGraph', n, m, {}, {memory: '4GB'})
 ----
 
-Once the graph is created, you can run any graph algorithms.
+Once the graph is created, you can run all supported graph algorithms.
 For example, run PageRank to find the central nodes in the graph and see their score.
 
 [source, cypher, copy=true]
