@@ -101,7 +101,7 @@ db_connection = DbmsConnectionInfo(
      password="<AuraDB password>"
 )
 
-gds = sessions.get_or_create(
+my_session = sessions.get_or_create(
     session_name="my-session",
     memory=SessionMemory.m_4GB,
     db_connection=db_connection,
@@ -112,7 +112,7 @@ With the session ready, add some data to the AuraDB instance with the `run_cyphe
 
 [source, python, copy=true]
 ----
-gds.run_cypher("""
+my_session.run_cypher("""
     CREATE
       (a:User {name: 'Alice'}),
       (b:User {name: 'Bob'}),
@@ -132,7 +132,7 @@ Then, create the remote graph `G` and run PageRank on it.
 
 [source, python, copy=true]
 ----
-G, result = gds.graph.project(
+G, result = my_session.graph.project(
     graph_name="my-graph",
     query="""
         CALL {
@@ -144,14 +144,14 @@ G, result = gds.graph.project(
     """,
 )
 
-gds.pageRank.stream(G)
+my_session.pageRank.stream(G)
 ----
 
 Finally, delete the session when you no longer need it.
 
 [source, python, copy=true]
 ----
-sessions.delete(session_name="my-session")
+my_session.delete()
 ----
 
 For more details, see the Python client link:https://neo4j.com/docs/graph-data-science-client/current/graph-analytics-serverless/[docs] and the link:https://neo4j.com/docs/graph-data-science-client/current/tutorials/graph-analytics-serverless/[tutorial for AuraDB].
