@@ -1,3 +1,157 @@
-== Setup Instructions
+== Introduction
 
-See https://neo4j.com/docs/aura/graph-analytics/[documentation]
+link:https://neo4j.com/docs/aura/graph-analytics[Graph Analytics^] allows you to run graph algorithms on your data, for example to detect communities or shortest paths between nodes.
+
+== Requirements
+
+You must create link:https://neo4j.com/docs/aura/api/authentication/[Aura API credentials] to use Aura Graph Analytics.
+
+== Graph Analytics with Cypher
+
+Add data to your AuraDB instance using the following Cypher query.
+
+[source, cypher, copy=true]
+----
+CREATE
+  (a:User {name: 'Alice'}),
+  (b:User {name: 'Bob'}),
+  (c:User {name: 'Charlie'}),
+  (d:User {name: 'Dan'}),
+  (e:User {name: 'Eve'}),
+  (f:User {name: 'Frank'}),
+  (a)-[:LINK]->(b),
+  (a)-[:LINK]->(c),
+  (c)-[:LINK]->(e),
+  (e)-[:LINK]->(d),
+  (e)-[:LINK]->(f)
+----
+
+Then, create a remote in-memory graph within an Aura Graph Analytics session using a _remote projection_.
+
+[source, cypher, copy=true]
+----
+CYPHER runtime=parallel
+WITH gds.aura.api.credentials("<Aura API Client ID>", "<Aura API Client Secret>") AS credentials
+MATCH (n)
+OPTIONAL MATCH (n)-->(m)
+RETURN gds.graph.project('myGraph', n, m, {}, {memory: '4GB'})
+----
+
+Once the graph is created, you can run all supported graph algorithms.
+For example, run PageRank to find the central nodes in the graph and see their score.
+
+[source, cypher, copy=true]
+----
+WITH gds.aura.api.credentials("<Aura API Client ID>", "<Aura API Client Secret>") AS credentials
+CALL gds.pageRank.stream('myGraph')
+YIELD nodeId, score
+RETURN gds.util.asNode(nodeId).name, score
+----
+
+Finally, drop the graph to delete the session when you no longer need it.
+
+[source, cypher, copy=true]
+----
+WITH gds.aura.api.credentials("<Aura API Client ID>", "<Aura API Client Secret>") AS credentials
+CALL gds.graph.drop('myGraph')
+YIELD graphName
+RETURN graphName
+----
+
+For a more detailed example including the use of query parameters for the Aura API credentials, updates to the in-memory graph, and write-back to AuraDB, see the link:https://neo4j.com/docs/graph-data-science/current/aura-graph-analytics/quickstart/[Aura Graph Analytics quickstart].
+
+For more information about the Graph Analytics Cypher API, see the link:https://neo4j.com/docs/graph-data-science/current/aura-graph-analytics/cypher[Graph Data Science documentation].
+
+== Graph Analytics with the Python client
+
+Compared to the Cypher API, the Python client adds the option to run algorithms on data from non-Neo4j data sources such as Pandas DataFrames.
+
+To use the Graph Analytics features in Neo4j Aura with Python, you need to install the `graphdatascience` package.
+
+[source, bash, copy=true]
+----
+pip install graphdatascience
+----
+
+The entry point for managing Aura Graph Analytics sessions is the `GdsSessions` class.
+
+[source, python, copy=true]
+----
+from graphdatascience.session import GdsSessions, AuraAPICredentials
+
+CLIENT_ID = "<Aura API Client ID>"
+CLIENT_SECRET = "<Aura API Client Secret>"
+PROJECT_ID = None
+# Create a new GdsSessions object
+sessions = GdsSessions(api_credentials=AuraAPICredentials(CLIENT_ID, CLIENT_SECRET, PROJECT_ID))
+----
+
+Use the `sessions` object to create an Aura Graph Analytics session.
+
+In the following example, the session is attached to an AuraDB instance.
+Here the username and password are the credentials of your AuraDB instance, _not_ your Aura API credentials.
+
+[source, python, copy=true]
+----
+from graphdatascience.session import DbmsConnectionInfo, SessionMemory
+
+db_connection = DbmsConnectionInfo(
+     uri="<AuraDB instance URI>",
+     username="<AuraDB username>",
+     password="<AuraDB password>"
+)
+
+my_session = sessions.get_or_create(
+    session_name="my-session",
+    memory=SessionMemory.m_4GB,
+    db_connection=db_connection,
+)
+----
+
+With the session ready, add some data to the AuraDB instance with the `run_cypher` method.
+
+[source, python, copy=true]
+----
+my_session.run_cypher("""
+    CREATE
+      (a:User {name: 'Alice'}),
+      (b:User {name: 'Bob'}),
+      (c:User {name: 'Charlie'}),
+      (d:User {name: 'Dan'}),
+      (e:User {name: 'Eve'}),
+      (f:User {name: 'Frank'}),
+      (a)-[:LINK]->(b),
+      (a)-[:LINK]->(c),
+      (c)-[:LINK]->(e),
+      (e)-[:LINK]->(d),
+      (e)-[:LINK]->(f)
+""")
+----
+
+Then, create the remote graph `G` and run PageRank on it.
+
+[source, python, copy=true]
+----
+G, result = my_session.graph.project(
+    graph_name="my-graph",
+    query="""
+        CALL {
+          MATCH (n)
+          OPTIONAL MATCH (n)-->(m)
+          RETURN n, m
+        }
+        RETURN gds.graph.project.remote(n, m, {})
+    """,
+)
+
+my_session.pageRank.stream(G)
+----
+
+Finally, delete the session when you no longer need it.
+
+[source, python, copy=true]
+----
+my_session.delete()
+----
+
+For more details, see the Python client link:https://neo4j.com/docs/graph-data-science-client/current/graph-analytics-serverless/[docs] and the link:https://neo4j.com/docs/graph-data-science-client/current/tutorials/graph-analytics-serverless/[tutorial for AuraDB].
