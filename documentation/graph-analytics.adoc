@@ -2,10 +2,6 @@
 
 link:https://neo4j.com/docs/aura/graph-analytics[Graph Analytics^] allows you to run graph algorithms on your data, for example to detect communities or shortest paths between nodes.
 
-== Requirements
-
-You must create link:https://neo4j.com/docs/aura/api/authentication/[Aura API credentials] to use Aura Graph Analytics.
-
 == Graph Analytics with Cypher
 
 Add data to your AuraDB instance using the following Cypher query.
@@ -31,7 +27,6 @@ Then, create a remote in-memory graph within an Aura Graph Analytics session usi
 [source, cypher, copy=true]
 ----
 CYPHER runtime=parallel
-WITH gds.aura.api.credentials("<Aura API Client ID>", "<Aura API Client Secret>") AS credentials
 MATCH (n)
 OPTIONAL MATCH (n)-->(m)
 RETURN gds.graph.project('myGraph', n, m, {}, {memory: '4GB'})
@@ -42,7 +37,6 @@ For example, run PageRank to find the central nodes in the graph and see their s
 
 [source, cypher, copy=true]
 ----
-WITH gds.aura.api.credentials("<Aura API Client ID>", "<Aura API Client Secret>") AS credentials
 CALL gds.pageRank.stream('myGraph')
 YIELD nodeId, score
 RETURN gds.util.asNode(nodeId).name, score
@@ -52,10 +46,7 @@ Finally, drop the graph to delete the session when you no longer need it.
 
 [source, cypher, copy=true]
 ----
-WITH gds.aura.api.credentials("<Aura API Client ID>", "<Aura API Client Secret>") AS credentials
 CALL gds.graph.drop('myGraph')
-YIELD graphName
-RETURN graphName
 ----
 
 For a more detailed example including the use of query parameters for the Aura API credentials, updates to the in-memory graph, and write-back to AuraDB, see the link:https://neo4j.com/docs/graph-data-science/current/aura-graph-analytics/quickstart/[Aura Graph Analytics quickstart].
@@ -63,6 +54,8 @@ For a more detailed example including the use of query parameters for the Aura A
 For more information about the Graph Analytics Cypher API, see the link:https://neo4j.com/docs/graph-data-science/current/aura-graph-analytics/cypher[Graph Data Science documentation].
 
 == Graph Analytics with the Python client
+
+You must create link:https://neo4j.com/docs/aura/api/authentication/[Aura API credentials] to use Python client for Aura Graph Analytics.
 
 Compared to the Cypher API, the Python client adds the option to run algorithms on data from non-Neo4j data sources such as Pandas DataFrames.
 
