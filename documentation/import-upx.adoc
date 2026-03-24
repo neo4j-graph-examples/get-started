@@ -11,7 +11,7 @@
 
 == Introduction
 
-Data importer offers a powerful and simple way to model and load data into Neo4j.
+The *Import* tool offers a powerful and simple way to model and load data into Neo4j.
 It's great if you're new to graphs or have rapid prototyping needs.
 If you have more advanced needs, checkout the _What's next?_ section at the end of this guide.
 
@@ -35,7 +35,8 @@ This guide is continuing with the same dataset, Northwind.
 
 === Add the Northwind files
 
-To get started, navigate to the `Data Services > Import` menu item and choose the CSV option when adding a data source. Then {northwind-subset-data-only-no-model-zip-file}[download and unzip this file of CSVs^] and drop the files onto the highlight:import/import-file-panel[data source panel].
+To get started, first {northwind-subset-data-only-no-model-zip-file}[download and unzip this file of CSVs^].
+Then navigate to the `Tools > Import` menu item, use the *New data source* button and choose the *.CSV/.TSV (local)* source and select the newly unzipped folder.
 
 [%collapsible]
 .Are you having trouble?
@@ -72,10 +73,13 @@ The `products.csv` and `orders.csv` files refer to the other parts of the Northw
 
 == Nodes and properties
 
+The Import tool can create a datamodel for you, but for learning purposes, you are going to *Define manually*.
+
 === Create the Order node
 
 You are going to create a simple model with two nodes and one relationship.
-Add a node using the highlight:import/import-add-node[add node button], and give it the label `Order`.
+The first node is created for you so you just have to give at label.
+Double-click the node and give it an `Order` label.
 
 image::simple-model.png[]
 
@@ -111,7 +115,7 @@ For example, Northwind's date/time columns are identified as strings, but you ca
 Nodes need an ID to define relationships with other nodes.
 An ID also ensures an import doesn't create a node more than once if it's referenced multiple times in a data file.
 
-In the _Definition_ tab, you can see that the `id` property is set as the ID for the node highlight:import/import-node-id[ID].
+In the _Definition_ tab, you can see that the `id` property is set as the ID for the node.
 The import tool did this for you automatically based on the property name containing the `id` string.
 In other cases, you may need to correct it or set it manually.
 
@@ -125,6 +129,9 @@ You can then map a column from your data file to the property in the file mappin
 === Create the Product node
 
 Now you just need to repeat the process you followed for `Order` and create a `Product` node from the `products.csv` file.
+
+Add a node using the *+ Node label* from the bottom of highlight:import/import-model-panel[Data model pane] , or hover the `Order` node and drag the `+` sign to create a new node (and a relationship).
+
 Here you need to map the `productId` and `productName` columns, rename the `productId` property to be simply `id` and set it to be a `string`.
 Ensure `id` is selected as the ID.
 
@@ -141,13 +148,13 @@ button::Load Northwind node mapping[role=NX_IMPORT_LOAD,endpoint={northwind-subs
 
 == Constraints and indexes
 
-To ensure accuracy of your data and support read performance, Data Importer automatically creates a uniqueness constraint and a corresponding index on the property you select as the node ID.
+To ensure accuracy of your data and support read performance, the Import tool automatically creates a uniqueness constraint and a corresponding index on the property you select as the node ID.
 You can add further indexes in addition to the mandatory constraint and index.
 
 Constraints and indexes have their own tab in the highlight:import/import-mapping-panel[mapping details panel].
 Use the `+`-sign to add an index and then select which property to add the index on.
 
-Data Importer generates a name for the index and the index type created is Neo4j's default index.
+Import generates a name for the index and the index type created is Neo4j's default index.
 If you make a mistake, select the erroneous index and click the trash-can to delete it.
 
 If you know that you are going to use a property regularly, it is good practice to add an index to it.
@@ -176,7 +183,8 @@ As you've seen already, your data concerns `Orders` that `CONTAIN` specific `Pro
 Conventionally, https://en.wikipedia.org/wiki/Camel_case[CamelCase^] is used for node labels and capitalized https://en.wikipedia.org/wiki/Snake_case[SNAKE_CASE^] for relationship types.
 ====
 
-You have two nodes and now you need to create a relationship to connect them.
+You have two mapped nodes and now you need to define the relationship that connects them.
+If you don't already have a relationship between the nodes:
 
 * Hover by the edge of the `Order` node circle and you'll see a `+` sign.
 * Click and hold it and you'll see another circle.
@@ -195,10 +203,10 @@ You can quickly change the direction of a relationship with _Switch direction_ n
 
 == Map a file to a relationship
 
-The next stage is critical in helping the importer understand how a file defines a relationship.
+The next stage is critical in helping Import understand how a file defines a relationship.
 This is what will give you a connected graph.
 
-* If you look in the highlight:import/import-file-panel[data source panel], you'll see `order-details.csv` has columns that correspond with the `id` of our `Order` and `Product` nodes.
+* If you look in the highlight:import/import-file-panel[data source panel], you'll see `order-details.csv` has columns that correspond with the `id` of your `Order` and `Product` nodes.
 * Ensuring you have the relationship selected, select the `order-details.csv` file from the highlight:import/import-relationship-file-dropdown[File dropdown].
 // TODO: Add id selector for relationship dropdown to enable UI higlighting
 * In the highlight:import/import-relationship-mapping-table[relationship mapping table] you will see the nodes and ID properties at each end of the `CONTAINS` relationship.
@@ -353,7 +361,7 @@ Ensure you are in the import tab.
 
 button::Import[role=NX_TAB_NAV,tab=import]
 
-image::save_load.png[]
+image::save_load.jpg[]
 
 When you choose to download your model, with or without data, you are essentially saving it.
 The model doesn't have to be mapped for you to download.
@@ -368,9 +376,9 @@ You can run the import multiple times without duplicating your data.
 For example, if you want to make some changes to your model after you've run the import, just fix your model and when you are happy run the import again.
 The changes you made will overwrite what you had before, but no existing elements will be recreated, unless you change their IDs.
 
-=== When you outgrow the Data Importer
+=== When you outgrow the Import tool
 
-Importer may not meet _all_ of your varied load needs, whether they are transformations or differing data formats.
+Import may not meet _all_ of your varied load needs, whether they are transformations or differing data formats.
 If you need more control, the chances are you can achieve the load using some of the other approaches to loading data into Neo4j.
 The following are useful resources for different needs:
 
@@ -381,21 +389,20 @@ The following are useful resources for different needs:
 
 == Frequently Asked Questions
 
-*Missing files - why does Data Importer say I need to provide my files after I've aready provided them?*
+*Missing files - why does Import say I need to provide my files after I've aready provided them?*
 
-When you provide the importer with your files, you are actually providing your web browser with a link to those files on your local file system, they aren't uploaded anywhere.
-The importer streams the content of the files to you database only when you run the import.
-If you reload the page, the importer loses access to the connection to those files due to security restrictions.
+When you provide the Import tool with your files, you are actually providing your web browser with a link to those files on your local file system, they aren't uploaded anywhere.
+Import streams the content of the files to you database only when you run the import.
+If you reload the page, Import loses access to the connection to those files due to security restrictions.
 These are in place to prevent web applications accessing files you haven't given express permission to use on page load.
-You simply need to re-provide the files when requested by data importer to be able to run an import.
+You simply need to re-provide the files when requested by Import to be able to run an import.
 
 *How can I replace a file?*
 
-The importer doesn't currently allow you to swap out files in the UI.
+The Import tool doesn't currently allow you to swap out files in the UI.
 However, there is a workaround that may prove useful.
-If you want to provide a different file with the same column structure to data importer, you can rename it to match and then simply add the file to the files panel.
+If you want to provide a different file with the same column structure to Import, you can rename it to match and then simply add the file to the files panel.
 This will replace the reference to the latest file and be available for use by your import.
-
 
 
 
