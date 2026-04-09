@@ -130,7 +130,7 @@ You can then map a column from your data file to the property in the file mappin
 
 Now you just need to repeat the process you followed for `Order` and create a `Product` node from the `products.csv` file.
 
-Add a node using the *+ Node label* from the bottom of highlight:import/import-model-panel[Data model pane] , or hover the `Order` node and drag the `+` sign to create a new node (and a relationship).
+Add a node using the highlight:import/import-add-node[Add node label button] from the bottom of highlight:import/import-model-panel[Data model pane] , or hover the `Order` node and drag the `+` sign to create a new node (and a relationship).
 
 Here you need to map the `productId` and `productName` columns, rename the `productId` property to be simply `id` and set it to be a `string`.
 Ensure `id` is selected as the ID.
