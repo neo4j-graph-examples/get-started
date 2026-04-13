@@ -130,7 +130,7 @@ You can then map a column from your data file to the property in the file mappin
 
 Now you just need to repeat the process you followed for `Order` and create a `Product` node from the `products.csv` file.
 
-Add a node using the *+ Node label* from the bottom of highlight:import/import-model-panel[Data model pane] , or hover the `Order` node and drag the `+` sign to create a new node (and a relationship).
+Add a node using the highlight:import/import-add-node[Add node label button] from the bottom of highlight:import/import-model-panel[Data model pane] , or hover the `Order` node and drag the `+` sign to create a new node (and a relationship).
 
 Here you need to map the `productId` and `productName` columns, rename the `productId` property to be simply `id` and set it to be a `string`.
 Ensure `id` is selected as the ID.
@@ -189,6 +189,7 @@ If you don't already have a relationship between the nodes:
 * Hover by the edge of the `Order` node circle and you'll see a `+` sign.
 * Click and hold it and you'll see another circle.
 * Drag the new circle on to the `Product` node and relase to create the relationship.
+* OR select both nodes and use the highlight:import/import-add-relationship[Add a relationship button]
 * With the relationship arrow selected, you can now specify how `Order` relates to `Product`.
 * In the highlight:import/import-relationship-type[type] section of the highlight:import/import-mapping-panel[mapping details panel], enter the text `CONTAINS`.
 
@@ -198,7 +199,7 @@ Just like newly created nodes, the relationship will only show a green check mar
 You can also name relationships by double-clicking the arrow in the graph model and typing it directly.
 You can rapidly add nodes with a linking relationship by releasing the circle on an empty space the canvas instead of an existing node.
 Selected nodes can be deleted by clicking the highlight:import/import-delete-node-or-rel[delete button] or with the backspace key.
-You can quickly change the direction of a relationship with _Switch direction_ next to the relationship type.
+You can quickly change the direction of a relationship with _Switch direction_ next to the relationship type OR with the relationship selected, use the highlight:import/import-reverse-relationship[Reverse direction button].
 ====
 
 == Map a file to a relationship
