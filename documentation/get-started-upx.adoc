@@ -108,7 +108,7 @@ If something goes wrong, keep in mind that the tool can import the same data mul
 
 === Explore your data
 
-After you have imported the Northwind dataset, click the _Start Exploring_ button in the report popup or use the _Explore_ tool.
+After you have imported the Northwind dataset, close the report popup and navigate to *Bloom* under *Studio* in the left-hand navigation.
 
 Next you are going to see the power of graph visualization.
 
@@ -117,9 +117,9 @@ Next you are going to see the power of graph visualization.
 
 == Explore your graph
 
-With the data in a graph, it is time to get familiar with the _Explore_ tool.
+With the data in a graph, it is time to get familiar with the visualization tool, *Bloom*.
 
-The `Show me a graph` Search phrase runs automatically to show an example subset of the data.
+Use the  `Show me a graph` Search phrase to show an example subset of the data.
 The visualized graph represents the relationships in the data in an intuitive way.
 
 [NOTE]
@@ -127,7 +127,7 @@ The visualized graph represents the relationships in the data in an intuitive wa
 You can also run the _Show me a graph_ example Search phrase yourself by typing the _Show me a graph_ in the top-left search bar.
 ====
 
-=== Searching for data in Explore
+=== Searching for data in Bloom
 
 You can use simple search phrases based on your node labels and relationship types to visualize your graph.
 If you ran the example Search phrase, you should clear the scene before you continue.
@@ -140,7 +140,11 @@ This is a great way to discover interesting relationships and formulate question
 
 // TODO captions!!
 
-Another useful feature is to select two nodes (`Ctrl-Click`/`Cmd-Click``) and select _Paths -> Shortest Path_ from the right-click context menu on one of them.
+Another useful feature is the context menu.
+You bring it up by right-clicking a a node or relationship.
+You can expand nodes to see its neighbors, dismiss elements, inspect them and more.
+
+Another example is to select two nodes (`Ctrl-Click`/`Cmd-Click``) and select _Paths -> Shortest Path_ from the context menu on one of them to see how they are related via the shortest path between them.
 
 // TBD educate about paths in search box!
 
@@ -150,7 +154,7 @@ The context menu also offers many more options like editing, partial expansion, 
 
 == Advanced exploration
 
-In the bottom-right of the _Explore_ canvas you can switch between the default force-based layout, a hierarchical layout, and a coordinate layout.
+In the bottom-right of the Bloom canvas you can switch between the default force-based layout, a hierarchical layout, and a coordinate layout.
 
 You can style your data in the right legend using colors, icons, sizes, and captions, and even apply rules for these.
 
@@ -161,7 +165,7 @@ Click on `Category` in the legend panel and pick a different color, icon, and/or
 Selected nodes and relationships are highlighted and counted in the legend panel and shown in the card view in the lower left corner.
 There you can explore your data structurally.
 
-Explore also offers options to filter your on-screen nodes with a advanced filter menu, and even rudimentary user programming by storing Cypher phrases to reuse later.
+Bloom also offers options to filter your on-screen nodes with a advanced filter menu, and even rudimentary user programming by storing Cypher phrases to reuse later.
 
 Learn more in the link:https://neo4j.com/docs/bloom-user-guide/current/bloom-visual-tour/[documentation^] and videos.
 
