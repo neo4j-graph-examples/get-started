@@ -35,9 +35,9 @@ button::Go back to Query[role=NX_TAB_NAV,tab=query]
 == Get to know the database
 
 A good place to start is to take stock of what you have in your database.
-You access _Database Information_ from the top of the sidebar.
+Expand the sidebar and access _Database Information_ from the far left.
 
-image::database-icon.png[]
+image::sidebar-database-icons.png[]
 //would be cool to replace this image with a highlight instead
 
 There you'll see how many nodes you have and all their labels, the number of relationships and their types, and also a list of all the property keys present in the database.
@@ -57,7 +57,7 @@ For example, try click on the `Product` node label and you'll see this query pop
 MATCH (n:Product) RETURN n LIMIT 25;
 ----
 
-== Excecuting queries with graph results
+== Executing queries with graph results
 
 Central to the Query tool's UI is the Cypher editor on top where you write and run your queries and the list of result frames.
 
@@ -84,7 +84,10 @@ The frame has two important views: _Graph_ and _Table_. (_Plan_ is for showing q
 
 The default view is graph if your query returns graph elements like nodes, relationships or paths.
 
-NOTE: Relationships are only shown if you return a path, or name and return the relationships as well as the nodes.
+[NOTE]
+====
+Relationships are only shown if you return a path, or name and return the relationships as well as the nodes.
+====
 
 Here you can see `Product` nodes with `PART_OF` relationships to the `Category` with name _Produce_.
 
@@ -111,6 +114,40 @@ The query uses _variables_, `c` and `p`, for the category and the product as you
 If you prefix your query with `EXPLAIN` or `PROFILE` you can see a plan option for a visual query plan, which helps later with optimizations.
 The RAW option shows the submitted query, the Neo4j server version and address, the result, and a summary.
 ====
+
+== Tabs
+
+Alternatively, instead of running your queries in the Cypher editor and streaming the results, as described in the previous steps, you can run them in *tabs*.
+You can have multiple tabs and easily navigate between them.
+
+You can open a tab and write a query, or you can open a saved query in a tab, or run (and save) a query from the stream in a tab.
+
+Open a new tab with the *+* icon.
+
+image::tabs.png[]
+
+Add the following query to the editor:
+
+[source,cypher]
+----
+MATCH (c:Category {categoryName:'Seafood'})-[r:PART_OF]-(p:Product)
+RETURN c, r, p
+----
+
+Use the *Layout* dropdown on the right to choose how to display the results.
+*Results on bottom*, and *results on right* allows you to toggle between different views, *graph*. *table*, and *raw*, all described in previous steps.
+
+The *interactive table view* displays both graph and table views, if available.
+In this view, you can select an element in the graph and see it highlighted in the table.
+Likewise, you can select an entry or a row in the table and see it highlighted in the graph.
+
+Just like in the stream, you can edit the Cypher query and rerun it within the tab, and see the results updated.
+Both tables and graphs have a search bar where you can search for elements in the returned data.
+
+Give the tab a name by double-clicking it.
+This makes it easier to navigate when you use multiple tabs.
+
+All queries in tabs are saved to the *Query* drawer, and these open in a tab when selected.
 
 == Use basic Cypher to answer questions
 
