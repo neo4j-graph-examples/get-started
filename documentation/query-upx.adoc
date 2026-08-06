@@ -117,7 +117,7 @@ The RAW option shows the submitted query, the Neo4j server version and address, 
 
 == Tabs
 
-Alternatively, instead of running your queries in the Cypher editor and streaming the results, as described in the previous steps, you can run them in *tabs*.
+Alternatively, instead of running your queries in the Cypher editor and streaming the results, you can run them in *tabs*.
 You can have multiple tabs and easily navigate between them.
 
 You can open a tab and write a query, or you can open a saved query in a tab, or run (and save) a query from the stream in a tab.
@@ -144,7 +144,7 @@ Likewise, you can select an entry or a row in the table and see it highlighted i
 Just like in the stream, you can edit the Cypher query and rerun it within the tab, and see the results updated.
 Both tables and graphs have a search bar where you can search for elements in the returned data.
 
-Give the tab a name by double-clicking it.
+Give the tab a name by double-clicking it, right-clicking it, or find it and (re)name it in the Query drawer.
 This makes it easier to navigate when you use multiple tabs.
 
 All queries in tabs are saved to the *Query* drawer, and these open in a tab when selected.
