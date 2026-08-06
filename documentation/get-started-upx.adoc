@@ -142,13 +142,12 @@ This is a great way to discover interesting relationships and formulate question
 
 Another useful feature is the context menu.
 You bring it up by right-clicking a a node or relationship.
-You can expand nodes to see its neighbors, dismiss elements, inspect them and more.
 
-Another example is to select two nodes (`Ctrl-Click`/`Cmd-Click``) and select _Paths -> Shortest Path_ from the context menu on one of them to see how they are related via the shortest path between them.
+One example is to select two nodes (`Ctrl-Click`/`Cmd-Click``) and select _Paths -> Shortest Path_ from the context menu on one of them to see how they are related via the shortest path between them.
 
 // TBD educate about paths in search box!
 
-You can select all `Categories` by clicking on their box in the right side legend and then choose _Expand -> All_ in the context menu to see all the products contained in these categories.
+You can select all `Categories` by clicking on their box in the right side legend and then choose _Expand -> All_ in the context menu on *one of them* to see all the products contained in these categories.
 
 The context menu also offers many more options like editing, partial expansion, clearing the scene, or dismissing (un-)selected nodes.
 
