@@ -36,7 +36,7 @@ This guide is continuing with the same dataset, Northwind.
 === Add the Northwind files
 
 To get started, first {northwind-subset-data-only-no-model-zip-file}[download and unzip this file of CSVs^].
-Then navigate to the `Tools > Import` menu item, use the *New data source* button and choose the *.CSV/.TSV (local)* source and select the newly unzipped folder.
+Then navigate to the `Studio > Import` menu item, use the *New data source* button and choose the *.CSV/.TSV (local)* source and select the newly unzipped folder.
 
 [%collapsible]
 .Are you having trouble?
