@@ -3,7 +3,7 @@
 
 == Introduction
 
-The import service now offers a way to import directly from data sources such as relational databases.
+The Studio tool *Import* now offers a way to import directly from data sources such as relational databases.
 If your data is already in reasonable shape for use in a graph database, it is possible to connect directly to your source and configure an import job.
 
 This guide will take you through a three-stage process:
@@ -34,9 +34,9 @@ Start by setting up a connection to a relational database and complete your firs
 
 [role=NX_TAB_NAV,tab=import]
 
-If you haven't already, navigate to the `Studio > Import` menu item to access the import service.
+If you haven't already, navigate to the `Studio > Import` menu item to access the import tool.
 
-Once in the Import service, the first step is to configure a new data source.
+Once in Import, the first step is to configure a new data source.
 Two categories of data sources are available:
 
 - Direct connection -- you provide the import service with access to your data source, including connection URL, database name, and credentials.
@@ -78,7 +78,6 @@ The next step in this guide is generating a graph model.
 
 
 == Generating a graph model
-
 
 Use the `Generate graph model` button once you have added a data source.
 Doing this inspects any constraints that exist in your database, looking for primary key constraints to create nodes with IDs and foreign keys to generate relationships between them.
