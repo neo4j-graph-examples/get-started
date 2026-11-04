@@ -24,19 +24,19 @@ If you already have imported the dataset, you can just hit _Next_ and get straig
 
 == The Explore UI
 
-[role=NX_TAB_NAV,tab=explore]
+[role=NX_TAB_NAV,tab=bloom]
 pagelaunch::[]
 
 When you first open the Explore tab (provided that you have data in your database), you're presented with a sample graph on the canvas, also called the _scene_, and a legend panel on the right and a sidebar on the left.
 
-The highlight:explore/tabpanel-categories[legend panel] shows the available node labels and relationships, respectively, in your data.
+The highlight:bloom/tabpanel-categories[legend panel] shows the available node labels and relationships, respectively, in your data.
 You can view them all or filter by whether they are present or not in the current scene.
 
 The sidebar contains the Perspective drawer, which you will have a closer look at later.
 
 On the bottom is the map and the layout options.
 
-On the top is the highlight:explore/searchBox[search bar] where you define what you want to see in the scene.
+On the top is the highlight:bloom/searchBox[search bar] where you define what you want to see in the scene.
 
 The next step is about the search bar.
 
@@ -178,7 +178,7 @@ In the next step, you'll learn how you can change the look of what you see in yo
 
 == Styling - default
 
-The highlight:explore/tabpanel-categories[legend panel] on your right contains a list of the elements in your dataset and how they are represented in the visualization.
+The highlight:bloom/tabpanel-categories[legend panel] on your right contains a list of the elements in your dataset and how they are represented in the visualization.
 But you can style this any way you want, change captions or change the size and colors of the elements, either by default or rule-based.
 
 Let's try to style the elements in the scene!
@@ -235,7 +235,7 @@ button::Seafood products[role=NX_EXPLORE_SEARCH,search=Category categoryName Sea
 ====
 
 With those in place click the filter icon (under the search bar) and **Add filter**.
-//implement this: highlight:explore/filter-collapse-button[filter icon]
+//implement this: highlight:bloom/filter-collapse-button[filter icon]
 First you need define which node label or relationship type to use the filter on, in this example you are looking for _Products_.
 
 Just like with the styling, you then need to select a property to filter on.
@@ -287,7 +287,7 @@ This is just one example on a small amount of elements.
 You can use the Slicer on any numerical values, feel free to play around.
 If you're unsure about the datatypes of the properties, you can always have a look in the Perspective drawer on the sidebar.
 //highlight here
-highlight:explore/perspective[Perspective drawer]
+highlight:bloom/perspective[Perspective drawer]
 
 
 
