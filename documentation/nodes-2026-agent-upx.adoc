@@ -1,0 +1,210 @@
+= Build a NODES 2026 agent
+
+// Source of truth for the copy, commands and prompts below: nodes-2026-promo-app/src/lib/content.ts
+// Keep this guide in sync with that file.
+
+== Claim your NODES credits
+
+Sign up for Aura and claim your credits 💰
+
+This special link attaches NODES credits to your new Aura account. No credit card required!
+
+Use this exact link so the credits land on your account. Sign up with Google, GitHub, or email, and keep this tab open, since you'll come back here.
+
+// TODO: replace with the final NODES 2026 credits link if it differs from the promo app's NEXT_PUBLIC_CREDITS_SIGNUP_URL
+link:https://console.neo4j.io/?ref=nodes-2026[Sign up with the NODES 2026 link^]
+
+When the Aura console offers to create an instance, skip it for now.
+
+If you continue the quest, your agent will create one in step 3.
+
+== Clone the repo & install neo4j-cli
+
+Get the NODES 2026 graph, the agent config, and the CLI your coding agent will drive.
+
+Signed up? 🎉 You're in, and your NODES credits are waiting. Got 15 minutes? Keep going and build your own NODES 2026 guide.
+
+You'll need git and a coding agent such as Claude Code, Cursor, Codex, or Gemini CLI.
+
+The link:https://github.com/jpadams/nodes-2026-agent[companion repo^] contains the NODES 2026 sessions graph (CSVs plus a Cypher load script, with embeddings for GraphRAG), an Aura Agent config, and a README written for both you and your agent.
+
+.Clone the repo
+[source,shell]
+----
+git clone https://github.com/jpadams/nodes-2026-agent
+cd nodes-2026-agent
+----
+
+.Install neo4j-cli (macOS / Linux)
+[source,shell]
+----
+curl -sSfL https://neo4j.sh/install.sh | bash
+----
+
+.Install neo4j-cli (Windows PowerShell; in Command Prompt, type powershell first), then restart your terminal and coding agent
+[source,powershell]
+----
+irm https://neo4j.sh/install.ps1 | iex
+----
+
+.Give your coding agent the Neo4j skills (add --all for every curated skill)
+[source,shell]
+----
+neo4j-cli skill install
+----
+
+link:https://neo4j.sh[More install options at neo4j.sh^]
+
+== Create an Aura API key for neo4j-cli
+
+Lets neo4j-cli (and your agent) manage Aura on your behalf.
+
+In the Aura console, click your avatar *◯* → *Account settings* → *Client credentials* → *Aura API*, then *Create client credential*. Any name is fine, such as _nodes_. It becomes part of the downloaded file's name.
+
+Download the credentials file, then copy its full path. On macOS, select the file in Finder and press ⌥⌘C. On Windows, right-click it in File Explorer and choose *Copy as path*. On Linux, it's usually in ~/Downloads.
+
+Replace `<path-to-downloaded-credentials-file>` in the command for your system with that path, then run it in your terminal:
+
+.Store the credential (macOS / Linux)
+[source,shell]
+----
+N=nodes-$(date +%s) && neo4j-cli credential aura-client add --name $N --env <path-to-downloaded-credentials-file> && neo4j-cli credential aura-client use $N && neo4j-cli aura organization list && echo "✓ Aura credential $N works" || echo "✗ That didn't work: see the error above"
+----
+
+.Store the credential (Windows PowerShell; in Command Prompt, type powershell first)
+[source,powershell]
+----
+$N="nodes-$([DateTimeOffset]::Now.ToUnixTimeSeconds())"; neo4j-cli credential aura-client add --name $N --env <path-to-downloaded-credentials-file>; if ($LASTEXITCODE -eq 0) { neo4j-cli credential aura-client use $N }; if ($LASTEXITCODE -eq 0) { neo4j-cli aura organization list }; if ($LASTEXITCODE -eq 0) { "OK: Aura credential $N works" } else { "That didn't work: see the error above" }
+----
+
+== Ask your agent to build it
+
+Your coding agent creates the Aura Free instance, loads the graph, and creates your Aura Agent.
+
+Open your coding agent in the repo folder and paste this prompt. Expect a few minutes, mostly waiting for the instance to provision.
+
+Already have an Aura Free instance? Aura allows one per person, and paused ones count. Your agent will spot it and ask what you'd like: a small Professional instance on your NODES credits (recommended, and your Free instance stays untouched), deleting the old Free instance, or reusing it.
+
+.Prompt for your coding agent
+[source,text]
+----
+Read README.md in this repo and follow the "Agent instructions" section to:
+First, set my Aura workspace: if neo4j-cli aura workspace list shows exactly one, select it with
+   neo4j-cli aura workspace use. If it shows several, ask me which one to use.
+0. Check whether I already have an Aura Free instance (paused ones count). If I do, stop and ask me
+   which option I want. Never delete anything without my explicit OK.
+1. Create an Aura Free instance named "nodes-2026" loaded with this repo's NODES 2026 database
+   (neo4j-cli aura instance create --type free --name nodes-2026 --credential-name nodes-2026 --wait,
+   then neo4j-cli query --credential nodes-2026 < data/load.cypher).
+2. Create the Aura Agent described in agent/agent.json against that instance as an internal agent
+   (--is-private, no MCP), so chatting with it in the console doesn't use credits.
+3. Confirm the graph loaded by counting the Session nodes.
+Use the neo4j-cli skill. Write commands need --rw. Tell me the instance ID and the agent ID when done.
+----
+
+[TIP]
+====
+Seeing "Billing account is not funded"? Aura Agents need the NODES credits from step 0. Check Billing in the console. Prefer to drive it yourself? The README lists the exact neo4j-cli commands.
+====
+
+== Try your agent
+
+Chat with it in the Aura console, then look at how it's built.
+
+In the Aura console, go to *Agents* and click on nodes-2026-agent to chat with it in your browser. Ask it one of the questions below, or anything else about NODES 2026.
+
+Then open the *⋯* menu next to your agent and click *Configure* to see how the agent is put together: its system prompt, the instance it queries, and its Agent tools. There are Cypher templates that look up sessions by speaker and by topic, semantic search over session descriptions using a vector index, and a text-to-Cypher tool that writes its own queries for everything else.
+
+.Questions to try
+[source,text]
+----
+What sessions at NODES 2026 cover GraphRAG?
+Who is speaking about knowledge graphs for agents, and when?
+Recommend three sessions for a Python developer new to Neo4j.
+----
+
+== You built a NODES 2026 agent! 🎉
+
+Bonus: take it external and use it from neo4j-cli and your coding agent over MCP.
+
+Nice work. You have a GraphRAG agent over every NODES 2026 session, and you got here in minutes.
+
+Want more? Your agent is internal, so it only chats in the Aura console. Switch it to external with MCP and you can call it from neo4j-cli and plug it into your coding agent.
+
+[WARNING]
+====
+_External agents use your NODES credits or other payment methods._
+====
+
+Paste this prompt into your coding agent, or run the commands below yourself.
+
+.Prompt for your coding agent
+[source,text]
+----
+Switch my Aura Agent "nodes-2026-agent" to external access with MCP enabled. Find its id with
+neo4j-cli aura agent list --format toon, then run
+neo4j-cli aura agent update <agent-id> --is-private=false --is-mcp-enabled=true --rw.
+Invoke it with "Who is speaking about knowledge graphs for agents, and when?" to confirm it works.
+Then add its MCP server endpoint (mcp_endpoint_link in neo4j-cli aura agent list) as an MCP server named
+"nodes-2026" for this coding agent, or tell me exactly how to add it.
+Use the neo4j-cli skill.
+----
+
+.Or yourself: find your agent's id, switch it to external with MCP, and ask it a question
+[source,shell]
+----
+neo4j-cli aura agent list
+neo4j-cli aura agent update <agent-id> --is-private=false --is-mcp-enabled=true --rw
+neo4j-cli aura agent invoke <agent-id> --input "Who is speaking about knowledge graphs for agents, and when?" --rw
+----
+
+Replace `<mcp-server-endpoint>` below with your agent's MCP server endpoint.
+
+.Add it to Claude Code
+[source,shell]
+----
+claude mcp add --transport http nodes-2026 "<mcp-server-endpoint>"
+----
+
+.Add it to Cursor (~/.cursor/mcp.json)
+[source,json]
+----
+{
+  "mcpServers": {
+    "nodes-2026": {
+      "url": "<mcp-server-endpoint>"
+    }
+  }
+}
+----
+
+.Add it to VS Code (.vscode/mcp.json)
+[source,json]
+----
+{
+  "servers": {
+    "nodes-2026": {
+      "type": "http",
+      "url": "<mcp-server-endpoint>"
+    }
+  }
+}
+----
+
+.Add it to Codex (~/.codex/config.toml)
+[source,toml]
+----
+[mcp_servers.nodes-2026]
+url = "<mcp-server-endpoint>"
+----
+
+.Make it internal again
+[source,shell]
+----
+neo4j-cli aura agent update <agent-id> --is-private=true --is-mcp-enabled=false --rw
+----
+
+[TIP]
+====
+Your MCP server endpoint is mcp_endpoint_link in neo4j-cli aura agent list, or ⋯ → Copy MCP server endpoint in the Aura console. The first time your coding agent connects, you'll sign in with your Aura account. Then ask things like "Recommend three sessions for a Python developer new to Neo4j."
+====
